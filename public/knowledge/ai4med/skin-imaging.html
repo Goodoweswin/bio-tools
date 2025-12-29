@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>皮肤影像AI诊断模型 - 知识库</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        .highlight-box { background: #fffbea; border-left: 4px solid #f0ad4e; padding: 15px; margin: 20px 0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>皮肤影像AI诊断模型</h1>
+        <div class="meta">
+            <span class="tag">计算机视觉</span>
+            <span class="tag">皮肤病诊断</span>
+            <span class="tag">深度学习</span>
+            <span>更新时间：2025-01-18</span>
+        </div>
+    </div>
+
+    <h2>皮肤病学的AI革命</h2>
+    <p>
+        皮肤病学是一门高度依赖视觉形态的学科，非常适合应用计算机视觉技术。
+        深度卷积神经网络（CNN）在皮肤癌分类任务上已达到甚至超过人类专家的水平。
+    </p>
+
+    <h2>核心技术架构</h2>
+    
+    <h3>1. 图像分类 (Classification)</h3>
+    <p><strong>任务：</strong>区分良性痣与恶性黑色素瘤，或识别常见的皮肤病（如湿疹、银屑病）。</p>
+    <p><strong>模型：</strong>ResNet, EfficientNet, InceptionV3</p>
+    <p><strong>数据集：</strong>ISIC Archive（国际皮肤成像协作组织）提供了数万张标注的皮肤镜图像。</p>
+
+    <h3>2. 目标检测与分割 (Detection & Segmentation)</h3>
+    <p><strong>任务：</strong>在图像中框出病灶位置，或精确勾勒病灶边界（用于ABCD法则分析）。</p>
+    <p><strong>模型：</strong>YOLO, Mask R-CNN, U-Net</p>
+
+    <h3>3. 多模态融合</h3>
+    <p><strong>趋势：</strong>结合临床照片（宏观）和皮肤镜图像（微观），甚至整合患者的元数据（年龄、性别、部位），提高诊断准确率。</p>
+
+    <h2>关键挑战：数据偏差与公平性</h2>
+    <div class="highlight-box">
+        <strong>Fitzpatrick肤色偏差：</strong>
+        目前的公开数据集主要由浅色皮肤（Fitzpatrick I-II型）组成，导致模型在深色皮肤人群中的表现较差。
+        这可能加剧医疗不平等。研究者正在努力构建更多样化的数据集（如DDI dataset）。
+    </div>
+
+    <h2>从诊断到医美：AI测肤</h2>
+    <p>
+        除了疾病诊断，AI技术也被广泛应用于医美和护肤领域：
+    </p>
+    <ul>
+        <li><strong>皱纹/色斑定量分析：</strong>自动检测并评分面部老化特征。</li>
+        <li><strong>肤质分析：</strong>评估毛孔大小、油脂分泌、水分含量。</li>
+        <li><strong>效果模拟：</strong>使用GAN生成用户使用产品后的预期效果图。</li>
+    </ul>
+
+    <h2>未来方向：联邦学习</h2>
+    <p>
+        为了解决医疗数据隐私问题，联邦学习（Federated Learning）允许不同医院在不共享原始数据的情况下共同训练模型，
+        这将打破数据孤岛，构建更健壮的AI诊断系统。
+    </p>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>

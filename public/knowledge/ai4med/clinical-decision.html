@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床决策支持系统 - 知识库</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        .highlight-box { background: #fffbea; border-left: 4px solid #f0ad4e; padding: 15px; margin: 20px 0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>临床决策支持系统 (CDSS)</h1>
+        <div class="meta">
+            <span class="tag">智慧医疗</span>
+            <span class="tag">NLP</span>
+            <span class="tag">电子病历</span>
+            <span>更新时间：2025-01-18</span>
+        </div>
+    </div>
+
+    <h2>什么是CDSS？</h2>
+    <p>
+        临床决策支持系统（Clinical Decision Support System）是利用计算机系统，
+        结合医学知识库和患者的具体数据，为医生提供诊断建议、治疗方案推荐、药物相互作用预警等辅助信息的工具。
+    </p>
+
+    <h2>AI驱动的新一代CDSS</h2>
+    <p>传统的CDSS主要基于规则（Rule-based），维护困难且缺乏灵活性。AI技术带来了革命性的变化：</p>
+    
+    <h3>1. 基于NLP的电子病历分析</h3>
+    <p>
+        利用自然语言处理（NLP）技术，从非结构化的电子病历（EMR）文本中提取关键信息（症状、病史、检查结果），
+        构建患者画像。BERT、GPT等大模型在医学文本理解上表现优异。
+    </p>
+
+    <h3>2. 风险预测模型</h3>
+    <p>
+        利用机器学习模型（如XGBoost, LSTM）分析患者的时序数据，预测不良事件风险：
+    </p>
+    <ul>
+        <li><strong>败血症预警：</strong>提前数小时预测ICU患者的败血症发作。</li>
+        <li><strong>再入院风险：</strong>预测患者出院后30天内的再入院概率，辅助制定出院计划。</li>
+    </ul>
+
+    <h3>3. 治疗方案推荐</h3>
+    <p>
+        基于强化学习（Reinforcement Learning），学习最佳的治疗策略。
+        例如，AI Clinician模型通过分析MIMIC-III数据库，为败血症患者推荐最佳的液体复苏和血管加压药剂量，
+        回顾性验证显示其推荐方案能降低死亡率。
+    </p>
+
+    <h2>大语言模型 (LLM) 在CDSS中的应用</h2>
+    <div class="highlight-box">
+        <strong>Med-PaLM 2 & GPT-4：</strong>
+        这些专为医疗微调的大模型通过了美国执业医师资格考试（USMLE），
+        能够回答复杂的医学问题，生成出院小结，甚至辅助进行鉴别诊断。
+        未来，它们将成为医生的"AI副驾驶"（Copilot）。
+    </div>
+
+    <h2>伦理与监管</h2>
+    <ul>
+        <li><strong>可解释性：</strong>医生需要知道AI为什么给出这个建议（"黑盒"问题）。</li>
+        <li><strong>责任归属：</strong>如果AI建议导致医疗事故，谁负责？</li>
+        <li><strong>幻觉问题：</strong>LLM可能会一本正经地胡说八道，需要严格的事实核查机制（RAG技术）。</li>
+    </ul>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>

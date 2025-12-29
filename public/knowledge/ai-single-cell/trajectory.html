@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI优化细胞轨迹分析 - 知识库</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .info-box { background: #d1ecf1; border-left: 4px solid #0c5460; padding: 15px; margin: 20px 0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>AI优化细胞轨迹分析</h1>
+        <div class="meta">
+            <span class="tag">轨迹推断</span>
+            <span class="tag">伪时序</span>
+            <span class="tag">深度学习</span>
+            <span>更新时间：2025-01-15</span>
+        </div>
+    </div>
+
+    <h2>细胞轨迹分析的核心问题</h2>
+    <p>
+        单细胞轨迹分析旨在重建细胞从一种状态（如干细胞）转变为另一种状态（如分化终末细胞）的连续过程。
+        传统方法如Monocle、PAGA、RNA velocity面临：
+    </p>
+    <ul>
+        <li>难以处理复杂的分支结构（如多谱系分化）</li>
+        <li>对起始点和终点的选择敏感</li>
+        <li>无法建模循环轨迹（如细胞周期）</li>
+    </ul>
+
+    <h2>AI赋能轨迹推断的三种范式</h2>
+    
+    <h3>1. 基于图神经网络（GNN）的拓扑学习</h3>
+    <div class="info-box">
+        <strong>代表工具：</strong>CellPath, DeepVelo<br>
+        <strong>核心思想：</strong>将细胞看作图中的节点，使用GNN学习细胞-细胞转换的概率邻接矩阵
+    </div>
+    <pre><code># 使用scVelo + GNN增强RNA velocity
+import scvelo as scv
+import torch_geometric
+
+adata = scv.read('data.h5ad')
+scv.pp.filter_and_normalize(adata)
+scv.pp.moments(adata)
+
+# 标准velocity分析
+scv.tl.velocity(adata, mode='stochastic')
+scv.tl.velocity_graph(adata)
+
+# 用GNN优化velocity图
+# （需要额外的GNN模块，此处为示意）
+from deepvelo import GNNRefiner
+refined_graph = GNNRefiner.refine(adata.uns['velocity_graph'])</code></pre>
+
+    <h3>2. 基于VAE的连续轨迹嵌入</h3>
+    <div class="info-box">
+        <strong>代表工具：</strong>Palantir, STREAM, scVI dynamics<br>
+        <strong>核心思想：</strong>使用变分自编码器学习低维流形，在流形上拟合平滑轨迹
+    </div>
+    <pre><code>import palantir
+
+# 预处理
+adata = sc.read_h5ad('hematopoiesis.h5ad')
+sc.pp.neighbors(adata, n_neighbors=30)
+sc.tl.diffmap(adata)
+
+# 运行Palantir
+pr_res = palantir.core.run_palantir(
+    adata,
+    early_cell='HSC_001',  # 指定起始细胞
+    num_waypoints=500
+)
+
+# 可视化分化势能和伪时序
+palantir.plot.plot_palantir_results(pr_res, adata)</code></pre>
+
+    <h3>3. 基于物理模型的轨迹预测</h3>
+    <div class="info-box">
+        <strong>代表工具：</strong>Waddington-OT, CellRank<br>
+        <strong>核心思想：</strong>结合最优传输理论和RNA velocity，建模细胞命运转换的能量景观
+    </div>
+    <pre><code>import cellrank as cr
+
+# 计算细胞转换核（transition kernel）
+cr.tl.terminal_states(adata, cluster_key='celltype')
+cr.tl.initial_states(adata, cluster_key='celltype')
+
+# 计算吸收概率（细胞最终分化到各终末状态的概率）
+cr.tl.lineages(adata)
+
+# 可视化Waddington景观
+cr.pl.lineages(adata, same_plot=True)</code></pre>
+
+    <h2>推荐工作流：CellRank 2.0</h2>
+    <p>
+        CellRank整合了RNA velocity、细胞-细胞相似性和实验时间信息，
+        使用马尔可夫链建模细胞状态转换，支持多种计算后端（velocity、伪时序、Waddington-OT）。
+    </p>
+
+    <h3>完整示例：造血分化轨迹</h3>
+    <pre><code>import scanpy as sc
+import scvelo as scv
+import cellrank as cr
+
+# 1. 加载数据并预处理
+adata = sc.datasets.pbmc3k()
+sc.pp.filter_cells(adata, min_genes=200)
+sc.pp.filter_genes(adata, min_cells=3)
+sc.pp.normalize_total(adata)
+sc.pp.log1p(adata)
+
+# 2. 降维和聚类
+sc.pp.highly_variable_genes(adata)
+sc.tl.pca(adata)
+sc.pp.neighbors(adata)
+sc.tl.umap(adata)
+sc.tl.leiden(adata)
+
+# 3. RNA velocity分析
+scv.pp.moments(adata, n_pcs=30, n_neighbors=30)
+scv.tl.velocity(adata, mode='dynamical')
+scv.tl.velocity_graph(adata)
+
+# 4. CellRank推断细胞命运
+cr.tl.terminal_states(adata, cluster_key='leiden', method='leiden')
+cr.tl.initial_states(adata, cluster_key='leiden')
+cr.tl.lineages(adata)
+
+# 5. 识别关键转换驱动基因
+cr.tl.lineage_drivers(adata)
+
+# 6. 可视化
+cr.pl.lineages(adata, same_plot=False)
+scv.pl.velocity_embedding_stream(adata, basis='umap', color='leiden')</code></pre>
+
+    <h2>轨迹分析的质量控制</h2>
+    <ul>
+        <li><strong>生物学验证：</strong>检查轨迹是否符合已知的分化顺序（如干细胞→祖细胞→成熟细胞）</li>
+        <li><strong>Marker基因表达梯度：</strong>沿伪时序绘制已知marker基因，验证表达模式</li>
+        <li><strong>velocity一致性：</strong>检查velocity方向是否与伪时序方向一致</li>
+        <li><strong>分支点基因：</strong>识别命运决定点的差异表达基因，验证是否为已知调控因子</li>
+    </ul>
+
+    <h2>特殊场景处理</h2>
+    <h3>循环轨迹（如细胞周期）</h3>
+    <pre><code># 使用Cyclum检测周期性轨迹
+from cyclum import Cyclum
+
+cy = Cyclum(adata.X)
+theta = cy.fit_predict()  # 返回每个细胞在周期中的相位
+adata.obs['cell_cycle_phase'] = theta</code></pre>
+
+    <h3>多条件比较（如治疗前后）</h3>
+    <pre><code># 使用CellRank比较两个条件的轨迹差异
+cr.tl.terminal_states(adata, cluster_key='celltype', method='eigengap')
+cr.tl.lineages(adata, cluster_key='celltype')
+
+# 分别计算每个条件的吸收概率
+for condition in ['control', 'treated']:
+    adata_subset = adata[adata.obs['condition'] == condition]
+    cr.tl.lineages(adata_subset)</code></pre>
+
+    <h2>相关资源</h2>
+    <ul>
+        <li><a href="https://cellrank.readthedocs.io/" target="_blank">CellRank官方文档</a></li>
+        <li><a href="https://scvelo.readthedocs.io/" target="_blank">scVelo教程</a></li>
+        <li><a href="https://github.com/dpeerlab/Palantir" target="_blank">Palantir GitHub</a></li>
+    </ul>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>

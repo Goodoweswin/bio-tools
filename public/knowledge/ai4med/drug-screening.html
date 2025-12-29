@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI预测抗衰老药物靶点 - 知识库</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        .highlight-box { background: #fffbea; border-left: 4px solid #f0ad4e; padding: 15px; margin: 20px 0; }
+        .method-card { background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 15px 0; border: 1px solid #e0e0e0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>AI预测抗衰老药物靶点</h1>
+        <div class="meta">
+            <span class="tag">AI制药</span>
+            <span class="tag">网络药理学</span>
+            <span class="tag">抗衰老</span>
+            <span>更新时间：2025-01-18</span>
+        </div>
+    </div>
+
+    <h2>背景</h2>
+    <p>
+        衰老是一个复杂的系统性过程，涉及基因组不稳定性、端粒磨损、线粒体功能障碍等多种机制。
+        传统的"一个药物对应一个靶点"的研发模式难以应对衰老的复杂性。
+        AI技术通过整合多组学数据和药物-靶点相互作用网络，能够高效识别潜在的抗衰老化合物。
+    </p>
+
+    <h2>AI药物发现的三大策略</h2>
+    
+    <div class="method-card">
+        <h3>1. 基于转录组特征的药物重定位 (Drug Repurposing)</h3>
+        <p><strong>原理：</strong>寻找能够逆转"衰老基因表达特征"的药物。</p>
+        <p><strong>工具：</strong>Connectivity Map (CMap), LINCS L1000</p>
+        <p><strong>流程：</strong></p>
+        <ol>
+            <li>鉴定衰老相关的差异表达基因（Age-Signature）</li>
+            <li>在CMap数据库中搜索能够诱导相反基因表达变化的药物</li>
+            <li>计算"连接分数"（Connectivity Score），筛选候选药物</li>
+        </ol>
+        <p><strong>成功案例：</strong>二甲双胍（Metformin）和雷帕霉素（Rapamycin）的抗衰老效应通过此方法得到验证。</p>
+    </div>
+
+    <div class="method-card">
+        <h3>2. 基于知识图谱的靶点预测</h3>
+        <p><strong>原理：</strong>构建包含基因、蛋白质、药物、疾病、通路的大规模知识图谱，利用图神经网络（GNN）预测潜在连接。</p>
+        <p><strong>工具：</strong>GraphSAGE, GAT, Hetionet</p>
+        <p><strong>优势：</strong>可以发现非直观的隐性关联，解释药物的作用机制。</p>
+    </div>
+
+    <div class="method-card">
+        <h3>3. 生成式AI分子设计</h3>
+        <p><strong>原理：</strong>使用生成对抗网络（GAN）或变分自编码器（VAE）设计全新的分子结构，使其具有特定的抗衰老属性（如激活Sirtuins）。</p>
+        <p><strong>工具：</strong>MolGAN, REINVENT</p>
+        <p><strong>优势：</strong>突破现有化学空间的限制，设计专利新药。</p>
+    </div>
+
+    <h2>PandaOmics平台案例</h2>
+    <p>
+        Insilico Medicine开发的PandaOmics平台利用AI分析了数百万个数据点，
+        成功发现了一种针对特发性肺纤维化（一种衰老相关疾病）的新靶点，并设计了相应的抑制剂，
+        仅用18个月就进入了临床试验阶段，大幅缩短了研发周期。
+    </p>
+
+    <h2>挑战与展望</h2>
+    <ul>
+        <li><strong>数据质量：</strong>高质量、标准化的衰老相关数据仍然稀缺。</li>
+        <li><strong>验证困难：</strong>抗衰老药物的临床试验周期长、成本高，缺乏公认的替代终点。</li>
+        <li><strong>个性化：</strong>不同个体的衰老机制存在差异，AI需要向精准医疗方向发展。</li>
+    </ul>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多组学数据AI整合 - 知识库</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        .highlight-box { background: #fffbea; border-left: 4px solid #f0ad4e; padding: 15px; margin: 20px 0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>多组学数据AI整合</h1>
+        <div class="meta">
+            <span class="tag">多组学</span>
+            <span class="tag">数据融合</span>
+            <span class="tag">深度学习</span>
+            <span>更新时间：2025-01-18</span>
+        </div>
+    </div>
+
+    <h2>为什么需要多组学整合？</h2>
+    <p>
+        单一组学（如转录组）只能提供细胞状态的一个侧面。
+        通过整合基因组（DNA）、转录组（RNA）、表观组（甲基化/染色质开放性）、蛋白组和代谢组数据，
+        我们可以构建细胞的"全息图"，更全面地理解疾病机制。
+    </p>
+
+    <h2>整合策略</h2>
+    
+    <h3>1. 早期融合 (Early Fusion)</h3>
+    <p>将不同组学的特征直接拼接，输入模型。适用于样本量完全匹配的情况。</p>
+
+    <h3>2. 晚期融合 (Late Fusion)</h3>
+    <p>分别对每个组学训练模型，最后综合各模型的预测结果。灵活性高，但忽略了组学间的交互。</p>
+
+    <h3>3. 中期融合 (Intermediate Fusion) - AI的主战场</h3>
+    <p>利用深度学习学习各组学的共同潜在表示（Joint Latent Representation）。</p>
+    
+    <div class="highlight-box">
+        <strong>代表模型：MOFA+ (Multi-Omics Factor Analysis)</strong><br>
+        MOFA使用贝叶斯因子分析，将多组学数据分解为一组潜在因子（Factors）。
+        每个因子代表一种生物学驱动力（如细胞周期、炎症、技术噪音），并量化其对各组学的贡献。
+    </div>
+
+    <h2>单细胞多组学整合 (scMulti-omics)</h2>
+    <p>
+        随着CITE-seq（RNA+蛋白）和Multiome（RNA+ATAC）技术的普及，单细胞多组学整合成为热点。
+    </p>
+    <ul>
+        <li><strong>Seurat v4 (WNN):</strong> 加权最近邻图，根据每个细胞在不同模态上的信息含量动态调整权重。</li>
+        <li><strong>TotalVI:</strong> 基于VAE的概率模型，同时处理RNA和蛋白数据，处理缺失值和批次效应。</li>
+        <li><strong>GLUE:</strong> 基于图神经网络，利用先验调控知识（如ATAC峰与基因的位置关系）整合非配对的多组学数据。</li>
+    </ul>
+
+    <h2>应用场景</h2>
+    <ul>
+        <li><strong>精准肿瘤学：</strong>结合基因突变、表达谱和免疫微环境特征，预测免疫治疗响应。</li>
+        <li><strong>生物标志物发现：</strong>识别跨组学的一致性特征，提高标志物的鲁棒性。</li>
+    </ul>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>

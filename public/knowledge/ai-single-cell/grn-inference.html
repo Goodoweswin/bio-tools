@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer推断基因调控网络 - 知识库</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .highlight-box { background: #e8f4f8; border-left: 4px solid #0072B2; padding: 15px; margin: 20px 0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>Transformer推断基因调控网络</h1>
+        <div class="meta">
+            <span class="tag">基因调控网络</span>
+            <span class="tag">Transformer</span>
+            <span class="tag">因果推断</span>
+            <span>更新时间：2025-01-15</span>
+        </div>
+    </div>
+
+    <h2>什么是基因调控网络（GRN）</h2>
+    <p>
+        基因调控网络描述了转录因子（TF）如何调控靶基因的表达，是理解细胞命运决定、疾病机制的核心。
+        传统GRN推断方法（如GENIE3、SCENIC）依赖于相关性分析，但面临以下挑战：
+    </p>
+    <ul>
+        <li>难以区分直接调控和间接调控关系</li>
+        <li>无法捕捉时序动态和因果关系</li>
+        <li>对细胞状态转换的建模能力有限</li>
+    </ul>
+
+    <h2>为什么Transformer适合GRN推断</h2>
+    <div class="highlight-box">
+        <strong>核心优势：</strong>
+        <ul style="margin: 10px 0 0 0;">
+            <li><strong>自注意力机制：</strong>自动学习基因-基因之间的长程依赖关系</li>
+            <li><strong>位置编码：</strong>引入时序信息，建模细胞轨迹中的基因表达动态</li>
+            <li><strong>多头注意力：</strong>同时捕捉多种调控模式（激活、抑制、协同）</li>
+        </ul>
+    </div>
+
+    <h2>代表性方法：GeneFormer</h2>
+    <p>
+        GeneFormer是首个基于Transformer的单细胞基础模型，通过在3000万个单细胞样本上预训练，
+        学习到了基因组范围的调控语法。其GRN推断能力来自于对注意力权重的解析。
+    </p>
+
+    <h3>工作流程</h3>
+    <pre><code># 1. 安装GeneFormer
+git clone https://huggingface.co/ctheodoris/Geneformer
+cd Geneformer
+pip install -e .
+
+# 2. 准备数据（需转换为rank-value编码）
+from geneformer import TranscriptomeTokenizer
+
+tk = TranscriptomeTokenizer(
+    custom_attr_name_dict={"cell_type": "celltype"},
+    nproc=4
+)
+tk.tokenize_data(
+    data_directory="data/",
+    output_directory="data/tokenized/",
+    output_prefix="dataset"
+)
+
+# 3. 加载预训练模型
+from transformers import BertForMaskedLM, BertConfig
+
+model = BertForMaskedLM.from_pretrained(
+    "ctheodoris/Geneformer",
+    output_attentions=True
+)
+
+# 4. 提取注意力矩阵推断GRN
+from geneformer import InSilicoPerturber
+
+perturber = InSilicoPerturber(
+    model_type="Pretrained",
+    num_classes=0,
+    emb_mode="cell",
+    cell_states_to_model={"state_key": "celltype", "states": "fibroblast"},
+    max_ncells=1000
+)
+
+# 5. 扰动分析：敲除某个TF，观察下游基因变化
+perturbation_results = perturber.perturb_data(
+    model_directory="ctheodoris/Geneformer",
+    input_data_file="data/tokenized/dataset.dataset",
+    output_directory="results/",
+    perturb_type="delete",
+    perturb_rank_shift=None,
+    genes_to_perturb=["SOX9", "RUNX2"]  # 扰动这些TF
+)</code></pre>
+
+    <h2>其他Transformer-based工具</h2>
+    <ul>
+        <li><strong>CellOracle：</strong>结合scATAC-seq和轨迹分析，推断调控网络并预测扰动效应</li>
+        <li><strong>DeepSEA：</strong>使用CNN预测顺式调控元件，可与Transformer结合用于增强子-基因连接</li>
+        <li><strong>Enformer：</strong>Google开发的序列模型，整合多组学数据预测基因表达</li>
+    </ul>
+
+    <h2>实战案例：推断成纤维细胞衰老GRN</h2>
+    <pre><code>import scanpy as sc
+import pyscenic
+
+# 方法1：传统SCENIC流程（作为对照）
+adata = sc.read_h5ad('fibroblast_aging.h5ad')
+lf = pyscenic.run_scenic(
+    adata,
+    tfs_file='resources/hs_tfs.txt',
+    motif_anno='resources/motifs-v10nr_clust.hg38.feather'
+)
+
+# 方法2：使用GeneFormer进行扰动分析
+# （代码同上，设置cell_states_to_model为衰老相关状态）
+
+# 比较两种方法识别的关键调控因子
+scenic_tfs = set(lf.keys())
+geneformer_tfs = set(perturbation_results['top_regulators'])
+common_tfs = scenic_tfs & geneformer_tfs  # 取交集验证</code></pre>
+
+    <h2>解释注意力矩阵</h2>
+    <p>Transformer的注意力权重可以直接解释为基因-基因的调控强度：</p>
+    <pre><code># 提取注意力权重
+attentions = model(input_ids, output_attentions=True).attentions
+
+# 平均所有层和所有头的注意力
+avg_attention = torch.mean(torch.stack(attentions), dim=(0, 1))
+
+# 构建GRN邻接矩阵
+import networkx as nx
+G = nx.DiGraph()
+gene_names = tokenizer.gene_list
+
+for i, tf in enumerate(gene_names):
+    for j, target in enumerate(gene_names):
+        weight = avg_attention[i, j].item()
+        if weight > threshold:  # 设定阈值过滤弱连接
+            G.add_edge(tf, target, weight=weight)
+
+# 可视化
+nx.draw_spring(G, with_labels=True, node_color='lightblue')</code></pre>
+
+    <h2>验证GRN的真实性</h2>
+    <ol>
+        <li><strong>ChIP-seq验证：</strong>比对预测的TF-靶基因对与ChIP-seq结合峰</li>
+        <li><strong>扰动实验：</strong>使用CRISPR-Cas9敲除预测的关键TF，检测下游基因表达变化</li>
+        <li><strong>已知通路富集：</strong>检查推断的网络是否富集已知调控模块（如KEGG、GO）</li>
+        <li><strong>跨数据集验证：</strong>在独立数据集上测试GRN的可复现性</li>
+    </ol>
+
+    <h2>未来方向</h2>
+    <p>
+        当前GRN推断的前沿是整合多模态数据（scRNA-seq + scATAC-seq + Hi-C），
+        利用Transformer学习从DNA序列到染色质开放性再到基因表达的完整调控级联。
+        代表性工作包括Enformer、Sei等，这些模型正在向"从基因组预测表型"的终极目标迈进。
+    </p>
+
+    <h2>相关资源</h2>
+    <ul>
+        <li><a href="https://huggingface.co/ctheodoris/Geneformer" target="_blank">GeneFormer模型下载</a></li>
+        <li><a href="https://github.com/aertslab/pySCENIC" target="_blank">pySCENIC工具包</a></li>
+        <li><a href="https://www.nature.com/articles/s41586-023-06139-9" target="_blank">Nature: Geneformer论文</a></li>
+    </ul>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>
