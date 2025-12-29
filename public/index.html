@@ -1,359 +1,142 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Academic Homepage</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --nature-blue: #0072B2;
-            --light-gray: #f5f5f5;
-            --dark-gray: #333;
-            --border-gray: #e0e0e0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-            line-height: 1.6;
-            color: var(--dark-gray);
-            background-color: #fff;
-        }
-
-        /* 导航栏 */
-        nav {
-            background-color: var(--nature-blue);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-        }
-
-        /* 容器 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* 头像区 */
-        .hero {
-            padding: 3rem 0;
-            background: linear-gradient(135deg, var(--light-gray) 0%, #fff 100%);
-        }
-
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--nature-blue), #56B4E9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .hero-info {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .hero-info h1 {
-            color: var(--nature-blue);
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
-        }
-
-        .hero-info .title {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-info .bio {
-            color: var(--dark-gray);
-            line-height: 1.8;
-        }
-
-        /* 主要内容区 */
-        section {
-            padding: 3rem 0;
-            border-bottom: 1px solid var(--border-gray);
-        }
-
-        section:last-of-type {
-            border-bottom: none;
-        }
-
-        section h2 {
-            color: var(--nature-blue);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--nature-blue);
-        }
-
-        /* 研究方向 */
-        .research-areas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .research-card {
-            padding: 1.5rem;
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .research-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,114,178,0.15);
-        }
-
-        .research-card h3 {
-            color: var(--nature-blue);
-            margin-bottom: 0.75rem;
-            font-size: 1.2rem;
-        }
-
-        .research-card p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        /* 代表论文 */
-        .papers {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .paper {
-            padding: 1.5rem;
-            border-left: 4px solid var(--nature-blue);
-            background-color: var(--light-gray);
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        .paper:hover {
-            background-color: #e8f4f8;
-        }
-
-        .paper h3 {
-            color: var(--dark-gray);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-            line-height: 1.4;
-        }
-
-        .paper .authors {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .paper .journal {
-            color: var(--nature-blue);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        /* 页脚 */
-        footer {
-            background-color: var(--dark-gray);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        footer a {
-            color: var(--nature-blue);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .hero {
-                padding: 2rem 0;
-            }
-
-            .hero-content {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .avatar {
-                width: 120px;
-                height: 120px;
-                font-size: 2.5rem;
-            }
-
-            .hero-info h1 {
-                font-size: 1.5rem;
-            }
-
-            section {
-                padding: 2rem 0;
-            }
-
-            section h2 {
-                font-size: 1.5rem;
-            }
-
-            .research-areas {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>PhD Candidate | Plastic Surgery & AI4Med</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav>
+
+    <!-- Navigation -->
+    <header>
         <div class="container">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#research">Research Areas</a></li>
-                <li><a href="#publications">Representative Publications</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <nav>
+                <a href="index.html" class="logo">Dr. Candidate</a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="knowledge.html">Knowledge Base</a></li>
+                </ul>
+                <div class="mobile-menu-btn" style="display:none;">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container" style="display: flex; align-items: center; gap: 2rem;">
+            <div class="hero-content">
+                <h1>Plastic Surgery & <br>Single-Cell Omics</h1>
+                <p>
+                    PhD Candidate specializing in <strong>AI for Medicine</strong>, <strong>Skin Aging</strong>, and <strong>Regenerative Medicine</strong>. 
+                    Leveraging single-cell sequencing and bioinformatics to uncover the mechanisms of tissue regeneration.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn">Contact Me</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-download"></i> Download CV</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-placeholder">
+                    <span>Photo Placeholder</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news">
+        <div class="container">
+            <h2>Latest News</h2>
+            <ul class="news-list">
+                <li class="news-item">
+                    <span class="news-date">Dec 2025</span>
+                    <div class="news-content">
+                        Paper accepted in <em>Nature Communications</em>: "Single-cell atlas of skin aging".
+                    </div>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">Nov 2025</span>
+                    <div class="news-content">
+                        Presented poster at the International Society for Stem Cell Research (ISSCR) meeting.
+                    </div>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">Oct 2025</span>
+                    <div class="news-content">
+                        Released new Python tool for differential expression analysis (DEG).
+                    </div>
+                </li>
             </ul>
         </div>
-    </nav>
+    </section>
 
-    <!-- 头像区 -->
-    <div class="hero" id="home">
+    <!-- Research Highlights -->
+    <section id="research-highlights" style="background-color: var(--light-bg);">
         <div class="container">
-            <div class="hero-content">
-                <div class="avatar">研</div>
-                <div class="hero-info">
-                    <h1>Jenius Dai</h1>
-                    <p class="title">Bioinformatics | Single-cell Omics | Vascular Aging Research</p>
-                    <p class="bio">
-                        Focusing AI4Med,applying AI and multi-omics approaches to skin aging research, especially the role of endothelial cells.
-                    </p>
+            <h2>Research Focus</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>AI for Medicine</h3>
+                    <p>Developing deep learning models to predict tissue regeneration outcomes from histological images.</p>
+                    <div class="tags">
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">Pathology</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Skin Aging</h3>
+                    <p>Investigating the cellular heterogeneity of aging skin using single-cell RNA sequencing.</p>
+                    <div class="tags">
+                        <span class="tag">scRNA-seq</span>
+                        <span class="tag">Aging</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Regeneration</h3>
+                    <p>Exploring novel therapeutic targets for wound healing and scar reduction.</p>
+                    <div class="tags">
+                        <span class="tag">Wound Healing</span>
+                        <span class="tag">Therapeutics</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- 研究方向 -->
-    <section id="research">
-        <div class="container">
-            <h2>Research Areas</h2>
-            <div class="research-areas">
-                <div class="research-card">
-                    <h3>🧬 Single-cell Omics Analysis</h3>
-                    <p>Utilizing single-cell RNA sequencing technology to study the heterogeneity of vascular endothelial cells, analyzing cell subpopulation characteristics and functional states, and identifying disease-related cell types.</p>
-                </div>
-                <div class="research-card">
-                    <h3>🫀 Vascular Aging Mechanisms</h3>
-                    <p>Exploring the molecular mechanisms of vascular endothelial cell aging, studying senescence-associated gene expression patterns, and analyzing the role of senescent cells in atherosclerosis.</p>
-                </div>
-                <div class="research-card">
-                    <h3>🔬 Bioinformatics Methods</h3>
-                    <p>Developing and applying bioinformatics tools and algorithms, integrating multi-omics data, constructing disease prediction models, and discovering new therapeutic targets.</p>
-                </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="research.html" class="btn btn-outline">View All Research</a>
             </div>
         </div>
     </section>
 
-    <!-- 代表论文 -->
-    <section id="publications">
-        <div class="container">
-            <h2>Representative Publications</h2>
-            <div class="papers">
-                <div class="paper">
-                    <h3>Single-cell transcriptomics reveals endothelial cell heterogeneity in atherosclerosis</h3>
-                    <p class="authors">Zhang L, Wang Y, Chen X, et al.</p>
-                    <p class="journal">Nature Communications, 2024, 15(1): 1234</p>
-                </div>
-                <div class="paper">
-                    <h3>Senescence-associated gene signatures in vascular endothelial cells predict cardiovascular disease risk</h3>
-                    <p class="authors">Li M, Chen Y, Zhang L, et al.</p>
-                    <p class="journal">Cell Reports, 2023, 42(5): 112345</p>
-                </div>
-                <div class="paper">
-                    <h3>Integrative multi-omics analysis identifies novel therapeutic targets for vascular aging</h3>
-                    <p class="authors">Wang H, Zhang L, Liu J, et al.</p>
-                    <p class="journal">Circulation Research, 2023, 132(8): 1045-1060</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer id="contact">
         <div class="container">
-            <p>© 2025 Personal Academic Homepage | Email: daiger870@gmail.com</p>
-            <p>GitHub: <a href="https://github.com/Goodoweswin">@Goodoweswin</a></p>
+            <p>Connect with me:</p>
+            <div class="social-links" style="margin: 1rem 0;">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+            </div>
+            <p>&copy; 2025 PhD Candidate. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Simple mobile menu toggle (placeholder for now)
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
 </body>
 </html>
