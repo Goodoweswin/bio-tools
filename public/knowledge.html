@@ -1,0 +1,83 @@
+<!-- 知识库主页 - AI·单细胞·皮肤衰老三方向
+   布局：顶部搜索框（前端过滤），3个方向卡片（AI×单细胞, 皮肤衰老, AI4Med）
+   每个卡片：标题、简介、文章数量、最新更新时间
+   数据：硬编码12篇核心文章（每方向4篇）
+   交互：点击方向→进入该方向索引页，搜索框支持关键词过滤
+   样式：学术卡片式，悬停阴影效果，移动端响应式 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>知识库 - AI·单细胞·皮肤衰老</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .search-box { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #0072B2; border-radius: 8px; margin-bottom: 30px; }
+    .direction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+    .direction-card { border: 1px solid #e0e0e0; border-radius: 12px; padding: 25px; transition: box-shadow 0.3s; cursor: pointer; }
+    .direction-card:hover { box-shadow: 0 4px 12px rgba(0,114,178,0.15); }
+    .direction-card h2 { color: #003366; margin-top: 0; }
+    .direction-card .count { color: #666; font-size: 14px; }
+    .article-list { margin-top: 15px; display: none; }
+    .article-list li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+    .article-list a { text-decoration: none; color: #0072B2; }
+    @media (max-width: 768px) { body { padding: 10px; } }
+  </style>
+</head>
+<body>
+  <h1>知识库：AI、单细胞组学、皮肤衰老</h1>
+  <input type="text" class="search-box" placeholder="搜索知识库（如：HES1、批次校正、Transformer）..." onkeyup="filterArticles(this.value)">
+  
+  <div class="direction-grid">
+    <div class="direction-card" onclick="toggleArticles('ai-sc')">
+      <h2>AI × 单细胞组学</h2>
+      <p>探索人工智能如何革新单细胞数据分析，从自动注释到调控网络预测。</p>
+      <span class="count">4篇文章 · 最后更新：2025-01-15</span>
+      <ul class="article-list" id="ai-sc-list">
+        <li><a href="knowledge/ai-single-cell/annotation.html">AI驱动的细胞类型自动注释</a></li>
+        <li><a href="knowledge/ai-single-cell/batch-correction.html">深度学习批次效应校正</a></li>
+        <li><a href="knowledge/ai-single-cell/grn-inference.html">Transformer推断基因调控网络</a></li>
+        <li><a href="knowledge/ai-single-cell/trajectory.html">AI优化细胞轨迹分析</a></li>
+      </ul>
+    </div>
+    
+    <div class="direction-card" onclick="toggleArticles('skin-aging')">
+      <h2>单细胞视角下的皮肤衰老</h2>
+      <p>基于单细胞测序解析皮肤衰老的分子机制与细胞异质性。</p>
+      <span class="count">4篇文章 · 最后更新：2025-01-20</span>
+      <ul class="article-list" id="skin-aging-list">
+        <li><a href="knowledge/skin-aging/fibroblast.html">成纤维细胞亚群异质性研究</a></li>
+        <li><a href="knowledge/skin-aging/il17-signaling.html">IL-17信号轴在衰老中的作用</a></li>
+        <li><a href="knowledge/skin-aging/hes1-klf6.html">HES1/KLF6调控机制解析</a></li>
+        <li><a href="knowledge/skin-aging/aging-clock.html">皮肤衰老时钟构建</a></li>
+      </ul>
+    </div>
+    
+    <div class="direction-card" onclick="toggleArticles('ai4med')">
+      <h2>AI4Med临床应用</h2>
+      <p>AI在医学诊断、药物筛选和衰老干预中的转化应用。</p>
+      <span class="count">4篇文章 · 最后更新：2025-01-18</span>
+      <ul class="article-list" id="ai4med-list">
+        <li><a href="knowledge/ai4med/drug-screening.html">AI预测抗衰老药物靶点</a></li>
+        <li><a href="knowledge/ai4med/skin-imaging.html">皮肤影像AI诊断模型</a></li>
+        <li><a href="knowledge/ai4med/multi-omics.html">多组学数据AI整合</a></li>
+        <li><a href="knowledge/ai4med/clinical-decision.html">临床决策支持系统</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function toggleArticles(id) {
+      const list = document.getElementById(id + '-list');
+      list.style.display = list.style.display === 'block' ? 'none' : 'block';
+    }
+    
+    function filterArticles(keyword) {
+      const articles = document.querySelectorAll('.article-list li');
+      articles.forEach(article => {
+        const match = article.textContent.toLowerCase().includes(keyword.toLowerCase());
+        article.style.display = match ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html> 

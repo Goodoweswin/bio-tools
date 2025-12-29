@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI驱动的细胞类型自动注释 - 知识库</title>
+    <link rel="stylesheet" href="../../styles/article.css">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
+        .header { border-bottom: 3px solid #0072B2; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #0072B2; font-size: 2.2em; margin-bottom: 10px; }
+        .meta { color: #666; font-size: 0.95em; }
+        .tag { display: inline-block; background: #e8f4f8; color: #0072B2; padding: 5px 12px; border-radius: 15px; margin-right: 8px; font-size: 0.85em; }
+        h2 { color: #003366; margin-top: 35px; border-left: 4px solid #0072B2; padding-left: 15px; }
+        code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; }
+        .highlight-box { background: #fffbea; border-left: 4px solid #f0ad4e; padding: 15px; margin: 20px 0; }
+        .method-card { background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 15px 0; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #0072B2; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../../knowledge.html" class="back-link">← 返回知识库</a>
+    
+    <div class="header">
+        <h1>AI驱动的细胞类型自动注释</h1>
+        <div class="meta">
+            <span class="tag">单细胞组学</span>
+            <span class="tag">机器学习</span>
+            <span class="tag">细胞注释</span>
+            <span>更新时间：2025-01-15</span>
+        </div>
+    </div>
+
+    <h2>背景与挑战</h2>
+    <p>
+        单细胞RNA测序（scRNA-seq）技术使我们能够以单细胞分辨率解析组织的细胞异质性。然而，识别和注释细胞类型仍然是分析流程中最耗时和主观的步骤之一。传统方法依赖于：
+    </p>
+    <ul>
+        <li>手动选择marker基因并在tSNE/UMAP图上可视化表达</li>
+        <li>依赖研究者的先验知识和文献检索</li>
+        <li>缺乏标准化流程，结果难以复现</li>
+    </ul>
+
+    <h2>AI注释方法概览</h2>
+    
+    <div class="method-card">
+        <h3>1. 基于参考数据集的迁移学习</h3>
+        <p><strong>代表工具：</strong>Azimuth, scArches, Symphony</p>
+        <p><strong>核心思想：</strong>利用已标注的大规模参考数据集训练模型，将标签迁移到新数据集</p>
+        <p><strong>优势：</strong>快速、准确，适合标准组织类型；无需专家知识</p>
+        <p><strong>局限：</strong>依赖参考数据集质量，难以发现新细胞亚型</p>
+    </div>
+
+    <div class="method-card">
+        <h3>2. Marker基因知识库匹配</h3>
+        <p><strong>代表工具：</strong>SingleR, scType, SCINA</p>
+        <p><strong>核心思想：</strong>整合公共数据库和文献中的marker基因，通过相关性或打分系统预测细胞类型</p>
+        <p><strong>优势：</strong>基于生物学知识，可解释性强</p>
+        <p><strong>局限：</strong>marker基因库更新滞后，跨物种/跨组织泛化能力有限</p>
+    </div>
+
+    <div class="method-card">
+        <h3>3. 深度学习端到端注释</h3>
+        <p><strong>代表工具：</strong>scBERT, Geneformer, CellTypist</p>
+        <p><strong>核心思想：</strong>使用Transformer等深度学习架构，从海量scRNA-seq数据中学习细胞表征</p>
+        <p><strong>优势：</strong>可捕捉复杂的基因-基因相互作用，处理高维数据能力强</p>
+        <p><strong>局限：</strong>需要大规模计算资源，"黑盒"模型可解释性差</p>
+    </div>
+
+    <h2>实战推荐：Azimuth工作流</h2>
+    <div class="highlight-box">
+        <strong>使用场景：</strong>对于常见组织（PBMC、肺、肝脏等），Azimuth提供了基于人类细胞图谱的高质量参考数据集
+    </div>
+    
+    <p><strong>Python示例代码：</strong></p>
+    <pre><code>import scanpy as sc
+import azimuth
+
+# 加载数据
+adata = sc.read_h5ad('your_data.h5ad')
+
+# 使用PBMC参考数据集进行注释
+predictions = azimuth.annotate(
+    adata, 
+    reference='pbmc',  # 可选：lung, liver, kidney等
+    layer='counts'
+)
+
+# 添加预测结果到adata
+adata.obs['predicted_celltype'] = predictions['predicted.celltype.l2']
+adata.obs['prediction_score'] = predictions['predicted.celltype.l2.score']
+
+# 可视化
+sc.pl.umap(adata, color='predicted_celltype', legend_loc='on data')</code></pre>
+
+    <h2>评估注释质量</h2>
+    <ul>
+        <li><strong>预测置信度分数：</strong>检查低置信度细胞（score < 0.5），可能为稀有亚型或低质量细胞</li>
+        <li><strong>生物学验证：</strong>绘制已知marker基因的表达热图，验证注释一致性</li>
+        <li><strong>跨方法比较：</strong>使用2-3种工具进行注释，检查一致性（建议Azimuth + SingleR）</li>
+    </ul>
+
+    <h2>未来展望</h2>
+    <p>
+        随着基础模型（Foundation Models）如scGPT、Geneformer的兴起，细胞注释正在向"零样本学习"（zero-shot learning）迈进——
+        模型可以通过自然语言描述细胞类型特征，直接进行注释，无需额外训练。这将大幅降低注释门槛，加速单细胞研究的民主化。
+    </p>
+
+    <h2>相关资源</h2>
+    <ul>
+        <li><a href="https://azimuth.hubmapconsortium.org/" target="_blank">Azimuth官方网站</a></li>
+        <li><a href="https://www.celltypist.org/" target="_blank">CellTypist在线工具</a></li>
+        <li><a href="https://github.com/theislab/scib" target="_blank">scIB基准测试框架</a></li>
+    </ul>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+    <p style="text-align: center; color: #999; font-size: 0.9em;">© 2025 知识库 | <a href="../../index.html">返回首页</a></p>
+</body>
+</html>
