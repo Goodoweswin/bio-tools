@@ -99,6 +99,12 @@ nav {
     overflow: hidden;
 }
 
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* 改进：按钮增大触摸区域 */
 .btn {
     display: inline-block;

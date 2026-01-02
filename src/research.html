@@ -3,9 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research | PhD Candidate</title>
+    <title>Research | MD Candidate</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Research Specific Styles */
+        .research-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .research-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .research-header h2 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: normal;
+            border-bottom: none;
+        }
+        
+        .summary-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .summary-text h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+        
+        .summary-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .pillar-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .pillar-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .pillar-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pillar-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .cn-text {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: auto;
+            display: block;
+            border-top: 1px dashed #eee;
+            padding-top: 0.5rem;
+        }
+
+        .roadmap-section {
+            margin-top: 4rem;
+        }
+        
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .roadmap-item {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .summary-section {
+                grid-template-columns: 1fr;
+            }
+            .research-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,9 +127,144 @@
 
     <section>
         <div class="container">
-            <h1>Research Projects</h1>
-            <p>Detailed descriptions of my research projects will go here.</p>
-            <!-- Content to be added -->
+            
+            <!-- Header -->
+            <div class="research-header">
+                <h1>Deciphering the Vascular-Skin Axis</h1>
+                <h2>Endothelial Senescence and Novel Regulator X (NRX) as Drivers of Dermal Aging</h2>
+                <p style="margin-top: 1rem; color: #666;">解密血管-皮肤轴：探究内皮细胞衰老与新型调节因子NRX驱动真皮老化的机制</p>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="summary-section">
+                <div class="summary-text">
+                    <h3>Research Summary / 研究概况</h3>
+                    <p>My research investigates the critical role of the microvasculature in skin aging, challenging the traditional view that vascular atrophy is merely a bystander. I propose that endothelial cell (EC) senescence, driven by the downregulation of a Novel Regulator X (NRX), acts as an upstream driver of dermal aging. My work integrates single-cell transcriptomics and molecular biology to map the "Vascular-Skin Axis" and develop targeted strategies to rejuvenate the aging skin microenvironment.</p>
+                    <span class="cn-text">我的研究致力于探究微血管在皮肤衰老中的关键作用，挑战“血管萎缩仅是旁观者”的传统观点。我提出内皮细胞（EC）衰老（由新型调节因子 NRX 下调驱动）是真皮老化的上游驱动因素。我的工作整合了单细胞转录组学与分子生物学技术，旨在绘制“血管-皮肤轴”的调控网络，并开发靶向策略以实现皮肤微环境的年轻化。</span>
+                </div>
+                <div class="summary-image">
+                    <img src="/assets/skin_aging/websummary_scEC.png" alt="Research Summary Visualization">
+                </div>
+            </div>
+
+            <!-- Pillars Grid -->
+            <h2 style="text-align: center; display: block; border: none; margin-bottom: 3rem;">Key Research Pillars / 核心研究版块</h2>
+            <div class="grid">
+                <!-- Pillar 1 -->
+                <div class="pillar-card">
+                    <img src="/assets/skin_aging/web_scanalysis.png" alt="Single-Cell Mapping" class="pillar-image">
+                    <div class="pillar-content">
+                        <h3>1. Discovery: Single-Cell Mapping & Target Identification</h3>
+                        <p>By re-analyzing large-scale scRNA-seq datasets (e.g., GSE113957) and validating with clinical samples, I have identified a specific subpopulation of senescent endothelial cells characterized by the loss of NRX. My research focuses on how NRX depletion triggers the transition of ECs from a quiescent state to a pro-inflammatory Senescence-Associated Secretory Phenotype (SASP).</p>
+                        <span class="cn-text">发现：单细胞图谱与靶点鉴定。通过重分析大规模单细胞数据集（如 GSE113957）并结合临床样本验证，我鉴定了一群以 NRX 缺失为特征的衰老内皮细胞亚群。重点研究 NRX 的耗竭如何触发内皮细胞从静息态向促炎的 SASP（衰老相关分泌表型） 转变。</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="pillar-card">
+                    <img src="/assets/skin_aging/web_workflow_EC.png" alt="Mechanism Workflow" class="pillar-image">
+                    <div class="pillar-content">
+                        <h3>2. Mechanism: Angiocrine Signaling Crosstalk</h3>
+                        <p>I utilize established in vitro co-culture models to decipher the communication between NRX-deficient ECs and dermal fibroblasts. My preliminary data suggests that the "Senescent Secretome" (including specific cytokines and miRNAs) from these ECs actively suppresses collagen synthesis and promotes matrix metalloproteinase (MMP) activity in fibroblasts, thereby accelerating structural aging.</p>
+                        <span class="cn-text">机制：血管旁分泌信号互作。我利用体外共培养模型解析 NRX 缺陷型内皮细胞与真皮成纤维细胞之间的通讯。初步数据显示，这些内皮细胞分泌的“衰老分泌组”（包含特定细胞因子与miRNA）会主动抑制成纤维细胞的胶原合成并促进 MMP 活性，从而加速皮肤结构老化。</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="pillar-card">
+                    <img src="/assets/skin_aging/web_clinical_transl.png" alt="Intervention Strategy" class="pillar-image">
+                    <div class="pillar-content">
+                        <h3>3. Intervention: Targeted Delivery & Rejuvenation</h3>
+                        <p>To translate these findings, I am developing a dual-intervention strategy. I employ small molecule agonists and engineered exosomes to restore NRX levels or clear senescent ECs in aged mice. This approach aims to achieve rapid vascular normalization and subsequent dermal regeneration, offering a novel therapeutic avenue for skin aging and wound healing.</p>
+                        <span class="cn-text">干预：靶向递送与年轻化。为了转化这些发现，我正在开发双重干预策略。利用小分子激动剂和工程化外泌体在老年小鼠中恢复 NRX 水平或清除衰老内皮细胞。该策略旨在实现血管快速正常化及随后的真皮再生，为皮肤抗衰和伤口愈合提供新的治疗途径。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Roadmap -->
+            <div class="roadmap-section">
+                <h2 style="border-bottom: 3px solid var(--accent-color); display: inline-block;">Future Roadmap / 未来规划</h2>
+                <div class="roadmap-grid" style="margin-top: 2rem;">
+                    <div class="roadmap-item">
+                        <h3><i class="fas fa-map-marked-alt"></i> Spatial Transcriptomics</h3>
+                        <p>Implementing spatial profiling to visualize the in situ niche of NRX-low endothelial cells and their proximity to senescent fibroblasts.</p>
+                        <span class="cn-text">空间转录组： 计划引入空间技术，原位可视化低表达 NRX 内皮细胞的空间壁龛及其与衰老成纤维细胞的邻近关系。</span>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3><i class="fas fa-user-md"></i> Clinical Validation</h3>
+                        <p>Expanding the validation of NRX as a diagnostic biomarker in human skin biopsies across different ages.</p>
+                        <span class="cn-text">临床验证： 扩大样本量，验证 NRX 作为不同年龄段人类皮肤衰老诊断标志物的潜力。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- PROJECT DIVIDER -->
+            <!-- ========================================== -->
+            <hr style="margin: 5rem 0; border: none; border-top: 1px solid #e0e0e0;">
+
+            <!-- PROJECT 2: Alopecia & Assembloids -->
+            <div class="research-project">
+                <!-- Header -->
+                <div class="research-header">
+                    <h1>Restoring Angio-Follicular Crosstalk</h1>
+                    <h2>A Vascularized Assembloid Approach to Reverse Senescence in Alopecia-Derived Dermal Papilla Cells</h2>
+                    <p style="margin-top: 1rem; color: #666;">基于人源血管化毛囊组装体（Assembloids）的血管-毛囊对话机制及其逆转脱发患者DPC衰老的研究</p>
+                </div>
+
+                <!-- Abstract -->
+                <div class="summary-section">
+                    <div class="summary-text">
+                        <h3>Abstract / 研究摘要</h3>
+                        <p>Androgenetic Alopecia (AGA) is characterized by the premature senescence and miniaturization of Dermal Papilla Cells (DPCs), closely linked to the loss of vascular signals in the hair follicle microenvironment. To overcome the limitations of traditional 2D cultures, this study employs cutting-edge Organoid Assembloid technology. By physically fusing independent Human Hair Follicle Organoids (HFOs) and Blood Vessel Organoids (BVOs), we successfully constructed functional Vascularized Hair Follicle Assembloids (vHFOs).</p>
+                        <p style="margin-top: 1rem;"><strong>Hypothesis:</strong> The vascularized microenvironment restores the missing "Angio-Follicular Crosstalk". We utilize vHFO-derived engineered exosomes (vHFO-Exos) to treat AGA-patient-derived DPCs under oxidative stress (H<sub>2</sub>O<sub>2</sub>). This aims to reveal how vHFO-Exos deliver specific Angiocrine factors and miRNAs to activate Wnt/&beta;-catenin pathways, reversing DPC senescence.</p>
+                        <span class="cn-text">雄激素性脱发（AGA）的核心病理特征在于毛乳头细胞（DPCs）的过早衰老与功能微型化，这与毛囊微环境中血管信号的缺失密切相关。为了突破传统二维培养无法模拟体内复杂微环境的局限，本研究采用前沿的类器官组装体技术（Organoid Assembloids），将独立培养的人毛囊类器官（HFOs）与血管类器官（BVOs）进行物理融合，成功构建了具备功能性血管网络的血管化毛囊组装体（vHFOs）。<br>本研究的核心假设是：血管化微环境能恢复缺失的“血管-毛囊对话”。我们将利用 vHFO 分泌的工程化外泌体（vHFO-Exos），作用于脱发患者来源的原代 DPCs。通过 H<sub>2</sub>O<sub>2</sub> 模拟脱发头皮的高氧化应激环境，旨在揭示 vHFO-Exos 如何通过传递特定的血管分泌因子及关键 miRNA，激活 Wnt/&beta;-catenin 等核心生发通路，从而逆转 DPC 的病理性衰老。</span>
+                    </div>
+                    <div class="summary-image">
+                        <img src="/assets/vHFO_exos/web_vHFO.png" alt="vHFO Assembloid Model">
+                    </div>
+                </div>
+
+                <!-- Methodology Grid -->
+                <h2 style="text-align: center; display: block; border: none; margin-bottom: 3rem;">Methodology & Mechanism / 技术路线与机制</h2>
+                <div class="grid">
+                    <!-- Pillar 1: Design & Model -->
+                    <div class="pillar-card">
+                        <img src="/assets/vHFO_exos/web_exp_design.png" alt="Experimental Design" class="pillar-image">
+                        <div class="pillar-content">
+                            <h3>1. Experimental Design & Model Construction</h3>
+                            <p><strong>Assembloid Construction:</strong> Differentiating iPSCs into mature HFOs and BVOs, followed by physical fusion to construct vHFO Assembloids.<br>
+                            <strong>Patient-Derived Model:</strong> Isolating primary hDPCs from AGA patient scalps and establishing an H<sub>2</sub>O<sub>2</sub>-induced oxidative stress senescence model.</p>
+                            <span class="cn-text">实验设计与模型构建：分别诱导人 iPSC 分化为成熟的 HFO 与 BVO，构建 vHFO 组装体。同时从 AGA 患者头皮分离原代 hDPC，建立氧化应激衰老模型。</span>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 2: Mechanism & Validation -->
+                    <div class="pillar-card">
+                        <img src="/assets/vHFO_exos/web_cellular_mechnism.png" alt="Cellular Mechanism" class="pillar-image">
+                        <div class="pillar-content">
+                            <h3>2. Mechanistic Insight & Functional Validation</h3>
+                            <p><strong>Multi-omics Mechanism:</strong> Using RNA-seq and proteomics to screen vHFO-Exos for specific Angiocrine signals.<br>
+                            <strong>Functional Validation:</strong> Evaluating the rescue effect of vHFO-Exos on DPC proliferation, antioxidant capacity, and hair-inductive properties (ALP, Versican).</p>
+                            <span class="cn-text">机制解析与功能验证：利用多组学筛选 vHFO-Exos 中的血管来源信号分子。评估 vHFO-Exos 对衰老 DPC 增殖、抗氧化能力及毛囊诱导特性的挽救作用。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keywords -->
+                <div style="margin-top: 3rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+                    <h4 style="margin-bottom: 1rem; color: var(--secondary-color);">Keywords / 关键词</h4>
+                    <div>
+                        <span class="tag">Vascularized Assembloids</span>
+                        <span class="tag">Angio-Follicular Crosstalk</span>
+                        <span class="tag">Alopecia</span>
+                        <span class="tag">Dermal Papilla Cells</span>
+                        <span class="tag">Exosomes</span>
+                        <span class="tag">Senescence Reversal</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 

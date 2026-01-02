@@ -25,7 +25,18 @@
 1. Edit `src/components/header.html`.
 2. **Done!** Vite will automatically update all pages during build. No manual copying needed.
 
-### C. Deploying (Cloudflare Pages)
+### C. Asset Management
+- **Organization**: Do not dump everything into `public/assets/`.
+- **Rule**: Create a subfolder for each major project or article.
+  - Example: `public/assets/skin_aging/figure1.png`
+- **Reference**: In HTML, use `/assets/skin_aging/figure1.png`.
+
+### D. Content Strategy (HTML vs JSON)
+- **Decision**: Use **Raw HTML** for `research.html` and complex pages.
+- **Reasoning**: Each research project has a unique layout (e.g., 3-pillar vs 4-step workflow). JSON templates are too rigid.
+- **Maintenance**: When moving assets, use VS Code "Find & Replace" to update paths globally.
+
+### E. Deploying (Cloudflare Pages)
 1. **Configuration (One-time)**:
    - Build command: `npm run build`
    - Build output directory: `dist`
