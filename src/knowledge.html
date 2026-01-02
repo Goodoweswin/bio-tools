@@ -9,8 +9,10 @@
 <head>
   <meta charset="UTF-8">
   <title>知识库 - AI·单细胞·皮肤衰老</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+    /* Keep existing specific styles but remove body padding/margin as it's handled by global style */
     .search-box { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #0072B2; border-radius: 8px; margin-bottom: 30px; }
     .direction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
     .direction-card { border: 1px solid #e0e0e0; border-radius: 12px; padding: 25px; transition: box-shadow 0.3s; cursor: pointer; }
@@ -20,34 +22,38 @@
     .article-list { margin-top: 15px; display: none; }
     .article-list li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
     .article-list a { text-decoration: none; color: #0072B2; }
-    @media (max-width: 768px) { body { padding: 10px; } }
   </style>
 </head>
 <body>
-  <h1>知识库：AI、单细胞组学、皮肤衰老</h1>
-  <input type="text" class="search-box" placeholder="搜索知识库（如：HES1、批次校正、Transformer）..." onkeyup="filterArticles(this.value)">
-  
-  <div class="direction-grid">
-    <div class="direction-card" onclick="toggleArticles('ai-sc')">
-      <h2>AI × 单细胞组学</h2>
-      <p>探索人工智能如何革新单细胞数据分析，从自动注释到调控网络预测。</p>
-      <span class="count">4篇文章 · 最后更新：2025-01-15</span>
-      <ul class="article-list" id="ai-sc-list">
-        <li><a href="knowledge/ai-single-cell/annotation.html">AI驱动的细胞类型自动注释</a></li>
-        <li><a href="knowledge/ai-single-cell/batch-correction.html">深度学习批次效应校正</a></li>
-        <li><a href="knowledge/ai-single-cell/grn-inference.html">Transformer推断基因调控网络</a></li>
-        <li><a href="knowledge/ai-single-cell/trajectory.html">AI优化细胞轨迹分析</a></li>
-      </ul>
-    </div>
-    
-    <div class="direction-card" onclick="toggleArticles('skin-aging')">
-      <h2>单细胞视角下的皮肤衰老</h2>
-      <p>基于单细胞测序解析皮肤衰老的分子机制与细胞异质性。</p>
-      <span class="count">4篇文章 · 最后更新：2025-01-20</span>
-      <ul class="article-list" id="skin-aging-list">
-        <li><a href="knowledge/skin-aging/fibroblast.html">成纤维细胞亚群异质性研究</a></li>
-        <li><a href="knowledge/skin-aging/il17-signaling.html">IL-17信号轴在衰老中的作用</a></li>
-        <li><a href="knowledge/skin-aging/hes1-klf6.html">HES1/KLF6调控机制解析</a></li>
+
+  <load src="./components/header.html" />
+
+  <div class="container" style="padding-top: 2rem;">
+      <h1>知识库：AI、单细胞组学、皮肤衰老</h1>
+      <input type="text" class="search-box" placeholder="搜索知识库（如：HES1、批次校正、Transformer）..." onkeyup="filterArticles(this.value)">
+      
+      <div class="direction-grid">
+        <div class="direction-card" onclick="toggleArticles('ai-sc')">
+          <h2>AI × 单细胞组学</h2>
+          <p>探索人工智能如何革新单细胞数据分析，从自动注释到调控网络预测。</p>
+          <span class="count">4篇文章 · 最后更新：2025-01-15</span>
+          <ul class="article-list" id="ai-sc-list">
+            <li><a href="knowledge/ai-single-cell/annotation.html">AI驱动的细胞类型自动注释</a></li>
+            <li><a href="knowledge/ai-single-cell/batch-correction.html">深度学习批次效应校正</a></li>
+            <li><a href="knowledge/ai-single-cell/grn-inference.html">Transformer推断基因调控网络</a></li>
+            <li><a href="knowledge/ai-single-cell/trajectory.html">AI优化细胞轨迹分析</a></li>
+          </ul>
+        </div>
+        
+        <div class="direction-card" onclick="toggleArticles('skin-aging')">
+          <h2>单细胞视角下的皮肤衰老</h2>
+          <p>基于单细胞测序解析皮肤衰老的分子机制与细胞异质性。</p>
+          <span class="count">4篇文章 · 最后更新：2025-01-20</span>
+          <ul class="article-list" id="skin-aging-list">
+            <li><a href="knowledge/skin-aging/fibroblast.html">成纤维细胞亚群异质性研究</a></li>
+            <li><a href="knowledge/skin-aging/il17-signaling.html">IL-17信号轴在衰老中的作用</a></li>
+            <li><a href="knowledge/skin-aging/hes1-klf6.html">HES1/KLF6调控机制解析</a></li>
+
         <li><a href="knowledge/skin-aging/aging-clock.html">皮肤衰老时钟构建</a></li>
       </ul>
     </div>
@@ -79,5 +85,8 @@
       });
     }
   </script>
+
+  <load src="./components/footer.html" />
+
 </body>
 </html> 

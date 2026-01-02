@@ -1,0 +1,195 @@
+:root {
+    --primary-color: #0072B2;
+    --secondary-color: #005b8e;
+    --accent-color: #FF7F50;
+    --text-color: #333333;
+    --bg-color: #ffffff;
+    --light-bg: #f4f7f6;
+    --border-color: #e0e0e0;
+    --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-main);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 导航栏 - 改进：移动端显示简化菜单 */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    flex-wrap: wrap;  /* 允许换行 */
+}
+
+/* 改进：Logo 在移动端适当缩小 */
+.logo {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);  /* 自动缩放 */
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: clamp(1rem, 3vw, 2rem);  /* 间距随屏幕变化 */
+    flex-wrap: wrap;  /* 小屏自动换行 */
+}
+
+/* 改进：增大触摸目标 */
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
+    padding: 8px 12px;  /* 增大点击区域 */
+    border-radius: 4px;
+}
+
+/* Hero 区域 - 改进：头像尺寸响应式 */
+.hero {
+    padding: clamp(2rem, 5vh, 4rem) 0;  /* 动态间距 */
+    background-color: var(--light-bg);
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+}
+
+.hero h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);  /* 核心改进：自动缩放 */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);  /* 改进：自动缩放 */
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+/* 改进：头像容器弹性缩放 */
+.hero-image {
+    flex: 0 0 clamp(150px, 30vw, 300px);  /* 手机小，电脑大 */
+}
+
+/* 改进：头像本身相对尺寸 */
+.profile-placeholder {
+    width: 100%;  /* 占满容器 */
+    aspect-ratio: 1;  /* 保持正方形 */
+    max-width: 250px;  /* 最大限制 */
+    background-color: #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid var(--primary-color);
+    color: #666;
+    overflow: hidden;
+}
+
+/* 改进：按钮增大触摸区域 */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    min-height: 44px;  /* 触摸目标 ≥44px */
+    min-width: 120px;
+    text-align: center;
+}
+
+/* 内容区域 - 未改动 */
+section { padding: 4rem 0; }
+h2 { font-size: 2rem; margin-bottom: 2rem; color: var(--text-color); border-bottom: 3px solid var(--accent-color); display: inline-block; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; transition: transform 0.3s, box-shadow 0.3s; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.card h3 { color: var(--primary-color); margin-bottom: 1rem; }
+
+.tag { display: inline-block; background-color: var(--light-bg); color: var(--primary-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; margin-right: 0.5rem; margin-top: 0.5rem; }
+
+.news-list { list-style: none; }
+.news-item { display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+.news-date { font-weight: bold; color: var(--accent-color); min-width: 100px; }
+
+footer { background-color: var(--text-color); color: white; padding: 2rem 0; text-align: center; margin-top: auto; }
+footer a { color: white; margin: 0 10px; }
+
+/* ========== 响应式断点（核心改进） ========== */
+
+/* 平板（768-1023px） */
+@media (max-width: 1023px) {
+    section {
+        padding: 3rem 0;  /* 减少间距 */
+    }
+}
+
+/* 手机（<768px） */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column-reverse;  /* 头像在上 */
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    /* 改进：导航栏变垂直 */
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+        gap: 0.5rem;
+    }
+    
+    /* 改进：论文列表改成单列 */
+    .news-item {
+        flex-direction: column;  /* 日期在上，内容在下 */
+        gap: 0.5rem;
+    }
+}
+
+/* 小手机（<480px）- 新增断点 */
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;  /* 防止字体过小 */
+    }
+    
+    .container {
+        padding: 0 15px;  /* 减少边距 */
+    }
+    
+    .hero {
+        padding: 2rem 0;
+    }
+    
+    /* 改进：按钮垂直堆叠 */
+    .btn-outline {
+        margin: 1rem 0 0 0;  /* 手机：取消左间距，改为上下 */
+        display: block;
+        width: 100%;
+    }
+    
+    .grid {
+        gap: 1.5rem;  /* 减少间距 */
+    }
+}
