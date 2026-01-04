@@ -136,15 +136,18 @@ async function callGemini(prompt, env) {
   const apiKey = env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY not configured");
 
+  // Use model from env var, or default to a stable version
+  const model = env.GEMINI_MODEL || "gemini-1.5-flash";
+
   let url;
   // Check if AI Gateway is configured
   if (env.CF_ACCOUNT_ID && env.AI_GATEWAY_NAME) {
     // Use Cloudflare AI Gateway
     // Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/google-ai-studio/...
-    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/google-ai-studio/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/google-ai-studio/v1beta/models/${model}:generateContent?key=${apiKey}`;
   } else {
     // Direct Google API
-    url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+    url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
   }
 
   const response = await fetch(url, {
