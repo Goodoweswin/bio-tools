@@ -184,15 +184,22 @@ async function callGemini(prompt, env) {
 
 /**
  * Call DeepSeek API (OpenAI Compatible)
- * Note: Currently Direct Connection only. Cloudflare AI Gateway 'openai' endpoint 
- * forwards to OpenAI servers, causing 401 with DeepSeek keys.
+ * Supports Cloudflare AI Gateway if configured
  */
 async function callDeepSeek(prompt, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) throw new Error("DEEPSEEK_API_KEY not configured");
 
-  // Direct DeepSeek API (Gateway integration requires specific provider support)
-  const url = "https://api.deepseek.com/chat/completions";
+  let url;
+  // Check if AI Gateway is configured
+  if (env.CF_ACCOUNT_ID && env.AI_GATEWAY_NAME) {
+    // Use Cloudflare AI Gateway with 'deepseek' provider
+    // Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/deepseek/chat/completions
+    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/deepseek/chat/completions`;
+  } else {
+    // Direct DeepSeek API
+    url = "https://api.deepseek.com/chat/completions";
+  }
 
   const response = await fetch(url, {
     method: "POST",
