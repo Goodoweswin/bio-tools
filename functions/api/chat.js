@@ -120,12 +120,22 @@ function buildSingleCellPrompt(question, context) {
 
 /**
  * Call Google Gemini API
+ * Supports Cloudflare AI Gateway if configured
  */
 async function callGemini(prompt, env) {
   const apiKey = env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY not configured");
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+  let url;
+  // Check if AI Gateway is configured
+  if (env.CF_ACCOUNT_ID && env.AI_GATEWAY_NAME) {
+    // Use Cloudflare AI Gateway
+    // Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/google-ai-studio/...
+    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/google-ai-studio/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+  } else {
+    // Direct Google API
+    url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+  }
 
   const response = await fetch(url, {
     method: "POST",
