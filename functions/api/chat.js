@@ -45,14 +45,21 @@ export async function onRequestPost({ request, env }) {
     // 5. Build Prompt
     const prompt = buildSingleCellPrompt(userQuestion, context);
 
-    // 6. Call Gemini API
-    const aiResponse = await callGemini(prompt, env);
+    // 6. Call AI API (Gemini or DeepSeek)
+    let aiResponse;
+    const provider = env.AI_PROVIDER || "gemini"; // Default to gemini
+
+    if (provider.toLowerCase() === "deepseek") {
+      aiResponse = await callDeepSeek(prompt, env);
+    } else {
+      aiResponse = await callGemini(prompt, env);
+    }
 
     // 7. Return Result
     return new Response(JSON.stringify({
       answer: aiResponse,
       references: context.map(c => c.title),
-      quota: { used: "tracked_internally", total: 100 }
+      quota: { used: "tracked_internally", total: 100, provider: provider }
     }), { 
       headers: { "Content-Type": "application/json" } 
     });
@@ -165,6 +172,39 @@ async function callGemini(prompt, env) {
 
   const data = await response.json();
   return data.candidates[0].content.parts[0].text;
+}
+
+/**
+ * Call DeepSeek API (OpenAI Compatible)
+ */
+async function callDeepSeek(prompt, env) {
+  const apiKey = env.DEEPSEEK_API_KEY;
+  if (!apiKey) throw new Error("DEEPSEEK_API_KEY not configured");
+
+  const url = "https://api.deepseek.com/chat/completions";
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "deepseek-chat",
+      messages: [
+        { role: "user", content: prompt }
+      ],
+      stream: false
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`DeepSeek API Error: ${response.status} - ${err}`);
+  }
+
+  const data = await response.json();
+  return data.choices[0].message.content;
 }
 
 /**
