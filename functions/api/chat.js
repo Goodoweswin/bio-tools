@@ -141,10 +141,10 @@ async function callGemini(prompt, env) {
   if (env.CF_ACCOUNT_ID && env.AI_GATEWAY_NAME) {
     // Use Cloudflare AI Gateway
     // Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/google-ai-studio/...
-    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/google-ai-studio/v1beta/models/gemini-1.5-flash-001:generateContent?key=${apiKey}`;
+    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/google-ai-studio/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
   } else {
     // Direct Google API
-    url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=${apiKey}`;
+    url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
   }
 
   const response = await fetch(url, {
