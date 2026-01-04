@@ -45,14 +45,15 @@ export async function onRequestPost({ request, env }) {
     // 5. Build Prompt
     const prompt = buildSingleCellPrompt(userQuestion, context);
 
-    // 6. Call AI API (Gemini or DeepSeek)
+    // 6. Call AI API (Gemini or Generic OpenAI Compatible)
     let aiResponse;
     const provider = env.AI_PROVIDER || "gemini"; // Default to gemini
 
-    if (provider.toLowerCase() === "deepseek") {
-      aiResponse = await callDeepSeek(prompt, env);
-    } else {
+    if (provider.toLowerCase() === "gemini") {
       aiResponse = await callGemini(prompt, env);
+    } else {
+      // Assume any other provider is OpenAI-compatible (DeepSeek, Doubao, Moonshot, etc.)
+      aiResponse = await callOpenAICompatible(prompt, env);
     }
 
     // 7. Return Result
@@ -183,24 +184,29 @@ async function callGemini(prompt, env) {
 }
 
 /**
- * Call DeepSeek API (OpenAI Compatible)
- * Supports Cloudflare AI Gateway if configured
+ * Call Generic OpenAI Compatible API
+ * Supports DeepSeek, Doubao, Moonshot, etc.
+ * Configured via env vars: OPENAI_BASE_URL, OPENAI_API_KEY, OPENAI_MODEL
  */
-async function callDeepSeek(prompt, env) {
-  const apiKey = env.DEEPSEEK_API_KEY;
-  if (!apiKey) throw new Error("DEEPSEEK_API_KEY not configured");
+async function callOpenAICompatible(prompt, env) {
+  // 1. Get Configuration
+  const baseUrl = env.OPENAI_BASE_URL || "https://api.deepseek.com"; // Default to DeepSeek if not set
+  const apiKey = env.OPENAI_API_KEY || env.DEEPSEEK_API_KEY; // Fallback to DEEPSEEK_KEY for backward compatibility
+  const model = env.OPENAI_MODEL || "deepseek-chat"; // Default model
 
-  let url;
-  // Check if AI Gateway is configured
-  if (env.CF_ACCOUNT_ID && env.AI_GATEWAY_NAME) {
-    // Use Cloudflare AI Gateway with 'deepseek' provider
-    // Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/deepseek/chat/completions
-    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/deepseek/chat/completions`;
-  } else {
-    // Direct DeepSeek API
-    url = "https://api.deepseek.com/chat/completions";
+  if (!apiKey) throw new Error("OPENAI_API_KEY not configured");
+
+  // 2. Construct URL
+  // If using AI Gateway, the baseUrl should be the Gateway URL
+  // Example Gateway URL: https://gateway.ai.cloudflare.com/v1/{account}/{gateway}/{provider}
+  let url = `${baseUrl}/chat/completions`;
+  
+  // Handle trailing slash issues
+  if (baseUrl.endsWith("/")) {
+    url = `${baseUrl}chat/completions`;
   }
 
+  // 3. Make Request
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -208,7 +214,7 @@ async function callDeepSeek(prompt, env) {
       "Authorization": `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: model,
       messages: [
         { role: "system", content: "You are a helpful assistant." },
         { role: "user", content: prompt }
@@ -219,7 +225,7 @@ async function callDeepSeek(prompt, env) {
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`DeepSeek API Error: ${response.status} - ${err}`);
+    throw new Error(`AI Provider Error (${model}): ${response.status} - ${err}`);
   }
 
   const data = await response.json();
