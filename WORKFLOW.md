@@ -46,6 +46,16 @@
    - `git push origin main`
    - Cloudflare handles the build and deployment automatically.
 
+### F. Updating AI Backend (sc-chat-api)
+- **Location**: `../sc-chat-api/`
+- **Logic**: `src/index.js` contains the API logic (Gemini call, Auth, Rate Limit).
+- **Deploy**:
+  ```bash
+  cd ../sc-chat-api
+  npm run deploy
+  ```
+- **Note**: The frontend (`chat-widget.html`) connects to the live Worker URL. If you change the Worker URL, update the frontend config.
+
 ## 3. Agent Protocol (For AI Assistants)
 - **Source Root**: `src/` is the working directory.
 - **Static Assets**: Images/PDFs go in `public/`, referenced as `/assets/file.ext` (Vite resolves this).

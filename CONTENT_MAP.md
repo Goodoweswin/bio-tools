@@ -7,6 +7,11 @@
 - `public/tools.html`: **Tools**. Bioinformatics software showcase.
 - `public/knowledge.html`: **Knowledge Base Index**. Entry point for articles.
 
+## Components (`src/components/`)
+- `header.html`: Global navigation bar.
+- `footer.html`: Global footer.
+- `chat-widget.html`: **AI Assistant**. Floating chat interface connecting to `sc-chat-api`.
+
 ## Knowledge Base Categories
 Located in `public/knowledge/`:
 

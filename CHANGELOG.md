@@ -6,6 +6,14 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 - **Planned**: Interactive Volcano Plot tool (`tools/deg.html`).
 - **Planned**: Publications page population.
 
+## [2026-01-04] - Phase 4: AI Integration
+### Added
+- **Backend API**: Created `sc-chat-api` (Cloudflare Workers) to handle AI requests securely.
+    - Features: Google Gemini integration, HTTP Basic Auth, IP Rate Limiting.
+- **Frontend Widget**: Created `src/components/chat-widget.html` for user interaction.
+    - Features: Floating UI, Password protection, Markdown rendering.
+- **Integration**: Injected the chat widget into `src/components/footer.html` for global visibility.
+
 ## [2026-01-02] - Phase 3: Content & Asset Organization
 ### Added
 - **Research Page**: Populated `src/research.html` with two major research projects:
