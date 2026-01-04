@@ -16,6 +16,9 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 
 ### Fixed
 - **Build Error**: Fixed `vite-plugin-html-inject` path resolution error by using absolute paths (`/components/chat-widget.html`) in `footer.html`.
+- **Connectivity**: Migrated backend from standalone Worker to Cloudflare Pages Functions (`/api/chat`) to resolve cross-border connection issues.
+- **Stability**: Integrated Cloudflare AI Gateway to improve Google Gemini API reliability and provide request logging.
+- **UX**: Improved error reporting in `chat-widget.html` to display specific API errors instead of generic messages.
 
 ## [2026-01-02] - Phase 3: Content & Asset Organization
 ### Added

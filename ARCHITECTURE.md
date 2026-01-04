@@ -2,29 +2,29 @@
 
 ## Stack
 - **Frontend**: Vite + Vanilla HTML/CSS (Static Site).
-- **Backend**: Cloudflare Workers (Serverless Node.js environment).
-- **AI Model**: Google Gemini Pro (via API).
+- **Backend**: Cloudflare Pages Functions (Serverless Node.js environment).
+- **AI Model**: Google Gemini Pro (via Cloudflare AI Gateway).
 - **Database**: Cloudflare Workers KV (for Rate Limiting & Knowledge Base).
 - **Build Tool**: Vite (handles bundling, minification, and HTML injection).
-- **Hosting**: Cloudflare Pages (Frontend) + Cloudflare Workers (Backend).
+- **Hosting**: Cloudflare Pages (Frontend + Backend).
 
 ## Directory Structure Rules
 ```
 biotools/
-├── bio-tools/               # FRONTEND (Static Site)
-│   ├── src/                 # Source Code
+├── bio-tools/               # FULL STACK PROJECT
+│   ├── src/                 # Frontend Source Code
 │   │   ├── components/      # Reusable HTML fragments
 │   │   │   ├── chat-widget.html # AI Chat Interface
 │   │   │   ├── header.html  # Global Navigation
 │   │   │   └── footer.html  # Global Footer
 │   │   ├── css/             # Global Styles
 │   │   └── ...
+│   ├── functions/           # Backend Source Code (Pages Functions)
+│   │   └── api/
+│   │       └── chat.js      # Main API Logic (Auth, Gemini, KV)
 │   └── ...
-├── sc-chat-api/             # BACKEND (AI Worker)
-│   ├── src/
-│   │   └── index.js         # Main Worker Logic (Auth, Gemini, KV)
-│   ├── wrangler.toml        # Worker Configuration
-│   └── package.json         # Backend Dependencies
+├── sc-chat-api/             # DEPRECATED (Standalone Worker)
+│   └── ...
 ```
 
 ## Design System (CSS Variables)

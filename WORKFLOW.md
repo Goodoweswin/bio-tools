@@ -52,7 +52,11 @@
 - **Deploy**: Automatically deployed when you `git push` the frontend.
 - **Configuration**:
   - Go to Cloudflare Dashboard -> Pages -> bio-tools -> Settings.
-  - **Environment Variables**: Add `ACCESS_PASSWORD` and `GEMINI_API_KEY`.
+  - **Environment Variables**: 
+    - `ACCESS_PASSWORD`: Chat password.
+    - `GEMINI_API_KEY`: Google AI Studio Key.
+    - `CF_ACCOUNT_ID`: Cloudflare Account ID (for AI Gateway).
+    - `AI_GATEWAY_NAME`: Name of your AI Gateway (e.g., `biotools-gateway`).
   - **KV Namespace Bindings**: Bind `RATE_LIMIT` and `KNOWLEDGE_INDEX` to the respective KV namespaces.
 
 ## 3. Agent Protocol (For AI Assistants)

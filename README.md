@@ -6,8 +6,8 @@ Features a custom **AI Research Assistant** powered by Cloudflare Workers and Go
 
 ## Tech Stack
 - **Frontend**: HTML5, CSS3, JavaScript (Vite)
-- **Backend**: Cloudflare Workers (Serverless API)
-- **AI**: Google Gemini Pro
+- **Backend**: Cloudflare Pages Functions (Serverless API)
+- **AI**: Google Gemini Pro (via Cloudflare AI Gateway)
 - **Hosting**: Cloudflare Pages
 
 ## Quick Start

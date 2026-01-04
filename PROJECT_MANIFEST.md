@@ -24,6 +24,7 @@
     - Full Stack: Cloudflare Pages (Frontend + Functions).
 - **Recent Achievements**:
     - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions for better connectivity and simplified maintenance.
+    - **AI Gateway**: Integrated Cloudflare AI Gateway for improved stability and logging.
     - **AI Assistant**: Integrated Google Gemini AI directly into the site.
     - Populated `research.html` with two major projects ("Skin Aging" & "Alopecia Assembloids").
     - Implemented a structured asset management system (`public/assets/<project_name>/`).

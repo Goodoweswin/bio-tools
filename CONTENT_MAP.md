@@ -10,7 +10,7 @@
 ## Components (`src/components/`)
 - `header.html`: Global navigation bar.
 - `footer.html`: Global footer.
-- `chat-widget.html`: **AI Assistant**. Floating chat interface connecting to `sc-chat-api`.
+- `chat-widget.html`: **AI Assistant**. Floating chat interface connecting to internal API (`/api/chat`).
 
 ## Knowledge Base Categories
 Located in `public/knowledge/`:
