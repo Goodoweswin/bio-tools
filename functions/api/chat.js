@@ -29,6 +29,16 @@ export async function onRequestPost({ request, env }) {
       return new Response(JSON.stringify({ error: "Question is required" }), { status: 400 });
     }
 
+    // [DEBUG MODE]
+    if (userQuestion.trim() === "/debug") {
+      const debugInfo = await diagnoseConnection(env);
+      return new Response(JSON.stringify({
+        answer: "### 🔍 Diagnostic Report\n\n" + debugInfo,
+        references: ["System Diagnosis"],
+        quota: { used: 0, total: 100 }
+      }), { headers: { "Content-Type": "application/json" } });
+    }
+
     // 4. Retrieve Knowledge Context
     const context = await fetchKnowledgeContext(userQuestion, env);
 
@@ -152,4 +162,43 @@ async function callGemini(prompt, env) {
 
   const data = await response.json();
   return data.candidates[0].content.parts[0].text;
+}
+
+/**
+ * Diagnostic Function to List Available Models
+ */
+async function diagnoseConnection(env) {
+  const apiKey = env.GEMINI_API_KEY;
+  if (!apiKey) return "❌ Error: GEMINI_API_KEY is missing in environment variables.";
+
+  const logs = [];
+  logs.push(`- **API Key Configured**: Yes (Starts with ${apiKey.substring(0, 4)}...)`);
+  logs.push(`- **AI Gateway**: ${env.AI_GATEWAY_NAME ? "Configured" : "Not Configured"}`);
+  
+  // Try to list models via Direct API (Bypass Gateway to isolate issue)
+  const directUrl = `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`;
+  
+  try {
+    const response = await fetch(directUrl);
+    const status = response.status;
+    const text = await response.text();
+    
+    logs.push(`- **Direct API Status**: ${status}`);
+    
+    if (status === 200) {
+      const data = JSON.parse(text);
+      const models = data.models ? data.models.map(m => `\`${m.name}\``).join(", ") : "No models found";
+      logs.push(`- **Available Models**: ${models}`);
+      return logs.join("\n");
+    } else {
+      logs.push(`- **Error Response**: \`${text}\``);
+      
+      if (status === 404) logs.push("\n**Diagnosis**: 404 on ListModels usually means the API Key is invalid, or the 'Generative Language API' is not enabled in Google Cloud Console.");
+      if (status === 403) logs.push("\n**Diagnosis**: 403 means Permission Denied. Check if your API Key has restrictions.");
+      
+      return logs.join("\n");
+    }
+  } catch (e) {
+    return `❌ Network Error: ${e.message}`;
+  }
 }
