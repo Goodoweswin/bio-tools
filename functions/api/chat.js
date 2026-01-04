@@ -184,12 +184,24 @@ async function callGemini(prompt, env) {
 
 /**
  * Call DeepSeek API (OpenAI Compatible)
+ * Supports Cloudflare AI Gateway if configured
  */
 async function callDeepSeek(prompt, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) throw new Error("DEEPSEEK_API_KEY not configured");
 
-  const url = "https://api.deepseek.com/chat/completions";
+  let url;
+  // Check if AI Gateway is configured
+  if (env.CF_ACCOUNT_ID && env.AI_GATEWAY_NAME) {
+    // Use Cloudflare AI Gateway (OpenAI Compatible Endpoint)
+    // Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/openai/chat/completions
+    // Note: We map DeepSeek to the 'openai' provider in Gateway because it uses the OpenAI format.
+    // You must ensure your Gateway is configured to allow the 'openai' provider (or 'universal').
+    url = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_NAME}/openai/chat/completions`;
+  } else {
+    // Direct DeepSeek API
+    url = "https://api.deepseek.com/chat/completions";
+  }
 
   const response = await fetch(url, {
     method: "POST",
@@ -200,6 +212,7 @@ async function callDeepSeek(prompt, env) {
     body: JSON.stringify({
       model: "deepseek-chat",
       messages: [
+        { role: "system", content: "You are a helpful assistant." }, // DeepSeek often behaves better with a system prompt
         { role: "user", content: prompt }
       ],
       stream: false
