@@ -5,6 +5,7 @@
 - **Backend**: Cloudflare Pages Functions (Serverless Node.js environment).
 - **AI Model**: Google Gemini Pro (via Cloudflare AI Gateway).
 - **Database**: Cloudflare Workers KV (for Rate Limiting & Knowledge Base).
+- **Vector Search (Planned)**: Cloudflare Vectorize + Workers AI (Embeddings).
 - **Build Tool**: Vite (handles bundling, minification, and HTML injection).
 - **Hosting**: Cloudflare Pages (Frontend + Backend).
 
@@ -14,16 +15,16 @@ biotools/
 ├── bio-tools/               # FULL STACK PROJECT
 │   ├── src/                 # Frontend Source Code
 │   │   ├── components/      # Reusable HTML fragments
-│   │   │   ├── chat-widget.html # AI Chat Interface
+│   │   │   ├── chat-widget.html # AI Chat Interface (calls /api/chat)
 │   │   │   ├── header.html  # Global Navigation
 │   │   │   └── footer.html  # Global Footer
 │   │   ├── css/             # Global Styles
 │   │   └── ...
 │   ├── functions/           # Backend Source Code (Pages Functions)
 │   │   └── api/
-│   │       └── chat.js      # Main API Logic (Auth, Gemini, KV)
+│   │       └── chat.js      # Main API Logic (Auth, Gemini, KV, AI Gateway)
 │   └── ...
-├── sc-chat-api/             # DEPRECATED (Standalone Worker)
+├── sc-chat-api/             # DEPRECATED (Standalone Worker - Do Not Use)
 │   └── ...
 ```
 

@@ -12,6 +12,9 @@
 - `footer.html`: Global footer.
 - `chat-widget.html`: **AI Assistant**. Floating chat interface connecting to internal API (`/api/chat`).
 
+## Backend (`functions/`)
+- `api/chat.js`: **Main Chat API**. Handles authentication, rate limiting, and Gemini API calls via AI Gateway.
+
 ## Knowledge Base Categories
 Located in `public/knowledge/`:
 

@@ -6,19 +6,22 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 - **Planned**: Interactive Volcano Plot tool (`tools/deg.html`).
 - **Planned**: Publications page population.
 
-## [2026-01-04] - Phase 4: AI Integration
+## [2026-01-04] - Phase 4: AI Integration & Architecture Upgrade
 ### Added
-- **Backend API**: Created `sc-chat-api` (Cloudflare Workers) to handle AI requests securely.
-    - Features: Google Gemini integration, HTTP Basic Auth, IP Rate Limiting.
+- **Backend API**: Created `functions/api/chat.js` (Pages Functions) to replace the standalone worker.
+    - Features: Google Gemini integration, HTTP Basic Auth, IP Rate Limiting, AI Gateway support.
 - **Frontend Widget**: Created `src/components/chat-widget.html` for user interaction.
     - Features: Floating UI, Password protection, Markdown rendering.
 - **Integration**: Injected the chat widget into `src/components/footer.html` for global visibility.
 
 ### Fixed
+- **Connectivity**: Migrated backend from standalone Worker (`*.workers.dev`) to Cloudflare Pages Functions (`/api/chat`) to resolve GFW blocking issues in China.
 - **Build Error**: Fixed `vite-plugin-html-inject` path resolution error by using absolute paths (`/components/chat-widget.html`) in `footer.html`.
-- **Connectivity**: Migrated backend from standalone Worker to Cloudflare Pages Functions (`/api/chat`) to resolve cross-border connection issues.
 - **Stability**: Integrated Cloudflare AI Gateway to improve Google Gemini API reliability and provide request logging.
 - **UX**: Improved error reporting in `chat-widget.html` to display specific API errors instead of generic messages.
+
+### Deprecated
+- **sc-chat-api**: The standalone Cloudflare Worker project is now deprecated in favor of the integrated Pages Functions.
 
 ## [2026-01-02] - Phase 3: Content & Asset Organization
 ### Added

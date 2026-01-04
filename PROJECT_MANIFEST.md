@@ -23,15 +23,19 @@
 - **Deployment**: 
     - Full Stack: Cloudflare Pages (Frontend + Functions).
 - **Recent Achievements**:
-    - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions for better connectivity and simplified maintenance.
-    - **AI Gateway**: Integrated Cloudflare AI Gateway for improved stability and logging.
-    - **AI Assistant**: Integrated Google Gemini AI directly into the site.
+    - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions (`/api/chat`) to bypass GFW blocking and simplify deployment.
+    - **AI Gateway**: Integrated Cloudflare AI Gateway for improved stability, caching, and logging of Gemini API calls.
+    - **AI Assistant**: Integrated Google Gemini AI directly into the site with rate limiting and auth.
     - Populated `research.html` with two major projects ("Skin Aging" & "Alopecia Assembloids").
     - Implemented a structured asset management system (`public/assets/<project_name>/`).
 
 ## Next Steps
-1. **Knowledge Base**: Populate `knowledge/` with content to feed the AI's RAG system.
-2. **Publications**: Populate `publications.html` with academic papers.
+1. **RAG Implementation (Priority)**:
+    - **Infrastructure**: Set up Cloudflare Vectorize (Index) and KV (Content Store).
+    - **Ingestion**: Create a Node.js script to chunk and embed documentation using Workers AI (`@cf/baai/bge-base-en-v1.5`).
+    - **Retrieval**: Update `chat.js` to query Vectorize and inject context into Gemini prompts.
+2. **Knowledge Base**: Populate `knowledge/` with content to feed the AI's RAG system.
+3. **Publications**: Populate `publications.html` with academic papers.
 3. **Interactive Tools**: Develop the "DEG Analysis" tool (Volcano Plot) using JavaScript/Python (WASM).
 4. **Mobile Optimization**: Fine-tune CSS Grid/Flexbox for smaller screens.
 

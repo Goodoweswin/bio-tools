@@ -48,6 +48,26 @@
 
 ### F. Updating AI Backend (Pages Functions)
 - **Location**: `functions/api/chat.js`
+- **Deployment**: Automatic via `git push`.
+
+### G. Configuring AI Backend (Critical)
+**Manual Steps Required in Cloudflare Dashboard:**
+Since `wrangler.toml` is not used for Pages Functions in this setup, you must configure bindings manually:
+
+1.  **Environment Variables**:
+    - Go to **Settings > Environment Variables**.
+    - Add `ACCESS_PASSWORD`: Your chat password.
+    - Add `GEMINI_API_KEY`: Your Google Gemini API Key.
+    - Add `CF_ACCOUNT_ID`: Your Cloudflare Account ID.
+    - Add `AI_GATEWAY_NAME`: The name of your AI Gateway (e.g., `biotools-gateway`).
+
+2.  **KV Namespace Bindings**:
+    - Go to **Settings > Functions > KV Namespace Bindings**.
+    - Bind `RATE_LIMIT` to your Rate Limit KV namespace.
+    - (Future) Bind `KNOWLEDGE_INDEX` to your Knowledge Base KV.
+
+3.  **Redeploy**:
+    - After changing settings, go to **Deployments** and trigger a **Retry** on the latest deployment to apply changes.
 - **Architecture**: Cloudflare Pages Functions (Serverless).
 - **Deploy**: Automatically deployed when you `git push` the frontend.
 - **Configuration**:
