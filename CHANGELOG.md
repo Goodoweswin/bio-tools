@@ -14,6 +14,9 @@ All notable changes to the **Bio-Tools** project will be documented in this file
     - Features: Floating UI, Password protection, Markdown rendering.
 - **Integration**: Injected the chat widget into `src/components/footer.html` for global visibility.
 
+### Fixed
+- **Build Error**: Fixed `vite-plugin-html-inject` path resolution error by using absolute paths (`/components/chat-widget.html`) in `footer.html`.
+
 ## [2026-01-02] - Phase 3: Content & Asset Organization
 ### Added
 - **Research Page**: Populated `src/research.html` with two major research projects:

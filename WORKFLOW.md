@@ -60,4 +60,5 @@
 - **Source Root**: `src/` is the working directory.
 - **Static Assets**: Images/PDFs go in `public/`, referenced as `/assets/file.ext` (Vite resolves this).
 - **Components**: ALWAYS use `<load src="..." />` for Header/Footer.
+  - **CRITICAL**: Use absolute paths (e.g., `/components/header.html`), NOT relative paths (`./header.html`), to avoid build errors in nested files.
 - **Style**: Global styles are in `src/css/style.css`.
