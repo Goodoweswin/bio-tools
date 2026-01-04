@@ -136,8 +136,8 @@ async function callGemini(prompt, env) {
   const apiKey = env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY not configured");
 
-  // Use model from env var, or default to a stable version
-  const model = env.GEMINI_MODEL || "gemini-1.5-flash";
+  // Use model from env var, or default to a stable version that exists for this user
+  const model = env.GEMINI_MODEL || "gemini-2.0-flash";
 
   let url;
   // Check if AI Gateway is configured
