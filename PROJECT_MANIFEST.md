@@ -21,11 +21,10 @@
 - **Phase**: Phase 4 - AI Integration & Full Stack Expansion.
 - **Last Update**: 2026-01-04
 - **Deployment**: 
-    - Frontend: Cloudflare Pages (Build command: `npm run build`, Output: `dist`).
-    - Backend: Cloudflare Workers (Service: `sc-chat-api`).
+    - Full Stack: Cloudflare Pages (Frontend + Functions).
 - **Recent Achievements**:
-    - **AI Assistant**: Successfully deployed a custom AI Chat API (`sc-chat-api`) using Cloudflare Workers and Google Gemini.
-    - **Full Stack Integration**: Integrated a secure, password-protected chat widget into the static site via `chat-widget.html`.
+    - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions for better connectivity and simplified maintenance.
+    - **AI Assistant**: Integrated Google Gemini AI directly into the site.
     - Populated `research.html` with two major projects ("Skin Aging" & "Alopecia Assembloids").
     - Implemented a structured asset management system (`public/assets/<project_name>/`).
 
