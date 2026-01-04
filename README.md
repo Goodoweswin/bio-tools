@@ -7,13 +7,14 @@ Features a custom **AI Research Assistant** powered by Cloudflare Workers and Go
 ## Tech Stack
 - **Frontend**: HTML5, CSS3, JavaScript (Vite)
 - **Backend**: Cloudflare Pages Functions (Serverless API at `/api/chat`)
-- **AI**: Google Gemini Pro (via Cloudflare AI Gateway)
+- **AI Engine**: Universal Handler (Gemini 2.0 + DeepSeek V3 + Any OpenAI Compatible)
+- **AI Gateway**: Cloudflare AI Gateway (Logging & Caching)
 - **Hosting**: Cloudflare Pages
 
 ## Roadmap
 - [x] **Phase 1**: Static Site Migration (Vite)
 - [x] **Phase 2**: Content & Asset Organization
-- [x] **Phase 3**: AI Chat Integration (Basic)
+- [x] **Phase 3**: AI Chat Integration (Universal Backend)
 - [ ] **Phase 4**: RAG Implementation (Vector Search)
     - [ ] Cloudflare Vectorize Index
     - [ ] Document Ingestion Script

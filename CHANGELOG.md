@@ -8,20 +8,23 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 
 ## [2026-01-04] - Phase 4: AI Integration & Architecture Upgrade
 ### Added
-- **Backend API**: Created `functions/api/chat.js` (Pages Functions) to replace the standalone worker.
-    - Features: Google Gemini integration, HTTP Basic Auth, IP Rate Limiting, AI Gateway support.
-- **Frontend Widget**: Created `src/components/chat-widget.html` for user interaction.
-    - Features: Floating UI, Password protection, Markdown rendering.
-- **Integration**: Injected the chat widget into `src/components/footer.html` for global visibility.
+- **Universal AI Backend**: Refactored `functions/api/chat.js` to support **any OpenAI-compatible provider** (DeepSeek, Doubao, Moonshot) in addition to Google Gemini.
+- **AI Configuration Guide**: Created `AI_CONFIG.md` to document how to switch models and providers via environment variables.
+- **Diagnostic Tool**: Added `/debug` command in chat to diagnose API connections and list available models.
+- **System Persona**: Updated AI System Prompt to include the website owner's identity (PhD Candidate) and fallback logic for general knowledge.
+
+### Changed
+- **Architecture**: Migrated from standalone Worker to Cloudflare Pages Functions (`/api/chat`) to resolve GFW blocking.
+- **AI Gateway**: Integrated Cloudflare AI Gateway for **both** Gemini and DeepSeek/OpenAI providers to enable unified logging and caching.
+- **Model Upgrade**: Updated default Gemini model to `gemini-2.0-flash` (from deprecated `gemini-pro`).
 
 ### Fixed
-- **Connectivity**: Migrated backend from standalone Worker (`*.workers.dev`) to Cloudflare Pages Functions (`/api/chat`) to resolve GFW blocking issues in China.
-- **Build Error**: Fixed `vite-plugin-html-inject` path resolution error by using absolute paths (`/components/chat-widget.html`) in `footer.html`.
-- **Stability**: Integrated Cloudflare AI Gateway to improve Google Gemini API reliability and provide request logging.
-- **UX**: Improved error reporting in `chat-widget.html` to display specific API errors instead of generic messages.
+- **Connectivity**: Resolved "Connection Refused" errors by moving API to same-origin (`/api/chat`).
+- **404/429 Errors**: Fixed Gemini API errors by correcting model versioning and implementing provider switching.
+- **DeepSeek Integration**: Fixed 401 errors by correctly routing DeepSeek requests through the `deepseek` provider path in AI Gateway.
 
 ### Deprecated
-- **sc-chat-api**: The standalone Cloudflare Worker project is now deprecated in favor of the integrated Pages Functions.
+- **sc-chat-api**: The standalone Cloudflare Worker project is now deprecated.
 
 ## [2026-01-02] - Phase 3: Content & Asset Organization
 ### Added

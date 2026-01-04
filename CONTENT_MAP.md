@@ -13,7 +13,13 @@
 - `chat-widget.html`: **AI Assistant**. Floating chat interface connecting to internal API (`/api/chat`).
 
 ## Backend (`functions/`)
-- `api/chat.js`: **Main Chat API**. Handles authentication, rate limiting, and Gemini API calls via AI Gateway.
+- `api/chat.js`: **Universal AI Handler**. 
+    - Supports **Google Gemini** (via `callGemini`).
+    - Supports **OpenAI Compatible** (DeepSeek, Doubao, etc. via `callOpenAICompatible`).
+    - Handles Auth, Rate Limiting, and AI Gateway routing.
+
+## Documentation
+- `AI_CONFIG.md`: **Critical Guide**. Instructions for configuring AI providers and models in Cloudflare Dashboard.
 
 ## Knowledge Base Categories
 Located in `public/knowledge/`:

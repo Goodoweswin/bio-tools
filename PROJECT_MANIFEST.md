@@ -23,19 +23,19 @@
 - **Deployment**: 
     - Full Stack: Cloudflare Pages (Frontend + Functions).
 - **Recent Achievements**:
-    - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions (`/api/chat`) to bypass GFW blocking and simplify deployment.
-    - **AI Gateway**: Integrated Cloudflare AI Gateway for improved stability, caching, and logging of Gemini API calls.
-    - **AI Assistant**: Integrated Google Gemini AI directly into the site with rate limiting and auth.
-    - Populated `research.html` with two major projects ("Skin Aging" & "Alopecia Assembloids").
-    - Implemented a structured asset management system (`public/assets/<project_name>/`).
+    - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions (`/api/chat`) to bypass GFW blocking.
+    - **Universal AI Support**: Refactored backend to support **Google Gemini** (via Gateway) and **Any OpenAI-Compatible Provider** (DeepSeek, Doubao, etc.) via environment variables.
+    - **AI Gateway**: Integrated Cloudflare AI Gateway for unified logging, caching, and rate limiting across all providers.
+    - **Documentation**: Created `AI_CONFIG.md` to guide model switching and configuration.
+    - **Identity**: Updated System Prompt to give the AI a clear persona as the "Bio-Tools Research Assistant".
 
 ## Next Steps
 1. **RAG Implementation (Priority)**:
     - **Infrastructure**: Set up Cloudflare Vectorize (Index) and KV (Content Store).
-    - **Ingestion**: Create a Node.js script to chunk and embed documentation using Workers AI (`@cf/baai/bge-base-en-v1.5`).
-    - **Retrieval**: Update `chat.js` to query Vectorize and inject context into Gemini prompts.
+    - **Ingestion**: Create a Node.js script to chunk and embed documentation using Workers AI.
+    - **Retrieval**: Update `chat.js` to query Vectorize and inject context into the prompt.
 2. **Knowledge Base**: Populate `knowledge/` with content to feed the AI's RAG system.
-3. **Publications**: Populate `publications.html` with academic papers.
+3. **UI Enhancements**: Add Markdown rendering (highlight.js) and streaming responses to the chat widget.
 3. **Interactive Tools**: Develop the "DEG Analysis" tool (Volcano Plot) using JavaScript/Python (WASM).
 4. **Mobile Optimization**: Fine-tune CSS Grid/Flexbox for smaller screens.
 

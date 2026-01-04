@@ -49,6 +49,7 @@
 ### F. Updating AI Backend (Pages Functions)
 - **Location**: `functions/api/chat.js`
 - **Deployment**: Automatic via `git push`.
+- **Configuration**: See `AI_CONFIG.md` for detailed instructions on switching models and providers.
 
 ### G. Configuring AI Backend (Critical)
 **Manual Steps Required in Cloudflare Dashboard:**
@@ -56,15 +57,18 @@ Since `wrangler.toml` is not used for Pages Functions in this setup, you must co
 
 1.  **Environment Variables**:
     - Go to **Settings > Environment Variables**.
-    - Add `ACCESS_PASSWORD`: Your chat password.
-    - Add `GEMINI_API_KEY`: Your Google Gemini API Key.
-    - Add `CF_ACCOUNT_ID`: Your Cloudflare Account ID.
-    - Add `AI_GATEWAY_NAME`: The name of your AI Gateway (e.g., `biotools-gateway`).
+    - **Authentication**: `ACCESS_PASSWORD`
+    - **Cloudflare**: `CF_ACCOUNT_ID`, `AI_GATEWAY_NAME`
+    - **AI Provider Config**:
+        - `AI_PROVIDER`: `gemini` (default) or `deepseek` / `doubao` etc.
+        - `GEMINI_API_KEY`: For Google models.
+        - `OPENAI_API_KEY`: For DeepSeek/Doubao/OpenAI models.
+        - `OPENAI_BASE_URL`: API Endpoint (e.g., `https://api.deepseek.com`).
+        - `OPENAI_MODEL`: Model name (e.g., `deepseek-chat`).
 
 2.  **KV Namespace Bindings**:
     - Go to **Settings > Functions > KV Namespace Bindings**.
     - Bind `RATE_LIMIT` to your Rate Limit KV namespace.
-    - (Future) Bind `KNOWLEDGE_INDEX` to your Knowledge Base KV.
 
 3.  **Redeploy**:
     - After changing settings, go to **Deployments** and trigger a **Retry** on the latest deployment to apply changes.
