@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Weight Analysis Tool (Stlite)</title>
+    <!-- 引用本地 Stlite 样式 -->
+    <link rel="stylesheet" href="../assets/stlite/stlite.css" />
+    <style>
+        /* 简单的 Loading 动画 */
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <a href="/" style="position: absolute; top: 10px; left: 10px; z-index: 9999; background: white; padding: 5px 10px; border-radius: 4px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: sans-serif; color: #333; font-weight: 500;">
+        ← Back to Bio-Tools
+    </a>
+    <div id="loading">
+        <div class="spinner"></div>
+        <div id="status">正在加载组件...</div>
+    </div>
+    
+    <div id="root"></div>
+
+    <!-- 引用本地 Stlite 核心 JS -->
+    <script src="../assets/stlite/stlite.js"></script>
+    
+    <script>
+      const statusDiv = document.getElementById('status');
+      const debugMode = true; // 开启调试日志
+
+      function log(msg) {
+        if(debugMode) console.log("[App Loader]", msg);
+        statusDiv.innerText = msg;
+      }
+
+      async function loadApp() {
+        try {
+            log("正在下载 Python 脚本...");
+            
+            // 1. 获取主程序代码
+            const appResp = await fetch('./app.py');
+            if (!appResp.ok) throw new Error(`无法加载 app.py: ${appResp.statusText}`);
+            const appCode = await appResp.text();
+
+            // 2. 获取共享样式代码 (Nature Style)
+            // 注意：路径是相对于当前 HTML 文件的
+            const styleResp = await fetch('../common/nature_style.py');
+            let styleCode = "";
+            if (styleResp.ok) {
+                styleCode = await styleResp.text();
+            } else {
+                console.warn("无法加载 nature_style.py，将使用默认样式");
+                styleCode = "# nature_style.py failing fallback\ndef set_nature_style(): pass";
+            }
+
+            log("正在启动 Python 环境...");
+            
+            // 3. 挂载 Stlite
+            stlite.mount({
+                requirements: [
+                    "pandas", 
+                    "matplotlib", 
+                    "scipy", 
+                    "statsmodels",
+                    "/tools/assets/pypi/seaborn-0.13.2-py3-none-any.whl",
+                    "/tools/assets/pypi/et_xmlfile-2.0.0-py3-none-any.whl",
+                    "/tools/assets/pypi/openpyxl-3.1.5-py2.py3-none-any.whl",
+                    "/tools/assets/pypi/scikit_posthocs-0.11.4-py3-none-any.whl",
+                    "/tools/assets/pypi/statannotations-0.7.2-py3-none-any.whl"
+                ],
+                entrypoint: "app.py",
+                files: {
+                    "app.py": appCode,
+                    "nature_style.py": styleCode
+                },
+                // 配置 Pyodide 本地路径，解决 importScripts 无法访问外网的问题
+                // 使用根相关路径以防解析错误
+                pyodideUrl: "/tools/assets/pyodide/pyodide.js"
+            }, document.getElementById("root"));
+
+            // 移除 loading 界面
+            document.getElementById("loading").style.display = 'none';
+
+        } catch (err) {
+            console.error(err);
+            statusDiv.innerHTML = `<span style="color:red">启动失败: ${err.message}</span>`;
+        }
+      }
+
+      loadApp();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+# Cloudflare Pages Headers
+# Ensure WASM and Wheels are served with correct MIME types
+
+/*.wasm
+  Content-Type: application/wasm
+
+/*.whl
+  Content-Type: application/octet-stream
+
+/*.js
+  Content-Type: application/javascript
+
+/*.css
+  Content-Type: text/css
