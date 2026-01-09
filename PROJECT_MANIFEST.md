@@ -19,10 +19,11 @@
 
 ## Current Status
 - **Phase**: Phase 4 - AI Integration & Full Stack Expansion.
-- **Last Update**: 2026-01-04
+- **Last Update**: 2026-01-09
 - **Deployment**: 
     - Full Stack: Cloudflare Pages (Frontend + Functions).
 - **Recent Achievements**:
+    - **Tool Integration**: Successfully deployed "Weight Analysis Tool" (Stlite/WASM) with offline capabilities.
     - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions (`/api/chat`) to bypass GFW blocking.
     - **Universal AI Support**: Refactored backend to support **Google Gemini** (via Gateway) and **Any OpenAI-Compatible Provider** (DeepSeek, Doubao, etc.) via environment variables.
     - **AI Gateway**: Integrated Cloudflare AI Gateway for unified logging, caching, and rate limiting across all providers.
@@ -36,6 +37,8 @@
     - **Retrieval**: Update `chat.js` to query Vectorize and inject context into the prompt.
 2. **Knowledge Base**: Populate `knowledge/` with content to feed the AI's RAG system.
 3. **UI Enhancements**: Add Markdown rendering (highlight.js) and streaming responses to the chat widget.
-3. **Interactive Tools**: Develop the "DEG Analysis" tool (Volcano Plot) using JavaScript/Python (WASM).
-4. **Mobile Optimization**: Fine-tune CSS Grid/Flexbox for smaller screens.
+4. **Interactive Tools (Phase 5)**: 
+    - [Done] Basic Stlite/WASM pipeline established (Weight Analysis).
+    - [todo] Develop "DEG Analysis" (Volcano Plot) using the same Stlite architecture.
+5. **Mobile Optimization**: Fine-tune CSS Grid/Flexbox for smaller screens.
 

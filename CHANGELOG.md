@@ -6,6 +6,15 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 - **Planned**: Interactive Volcano Plot tool (`tools/deg.html`).
 - **Planned**: Publications page population.
 
+## [2026-01-09] - Phase 5: Interactive Tools Integration
+### Added
+- **Weight Analysis Tool**: Integrated client-side Python application (Stlite/WASM) for statistical weight analysis at `/tools/weight_analysis/index.html`.
+- **MIME Configuration**: Added `public/_headers` to support `.wasm` and `.whl` files on Cloudflare Pages.
+- **Navigation**: Added entry card in `src/tools.html` and a "Back to Home" floating button in the tool interface.
+
+### Changed
+- **Directory Structure**: Migrated tool artifacts to `public/tools/` to ensure correct absolute path resolution.
+
 ## [2026-01-04] - Phase 4: AI Integration & Architecture Upgrade
 ### Added
 - **Universal AI Backend**: Refactored `functions/api/chat.js` to support **any OpenAI-compatible provider** (DeepSeek, Doubao, Moonshot) in addition to Google Gemini.
