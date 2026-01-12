@@ -8,12 +8,15 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 
 ## [2026-01-09] - Phase 5: Interactive Tools Integration
 ### Added
-- **Weight Analysis Tool**: Integrated client-side Python application (Stlite/WASM) for statistical weight analysis at `/tools/weight_analysis/index.html`.
+- **Statistical Analysis Workbench**: Integrated client-side Python application (Stlite/WASM) for statistical analysis at `/tools/stat_analysis/index.html`.
 - **MIME Configuration**: Added `public/_headers` to support `.wasm` and `.whl` files on Cloudflare Pages.
 - **Navigation**: Added entry card in `src/tools.html` and a "Back to Home" floating button in the tool interface.
 
 ### Changed
 - **Directory Structure**: Migrated tool artifacts to `public/tools/` to ensure correct absolute path resolution.
+- **Optimization**: Switched Stlite/Pyodide to load from `cdn.jsdelivr.net` instead of local assets.
+    - *Reason*: Cloudflare Pages has a 25MB file size limit (caused by `scipy.whl`).
+    - *Benefit*: Reduces repo size by ~200MB and improves global load times.
 
 ## [2026-01-04] - Phase 4: AI Integration & Architecture Upgrade
 ### Added

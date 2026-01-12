@@ -23,7 +23,8 @@
 - **Deployment**: 
     - Full Stack: Cloudflare Pages (Frontend + Functions).
 - **Recent Achievements**:
-    - **Tool Integration**: Successfully deployed "Weight Analysis Tool" (Stlite/WASM) with offline capabilities.
+    - **Tool Integration**: Successfully deployed "Weight Analysis Tool" (Stlite/WASM).
+        - *Architecture Note*: Employed Hybrid Loading (App Code Local + Pyodide Runtime via CDN) to bypass Cloudflare hosting limits.
     - **Architecture Upgrade**: Migrated AI Backend to Cloudflare Pages Functions (`/api/chat`) to bypass GFW blocking.
     - **Universal AI Support**: Refactored backend to support **Google Gemini** (via Gateway) and **Any OpenAI-Compatible Provider** (DeepSeek, Doubao, etc.) via environment variables.
     - **AI Gateway**: Integrated Cloudflare AI Gateway for unified logging, caching, and rate limiting across all providers.

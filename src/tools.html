@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <load src="./components/header.html" />
@@ -15,13 +17,27 @@
         <div class="container">
             <h1>Bioinformatics Tools</h1>
             <p>Software and tools I have developed.</p>
-            
-            <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+
+            <div
+                style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                 <div style="border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px;">
-                    <h3><i class="fas fa-balance-scale"></i> Weight Analysis Tool</h3>
-                    <p>A client-side (offline capable) tool for statistical weight analysis built with typical bioinformatics libraries (Pandas, Seaborn).</p>
+                    <h3><i class="fas fa-chart-bar"></i> Statistical Analysis Workbench</h3>
+                    <p>A comprehensive client-side tool for Normality, Homogeneity checks, and Statistical Difference
+                        analysis (Nature Style).</p>
                     <div style="margin-top: 1rem;">
-                        <a href="/tools/weight_analysis/index.html" style="background-color: var(--primary-color, #0072B2); color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; display: inline-block;">Launch Tool <i class="fas fa-external-link-alt"></i></a>
+                        <a href="/tools/stat_analysis/index.html"
+                            style="background-color: var(--primary-color, #0072B2); color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; display: inline-block;">Launch
+                            Workbench <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div style="border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px;">
+                    <h3><i class="fas fa-dna"></i> DEG Analysis Tool</h3>
+                    <p>A tool for Differential Expression Gene analysis. (Under Construction)</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="/tools/deg/index.html"
+                            style="background-color: var(--secondary-color, #6c757d); color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; display: inline-block;">Launch
+                            Tool <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
             </div>
@@ -31,4 +47,5 @@
     <load src="./components/footer.html" />
 
 </body>
+
 </html>
