@@ -103,6 +103,7 @@
                         "nature_style.py": styleCode
                     },
                     // 配置 Pyodide 路径 (切换到 CDN 以解决 Cloudflare 25MB 文件限制)
+                    // 此时 Stlite 会自动从官方 CDN 加载 pandas, scipy 等基础库
                     pyodideUrl: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"
                 }, document.getElementById("root"));
 
