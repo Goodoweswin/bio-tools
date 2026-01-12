@@ -1,6 +1,10 @@
 # Cloudflare Pages Headers
-# Ensure WASM and Wheels are served with correct MIME types
+# Cross-Origin Isolation (Required for SharedArrayBuffer / Pyodide)
+/*
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
 
+# Ensure WASM and Wheels are served with correct MIME types
 /*.wasm
   Content-Type: application/wasm
 
