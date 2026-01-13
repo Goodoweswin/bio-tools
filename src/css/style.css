@@ -142,6 +142,101 @@ h2 { font-size: 2rem; margin-bottom: 2rem; color: var(--text-color); border-bott
 footer { background-color: var(--text-color); color: white; padding: 2rem 0; text-align: center; margin-top: auto; }
 footer a { color: white; margin: 0 10px; }
 
+/* === Featured Articles Carousel === */
+.carousel-section {
+    padding: 3rem 0;
+    background-color: var(--bg-color);
+}
+
+.carousel-container {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem 0;
+}
+
+.carousel-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel-container::-webkit-scrollbar-track {
+    background: var(--light-bg);
+    border-radius: 4px;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.carousel-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.carousel-card:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.carousel-card-content {
+    padding: 1rem;
+}
+
+.carousel-card-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.carousel-card-content p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* === News Section with QR Code === */
+.news-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.news-main {
+    flex: 1;
+}
+
+.news-sidebar {
+    flex: 0 0 150px;
+    text-align: center;
+}
+
+.news-sidebar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+.news-sidebar p {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
 /* ========== 响应式断点（核心改进） ========== */
 
 /* 平板（768-1023px） */

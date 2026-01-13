@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <!-- Navigation -->
@@ -18,12 +20,15 @@
             <div class="hero-content">
                 <h1>Plastic Surgery & <br>Single-Cell Omics</h1>
                 <p>
-                    MD Candidate specializing in <strong>AI for Medicine</strong>, <strong>Skin Aging</strong>, and <strong>Regenerative Medicine</strong>. 
-                    Leveraging single-cell sequencing and bioinformatics to uncover the mechanisms of tissue regeneration.
+                    MD Candidate specializing in <strong>AI for Medicine</strong>, <strong>Skin Aging</strong>, and
+                    <strong>Regenerative Medicine</strong>.
+                    Leveraging single-cell sequencing and bioinformatics to uncover the mechanisms of tissue
+                    regeneration.
                 </p>
                 <div class="cta-buttons">
                     <a href="#contact" class="btn">Contact Me</a>
-                    <a href="assets/cv.pdf" class="btn btn-outline" target="_blank"><i class="fas fa-download"></i> Download CV</a>
+                    <a href="assets/cv.pdf" class="btn btn-outline" target="_blank"><i class="fas fa-download"></i>
+                        Download CV</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -34,30 +39,69 @@
         </div>
     </section>
 
+    <!-- Featured Articles Carousel -->
+    <section class="carousel-section">
+        <div class="container">
+            <h2>知识精选</h2>
+            <div class="carousel-container">
+                <a href="knowledge/ai-single-cell/annotation.html" class="carousel-card">
+                    <img src="assets/knowledge/封面scVI.png" alt="scVI Annotation">
+                    <div class="carousel-card-content">
+                        <h4>AI 驱动的细胞注释</h4>
+                        <p>使用 scVI 进行单细胞 RNA-seq 数据分析</p>
+                    </div>
+                </a>
+                <a href="knowledge/ai-single-cell/batch-correction.html" class="carousel-card">
+                    <img src="assets/knowledge/封面scVI.png" alt="Batch Correction">
+                    <div class="carousel-card-content">
+                        <h4>批次效应校正</h4>
+                        <p>单细胞数据整合的最佳实践</p>
+                    </div>
+                </a>
+                <a href="knowledge/skin-aging/aging-clock.html" class="carousel-card">
+                    <img src="assets/knowledge/封面scVI.png" alt="Aging Clock">
+                    <div class="carousel-card-content">
+                        <h4>衰老时钟</h4>
+                        <p>表观遗传学与皮肤衰老</p>
+                    </div>
+                </a>
+                <!-- Add more cards as needed -->
+            </div>
+        </div>
+    </section>
+
     <!-- News Section -->
     <section id="news">
         <div class="container">
             <h2>Latest News</h2>
-            <ul class="news-list">
-                <li class="news-item">
-                    <span class="news-date">Dec 2025</span>
-                    <div class="news-content">
-                        Paper accepted in <em>Nature Communications</em>: "Single-cell atlas of skin aging".
-                    </div>
-                </li>
-                <li class="news-item">
-                    <span class="news-date">Nov 2025</span>
-                    <div class="news-content">
-                        Presented poster at the International Society for Stem Cell Research (ISSCR) meeting.
-                    </div>
-                </li>
-                <li class="news-item">
-                    <span class="news-date">Nov 2025</span>
-                    <div class="news-content">
-                        This is the first day of my website! Welcome to my personal page.
-                    </div>
-                </li>
-            </ul>
+            <div class="news-container">
+                <div class="news-main">
+                    <ul class="news-list">
+                        <li class="news-item">
+                            <span class="news-date">Dec 2025</span>
+                            <div class="news-content">
+                                Paper accepted in <em>Nature Communications</em>: "Single-cell atlas of skin aging".
+                            </div>
+                        </li>
+                        <li class="news-item">
+                            <span class="news-date">Nov 2025</span>
+                            <div class="news-content">
+                                Presented poster at the International Society for Stem Cell Research (ISSCR) meeting.
+                            </div>
+                        </li>
+                        <li class="news-item">
+                            <span class="news-date">Nov 2025</span>
+                            <div class="news-content">
+                                This is the first day of my website! Welcome to my personal page.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="news-sidebar">
+                    <img src="assets/knowledge/QRcode4公众号.jpg" alt="WeChat QR Code">
+                    <p>关注公众号</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -68,7 +112,8 @@
             <div class="grid">
                 <div class="card">
                     <h3>AI for Medicine</h3>
-                    <p>Developing deep learning models to predict tissue regeneration outcomes from histological images.</p>
+                    <p>Developing deep learning models to predict tissue regeneration outcomes from histological images.
+                    </p>
                     <div class="tags">
                         <span class="tag">Deep Learning</span>
                         <span class="tag">Pathology</span>
@@ -104,12 +149,13 @@
         // Simple mobile menu toggle (placeholder for now)
         const menuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-        
-        if(menuBtn) {
+
+        if (menuBtn) {
             menuBtn.addEventListener('click', () => {
                 navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
             });
         }
     </script>
 </body>
+
 </html>
