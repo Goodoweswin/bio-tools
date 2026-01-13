@@ -19,25 +19,39 @@ from lifelines.statistics import logrank_test
 
 # --- Color Palettes ---
 PALETTES = {
-    "Nature (NPG)": ['#E64B35', '#4DBBD5', '#00A087', '#3C5488', '#F39B7F', '#8491B4', '#91D1C2', '#DC0000', '#7E6148', '#B09C85'],
-    "Science (AAAS)": ['#3B4992', '#EE0000', '#008B45', '#631879', '#008280', '#BB0021', '#5F559B', '#A20056', '#808180', '#1B1919'],
-    "NEJM (Med)": ['#BC3C29', '#0072B5', '#E18727', '#20854E', '#7876B1', '#6F99AD', '#FFDC91', '#EE4C97'],
-    "Lancet (Med)": ['#00468B', '#ED0000', '#42B540', '#0099B4', '#925E9F', '#FDAF91', '#AD002A', '#ADB6B6', '#1B1919'],
-    "JCO (Oncology)": ['#0073C2', '#EFC000', '#868686', '#CD534C', '#7AA6DC', '#003C67', '#8F7700', '#3B3B3B', '#A73030', '#4A6990'],
-    "Classic Set2": "Set2",
-    "Vibrant Set1": "Set1",
-    "Paired": "Paired",
-    "Muted (Deep)": "deep"
+    "🔴 红蓝经典": ['#E64B35', '#4DBBD5', '#00A087', '#3C5488', '#F39B7F', '#8491B4', '#91D1C2', '#DC0000', '#7E6148', '#B09C85'],
+    "🔵 冷色专业": ['#3B4992', '#EE0000', '#008B45', '#631879', '#008280', '#BB0021', '#5F559B', '#A20056', '#808180', '#1B1919'],
+    "🟠 暖色医学": ['#BC3C29', '#0072B5', '#E18727', '#20854E', '#7876B1', '#6F99AD', '#FFDC91', '#EE4C97'],
+    "🟢 柔和自然": "Set2",
+    "🟣 高对比": "Set1",
+    "🔵 蓝色渐变": "Blues",
+    "🤎 色盲友好": ['#0077BB', '#33BBEE', '#009988', '#EE7733', '#CC3311', '#EE3377', '#BBBBBB'],
+    "⚫ 灰度单色": ['#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#E5E5E5'],
+    "🌈 彩虹渐变": "husl",
+    "✏️ 自定义...": None  # Triggers custom input
 }
 
-def get_palette_colors(name, n_colors=None):
+CUSTOM_PALETTE_KEY = "✏️ 自定义..."
+
+def get_palette_colors(name, n_colors=None, custom_colors=None):
+    """Get palette colors by name. If custom, parse from custom_colors string."""
+    if name == CUSTOM_PALETTE_KEY and custom_colors:
+        # Parse custom hex colors
+        try:
+            colors = [c.strip() for c in custom_colors.split(',') if c.strip().startswith('#')]
+            if colors:
+                return colors[:n_colors] if n_colors else colors
+        except:
+            pass
+        return sns.color_palette("Set2", n_colors=n_colors)  # Fallback
+    
     if name in PALETTES:
         param = PALETTES[name]
-        if isinstance(param, list):
-            # If explicit list, simpler
+        if param is None:
+            return sns.color_palette("Set2", n_colors=n_colors)
+        elif isinstance(param, list):
             return param[:n_colors] if n_colors else param
         else:
-            # If seaborn string name
             return sns.color_palette(param, n_colors=n_colors)
     return sns.color_palette("Set2", n_colors=n_colors)
 
@@ -178,6 +192,11 @@ def render_difference_module(data):
     
     # Palette Selection
     palette_name = c_opt3.selectbox("配色方案", list(PALETTES.keys()), index=0, key="diff_palette")
+    
+    # Custom color input (appears if user selects custom)
+    custom_colors = None
+    if palette_name == CUSTOM_PALETTE_KEY:
+        custom_colors = st.text_input("输入自定义颜色 (逗号分隔)", placeholder="#FF0000, #00FF00, #0000FF", key="diff_custom_colors")
 
     if st.button("🚀 运行分析 (智能模式)", type="primary"):
         st.session_state['diff_active'] = True
@@ -333,7 +352,7 @@ def render_difference_module(data):
         fig, ax = plt.subplots(figsize=(4, 5))
         
         # Get palette colors
-        colors = get_palette_colors(palette_name, n_colors=len(group_order_str))
+        colors = get_palette_colors(palette_name, n_colors=len(group_order_str), custom_colors=custom_colors)
         
         sns.boxplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, width=0.5, ax=ax, palette=colors)
         sns.stripplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, color='#333', size=4, jitter=True, ax=ax)
@@ -369,6 +388,121 @@ def render_difference_module(data):
         st.dataframe(res_df)
         
         get_download_buttons(fig, f"Stat_{y_col}", "stat", df_stats=res_df, report_title=f"Analysis: {test_name} on {y_col}")
+
+# --- Bar Chart Module ---
+def render_barplot_module(data):
+    st.header("📊 条形图 (Bar Chart)")
+    st.markdown("绘制带误差棒的条形图，支持统计分析和显著性标注。")
+    
+    cols = data.columns.tolist()
+    num_cols = data.select_dtypes(include=['number']).columns.tolist()
+    
+    c1, c2, c3 = st.columns(3)
+    x_col = c1.selectbox("分组列 (X)", cols, index=0, key="bar_x")
+    y_col = c2.selectbox("数值列 (Y)", num_cols, index=0, key="bar_y")
+    hue_col = c3.selectbox("颜色分组 (Hue, 可选)", ["无"] + cols, index=0, key="bar_hue")
+    
+    c_opt1, c_opt2, c_opt3, c_opt4 = st.columns(4)
+    agg_method = c_opt1.selectbox("聚合方式", ["mean", "median", "sum", "count"], key="bar_agg")
+    error_type = c_opt2.selectbox("误差棒", ["sd", "se", "ci", "无"], key="bar_err")
+    show_ns = c_opt3.checkbox("显示 'ns'", value=False, key="bar_show_ns")
+    palette_name = c_opt4.selectbox("配色方案", list(PALETTES.keys()), index=0, key="bar_palette")
+    
+    # Custom color input
+    custom_colors = None
+    if palette_name == CUSTOM_PALETTE_KEY:
+        custom_colors = st.text_input("输入自定义颜色 (逗号分隔)", placeholder="#FF0000, #00FF00, #0000FF", key="bar_custom_colors")
+    
+    custom_title = st.text_input("图表标题", value="", placeholder="留空则无标题", key="bar_plot_title")
+    
+    # Group order
+    group_order = st.multiselect("分组顺序 (X)", sorted(data[x_col].unique()), default=sorted(data[x_col].unique()), key="bar_order")
+    if not group_order: return
+    
+    if st.button("🚀 生成条形图", type="primary", key="bar_btn"):
+        st.session_state['bar_active'] = True
+    
+    if st.session_state.get('bar_active', False):
+        st.divider()
+        import numpy as np
+        
+        # Filter data
+        data_filtered = data[data[x_col].isin(group_order)].copy()
+        data_filtered[x_col] = data_filtered[x_col].astype(str)
+        data_filtered[y_col] = pd.to_numeric(data_filtered[y_col], errors='coerce')
+        data_filtered = data_filtered.replace([np.inf, -np.inf], np.nan).dropna(subset=[y_col, x_col])
+        group_order_str = [str(g) for g in group_order]
+        
+        # Aggregation function
+        if agg_method == "mean":
+            estimator = np.mean
+        elif agg_method == "median":
+            estimator = np.median
+        elif agg_method == "sum":
+            estimator = np.sum
+        else:
+            estimator = len  # count
+        
+        # Error bar type
+        errorbar_param = None if error_type == "无" else error_type
+        
+        # Plotting
+        nature_style.apply_nature_style()
+        fig, ax = plt.subplots(figsize=(5, 5))
+        
+        n_groups = len(group_order_str)
+        colors = get_palette_colors(palette_name, n_colors=n_groups, custom_colors=custom_colors)
+        
+        hue = None if hue_col == "无" else hue_col
+        
+        sns.barplot(
+            data=data_filtered, x=x_col, y=y_col, order=group_order_str,
+            hue=hue, estimator=estimator, errorbar=errorbar_param,
+            palette=colors, ax=ax, capsize=0.1
+        )
+        
+        # Statistical analysis (if no Hue - simple comparison)
+        if hue is None:
+            groups_data = [data_filtered[data_filtered[x_col]==g][y_col] for g in group_order_str]
+            if len(groups_data) >= 2:
+                # Auto-select test
+                if len(groups_data) == 2:
+                    try:
+                        stat, p = stats.mannwhitneyu(groups_data[0], groups_data[1])
+                        if p < 0.05 or show_ns:
+                            annotator = Annotator(ax, [(group_order_str[0], group_order_str[1])], data=data_filtered, x=x_col, y=y_col, order=group_order_str)
+                            annotator.configure(test=None, text_format='star', loc='inside')
+                            annotator.set_pvalues([p])
+                            annotator.annotate()
+                    except: pass
+                else:
+                    try:
+                        h_stat, k_p = stats.kruskal(*groups_data)
+                        if k_p < 0.05 or show_ns:
+                            dunn = posthoc_dunn(data_filtered, val_col=y_col, group_col=x_col, p_adjust='holm')
+                            sig_pairs = []
+                            for i in range(len(group_order_str)):
+                                for j in range(i+1, len(group_order_str)):
+                                    p_val = dunn.loc[group_order_str[i], group_order_str[j]]
+                                    if p_val < 0.05 or show_ns:
+                                        sig_pairs.append(((group_order_str[i], group_order_str[j]), p_val))
+                            if sig_pairs:
+                                annotator = Annotator(ax, [p[0] for p in sig_pairs], data=data_filtered, x=x_col, y=y_col, order=group_order_str)
+                                annotator.configure(test=None, text_format='star', loc='inside')
+                                annotator.set_pvalues([p[1] for p in sig_pairs])
+                                annotator.annotate()
+                    except Exception as e:
+                        st.write(f"Stats Warning: {e}")
+        
+        if custom_title:
+            ax.set_title(custom_title, fontsize=12)
+        
+        ax.set_xlabel(x_col)
+        ax.set_ylabel(y_col)
+        sns.despine()
+        st.pyplot(fig)
+        
+        get_download_buttons(fig, f"Bar_{y_col}", "bar", report_title=f"Bar Chart: {y_col} by {x_col}")
 
 def render_survival_module(data):
     st.header("💀 生存分析 (Survival Analysis - KM)")
@@ -584,7 +718,8 @@ st.sidebar.title("控制面板")
 mode = st.sidebar.radio("功能模块", [
     "🏠 首页 & 指南",
     "📊 差异分析",
-    "💀 生存分析 (New)",
+    "📊 条形图",
+    "💀 生存分析",
     "🧬 PCA (3D)",
     "🔥 热图聚类",
     "📈 相关性",
@@ -605,6 +740,7 @@ else:
         data = load_data(uploaded_file)
         if data is not None:
             if "差异" in mode: render_difference_module(data)
+            elif "条形" in mode: render_barplot_module(data)
             elif "生存" in mode: render_survival_module(data)
             elif "PCA" in mode: render_pca_module(data)
             elif "热图" in mode: render_heatmap_module(data)

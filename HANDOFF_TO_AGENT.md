@@ -1,42 +1,33 @@
-# Engineering Handoff: 2026-01-09
+# Engineering Handoff: 2026-01-12
 
 **Status**: Stable / Deployed
-**Last Feature**: Integrated "Weight Analysis Tool" (Stlite/WASM)
+**Last Feature**: Upgraded to Bio-Analysis Suite v4.0 & Added DEG Tool Scaffold
 **Repository**: `bio-tools` (Cloudflare Pages)
 
 ## 1. Session Summary
-We successfully integrated the offline-capable Python analysis tool into the main website. 
-- **Migration**: Moved Stlite app to `public/tools/stat_analysis/`.
-- **Infrastructure**: Configured `_headers` for WASM MIME types.
-- **Critical Fix**: Encountered Cloudflare's 25MB file limit with local Pyodide wheels. **Switched to Hybrid Architecture**:
-    - `app.py` & custom wheels -> Hosted locally.
-    - Pyodide Runtime & SciPy/NumPy -> Loaded via CDN (`cdn.jsdelivr.net`).
-- **Docs**: Updated `CHANGELOG.md`, `PROJECT_MANIFEST.md`, and created `public/tools/ARCHITECTURE_NOTE.md`.
+We upgraded the analysis capabilities and optimized the deployment architecture.
+- **Upgrade**: `stat_analysis` is now **Bio-Analysis Suite v4.0** (Survival, Heatmap, PCA).
+- **Architecture**: Implemented **Hybrid Loading**:
+    - **CDN**: Standard heavy libraries (scipy, pandas, numpy) load from jsDelivr (Bypasses 25MB limit).
+    - **Local**: Custom logic (`app.py`) and small wheels (`pypi/`) load from `public/tools/assets/`.
+- **New Tool**: Created `public/tools/deg/` (Volcano Plot) scaffold.
 
 ## 2. Current Architecture
 - **Frontend**: Vite + HTML/JS.
-- **Tools**: Client-side Python (Pyodide/Stlite).
-    - Config: `public/tools/stat_analysis/index.html` (Points to CDN).
-    - Code: `public/tools/stat_analysis/app.py`.
-- **Backend (Chat)**: Cloudflare Pages Functions (`/api/chat`).
+- **Tools**: Client-side Python (Pyodide/Stlite) via Hybrid Loading.
+    - **Workbench**: `/tools/stat_analysis/index.html` -> `app.py` (v4.0).
+    - **DEG Tool**: `/tools/deg/index.html` -> `app.py` (Placeholder).
+- **Backend**: Cloudflare Pages Functions (`/api/chat`).
 
 ## 3. Next Steps (Prioritized)
 
-### A. RAG Implementation (Top Priority)
-The chat assistant needs knowledge base access.
-1.  **Infrastructure**: Enable Cloudflare Vectorize in Dash.
-2.  **Ingestion**: Write a script (Node.js/Python) to:
-    - Read Markdown/HTML in `public/knowledge/`.
-    - Chunk text.
-    - Generate Embeddings (via Workers AI `bge-base-en-v1.5`).
-    - Upsert to Vectorize.
-3.  **Retrieval**: Modify `functions/api/chat.js` to query Vectorize before calling the LLM.
+### A. DEG Tool Development (Immediate)
+- The file `public/tools/deg/app.py` is currently a basic template.
+- **Action**: Implement full Volcano Plot logic (using matplotlib/seaborn) similar to `stat_analysis`.
+- **Assets**: Reuse `tools/assets` for local wheels if needed.
 
-### B. New Tool: DEG Analysis (Volcano Plot)
-Reficate the success of the Weight Tool.
-- Use the **same `public/tools/` structure**.
-- Copy `stat_analysis/index.html` as a template (keep the CDN config!).
-- Implement `app.py` for Volcano Plots (using `matplotlib` or `altair`).
+### B. RAG Implementation
+- (Carry over from previous) Enable Cloudflare Vectorize and build ingestion script for `public/knowledge/`.
 
 ### C. Content & UI
 - Populate `public/knowledge` (Feed the RAG).

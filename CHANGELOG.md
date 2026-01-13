@@ -8,15 +8,16 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 
 ## [2026-01-09] - Phase 5: Interactive Tools Integration
 ### Added
-- **Statistical Analysis Workbench**: Integrated client-side Python application (Stlite/WASM) for statistical analysis at `/tools/stat_analysis/index.html`.
-- **MIME Configuration**: Added `public/_headers` to support `.wasm` and `.whl` files on Cloudflare Pages.
-- **Navigation**: Added entry card in `src/tools.html` and a "Back to Home" floating button in the tool interface.
+- **Statistical Analysis Workbench (v4.0)**: Upgraded `/tools/stat_analysis` to Bio-Analysis Suite v4.0 (Survival, Heatmap, PCA).
+- **DEG Analysis Tool**: Added scaffold for Volcano Plot tool at `/tools/deg/index.html`.
+- **MIME Configuration**: Added `public/_headers` to support `.wasm` and `.whl` files.
 
 ### Changed
-- **Directory Structure**: Migrated tool artifacts to `public/tools/` to ensure correct absolute path resolution.
-- **Optimization**: Switched Stlite/Pyodide to load from `cdn.jsdelivr.net` instead of local assets.
-    - *Reason*: Cloudflare Pages has a 25MB file size limit (caused by `scipy.whl`).
-    - *Benefit*: Reduces repo size by ~200MB and improves global load times.
+- **Optimization**: Switched Stlite/Pyodide to load standard libraries (scipy, pandas) from `cdn.jsdelivr.net`.
+    - *Reason*: Fixed Cloudflare Pages 25MB file size limit.
+    - *Action*: Removed heavy local wheels, kept custom wheels in `assets/pypi/`.
+- **Renaming**: Renamed `weight_analysis` to `stat_analysis` to reflect broader v4.0 capabilities.
+- **Cleanup**: Moved temporary documentation to `docs/`.
 
 ## [2026-01-04] - Phase 4: AI Integration & Architecture Upgrade
 ### Added
