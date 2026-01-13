@@ -6,6 +6,19 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 - **Planned**: Interactive Volcano Plot tool (`tools/deg.html`).
 - **Planned**: Publications page population.
 
+## [2026-01-13] - Phase 5.1: Bar Chart Module & Palette Enhancement
+### Added
+- **Bar Chart Module**: New `📊 条形图` module in Bio-Analysis Suite with:
+    - Aggregation options: Mean, Median, Sum, Count
+    - Error bars: SD, SE, CI, or None
+    - Statistical analysis: Auto Mann-Whitney (2 groups) or Kruskal-Wallis + Dunn (3+)
+    - Significance annotations via `statannotations`
+- **Custom Color Input**: Users can now select "✏️ 自定义..." and input custom hex colors.
+
+### Changed
+- **Palette Presets**: Renamed all presets with intuitive Chinese names (e.g., "🔴 红蓝经典", "🤎 色盲友好").
+- **New Presets Added**: 蓝色渐变, 色盲友好 (colorblind-safe), 灰度单色, 彩虹渐变.
+
 ## [2026-01-09] - Phase 5: Interactive Tools Integration
 ### Added
 - **Statistical Analysis Workbench (v4.0)**: Upgraded `/tools/stat_analysis` to Bio-Analysis Suite v4.0 (Survival, Heatmap, PCA).

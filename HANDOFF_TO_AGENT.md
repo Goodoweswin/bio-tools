@@ -1,15 +1,16 @@
-# Engineering Handoff: 2026-01-12
+# Engineering Handoff: 2026-01-13
 
 **Status**: Stable / Deployed
-**Last Feature**: Upgraded to Bio-Analysis Suite v4.0 & Added DEG Tool Scaffold
+**Last Feature**: Bar Chart Module & Palette Enhancement
 **Repository**: `bio-tools` (Cloudflare Pages)
 
 ## 1. Session Summary
-We upgraded the analysis capabilities and optimized the deployment architecture.
-- **Upgrade**: `stat_analysis` is now **Bio-Analysis Suite v4.0** (Survival, Heatmap, PCA).
-- **Architecture**: Implemented **Hybrid Loading**:
-    - **CDN**: Standard heavy libraries (scipy, pandas, numpy) load from jsDelivr (Bypasses 25MB limit).
-    - **Local**: Custom logic (`app.py`) and small wheels (`pypi/`) load from `public/tools/assets/`.
+Continued enhancing Bio-Analysis Suite with new visualization and UX features.
+- **Bar Chart Module**: New `📊 条形图` with aggregation, error bars, and auto-statistcs (Mann-Whitney/Kruskal-Wallis).
+- **Palette Upgrade**:
+    - Renamed presets to intuitive Chinese names (e.g., "🔴 红蓝经典").
+    - Added presets: 色盲友好, 灰度单色, 彩虹渐变.
+    - Added "✏️ 自定义..." option for custom hex color input.
 - **New Tool**: Created `public/tools/deg/` (Volcano Plot) scaffold.
 
 ## 2. Current Architecture
