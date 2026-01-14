@@ -175,7 +175,7 @@ def render_stat_guide():
 # --- Modules ---
 
 def render_difference_module(data):
-    st.header("📊 差异分析 (Difference Analysis)")
+    st.header("📊 箱线图 (Boxplot)")
     render_stat_guide() # Insert Guide Here
     
     cols = data.columns.tolist()
@@ -204,6 +204,9 @@ def render_difference_module(data):
         show_ns = c_s2.checkbox("显示 'ns'", value=False, key="diff_show_ns", help="勾选后将显示非显著差异 (p>0.05) 的标记")
         p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="diff_pfmt")
         italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="diff_italic")
+        # Width Slider
+        default_width = 0.4 if metric_as_x else 0.5
+        box_width = st.slider("箱体宽度 (Width)", 0.1, 1.0, default_width, 0.1, key="diff_width")
     
     # Custom color input (appears if user selects custom)
     custom_colors = None
@@ -398,9 +401,6 @@ def render_difference_module(data):
         colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
         # Boxplot
-        # width logic: if single metric, narrower box
-        box_width = 0.4 if metric_as_x else 0.5
-        
         sns.boxplot(x=plot_x_col, y=y_col, hue=plot_hue_col, data=data_filtered, 
                     order=plot_order, hue_order=hue_order,
                     width=box_width, ax=ax, palette=colors,
@@ -512,6 +512,9 @@ def render_barplot_module(data):
         show_ns = c_s2.checkbox("显示 'ns'", value=False, key="bar_show_ns")
         p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="bar_pfmt")
         italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="bar_italic")
+        # Width Slider
+        default_bar_width = 0.4 if metric_as_x else 0.6
+        bar_width_val = st.slider("条形宽度 (Width)", 0.1, 1.0, default_bar_width, 0.1, key="bar_width")
         # Layout Option
         metric_as_x = st.checkbox("将数值列名作为X轴 (Single Metric)", value=False, key="bar_metric_x", help="开启后，X轴显示参数名，分组以不同颜色展示")
 
@@ -586,16 +589,13 @@ def render_barplot_module(data):
         colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
         # 1. Main Bar Plot
-        # width adjustment
-        bar_width = 0.4 if metric_as_x else 0.6
-        
         sns.barplot(
             data=data_filtered, x=plot_x_col, y=y_col, order=plot_order,
             hue=plot_hue_col, hue_order=hue_order,
             estimator=estimator, errorbar=errorbar_param,
             palette=colors, ax=ax, capsize=0.1, errwidth=1.5,
             edgecolor="black", linewidth=1.0, 
-            width=bar_width, dodge=True
+            width=bar_width_val, dodge=True
         )
         
         # 2. Points Overlay
@@ -921,7 +921,7 @@ def render_data_guide():
 st.sidebar.title("控制面板")
 mode = st.sidebar.radio("功能模块", [
     "🏠 首页 & 指南",
-    "📊 差异分析",
+    "📊 箱线图 (Boxplot)",
     "📊 条形图",
     "💀 生存分析",
     "🧬 PCA (3D)",
@@ -943,23 +943,30 @@ else:
     if uploaded_file:
         data = load_data(uploaded_file)
         if data is not None:
-            if "差异" in mode: render_difference_module(data)
-            elif "条形" in mode: render_barplot_module(data)
-            elif "生存" in mode: render_survival_module(data)
+            # Use the top-level 'mode' variable directly to cleaner logic
+            if "描述" in mode: render_desc_stats(data)
+            elif "箱线图" in mode: render_difference_module(data)
+            elif "条形图" in mode: render_barplot_module(data)
             elif "PCA" in mode: render_pca_module(data)
             elif "热图" in mode: render_heatmap_module(data)
+            elif "生存" in mode: render_survival_module(data)
             elif "相关" in mode: 
                 # Re-implement simple correlation for v4
                 st.header("📈 相关性分析")
                 num_cols = data.select_dtypes(include=['number']).columns
                 x = st.selectbox("X", num_cols, key="cx")
                 y = st.selectbox("Y", num_cols, key="cy")
+                
+                col_w1, col_w2 = st.columns(2)
+                fig_width = col_w1.slider("图表宽度 (inches)", 3, 15, 6)
+                fig_height = col_w2.slider("图表高度 (inches)", 3, 15, 6)
+
                 if st.button("Run"):
                     st.session_state['corr_active'] = True
 
                 if st.session_state.get('corr_active', False):
                     nature_style.apply_nature_style()
-                    fig, ax = plt.subplots(figsize=(5,5))
+                    fig, ax = plt.subplots(figsize=(fig_width, fig_height))
                     sns.regplot(data=data, x=x, y=y, ax=ax)
                     st.pyplot(fig)
                     get_download_buttons(fig, "Corr", "corr", report_title=f"Correlation {x} vs {y}")
