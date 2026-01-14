@@ -9,10 +9,10 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 ## [2026-01-13] - Phase 5.1: Bar Chart Module & Palette Enhancement
 ### Added
 - **Bar Chart Module**: New `📊 条形图` module in Bio-Analysis Suite with:
-    - Aggregation options: Mean, Median, Sum, Count
-    - Error bars: SD, SE, CI, or None
-    - Statistical analysis: Auto Mann-Whitney (2 groups) or Kruskal-Wallis + Dunn (3+)
-    - Significance annotations via `statannotations`
+    - **Scientific Styling**: Added "🧬 科研柔和" palette, data points overlay (stripplot), and italic labeling.
+    - **Statistics**: Display actual p-values (e.g., `p=0.001`) instead of just stars.
+    - Aggregation options: Mean, Median, Sum, Count with Error bars (SD, SE, CI).
+- **Difference Analysis (Boxplot)**: Upgraded with scientific styling (points overlay, p-value format) matching the bar chart.
 - **Custom Color Input**: Users can now select "✏️ 自定义..." and input custom hex colors.
 
 ### Changed

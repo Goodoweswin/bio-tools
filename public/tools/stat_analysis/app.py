@@ -28,6 +28,7 @@ PALETTES = {
     "🤎 色盲友好": ['#0077BB', '#33BBEE', '#009988', '#EE7733', '#CC3311', '#EE3377', '#BBBBBB'],
     "⚫ 灰度单色": ['#000000', '#333333', '#666666', '#999999', '#CCCCCC', '#E5E5E5'],
     "🌈 彩虹渐变": "husl",
+    "🧬 科研柔和 (Sci)": ['#B4C7E7', '#E6B8D1', '#C5E0B4', '#FFE699', '#F4B183', '#D9D9D9'],
     "✏️ 自定义...": None  # Triggers custom input
 }
 
@@ -187,11 +188,18 @@ def render_difference_module(data):
 
     # User input for plot title
     c_opt1, c_opt2, c_opt3 = st.columns([3, 1, 1])
-    custom_title = c_opt1.text_input("图表标题 (Plot Title)", value="", placeholder="留空则无标题", key="diff_plot_title")
-    show_ns = c_opt2.checkbox("显示 'ns' 标记", value=False, key="diff_show_ns", help="勾选后将显示非显著差异 (p>0.05) 的标记")
-    
     # Palette Selection
-    palette_name = c_opt3.selectbox("配色方案", list(PALETTES.keys()), index=0, key="diff_palette")
+    # Try to set default to Scientific if available
+    default_idx = 11 if "🧬" in list(PALETTES.keys())[11] else 0
+    palette_name = c_opt3.selectbox("配色方案", list(PALETTES.keys()), index=default_idx, key="diff_palette")
+    
+    # Advanced Styling
+    with st.expander("🎨 样式与标注设置 (Style & Stats)", expanded=True):
+        c_s1, c_s2, c_s3, c_s4 = st.columns(4)
+        show_points = c_s1.checkbox("显示散点 (Points)", value=True, key="diff_points")
+        show_ns = c_s2.checkbox("显示 'ns'", value=False, key="diff_show_ns", help="勾选后将显示非显著差异 (p>0.05) 的标记")
+        p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="diff_pfmt")
+        italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="diff_italic")
     
     # Custom color input (appears if user selects custom)
     custom_colors = None
@@ -354,16 +362,25 @@ def render_difference_module(data):
         # Get palette colors
         colors = get_palette_colors(palette_name, n_colors=len(group_order_str), custom_colors=custom_colors)
         
-        sns.boxplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, width=0.5, ax=ax, palette=colors)
-        sns.stripplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, color='#333', size=4, jitter=True, ax=ax)
+        # Boxplot
+        sns.boxplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, width=0.5, ax=ax, palette=colors,
+                    linewidth=1.0, fliersize=0) # fliersize=0 to hide original outliers overlapping with stripplot
+        
+        # Stripplot (Styled)
+        if show_points:
+            sns.stripplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, 
+                          size=5, jitter=True, ax=ax,
+                          color="white", edgecolor="gray", linewidth=1) # Match Barplot Style
         
         # Annotate
+        text_format = 'simple' if 'Simple' in p_val_fmt else 'star'
+        
         if sig_pairs:
              plot_pairs = [p[0] for p in sig_pairs]
              p_values = [p[1] for p in sig_pairs]
              try:
                  annotator = Annotator(ax, plot_pairs, data=data_filtered, x=x_col, y=y_col, order=group_order_str)
-                 annotator.configure(test=None, text_format='star', loc='inside')
+                 annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
                  annotator.set_pvalues(p_values)
                  annotator.annotate()
              except Exception as e:
@@ -373,6 +390,9 @@ def render_difference_module(data):
             ax.set_title(custom_title, fontsize=12)
         else:
             ax.set_title("") # Ensure no default title if user leaves it blank
+
+        if italic_xaxis:
+             ax.set_xticklabels(ax.get_xticklabels(), fontstyle='italic')
 
         sns.despine()
         st.pyplot(fig)
@@ -402,12 +422,20 @@ def render_barplot_module(data):
     y_col = c2.selectbox("数值列 (Y)", num_cols, index=0, key="bar_y")
     hue_col = c3.selectbox("颜色分组 (Hue, 可选)", ["无"] + cols, index=0, key="bar_hue")
     
-    c_opt1, c_opt2, c_opt3, c_opt4 = st.columns(4)
+    # Options Row 1
+    c_opt1, c_opt2, c_opt3 = st.columns(3)
     agg_method = c_opt1.selectbox("聚合方式", ["mean", "median", "sum", "count"], key="bar_agg")
     error_type = c_opt2.selectbox("误差棒", ["sd", "se", "ci", "无"], key="bar_err")
-    show_ns = c_opt3.checkbox("显示 'ns'", value=False, key="bar_show_ns")
-    palette_name = c_opt4.selectbox("配色方案", list(PALETTES.keys()), index=0, key="bar_palette")
-    
+    palette_name = c_opt3.selectbox("配色方案", list(PALETTES.keys()), index=11 if "🧬" in list(PALETTES.keys())[11] else 0, key="bar_palette") 
+
+    # Advanced Styling
+    with st.expander("🎨 样式与标注设置 (Style & Stats)", expanded=True):
+        c_s1, c_s2, c_s3, c_s4 = st.columns(4)
+        show_points = c_s1.checkbox("显示散点 (Points)", value=True, key="bar_points")
+        show_ns = c_s2.checkbox("显示 'ns'", value=False, key="bar_show_ns")
+        p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="bar_pfmt")
+        italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="bar_italic")
+
     # Custom color input
     custom_colors = None
     if palette_name == CUSTOM_PALETTE_KEY:
@@ -426,14 +454,14 @@ def render_barplot_module(data):
         st.divider()
         import numpy as np
         
-        # Filter data
+        # Data Preparation
         data_filtered = data[data[x_col].isin(group_order)].copy()
         data_filtered[x_col] = data_filtered[x_col].astype(str)
         data_filtered[y_col] = pd.to_numeric(data_filtered[y_col], errors='coerce')
         data_filtered = data_filtered.replace([np.inf, -np.inf], np.nan).dropna(subset=[y_col, x_col])
         group_order_str = [str(g) for g in group_order]
         
-        # Aggregation function
+        # Aggregation
         if agg_method == "mean":
             estimator = np.mean
         elif agg_method == "median":
@@ -441,65 +469,110 @@ def render_barplot_module(data):
         elif agg_method == "sum":
             estimator = np.sum
         else:
-            estimator = len  # count
+            estimator = len
         
-        # Error bar type
+        # Error Bar
         errorbar_param = None if error_type == "无" else error_type
         
-        # Plotting
+        # Plotting Setup
         nature_style.apply_nature_style()
         fig, ax = plt.subplots(figsize=(5, 5))
         
-        n_groups = len(group_order_str)
-        colors = get_palette_colors(palette_name, n_colors=n_groups, custom_colors=custom_colors)
-        
         hue = None if hue_col == "无" else hue_col
+        # Calculate N colors needed
+        if hue:
+            hue_order = sorted(data_filtered[hue].unique())
+            n_colors = len(hue_order)
+        else:
+            n_colors = len(group_order_str)
+
+        colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
+        # 1. Main Bar Plot
+        # Using edgecolor='black' to match reference style edges if desired, or let seaborn handle it.
+        # Reference image has clean bars with black edges? Actually looks like thin edges.
         sns.barplot(
             data=data_filtered, x=x_col, y=y_col, order=group_order_str,
             hue=hue, estimator=estimator, errorbar=errorbar_param,
-            palette=colors, ax=ax, capsize=0.1
+            palette=colors, ax=ax, capsize=0.1, errwidth=1.5,
+            edgecolor="black", linewidth=1.0 # Add black border to bars
         )
         
-        # Statistical analysis (if no Hue - simple comparison)
-        if hue is None:
-            groups_data = [data_filtered[data_filtered[x_col]==g][y_col] for g in group_order_str]
-            if len(groups_data) >= 2:
-                # Auto-select test
-                if len(groups_data) == 2:
-                    try:
-                        stat, p = stats.mannwhitneyu(groups_data[0], groups_data[1])
+        # 2. Points Overlay
+        if show_points:
+            dodge = True if hue else False
+            sns.stripplot(
+                data=data_filtered, x=x_col, y=y_col, 
+                hue=hue, order=group_order_str,
+                dodge=dodge, jitter=True, size=5,
+                color="white", edgecolor="gray", linewidth=1, # White points with gray edge like reference
+                ax=ax, legend=False, alpha=0.9
+            )
+
+        # 3. Statistical Analysis
+        text_format = 'simple' if 'Simple' in p_val_fmt else 'star'
+        
+        # --- Logic for Stats ---
+        try:
+            if hue is None:
+                # Simple comparisons between X groups
+                groups_data = [data_filtered[data_filtered[x_col]==g][y_col] for g in group_order_str]
+                if len(groups_data) >= 2:
+                    sig_pairs_found = []
+                    # KW or Mann-Whitney
+                    if len(groups_data) == 2:
+                        _, p = stats.mannwhitneyu(groups_data[0], groups_data[1])
                         if p < 0.05 or show_ns:
-                            annotator = Annotator(ax, [(group_order_str[0], group_order_str[1])], data=data_filtered, x=x_col, y=y_col, order=group_order_str)
-                            annotator.configure(test=None, text_format='star', loc='inside')
-                            annotator.set_pvalues([p])
-                            annotator.annotate()
-                    except: pass
-                else:
-                    try:
-                        h_stat, k_p = stats.kruskal(*groups_data)
+                            sig_pairs_found.append(((group_order_str[0], group_order_str[1]), p))
+                    else:
+                        _, k_p = stats.kruskal(*groups_data)
                         if k_p < 0.05 or show_ns:
                             dunn = posthoc_dunn(data_filtered, val_col=y_col, group_col=x_col, p_adjust='holm')
-                            sig_pairs = []
                             for i in range(len(group_order_str)):
                                 for j in range(i+1, len(group_order_str)):
                                     p_val = dunn.loc[group_order_str[i], group_order_str[j]]
                                     if p_val < 0.05 or show_ns:
-                                        sig_pairs.append(((group_order_str[i], group_order_str[j]), p_val))
-                            if sig_pairs:
-                                annotator = Annotator(ax, [p[0] for p in sig_pairs], data=data_filtered, x=x_col, y=y_col, order=group_order_str)
-                                annotator.configure(test=None, text_format='star', loc='inside')
-                                annotator.set_pvalues([p[1] for p in sig_pairs])
-                                annotator.annotate()
-                    except Exception as e:
-                        st.write(f"Stats Warning: {e}")
-        
+                                        sig_pairs_found.append(((group_order_str[i], group_order_str[j]), p_val))
+                    
+                    if sig_pairs_found:
+                        annotator = Annotator(ax, [p[0] for p in sig_pairs_found], data=data_filtered, x=x_col, y=y_col, order=group_order_str)
+                        annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
+                        annotator.set_pvalues([p[1] for p in sig_pairs_found])
+                        annotator.annotate()
+
+            else:
+                # Hue Stats
+                # Compare hues within each X group (Common requirement)
+                hue_order = sorted(data_filtered[hue].unique())
+                if len(hue_order) == 2:
+                    pairs = []
+                    for g in group_order_str:
+                        pairs.append(((g, hue_order[0]), (g, hue_order[1])))
+                    
+                    annotator = Annotator(ax, pairs, data=data_filtered, x=x_col, y=y_col, hue=hue, order=group_order_str, hue_order=hue_order)
+                    annotator.configure(test='Mann-Whitney', text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
+                    annotator.apply_test()
+                    annotator.annotate()
+        except Exception as e:
+            st.warning(f"Stats Calculation Error: {e}")
+
+        # Formatting
         if custom_title:
-            ax.set_title(custom_title, fontsize=12)
+             ax.set_title(custom_title, fontsize=12)
+        
+        if italic_xaxis:
+             ax.set_xticklabels(ax.get_xticklabels(), fontstyle='italic')
         
         ax.set_xlabel(x_col)
         ax.set_ylabel(y_col)
         sns.despine()
+        
+        # Adjust Legend
+        # If hue is active, place legend outside or top
+        if hue or show_points:
+             if hue:
+                 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+        
         st.pyplot(fig)
         
         get_download_buttons(fig, f"Bar_{y_col}", "bar", report_title=f"Bar Chart: {y_col} by {x_col}")
