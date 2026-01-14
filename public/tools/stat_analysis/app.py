@@ -400,10 +400,19 @@ def render_difference_module(data):
             
         colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
+        if metric_as_x:
+            # Robust alignment: standard width 0.8 to match stripplot dodge
+            real_width = 0.8
+            # Use slider to control "Padding" (Inverse logic)
+            padding_factor = (1.1 - box_width) * 1.5 
+            ax.set_xlim(-0.5 - padding_factor, 0.5 + padding_factor)
+        else:
+            real_width = box_width
+
         # Boxplot
         sns.boxplot(x=plot_x_col, y=y_col, hue=plot_hue_col, data=data_filtered, 
                     order=plot_order, hue_order=hue_order,
-                    width=box_width, ax=ax, palette=colors,
+                    width=real_width, ax=ax, palette=colors,
                     linewidth=1.0, fliersize=0) 
         
         # Stripplot (Styled)
@@ -588,6 +597,14 @@ def render_barplot_module(data):
 
         colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
+        if metric_as_x:
+            real_width = 0.8 # Standard Seaborn width
+            # Control Padding
+            padding_factor = (1.1 - bar_width_val) * 1.5
+            ax.set_xlim(-0.5 - padding_factor, 0.5 + padding_factor)
+        else:
+            real_width = bar_width_val
+
         # 1. Main Bar Plot
         sns.barplot(
             data=data_filtered, x=plot_x_col, y=y_col, order=plot_order,
@@ -595,7 +612,7 @@ def render_barplot_module(data):
             estimator=estimator, errorbar=errorbar_param,
             palette=colors, ax=ax, capsize=0.1, errwidth=1.5,
             edgecolor="black", linewidth=1.0, 
-            width=bar_width_val, dodge=True
+            width=real_width, dodge=True
         )
         
         # 2. Points Overlay
@@ -668,7 +685,7 @@ def render_barplot_module(data):
                 if hue_plot_pairs:
                      annotator = Annotator(ax, hue_plot_pairs, data=data_filtered, x=plot_x_col, y=y_col, hue=plot_hue_col, 
                                            order=plot_order, hue_order=hue_order)
-                     annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
+                     annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False, line_offset=0.08, line_offset_to_group=0.05)
                      annotator.set_pvalues(p_values)
                      annotator.annotate()
 

@@ -5,6 +5,20 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 ## [Unreleased]
 - **Planned**: Interactive Volcano Plot tool (`tools/deg.html`).
 - **Planned**: Publications page population.
+## [2026-01-14] - Phase 5.2: Scientific Styling & Infrastructure Hardening
+### Added
+- **Scientific Visualization Upgrade**:
+    - **Single Metric Mode**: Optimized layout for single-variable data (metric as X-axis label, grouping by color).
+    - **New Styling**: Added `🧬 科研柔和 (Sci)` palette, stripplot overlay, and auto-adjusted p-value formats.
+    - **Manual Controls**: Added width sliders for both Barplot and Boxplot to fine-tune visual density.
+- **Infrastructure Hardening**:
+    - **Offline Deployment Package**: Generated full offline archive `bio-tools-server-deploy.zip` (~300MB) containing all dependencies.
+    - **Dual-Mode Support**: Included `enable_offline_mode.py` for one-click conversion from Cloudflare mode to 100% offline mode on private servers.
+
+### Changed
+- **Renaming**: "Difference Analysis" module formally renamed to "Boxplot" (`📊 箱线图`).
+- **Optimization**: Reverted git repository to Cloudflare-compatible state (remote Scipy) to ensure free hosting stability, while preserving offline capabilities via external script.
+
 
 ## [2026-01-13] - Phase 5.1: Bar Chart Module & Palette Enhancement
 ### Added
