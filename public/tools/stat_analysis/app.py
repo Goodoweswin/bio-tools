@@ -207,6 +207,8 @@ def render_difference_module(data):
     if palette_name == CUSTOM_PALETTE_KEY:
         custom_colors = st.text_input("输入自定义颜色 (逗号分隔)", placeholder="#FF0000, #00FF00, #0000FF", key="diff_custom_colors")
 
+    custom_title = st.text_input("图表标题 (Plot Title)", value="", placeholder="留空则无标题", key="diff_plot_title")
+
     if st.button("🚀 运行分析 (智能模式)", type="primary"):
         st.session_state['diff_active'] = True
         
