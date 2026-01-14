@@ -512,11 +512,11 @@ def render_barplot_module(data):
         show_ns = c_s2.checkbox("显示 'ns'", value=False, key="bar_show_ns")
         p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="bar_pfmt")
         italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="bar_italic")
+        # Layout Option
+        metric_as_x = st.checkbox("将数值列名作为X轴 (Single Metric)", value=False, key="bar_metric_x", help="开启后，X轴显示参数名，分组以不同颜色展示")
         # Width Slider
         default_bar_width = 0.4 if metric_as_x else 0.6
         bar_width_val = st.slider("条形宽度 (Width)", 0.1, 1.0, default_bar_width, 0.1, key="bar_width")
-        # Layout Option
-        metric_as_x = st.checkbox("将数值列名作为X轴 (Single Metric)", value=False, key="bar_metric_x", help="开启后，X轴显示参数名，分组以不同颜色展示")
 
     # Custom color input
     custom_colors = None
