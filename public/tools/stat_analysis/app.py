@@ -190,8 +190,9 @@ def render_difference_module(data):
     c_opt1, c_opt2, c_opt3 = st.columns([3, 1, 1])
     # Palette Selection
     # Try to set default to Scientific if available
-    default_idx = 11 if "🧬" in list(PALETTES.keys())[11] else 0
-    palette_name = c_opt3.selectbox("配色方案", list(PALETTES.keys()), index=default_idx, key="diff_palette")
+    palette_keys = list(PALETTES.keys())
+    default_idx = next((i for i, k in enumerate(palette_keys) if "🧬" in k), 0)
+    palette_name = c_opt3.selectbox("配色方案", palette_keys, index=default_idx, key="diff_palette")
     
     # Advanced Styling
     with st.expander("🎨 样式与标注设置 (Style & Stats)", expanded=True):
@@ -426,7 +427,9 @@ def render_barplot_module(data):
     c_opt1, c_opt2, c_opt3 = st.columns(3)
     agg_method = c_opt1.selectbox("聚合方式", ["mean", "median", "sum", "count"], key="bar_agg")
     error_type = c_opt2.selectbox("误差棒", ["sd", "se", "ci", "无"], key="bar_err")
-    palette_name = c_opt3.selectbox("配色方案", list(PALETTES.keys()), index=11 if "🧬" in list(PALETTES.keys())[11] else 0, key="bar_palette") 
+    palette_keys = list(PALETTES.keys())
+    default_idx = next((i for i, k in enumerate(palette_keys) if "🧬" in k), 0)
+    palette_name = c_opt3.selectbox("配色方案", palette_keys, index=default_idx, key="bar_palette") 
 
     # Advanced Styling
     with st.expander("🎨 样式与标注设置 (Style & Stats)", expanded=True):
