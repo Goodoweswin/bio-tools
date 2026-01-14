@@ -8,11 +8,13 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 
 ## [2026-01-13] - Phase 5.1: Bar Chart Module & Palette Enhancement
 ### Added
-- **Bar Chart Module**: New `📊 条形图` module in Bio-Analysis Suite with:
+- **Bar Chart Module**: 
+    - **Layout Upgrade**: Added "Single Metric Mode" (Metric on X-axis, Group in Legend) and fixed bar width issues.
     - **Scientific Styling**: Added "🧬 科研柔和" palette, data points overlay (stripplot), and italic labeling.
     - **Statistics**: Display actual p-values (e.g., `p=0.001`) instead of just stars.
-    - Aggregation options: Mean, Median, Sum, Count with Error bars (SD, SE, CI).
-- **Difference Analysis (Boxplot)**: Upgraded with scientific styling (points overlay, p-value format) matching the bar chart.
+- **Difference Analysis (Boxplot)**: 
+    - **Layout Upgrade**: Added Hue selector and "Single Metric Mode" support.
+    - Upgraded with scientific styling (points overlay, p-value format) matching the bar chart.
 - **Custom Color Input**: Users can now select "✏️ 自定义..." and input custom hex colors.
 
 ### Changed

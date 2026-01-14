@@ -179,15 +179,18 @@ def render_difference_module(data):
     render_stat_guide() # Insert Guide Here
     
     cols = data.columns.tolist()
-    c1, c2 = st.columns(2)
+    c1, c2, c3 = st.columns(3)
     x_col = c1.selectbox("分组列 (Group)", cols, index=0, key="diff_x")
     y_col = c2.selectbox("数值列 (Value)", cols, index=min(1, len(cols)-1), key="diff_y")
+    hue_col = c3.selectbox("颜色分组 (Hue, 可选)", ["无"] + cols, index=0, key="diff_hue")
 
     group_order = st.multiselect("分组顺序", sorted(data[x_col].unique()), default=sorted(data[x_col].unique()))
     if not group_order: return
 
     # User input for plot title
-    c_opt1, c_opt2, c_opt3 = st.columns([3, 1, 1])
+    c_opt1, c_opt2, c_opt3 = st.columns([1, 1, 1])
+    # Advanced Layout Option
+    metric_as_x = c_opt1.checkbox("将数值列名作为X轴 (Single Metric)", value=False, key="diff_metric_x", help="开启后，X轴显示参数名，分组显示在图例中")
     # Palette Selection
     # Try to set default to Scientific if available
     palette_keys = list(PALETTES.keys())
@@ -217,19 +220,38 @@ def render_difference_module(data):
         data_filtered = data[data[x_col].isin(group_order)].copy()
         
         # --- FIX: Type Consistency for Plotting & Stats ---
-        # Ensure grouping column is strictly STRING to match between
-        # st.multiselect (group_order), TukeyHSD output, and Annotator.
         data_filtered[x_col] = data_filtered[x_col].astype(str)
         group_order_str = [str(g) for g in group_order]
         
         # Robust Data Cleaning:
-        # 1. Coerce to numeric (handle 'NaN', 'N/A' strings)
         data_filtered[y_col] = pd.to_numeric(data_filtered[y_col], errors='coerce')
-        # 2. Drop NaNs and Infs (optimization solvers hate Infs)
+
         import numpy as np
         data_filtered = data_filtered.replace([np.inf, -np.inf], np.nan)
         data_filtered = data_filtered.dropna(subset=[y_col, x_col])
+
+        # --- Layout Logic Transformation ---
+        plot_x_col = x_col
+        plot_hue_col = hue_col if hue_col != "无" else None
+        plot_order = group_order_str
+        hue_order = None
         
+        if metric_as_x:
+            # Single Metric Mode: X-axis = Metric Name, Hue = Original Group
+            metric_name = y_col
+            data_filtered["_Metric"] = metric_name
+            plot_x_col = "_Metric"
+            plot_order = [metric_name]
+            
+            plot_hue_col = x_col # Original group becomes Hue
+            hue_order = group_order_str # Original group order becomes Hue order
+        elif plot_hue_col:
+             hue_order = sorted(data_filtered[plot_hue_col].astype(str).unique())
+
+        # Prepare Data Groups for Stats (Based on original logic or new logic?)
+        # Original logic was comparing X groups.
+        # If Metric Mode, we want to compare Hue groups (which was original X).
+        # So we can keep using 'groups_data' based on original X_col for global stats.
         groups_data = [data_filtered[data_filtered[x_col]==g][y_col] for g in group_order_str]
         
         if len(groups_data) < 2:
@@ -360,44 +382,94 @@ def render_difference_module(data):
 
         # --- 3. Plotting ---
         nature_style.apply_nature_style()
-        fig, ax = plt.subplots(figsize=(4, 5))
+        fig, ax = plt.subplots(figsize=(5, 5))
         
         # Get palette colors
-        colors = get_palette_colors(palette_name, n_colors=len(group_order_str), custom_colors=custom_colors)
+        # If Hue is used, we need colors for Hue levels.
+        # If Metric Mode, Hue=Original X, so n_colors=len(group_order)
+        # If Standard Mode + Hue, n_colors=len(hue_unique)
+        # If Standard Mode No Hue, n_colors=len(group_order)
+        if plot_hue_col:
+            hue_levels = hue_order if hue_order else sorted(data_filtered[plot_hue_col].astype(str).unique())
+            n_colors = len(hue_levels)
+        else:
+            n_colors = len(group_order_str)
+            
+        colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
         # Boxplot
-        sns.boxplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, width=0.5, ax=ax, palette=colors,
-                    linewidth=1.0, fliersize=0) # fliersize=0 to hide original outliers overlapping with stripplot
+        # width logic: if single metric, narrower box
+        box_width = 0.4 if metric_as_x else 0.5
+        
+        sns.boxplot(x=plot_x_col, y=y_col, hue=plot_hue_col, data=data_filtered, 
+                    order=plot_order, hue_order=hue_order,
+                    width=box_width, ax=ax, palette=colors,
+                    linewidth=1.0, fliersize=0) 
         
         # Stripplot (Styled)
         if show_points:
-            sns.stripplot(x=x_col, y=y_col, data=data_filtered, order=group_order_str, 
-                          size=5, jitter=True, ax=ax,
-                          color="white", edgecolor="gray", linewidth=1) # Match Barplot Style
+            dodge = True if plot_hue_col else False
+            sns.stripplot(x=plot_x_col, y=y_col, hue=plot_hue_col, data=data_filtered, 
+                          order=plot_order, hue_order=hue_order,
+                          dodge=dodge, size=5, jitter=True, ax=ax,
+                          color="white", edgecolor="gray", linewidth=1,
+                          legend=False) # Legend handled by boxplot
         
         # Annotate
         text_format = 'simple' if 'Simple' in p_val_fmt else 'star'
         
-        if sig_pairs:
-             plot_pairs = [p[0] for p in sig_pairs]
-             p_values = [p[1] for p in sig_pairs]
-             try:
-                 annotator = Annotator(ax, plot_pairs, data=data_filtered, x=x_col, y=y_col, order=group_order_str)
-                 annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
-                 annotator.set_pvalues(p_values)
-                 annotator.annotate()
-             except Exception as e:
-                 st.write(f"Annotation Warning: {e}")
+        # Stats Annotation Logic Update for Layouts
+        try:
+            # Case 1: Standard Mode (No Hue) -> Compare X groups
+            if not plot_hue_col:
+                if sig_pairs:
+                     plot_pairs = [p[0] for p in sig_pairs]
+                     p_values = [p[1] for p in sig_pairs]
+                     annotator = Annotator(ax, plot_pairs, data=data_filtered, x=plot_x_col, y=y_col, order=plot_order)
+                     annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
+                     annotator.set_pvalues(p_values)
+                     annotator.annotate()
+            
+            # Case 2: Metric as X Mode -> Compare Hue groups within the single Metric X
+            elif metric_as_x:
+                # We want to compare the Hue groups (which are the original X groups)
+                # sig_pairs contains (GroupA, GroupB)
+                # We need to construct pairs like: (("Metric", GroupA), ("Metric", GroupB))
+                if sig_pairs:
+                     # Reformat pairs for statannotations with hue
+                     hue_plot_pairs = []
+                     for (g1, g2), _ in sig_pairs:
+                         hue_plot_pairs.append(((metric_name, g1), (metric_name, g2)))
+                     
+                     p_values = [p[1] for p in sig_pairs]
+                     
+                     annotator = Annotator(ax, hue_plot_pairs, data=data_filtered, x=plot_x_col, y=y_col, hue=plot_hue_col, 
+                                           order=plot_order, hue_order=hue_order)
+                     annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
+                     annotator.set_pvalues(p_values)
+                     annotator.annotate()
+            
+            # Case 3: Standard Mode + Hue -> Hue comparisons? Or X comparisons?
+            # Typically user wants to compare Hue within X. Not implemented in previous stats logic but useful.
+            # For now, let's skip complex stats for Case 3 to avoid breakage, unless user asks.
+            
+        except Exception as e:
+             st.write(f"Annotation Warning: {e}")
         
         if custom_title:
             ax.set_title(custom_title, fontsize=12)
         else:
-            ax.set_title("") # Ensure no default title if user leaves it blank
+            ax.set_title("") 
 
-        if italic_xaxis:
+        if italic_xaxis and not metric_as_x: # If metric as X, usually not italic
              ax.set_xticklabels(ax.get_xticklabels(), fontstyle='italic')
 
         sns.despine()
+        
+        # Move Legend
+        if plot_hue_col:
+             plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+
         st.pyplot(fig)
         
         # Result DataFrame
@@ -440,6 +512,8 @@ def render_barplot_module(data):
         show_ns = c_s2.checkbox("显示 'ns'", value=False, key="bar_show_ns")
         p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="bar_pfmt")
         italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="bar_italic")
+        # Layout Option
+        metric_as_x = st.checkbox("将数值列名作为X轴 (Single Metric)", value=False, key="bar_metric_x", help="开启后，X轴显示参数名，分组以不同颜色展示")
 
     # Custom color input
     custom_colors = None
@@ -466,6 +540,24 @@ def render_barplot_module(data):
         data_filtered = data_filtered.replace([np.inf, -np.inf], np.nan).dropna(subset=[y_col, x_col])
         group_order_str = [str(g) for g in group_order]
         
+        # --- Layout Logic Transformation ---
+        plot_x_col = x_col
+        plot_hue_col = hue_col if hue_col != "无" else None
+        plot_order = group_order_str
+        hue_order = None
+        
+        if metric_as_x:
+            # Single Metric Mode
+            metric_name = y_col
+            data_filtered["_Metric"] = metric_name
+            plot_x_col = "_Metric"
+            plot_order = [metric_name]
+            
+            plot_hue_col = x_col # Original Group becomes Hue
+            hue_order = group_order_str
+        elif plot_hue_col:
+             hue_order = sorted(data_filtered[plot_hue_col].astype(str).unique())
+        
         # Aggregation
         if agg_method == "mean":
             estimator = np.mean
@@ -485,30 +577,33 @@ def render_barplot_module(data):
         
         hue = None if hue_col == "无" else hue_col
         # Calculate N colors needed
-        if hue:
-            hue_order = sorted(data_filtered[hue].unique())
-            n_colors = len(hue_order)
+        if plot_hue_col:
+            hue_levels = hue_order if hue_order else sorted(data_filtered[plot_hue_col].astype(str).unique())
+            n_colors = len(hue_levels)
         else:
-            n_colors = len(group_order_str)
+            n_colors = len(plot_order)
 
         colors = get_palette_colors(palette_name, n_colors=n_colors, custom_colors=custom_colors)
         
         # 1. Main Bar Plot
-        # Using edgecolor='black' to match reference style edges if desired, or let seaborn handle it.
-        # Reference image has clean bars with black edges? Actually looks like thin edges.
+        # width adjustment
+        bar_width = 0.4 if metric_as_x else 0.6
+        
         sns.barplot(
-            data=data_filtered, x=x_col, y=y_col, order=group_order_str,
-            hue=hue, estimator=estimator, errorbar=errorbar_param,
+            data=data_filtered, x=plot_x_col, y=y_col, order=plot_order,
+            hue=plot_hue_col, hue_order=hue_order,
+            estimator=estimator, errorbar=errorbar_param,
             palette=colors, ax=ax, capsize=0.1, errwidth=1.5,
-            edgecolor="black", linewidth=1.0 # Add black border to bars
+            edgecolor="black", linewidth=1.0, 
+            width=bar_width, dodge=True
         )
         
         # 2. Points Overlay
         if show_points:
-            dodge = True if hue else False
+            dodge = True if plot_hue_col else False
             sns.stripplot(
-                data=data_filtered, x=x_col, y=y_col, 
-                hue=hue, order=group_order_str,
+                data=data_filtered, x=plot_x_col, y=y_col, 
+                hue=plot_hue_col, order=plot_order, hue_order=hue_order,
                 dodge=dodge, jitter=True, size=5,
                 color="white", edgecolor="gray", linewidth=1, # White points with gray edge like reference
                 ax=ax, legend=False, alpha=0.9
@@ -519,7 +614,7 @@ def render_barplot_module(data):
         
         # --- Logic for Stats ---
         try:
-            if hue is None:
+            if not plot_hue_col:
                 # Simple comparisons between X groups
                 groups_data = [data_filtered[data_filtered[x_col]==g][y_col] for g in group_order_str]
                 if len(groups_data) >= 2:
@@ -540,21 +635,53 @@ def render_barplot_module(data):
                                         sig_pairs_found.append(((group_order_str[i], group_order_str[j]), p_val))
                     
                     if sig_pairs_found:
-                        annotator = Annotator(ax, [p[0] for p in sig_pairs_found], data=data_filtered, x=x_col, y=y_col, order=group_order_str)
+                        annotator = Annotator(ax, [p[0] for p in sig_pairs_found], data=data_filtered, x=plot_x_col, y=y_col, order=plot_order)
                         annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
                         annotator.set_pvalues([p[1] for p in sig_pairs_found])
                         annotator.annotate()
 
+            elif metric_as_x:
+                # Metric Mode: Compare Hue groups (Original Groups)
+                # Reformat pairs for statannotations with hue
+                # Compare all pairs in group_order
+                sig_pairs_found = []
+                groups_data = [data_filtered[data_filtered[x_col]==g][y_col] for g in group_order_str]
+                
+                # We need p-values for pairs
+                # Let's reuse simple logic, calculating p for pairs
+                import itertools
+                pairs = list(itertools.combinations(group_order_str, 2))
+                
+                hue_plot_pairs = []
+                p_values = []
+                
+                for g1, g2 in pairs:
+                    v1 = data_filtered[data_filtered[x_col]==g1][y_col]
+                    v2 = data_filtered[data_filtered[x_col]==g2][y_col]
+                    try:
+                        _, p = stats.mannwhitneyu(v1, v2)
+                        if p < 0.05 or show_ns:
+                            hue_plot_pairs.append(((metric_name, g1), (metric_name, g2)))
+                            p_values.append(p)
+                    except: pass
+
+                if hue_plot_pairs:
+                     annotator = Annotator(ax, hue_plot_pairs, data=data_filtered, x=plot_x_col, y=y_col, hue=plot_hue_col, 
+                                           order=plot_order, hue_order=hue_order)
+                     annotator.configure(test=None, text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
+                     annotator.set_pvalues(p_values)
+                     annotator.annotate()
+
             else:
-                # Hue Stats
+                # Hue Stats (Standard)
                 # Compare hues within each X group (Common requirement)
-                hue_order = sorted(data_filtered[hue].unique())
+                hue_order = sorted(data_filtered[hue_col].unique())
                 if len(hue_order) == 2:
                     pairs = []
                     for g in group_order_str:
                         pairs.append(((g, hue_order[0]), (g, hue_order[1])))
                     
-                    annotator = Annotator(ax, pairs, data=data_filtered, x=x_col, y=y_col, hue=hue, order=group_order_str, hue_order=hue_order)
+                    annotator = Annotator(ax, pairs, data=data_filtered, x=x_col, y=y_col, hue=hue_col, order=group_order_str, hue_order=hue_order)
                     annotator.configure(test='Mann-Whitney', text_format=text_format, loc='inside' if text_format=='star' else 'outside', verbose=False)
                     annotator.apply_test()
                     annotator.annotate()
@@ -565,18 +692,17 @@ def render_barplot_module(data):
         if custom_title:
              ax.set_title(custom_title, fontsize=12)
         
-        if italic_xaxis:
+        if italic_xaxis and not metric_as_x:
              ax.set_xticklabels(ax.get_xticklabels(), fontstyle='italic')
         
-        ax.set_xlabel(x_col)
+        ax.set_xlabel(x_col if not metric_as_x else "") # Hide X label if metric mode (tick is enough)
         ax.set_ylabel(y_col)
         sns.despine()
         
         # Adjust Legend
         # If hue is active, place legend outside or top
-        if hue or show_points:
-             if hue:
-                 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+        if plot_hue_col:
+             plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
         
         st.pyplot(fig)
         
