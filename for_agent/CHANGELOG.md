@@ -19,6 +19,15 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 - **Renaming**: "Difference Analysis" module formally renamed to "Boxplot" (`📊 箱线图`).
 - **Optimization**: Reverted git repository to Cloudflare-compatible state (remote Scipy) to ensure free hosting stability, while preserving offline capabilities via external script.
 
+## [2026-01-14 Evening] - Phase 5.3: Layout Perfection & Deployment
+### Added
+- **Manual Tuning Guide**: Created `CODE_STYLE_ADJUSTMENT.md` for users to fine-tune chart physics (padding, spacing).
+- **Offline Sync**: Auto-synced latest layout algorithms to the private server deployment package.
+
+### Changed
+- **Chart Alignment**: Refactored Single Metric Mode to use a "Conservative Alignment" strategy (Fixed physical width + Variable visual padding) to ensuring 100% alignment between Bar/Box and Stripplot.
+- **Visual Polish**: Increased separation between P-value brackets and data points to prevent overlapping.
+
 
 ## [2026-01-13] - Phase 5.1: Bar Chart Module & Palette Enhancement
 ### Added

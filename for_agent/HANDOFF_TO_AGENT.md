@@ -1,8 +1,8 @@
 # Engineering Handoff: 2026-01-13
 
-**Status**: Stable / Cloudflare Compatible (Offline Package Archived)
-**Last Feature**: Scientific Plotting Upgrade & Offline Mirroring
-**Repository**: `bio-tools` (Main branch reverted to lightweight state)
+**Status**: Live / Cloudflare & Offline Synchronized
+**Last Feature**: Layout Micro-Adjustment & Manual Guides
+**Repository**: `bio-tools` (v4.1.0)
 
 ## 1. Session Summary
 Completed major visual upgrades for publication-grade charts and solved critical deployment constraints.
@@ -11,7 +11,9 @@ Completed major visual upgrades for publication-grade charts and solved critical
     - Encountered Cloudflare 25MB limit with local Scipy wheel.
     - **Solution**: Reverted git to lightweight state (Scipy via CDN) for Cloudflare.
     - **Deliverable**: Generated `bio-tools-server-deploy.zip` (full offline bundle) for private server deployment.
-
+- **Refinement**:
+    - Solved "Single Metric Mode" misalignment via "Conservative Alignment" (Fixed Width + xlim padding).
+    - Produced `CODE_STYLE_ADJUSTMENT.md` for manual styling control.
 ## 2. Current Architecture
 - **Frontend**: Vite + HTML/JS.
 - **Tools**: Client-side Python (Pyodide/Stlite) via Hybrid Loading.
