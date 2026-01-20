@@ -50,3 +50,12 @@
     - **AI Integration**: Auto-generate "Figure Legends" using LLM based on plot metadata.
     - **Vector Export**: Support SVG/PDF download for high-quality publication figures.
 
+## Infrastructure & Deployment Strategy
+- **Global / VPN**: Use Cloudflare Pages + Official  (Current Default).
+- **China (Private Server)**: Use  (Offline Mode).
+- **China (Public)**: Not fully supported without VPN due to CDN blocks. Future: Consider dedicated AliCloud bucket for Pyodide mirroring if demand grows.
+
+## Infrastructure & Deployment Strategy
+- **Global / VPN**: Use Cloudflare Pages + Official `jsdelivr` (Current Default).
+- **China (Private Server)**: Use `bio-tools-server-deploy.zip` (Offline Mode).
+- **China (Public)**: Not fully supported without VPN due to CDN blocks. Future: Consider dedicated AliCloud bucket for Pyodide mirroring if demand grows.

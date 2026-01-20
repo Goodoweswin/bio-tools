@@ -19,6 +19,20 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 
 ### Changed
 - **UX**: Fixed `DuplicateWidgetID` errors and optimized layout for multi-metric views (auto-rotating X-labels).
+- **Homepage**: Updated news section with Chinese Medical Association report and Westlake conference.
+
+### Infrastructure & Deployment Fixes
+- **Stlite Loading Fix**:
+    - **Issue**: Tool stuck at "Installing packages" (Pyodide load failure).
+    - **Root Cause**: GFW/ISP blocking or throttling `jsdelivr` CDN in China.
+    - **Failed Attempts**: 
+        - Localizing Pyodide (Cloudflare Pages relative path issues).
+        - Switching to BootCDN/npmmirror (CORS/Path issues).
+    - **Final Resolution**: Reverted to official `jsdelivr` CDN (`f6d0a63`) to maintain code purity.
+    - **Best Practice**: Recommended **VPN** for China access, or fully offline deployment (available in server package) for private servers.
+- **Infrastructure Hardening**:
+    - **Offline Deployment Package**: Generated full offline archive `bio-tools-server-deploy.zip` (~300MB) containing all dependencies.
+    - **Dual-Mode Support**: Included `enable_offline_mode.py` for one-click conversion from Cloudflare mode to 100% offline mode on private servers.
 
 ## [2026-01-14] - Phase 5.2: Scientific Styling & Infrastructure Hardening
 ### Added
@@ -26,9 +40,6 @@ All notable changes to the **Bio-Tools** project will be documented in this file
     - **Single Metric Mode**: Optimized layout for single-variable data (metric as X-axis label, grouping by color).
     - **New Styling**: Added `🧬 科研柔和 (Sci)` palette, stripplot overlay, and auto-adjusted p-value formats.
     - **Manual Controls**: Added width sliders for both Barplot and Boxplot to fine-tune visual density.
-- **Infrastructure Hardening**:
-    - **Offline Deployment Package**: Generated full offline archive `bio-tools-server-deploy.zip` (~300MB) containing all dependencies.
-    - **Dual-Mode Support**: Included `enable_offline_mode.py` for one-click conversion from Cloudflare mode to 100% offline mode on private servers.
 
 ### Changed
 - **Renaming**: "Difference Analysis" module formally renamed to "Boxplot" (`📊 箱线图`).
