@@ -296,52 +296,55 @@ def render_difference_module(data):
     st.header("📊 箱线图 (Boxplot)")
     render_stat_guide() # Insert Guide Here
     
-    cols = data.columns.tolist()
-    c1, c2, c3 = st.columns(3)
-    x_col = c1.selectbox("分组列 (Group)", cols, index=0, key="diff_x")
-    y_col = c2.selectbox("数值列 (Value)", cols, index=min(1, len(cols)-1), key="diff_y")
-    hue_col = c3.selectbox("颜色分组 (Hue, 可选)", ["无"] + cols, index=0, key="diff_hue")
+    # --- Dashboard Layout ---
+    left_col, right_col = st.columns([1, 2], gap="large")
 
-    group_order = st.multiselect("分组顺序", sorted(data[x_col].unique()), default=sorted(data[x_col].unique()))
-    if not group_order: return
+    with left_col:
+        with st.container(border=True):
+            st.markdown("### 🔧 参数设置")
+            cols = data.columns.tolist()
+            
+            x_col = st.selectbox("分组列 (Group)", cols, index=0, key="diff_x")
+            y_col = st.selectbox("数值列 (Value)", cols, index=min(1, len(cols)-1), key="diff_y")
+            hue_col = st.selectbox("颜色分组 (Hue)", ["无"] + cols, index=0, key="diff_hue")
+            
+            group_order = st.multiselect("分组顺序", sorted(data[x_col].unique()), default=sorted(data[x_col].unique()))
+            
+            with st.expander("🎨 绘图选项", expanded=False):
+                metric_as_x = st.checkbox("将数值列名作为X轴", value=False, key="diff_metric_x")
+                palette_keys = list(PALETTES.keys())
+                default_idx = next((i for i, k in enumerate(palette_keys) if "🧬" in k), 0)
+                palette_name = st.selectbox("配色方案", palette_keys, index=default_idx, key="diff_palette")
+                
+                show_points = st.checkbox("显示散点", value=True, key="diff_points")
+                show_ns = st.checkbox("显示 'ns'", value=False, key="diff_show_ns")
+                p_val_fmt = st.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="diff_pfmt")
+                italic_xaxis = st.checkbox("斜体X轴", value=True, key="diff_italic")
+                
+                default_width = "0.4" if metric_as_x else "0.5"
+                bw_str = st.text_input("箱体宽度 (0.1-1.0)", default_width, key="diff_width")
+                try: box_width = float(bw_str)
+                except: box_width = float(default_width)
+                
+                if palette_name == CUSTOM_PALETTE_KEY:
+                    custom_colors = st.text_input("自定义颜色 (#RRGGBB, ...)", key="diff_custom_colors")
+                else:
+                    custom_colors = None
 
-    # User input for plot title
-    c_opt1, c_opt2, c_opt3 = st.columns([1, 1, 1])
-    # Advanced Layout Option
-    metric_as_x = c_opt1.checkbox("将数值列名作为X轴 (Single Metric)", value=False, key="diff_metric_x", help="开启后，X轴显示参数名，分组显示在图例中")
-    # Palette Selection
-    # Try to set default to Scientific if available
-    palette_keys = list(PALETTES.keys())
-    default_idx = next((i for i, k in enumerate(palette_keys) if "🧬" in k), 0)
-    palette_name = c_opt3.selectbox("配色方案", palette_keys, index=default_idx, key="diff_palette")
-    
-    # Advanced Styling
-    # Advanced Styling (Direct layout to fix Stlite issues)
-    st.markdown("#### 🎨 样式与标注设置")
-    c_s1, c_s2, c_s3, c_s4 = st.columns(4)
-    show_points = c_s1.checkbox("显示散点 (Points)", value=True, key="diff_points")
-    show_ns = c_s2.checkbox("显示 'ns'", value=False, key="diff_show_ns", help="勾选后将显示非显著差异 (p>0.05) 的标记")
-    p_val_fmt = c_s3.selectbox("P值格式", ["Star (*)", "Simple (p=0.05)"], index=1, key="diff_pfmt")
-    italic_xaxis = c_s4.checkbox("斜体X轴 (Italic)", value=True, key="diff_italic")
-    
-    # Width Input (Text fallback)
-    default_width = "0.4" if metric_as_x else "0.5"
-    bw_str = st.text_input("箱体宽度 (Width, 0.1-1.0)", default_width, key="diff_width")
-    try: box_width = float(bw_str)
-    except: box_width = float(default_width)
-    
-    # Custom color input (appears if user selects custom)
-    custom_colors = None
-    if palette_name == CUSTOM_PALETTE_KEY:
-        custom_colors = st.text_input("输入自定义颜色 (逗号分隔)", placeholder="#FF0000, #00FF00, #0000FF", key="diff_custom_colors")
+            custom_title = st.text_input("图表标题", placeholder="Optional Plot Title", key="diff_plot_title")
 
-    custom_title = st.text_input("图表标题 (Plot Title)", value="", placeholder="留空则无标题", key="diff_plot_title")
+            if st.button("🚀 更新图表", type="primary", use_container_width=True):
+                st.session_state['diff_active'] = True
 
-    if st.button("🚀 运行分析 (智能模式)", type="primary"):
-        st.session_state['diff_active'] = True
-        
-    if st.session_state.get('diff_active', False):
-        st.divider()
+    if not group_order: 
+        st.warning("请至少选择一个分组")
+        return
+
+    # --- Plotting Logic (Moved to Right Column) ---
+    with right_col:
+        if st.session_state.get('diff_active', False):
+            with st.container(border=True):
+                st.markdown("### 📈 分析结果")
         data_filtered = data[data[x_col].isin(group_order)].copy()
         
         # --- FIX: Type Consistency for Plotting & Stats ---
@@ -384,7 +387,7 @@ def render_difference_module(data):
             return
 
         # --- 1. Assumption Checks ---
-        st.subheader("🧐 统计策略检测 (Statistical Strategy)")
+        st.markdown("#### 🧐 统计策略检测")
         
         normality_passed = True
         dataset_too_small = False
@@ -411,7 +414,7 @@ def render_difference_module(data):
             equal_var = False # Conservative fallback
 
         # Display Report
-        with st.expander("📄 查看详细假设检验报告 (Assumption Check Report)", expanded=True):
+        with st.expander("📄 查看详细假设检验报告", expanded=False):
             c_r1, c_r2 = st.columns(2)
             with c_r1:
                 st.markdown("**1. 正态性检验 (Shapiro-Wilk)**")
