@@ -74,42 +74,118 @@ st.set_page_config(page_title="ElementPrism - Visual Workbench", layout="wide", 
 # --- ElementPrism Brand Theme (Emerald Green) ---
 st.markdown("""
 <style>
-    /* Primary Color Override */
+    /* --- Global Theme --- */
     :root {
-        --primary-color: #10b981;
+        --primary: #10b981;
+        --bg-dark: #0d1117;
+        --glass-bg: rgba(22, 27, 34, 0.7);
+        --glass-border: 1px solid rgba(48, 54, 61, 0.7);
+        --text-main: #e6edf3;
     }
-    .stButton>button {
-        border-color: #10b981;
-        color: #10b981;
+
+    /* Force Dark Background */
+    .stApp {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
     }
-    .stButton>button:hover {
-        border-color: #059669;
-        color: #059669;
-        background-color: rgba(16, 185, 129, 0.1);
+
+    /* --- Inputs & Widgets (Glassmorphism) --- */
+    /* Text Input, Selectbox, Number Input overlays */
+    .stTextInput > div > div, 
+    .stSelectbox > div > div, 
+    .stNumberInput > div > div,
+    .stMultiSelect > div > div {
+        background-color: rgba(13, 17, 23, 0.5) !important;
+        border: 1px solid rgba(16, 185, 129, 0.2) !important;
+        border-radius: 8px !important;
+        color: #fff !important;
     }
-    /* Primary buttons */
-    .stButton>button[kind="primary"] {
-        background-color: #10b981;
-        color: white;
-        border: none;
+    
+    /* Focus State */
+    .stTextInput > div > div:focus-within, 
+    .stSelectbox > div > div:focus-within {
+        border-color: #10b981 !important;
+        box_shadow: 0 0 0 1px #10b981 !important;
     }
-    .stButton>button[kind="primary"]:hover {
-        background-color: #059669;
+
+    /* Sliders */
+    .stSlider [data-baseweb="slider"] {
+        margin-top: 1rem;
     }
-    /* Headers */
-    h1, h2, h3 {
-        color: #e6edf3 !important; /* Force dark mode text */
+    
+    /* Buttons (Emerald Glow) */
+    .stButton > button {
+        background: rgba(16, 185, 129, 0.1) !important;
+        border: 1px solid rgba(16, 185, 129, 0.5) !important;
+        color: #10b981 !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease;
     }
+    .stButton > button:hover {
+        background: #10b981 !important;
+        color: #fff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    
+    /* Primary Action Buttons */
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+        color: white !important;
+        border: none !important;
+        font-weight: bold;
+    }
+
+    /* --- Containers & Expanders --- */
+    /* Make Expanders look like Cards */
+    .streamlit-expanderHeader {
+        background-color: rgba(22, 27, 34, 0.6) !important;
+        border: var(--glass-border) !important;
+        border-radius: 8px !important;
+        color: var(--text-main) !important;
+    }
+    .streamlit-expanderContent {
+        background-color: rgba(22, 27, 34, 0.3) !important;
+        border-left: 1px solid rgba(16, 185, 129, 0.2);
+        border-right: 1px solid rgba(16, 185, 129, 0.2);
+        border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        color: var(--text-main) !important;
+    }
+
     /* Sidebar */
     [data-testid="stSidebar"] {
         background-color: #161b22;
+        border-right: 1px solid rgba(48, 54, 61, 0.5);
     }
+    
+    /* Headings */
+    h1, h2, h3 {
+        color: #e6edf3 !important;
+        font-family: 'Segoe UI', Inter, sans-serif !important;
+    }
+    h2 {
+        border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Tables/Dataframes */
+    [data-testid="stDataFrame"] {
+        border: 1px solid rgba(48, 54, 61, 0.5);
+        border-radius: 8px;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
 # --- ElementPrism Header ---
-st.title("ElementPrism :rainbow[Workbench]")
-st.caption("One-Click Publication-Ready Figures for Biologists")
+# Using columns to create a balanced header
+h_c1, h_c2 = st.columns([3, 1])
+with h_c1:
+    st.title("ElementPrism :rainbow[Workbench]")
+    st.caption("One-Click Publication-Ready Figures for Biologists")
 
 
 # --- Session State for Report ---
