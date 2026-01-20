@@ -1544,9 +1544,35 @@ elif mode == "📝 导出报告":
     
 else:
     uploaded_file = st.sidebar.file_uploader("📂 上传 Excel/CSV 数据", type=['xlsx', 'csv'])
+    
+    # --- Demo Data Logic ---
+    if st.sidebar.button("🎲 加载演示数据 (Load Demo)", use_container_width=True):
+        st.session_state['use_demo'] = True
+        
+    data = None
+    if st.session_state.get('use_demo', False) and not uploaded_file:
+        # Generate Demo Data
+        import numpy as np
+        np.random.seed(42)
+        n = 150
+        data = pd.DataFrame({
+            "Group": np.random.choice(["Control", "Treatment_Low", "Treatment_High"], n),
+            "Expression_Level": np.concatenate([
+                np.random.normal(10, 2, 50),
+                np.random.normal(12, 2.5, 50),
+                np.random.normal(15, 3, 50)
+            ]),
+            "Cell_Count": np.random.poisson(100, n),
+            "Viability": np.random.uniform(0.5, 1.0, n),
+            "Timepoint": np.random.choice(["0h", "24h", "48h"], n)
+        })
+        st.sidebar.success("✅ 演示数据已加载")
+        
     if uploaded_file:
+        st.session_state['use_demo'] = False # Reset demo if file uploaded
         data = load_data(uploaded_file)
-        if data is not None:
+        
+    if data is not None:
             # Use the top-level 'mode' variable directly to cleaner logic
             if "描述" in mode: render_desc_stats(data)
             elif "箱线图" in mode: render_difference_module(data)
@@ -1577,4 +1603,4 @@ else:
                     st.pyplot(fig)
                     get_download_buttons(fig, "Corr", "corr", report_title=f"Correlation {x} vs {y}")
     else:
-        st.info("👈 请先上传数据")
+        st.info("👈 请在左侧上传数据，或点击 **[加载演示数据]** 体验功能。")
