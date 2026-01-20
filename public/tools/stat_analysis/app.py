@@ -69,7 +69,48 @@ except ImportError:
             sns.set_style("ticks")
             sns.set_context("paper")
 
-st.set_page_config(page_title="Bio-Analysis Suite v4.0", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="ElementPrism - Visual Workbench", layout="wide", initial_sidebar_state="expanded")
+
+# --- ElementPrism Brand Theme (Emerald Green) ---
+st.markdown("""
+<style>
+    /* Primary Color Override */
+    :root {
+        --primary-color: #10b981;
+    }
+    .stButton>button {
+        border-color: #10b981;
+        color: #10b981;
+    }
+    .stButton>button:hover {
+        border-color: #059669;
+        color: #059669;
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+    /* Primary buttons */
+    .stButton>button[kind="primary"] {
+        background-color: #10b981;
+        color: white;
+        border: none;
+    }
+    .stButton>button[kind="primary"]:hover {
+        background-color: #059669;
+    }
+    /* Headers */
+    h1, h2, h3 {
+        color: #e6edf3 !important; /* Force dark mode text */
+    }
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #161b22;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# --- ElementPrism Header ---
+st.title("ElementPrism :rainbow[Workbench]")
+st.caption("One-Click Publication-Ready Figures for Biologists")
+
 
 # --- Session State for Report ---
 if 'report_items' not in st.session_state:
@@ -142,7 +183,7 @@ def get_download_buttons(fig, prefix, key_suffix, df_stats=None, report_title=No
 
 # --- Educational Modules ---
 def render_stat_guide():
-    with st.expander("📚 统计学小课堂：我该选什么检验？(Statistical Guide)", expanded=False):
+    with st.expander("📚 ElementPrism导览：我该选什么检验？(Statistical Guide)", expanded=False):
         st.markdown("""
         ### Q1: 我有几组数据？
         
@@ -1416,8 +1457,8 @@ mode = st.sidebar.radio("功能模块", [
 ])
 
 if mode == "🏠 首页 & 指南":
-    st.title("🧬 Bio-Analysis Suite v4.0")
-    st.markdown("欢迎使用生物分析套件。请在左侧上传数据并选择模块。")
+    st.title("💎 ElementPrism Workbench")
+    st.markdown("欢迎使用 ElementPrism 生物数据可视化分析套件。请在左侧上传数据并选择模块。")
     render_data_guide()
     
 elif mode == "📝 导出报告":
