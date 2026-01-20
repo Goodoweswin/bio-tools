@@ -83,55 +83,21 @@ if uploaded_file and df is not None:
     # Avoid log(0) by adding a tiny epsilon if p=0
     df['neg_log10_p'] = -np.log10(df[pval_col] + 1e-300)
 
-    # Split output into tabs
-    tab1, tab2, tab3 = st.tabs(["📈 Interactive Plot", "📄 Publication Plot", "💾 Data Table"])
+    # Split output into tabs (Static First for Stability)
+    tab1, tab2, tab3 = st.tabs(["📈 Static Plot (Nature Style)", "🔍 Interactive Plot", "💾 Data Table"])
 
-    # --- Tab 1: Interactive Plotly ---
+    # --- Tab 1: Matplotlib (Publication) - DEFAULT ---
     with tab1:
-        st.subheader("Interactive Exploration")
-        
-        # Map colors
-        color_map = {'Up': color_up, 'Down': color_down, 'NS': color_ns}
-        
-        fig = px.scatter(
-            df, 
-            x=log2fc_col, 
-            y='neg_log10_p',
-            color='Regulation',
-            color_discrete_map=color_map,
-            hover_name=gene_col,
-            hover_data=[log2fc_col, pval_col],
-            title=f"Volcano Plot (n={len(df)})",
-            template="simple_white"
-        )
-        
-        # Add threshold lines
-        fig.add_vline(x=log2fc_thresh, line_width=1, line_dash="dash", line_color="black")
-        fig.add_vline(x=-log2fc_thresh, line_width=1, line_dash="dash", line_color="black")
-        fig.add_hline(y=-np.log10(pval_thresh), line_width=1, line_dash="dash", line_color="black")
-
-        fig.update_traces(marker=dict(size=point_size, opacity=0.8))
-        fig.update_layout(
-            xaxis_title="Log2 Fold Change",
-            yaxis_title="-Log10(P-value)",
-            legend_title_text="Regulation",
-            width=800,
-            height=600
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
-
-    # --- Tab 2: Matplotlib (Publication) ---
-    with tab2:
         st.subheader("Static Plot (Nature Style)")
         nature_style.apply_nature_style()
         
-        plt_fig, ax = plt.subplots(figsize=(5, 4))
+        plt_fig, ax = plt.subplots(figsize=(6, 5))
         
         # Plot each group manually to ensure order and color
         for group, color in [('NS', color_ns), ('Up', color_up), ('Down', color_down)]:
             subset = df[df['Regulation'] == group]
-            ax.scatter(subset[log2fc_col], subset['neg_log10_p'], c=color, s=point_size*2, alpha=0.8, label=group, edgecolors='none')
+            # Use rasterized=True for large datasets to reduce PDF size and rendering lag
+            ax.scatter(subset[log2fc_col], subset['neg_log10_p'], c=color, s=point_size*2, alpha=0.8, label=group, edgecolors='none', rasterized=True)
             
         # Lines
         ax.axvline(x=log2fc_thresh, color='black', linestyle='--', linewidth=0.8, alpha=0.5)
@@ -154,6 +120,44 @@ if uploaded_file and df is not None:
             file_name="volcano_plot.pdf",
             mime="application/pdf"
         )
+
+    # --- Tab 2: Interactive Plotly (Optional) ---
+    with tab2:
+        st.subheader("Interactive Exploration")
+        try:
+            # Map colors
+            color_map = {'Up': color_up, 'Down': color_down, 'NS': color_ns}
+            
+            fig = px.scatter(
+                df, 
+                x=log2fc_col, 
+                y='neg_log10_p',
+                color='Regulation',
+                color_discrete_map=color_map,
+                hover_name=gene_col,
+                hover_data=[log2fc_col, pval_col],
+                title=f"Volcano Plot (n={len(df)})",
+                template="simple_white"
+            )
+            
+            # Add threshold lines
+            fig.add_vline(x=log2fc_thresh, line_width=1, line_dash="dash", line_color="black")
+            fig.add_vline(x=-log2fc_thresh, line_width=1, line_dash="dash", line_color="black")
+            fig.add_hline(y=-np.log10(pval_thresh), line_width=1, line_dash="dash", line_color="black")
+
+            fig.update_traces(marker=dict(size=point_size, opacity=0.8))
+            fig.update_layout(
+                xaxis_title="Log2 Fold Change",
+                yaxis_title="-Log10(P-value)",
+                legend_title_text="Regulation",
+                width=800,
+                height=600
+            )
+            
+            st.plotly_chart(fig, use_container_width=True)
+        except Exception as e:
+            st.warning("Interactive plot failed to load (likely network issue loading Plotly). Please use the Static Plot.")
+            st.error(e)
 
     # --- Tab 3: Data Table ---
     with tab3:
