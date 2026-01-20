@@ -1,32 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Weight Analysis Tool (Stlite)</title>
-  <!-- 引用本地 Stlite 样式 -->
+  <title>ElementPrism | Bio-Tools</title>
+  <!-- Stlite Styles -->
   <link rel="stylesheet" href="../assets/stlite/stlite.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-    /* 简单的 Loading 动画 */
-    #loading {
+    /* Tool-Specific Emerald Theme */
+    :root {
+      --ep-primary: #10b981;
+      --ep-secondary: #059669;
+      --ep-bg: #0d1117;
+      --ep-text: #e6edf3;
+      --ep-text-dim: #8b949e;
+      --ep-glass: rgba(13, 17, 23, 0.7);
+      --ep-glass-border: rgba(16, 185, 129, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--ep-bg);
+      color: var(--ep-text);
+      overflow-x: hidden;
+      /* Prevent scrollbar flash during anims */
+    }
+
+    /* Canvas Background */
+    #grid-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Landing Overlay */
+    #landing-page {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    }
+
+    /* Navigation */
+    .nav {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--ep-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-card {
+      background: rgba(13, 17, 23, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--ep-glass-border);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--ep-text-dim);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--ep-primary) 0%, var(--ep-secondary) 100%);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5);
+    }
+
+    /* Features Grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+      width: 100%;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--ep-text);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .feature-item i {
+      color: var(--ep-primary);
+    }
+
+    /* Usage Stats */
+    .stats {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--ep-glass-border);
+      color: var(--ep-text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--ep-text-dim);
+      font-size: 0.9rem;
+      z-index: 10;
+    }
+
+    /* App Container (Hidden Initially) */
+    #app-container {
+      position: absolute;
+      /* or fixed */
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 100vh;
+      z-index: 20;
+      background: var(--ep-bg);
+      display: none;
+      /* Shown via JS */
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    #root {
+      height: 100%;
+    }
+
+    /* Loading Spinner for Stlite */
+    #loading-overlay {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: sans-serif;
-      text-align: center;
+      z-index: 30;
+      display: none;
     }
 
     .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #3498db;
+      border: 4px solid rgba(16, 185, 129, 0.1);
+      border-top: 4px solid var(--ep-primary);
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       animation: spin 1s linear infinite;
-      margin: 0 auto 10px;
     }
 
     @keyframes spin {
@@ -38,60 +238,229 @@
         transform: rotate(360deg);
       }
     }
+
+    /* Return Home Button within App */
+    #back-home {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10000;
+      /* Above Streamlit */
+      background: rgba(13, 17, 23, 0.8);
+      border: 1px solid var(--ep-glass-border);
+      color: var(--ep-text-dim);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      backdrop-filter: blur(4px);
+    }
+
+    #back-home:hover {
+      color: var(--ep-primary);
+      border-color: var(--ep-primary);
+    }
   </style>
 </head>
 
 <body>
-  <div id="loading">
-    <div class="spinner"></div>
-    <div id="status">正在加载组件...</div>
+
+  <canvas id="grid-canvas"></canvas>
+
+  <!-- Landing Page UI -->
+  <div id="landing-page">
+    <nav class="nav">
+      <a href="/" class="logo"><i class="fas fa-cube"></i> ElementPrism</a>
+      <a href="/" style="color: var(--ep-text-dim); text-decoration: none;"><i class="fas fa-arrow-left"></i> Back to
+        Bio-Tools</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>ElementPrism</h1>
+        <p>The ultimate statistical workbench for wet-lab biologists.<br>Generate publication-ready figures in one
+          click.</p>
+
+        <button class="cta-btn" onclick="launchApp()">
+          <i class="fas fa-rocket"></i> Launch Workbench
+        </button>
+
+        <div class="features">
+          <div class="feature-item"><i class="fas fa-chart-line"></i> Survival Analysis</div>
+          <div class="feature-item"><i class="fas fa-th"></i> Heatmap & PCA</div>
+          <div class="feature-item"><i class="fas fa-not-equal"></i> Difference Tests</div>
+          <div class="feature-item"><i class="fas fa-file-pdf"></i> Vector Export</div>
+        </div>
+
+        <div class="stats">
+          <i class="fas fa-users"></i> Trusted by <strong>500+</strong> Researchers | <i class="fas fa-bolt"></i>
+          Powered by WebAssembly
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 Bio-Tools Platform. All rights reserved.
+    </footer>
   </div>
 
-  <div id="root"></div>
+  <!-- App Container -->
+  <div id="app-container">
+    <button id="back-home" onclick="closeApp()"><i class="fas fa-times"></i> Exit Tool</button>
+    <div id="loading-overlay">
+      <div class="spinner"></div>
+      <div style="color: var(--ep-primary); margin-top: 10px;">Loading Model...</div>
+    </div>
+    <div id="root"></div>
+  </div>
 
-  <!-- 引用本地 Stlite 核心 JS -->
-  <script src="../assets/stlite/stlite.js"></script>
-
+  <!-- Canvas Animation Script -->
   <script>
-    const statusDiv = document.getElementById('status');
-    const debugMode = true; // 开启调试日志
+    const canvas = document.getElementById('grid-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
 
-    function log(msg) {
-      if (debugMode) console.log("[App Loader]", msg);
-      statusDiv.innerText = msg;
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+        this.opacity = Math.random() * 0.5 + 0.3;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(16, 185, 129, ${this.opacity})`;
+        ctx.fill();
+      }
     }
 
-    async function loadApp() {
-      try {
-        log("正在下载 Python 脚本...");
+    function initParticles() {
+      particles = [];
+      const count = Math.min(50, Math.floor(width * height / 15000));
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+    initParticles();
+    window.addEventListener('resize', initParticles);
 
-        // 1. 获取主程序代码
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Grid
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.05)';
+      ctx.lineWidth = 1;
+      const gridSize = 50;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+      }
+
+      // Particles
+      particles.forEach(p => { p.update(); p.draw(); });
+
+      // Connections
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.1)';
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 150) {
+            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // Respect reduced motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      animate();
+    } else {
+      // Draw static grid once
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.05)';
+      const gridSize = 50;
+      for (let x = 0; x < width; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke(); }
+      for (let y = 0; y < height; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke(); }
+    }
+  </script>
+
+  <!-- Stlite Loader Script -->
+  <script src="../assets/stlite/stlite.js"></script>
+  <script>
+    let appLoaded = false;
+
+    function launchApp() {
+      // Transition UI
+      const landing = document.getElementById('landing-page');
+      const app = document.getElementById('app-container');
+      const loader = document.getElementById('loading-overlay');
+      const backBtn = document.getElementById('back-home');
+
+      landing.style.opacity = '0';
+      setTimeout(() => {
+        landing.style.display = 'none';
+        app.style.display = 'block';
+        // Trigger reflow/animation
+        setTimeout(() => app.style.opacity = '1', 10);
+
+        if (!appLoaded) {
+          loader.style.display = 'block';
+          loadStliteApp().then(() => {
+            loader.style.display = 'none';
+            backBtn.style.display = 'block';
+            appLoaded = true;
+          });
+        } else {
+          backBtn.style.display = 'block';
+        }
+      }, 500);
+    }
+
+    function closeApp() {
+      const landing = document.getElementById('landing-page');
+      const app = document.getElementById('app-container');
+
+      app.style.opacity = '0';
+      setTimeout(() => {
+        app.style.display = 'none';
+        landing.style.display = 'flex';
+        setTimeout(() => landing.style.opacity = '1', 10);
+      }, 500);
+    }
+
+    async function loadStliteApp() {
+      try {
+        // Fetch code
         const appResp = await fetch('./app.py?v=' + Date.now());
-        if (!appResp.ok) throw new Error(`无法加载 app.py: ${appResp.statusText}`);
+        if (!appResp.ok) throw new Error('Failed to load app.py');
         const appCode = await appResp.text();
 
-        // 2. 获取共享样式代码 (Nature Style)
-        // 注意：路径是相对于当前 HTML 文件的
         const styleResp = await fetch('../common/nature_style.py?v=' + Date.now());
-        let styleCode = "";
-        if (styleResp.ok) {
-          styleCode = await styleResp.text();
-        } else {
-          console.warn("无法加载 nature_style.py，将使用默认样式");
-          styleCode = "# nature_style.py failing fallback\ndef set_nature_style(): pass";
-        }
+        let styleCode = styleResp.ok ? await styleResp.text() : "def set_nature_style(): pass";
 
-        log("正在启动 Python 环境...");
-
-        // 3. 挂载 Stlite
-        stlite.mount({
+        // Mount Stlite
+        return stlite.mount({
           requirements: [
-            "pandas",
-            "matplotlib",
-            "scipy",
-            "statsmodels",
-            "scikit-learn",
-            "lxml",
+            "pandas", "matplotlib", "scipy", "statsmodels", "scikit-learn", "lxml",
             "/tools/assets/pypi/interface_meta-1.3.0-py3-none-any.whl",
             "/tools/assets/pypi/formulaic-0.2.4-py3-none-any.whl",
             "/tools/assets/pypi/autograd_gamma-0.4.2-py3-none-any.whl",
@@ -108,21 +477,14 @@
             "app.py": appCode,
             "nature_style.py": styleCode
           },
-          // 配置 Pyodide 路径 (切换到 CDN 以解决 Cloudflare 25MB 文件限制)
-          // 此时 Stlite 会自动从官方 CDN 加载 pandas, scipy 等基础库
           pyodideUrl: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"
         }, document.getElementById("root"));
 
-        // 移除 loading 界面
-        document.getElementById("loading").style.display = 'none';
-
       } catch (err) {
         console.error(err);
-        statusDiv.innerHTML = `<span style="color:red">启动失败: ${err.message}</span>`;
+        alert("Failed to load application: " + err.message);
       }
     }
-
-    loadApp();
   </script>
 </body>
 
