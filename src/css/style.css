@@ -1,15 +1,24 @@
 :root {
-    --primary-color: #0072B2;
-    --secondary-color: #005b8e;
-    --accent-color: #FF7F50;
-    --text-color: #333333;
-    --bg-color: #ffffff;
-    --light-bg: #f4f7f6;
-    --border-color: #e0e0e0;
+    /* Dark Theme - Neon Blue & Purple */
+    --primary-color: #58a6ff;
+    --secondary-color: #a371f7;
+    --accent-color: #39d353;
+    --text-color: #e6edf3;
+    --text-secondary: #8b949e;
+    --bg-color: #0d1117;
+    --bg-secondary: #161b22;
+    --surface-bg: rgba(22, 27, 34, 0.7);
+    --border-color: rgba(240, 246, 252, 0.1);
+    --glow-blue: rgba(88, 166, 255, 0.3);
+    --glow-purple: rgba(163, 113, 247, 0.3);
     --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: var(--font-main);
@@ -30,12 +39,14 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    flex-wrap: wrap;  /* 允许换行 */
+    flex-wrap: wrap;
+    /* 允许换行 */
 }
 
 /* 改进：Logo 在移动端适当缩小 */
 .logo {
-    font-size: clamp(1.2rem, 4vw, 1.5rem);  /* 自动缩放 */
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    /* 自动缩放 */
     font-weight: bold;
     color: var(--primary-color);
     text-decoration: none;
@@ -44,8 +55,10 @@ nav {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: clamp(1rem, 3vw, 2rem);  /* 间距随屏幕变化 */
-    flex-wrap: wrap;  /* 小屏自动换行 */
+    gap: clamp(1rem, 3vw, 2rem);
+    /* 间距随屏幕变化 */
+    flex-wrap: wrap;
+    /* 小屏自动换行 */
 }
 
 /* 改进：增大触摸目标 */
@@ -54,49 +67,83 @@ nav {
     color: var(--text-color);
     font-weight: 500;
     transition: color 0.3s;
-    padding: 8px 12px;  /* 增大点击区域 */
+    padding: 8px 12px;
+    /* 增大点击区域 */
     border-radius: 4px;
 }
 
 /* Hero 区域 - 改进：头像尺寸响应式 */
 .hero {
-    padding: clamp(2rem, 5vh, 4rem) 0;  /* 动态间距 */
-    background-color: var(--light-bg);
+    padding: clamp(2rem, 5vh, 4rem) 0;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a1f2e 100%);
+    position: relative;
     display: flex;
     align-items: center;
     gap: clamp(1rem, 3vw, 2rem);
 }
 
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+
 .hero h1 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);  /* 核心改进：自动缩放 */
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    /* 核心改进：自动缩放 */
     margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
 .hero p {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);  /* 改进：自动缩放 */
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    /* 改进：自动缩放 */
     margin-bottom: 2rem;
     max-width: 600px;
 }
 
-/* 改进：头像容器弹性缩放 */
+/* Profile moved to corner - smaller */
 .hero-image {
-    flex: 0 0 clamp(150px, 30vw, 300px);  /* 手机小，电脑大 */
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    flex: none;
 }
 
-/* 改进：头像本身相对尺寸 */
+/* Profile photo - smaller with subtle glow */
 .profile-placeholder {
-    width: 100%;  /* 占满容器 */
-    aspect-ratio: 1;  /* 保持正方形 */
-    max-width: 250px;  /* 最大限制 */
-    background-color: #ddd;
+    width: 80px;
+    height: 80px;
+    background-color: var(--bg-secondary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 5px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 20px var(--glow-blue);
     color: #666;
     overflow: hidden;
+    animation: pulse-glow 3s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px var(--glow-blue);
+    }
+
+    50% {
+        box-shadow: 0 0 30px var(--glow-blue), 0 0 10px var(--glow-purple);
+    }
 }
 
 .profile-photo {
@@ -105,23 +152,50 @@ nav {
     object-fit: cover;
 }
 
-/* 改进：按钮增大触摸区域 */
+/* Gradient buttons with glow */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    min-height: 44px;  /* 触摸目标 ≥44px */
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 44px;
     min-width: 120px;
     text-align: center;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--glow-blue), 0 0 15px var(--glow-purple);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--surface-bg);
+    box-shadow: 0 0 20px var(--glow-blue);
 }
 
 /* 内容区域 - 未改动 */
-section { padding: 4rem 0; }
-h2 { font-size: 2rem; margin-bottom: 2rem; color: var(--text-color); border-bottom: 3px solid var(--accent-color); display: inline-block; }
+section {
+    padding: 4rem 0;
+    background-color: var(--bg-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    border-bottom: 3px solid var(--accent-color);
+    display: inline-block;
+}
 
 .grid {
     display: grid;
@@ -129,18 +203,78 @@ h2 { font-size: 2rem; margin-bottom: 2rem; color: var(--text-color); border-bott
     gap: 2rem;
 }
 
-.card { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; transition: transform 0.3s, box-shadow 0.3s; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.card h3 { color: var(--primary-color); margin-bottom: 1rem; }
+.card {
+    background: var(--surface-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
 
-.tag { display: inline-block; background-color: var(--light-bg); color: var(--primary-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; margin-right: 0.5rem; margin-top: 0.5rem; }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px var(--glow-blue);
+    border-color: rgba(88, 166, 255, 0.4);
+}
 
-.news-list { list-style: none; }
-.news-item { display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
-.news-date { font-weight: bold; color: var(--accent-color); min-width: 100px; }
+.card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
 
-footer { background-color: var(--text-color); color: white; padding: 2rem 0; text-align: center; margin-top: auto; }
-footer a { color: white; margin: 0 10px; }
+.tag {
+    display: inline-block;
+    background-color: var(--surface-bg);
+    color: var(--primary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.news-list {
+    list-style: none;
+}
+
+.news-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.news-content {
+    color: var(--text-secondary);
+}
+
+.news-date {
+    font-weight: bold;
+    color: var(--accent-color);
+    min-width: 100px;
+}
+
+footer {
+    background-color: var(--bg-secondary);
+    color: var(--text-color);
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+}
+
+footer a {
+    color: var(--primary-color);
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--glow-blue);
+}
 
 /* === Featured Articles Carousel === */
 .carousel-section {
@@ -175,17 +309,21 @@ footer a { color: white; margin: 0 10px; }
 .carousel-card {
     flex: 0 0 280px;
     scroll-snap-align: start;
-    background: white;
+    background: var(--surface-bg);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 15px var(--glow-blue);
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
     text-decoration: none;
     color: inherit;
+    border: 1px solid var(--border-color);
 }
 
 .carousel-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 0 35px var(--glow-blue), 0 0 15px var(--glow-purple);
+    border-color: var(--primary-color);
 }
 
 .carousel-card img {
@@ -242,18 +380,20 @@ footer a { color: white; margin: 0 10px; }
 /* 平板（768-1023px） */
 @media (max-width: 1023px) {
     section {
-        padding: 3rem 0;  /* 减少间距 */
+        padding: 3rem 0;
+        /* 减少间距 */
     }
 }
 
 /* 手机（<768px） */
 @media (max-width: 768px) {
     .hero {
-        flex-direction: column-reverse;  /* 头像在上 */
+        flex-direction: column-reverse;
+        /* 头像在上 */
         text-align: center;
         gap: 2rem;
     }
-    
+
     /* 改进：导航栏变垂直 */
     .nav-links {
         width: 100%;
@@ -261,10 +401,11 @@ footer a { color: white; margin: 0 10px; }
         margin-top: 1rem;
         gap: 0.5rem;
     }
-    
+
     /* 改进：论文列表改成单列 */
     .news-item {
-        flex-direction: column;  /* 日期在上，内容在下 */
+        flex-direction: column;
+        /* 日期在上，内容在下 */
         gap: 0.5rem;
     }
 }
@@ -272,25 +413,29 @@ footer a { color: white; margin: 0 10px; }
 /* 小手机（<480px）- 新增断点 */
 @media (max-width: 480px) {
     body {
-        font-size: 16px;  /* 防止字体过小 */
+        font-size: 16px;
+        /* 防止字体过小 */
     }
-    
+
     .container {
-        padding: 0 15px;  /* 减少边距 */
+        padding: 0 15px;
+        /* 减少边距 */
     }
-    
+
     .hero {
         padding: 2rem 0;
     }
-    
+
     /* 改进：按钮垂直堆叠 */
     .btn-outline {
-        margin: 1rem 0 0 0;  /* 手机：取消左间距，改为上下 */
+        margin: 1rem 0 0 0;
+        /* 手机：取消左间距，改为上下 */
         display: block;
         width: 100%;
     }
-    
+
     .grid {
-        gap: 1.5rem;  /* 减少间距 */
+        gap: 1.5rem;
+        /* 减少间距 */
     }
 }
