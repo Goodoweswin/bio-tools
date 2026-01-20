@@ -4,9 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools | PhD Candidate</title>
+    <title>BioTools | AI for Medicine</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .tool-preview {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 8px 8px 0 0;
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tool-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .category-header i {
+            color: var(--accent-color);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.3rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .tool-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .tool-tag.primary {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
 </head>
 
 <body>
@@ -15,31 +89,113 @@
 
     <section>
         <div class="container">
-            <h1>Bioinformatics Tools</h1>
-            <p>Software and tools I have developed.</p>
+            <h1>🧬 Bioinformatics Tools</h1>
+            <p>Browser-based tools powered by WebAssembly. No installation, no login required.</p>
 
-            <div
-                style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                <div class="card">
-                    <h3><i class="fas fa-chart-bar"></i> Statistical Analysis Workbench</h3>
-                    <p><strong>v4.0 Updated</strong>: Comprehensive suite including Survival Analysis (KM), Heatmap
-                        Clustering, PCA (3D), and Difference Tests.</p>
-                    <div style="margin-top: 1rem;">
-                        <a href="/tools/stat_analysis/index.html" class="btn">Launch
-                            Suite v4.0 <i class="fas fa-external-link-alt"></i></a>
-                    </div>
+            <!-- Statistical Analysis Category -->
+            <div class="tool-category">
+                <div class="category-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h2 style="border: none; margin: 0; display: inline;">Statistical Analysis</h2>
                 </div>
 
-                <div class="card">
-                    <h3><i class="fas fa-volcano"></i> DEG Analysis (Volcano Plot)</h3>
-                    <p>Interactive tool for visualizing Differential Expression Genes (DEGs) with real-time
-                        thresholding.</p>
-                    <div style="margin-top: 1rem;">
-                        <a href="/tools/deg/index.html" class="btn">Launch
-                            Volcano Tool <i class="fas fa-external-link-alt"></i></a>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <!-- Tool 1: Statistical Workbench -->
+                    <div class="card">
+                        <div class="tool-preview">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+
+                        <div class="tool-tags">
+                            <span class="tool-tag primary">Free</span>
+                            <span class="tool-tag">No Login</span>
+                            <span class="tool-tag">WASM</span>
+                            <span class="tool-tag">v4.0</span>
+                        </div>
+
+                        <h3><i class="fas fa-chart-bar"></i> Statistical Analysis Workbench</h3>
+                        <p>Comprehensive suite for medical statistics and biomarker analysis. Run complex analyses
+                            directly in your browser.</p>
+
+                        <ul class="feature-list">
+                            <li>Survival Analysis (Kaplan-Meier curves)</li>
+                            <li>Heatmap Clustering & PCA (3D interactive)</li>
+                            <li>Difference Tests (Mann-Whitney, Kruskal-Wallis)</li>
+                            <li>Publication-ready figures (PDF export)</li>
+                        </ul>
+
+                        <div style="margin-top: 1rem;">
+                            <a href="/tools/stat_analysis/index.html" class="btn">Launch Tool <i
+                                    class="fas fa-external-link-alt"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Genomics Category -->
+            <div class="tool-category">
+                <div class="category-header">
+                    <i class="fas fa-dna"></i>
+                    <h2 style="border: none; margin: 0; display: inline;">Genomics & Expression</h2>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <!-- Tool 2: Volcano Plot -->
+                    <div class="card">
+                        <div class="tool-preview">
+                            <i class="fas fa-volcano"></i>
+                        </div>
+
+                        <div class="tool-tags">
+                            <span class="tool-tag primary">Free</span>
+                            <span class="tool-tag">No Login</span>
+                            <span class="tool-tag">WASM</span>
+                            <span class="tool-tag">New</span>
+                        </div>
+
+                        <h3><i class="fas fa-volcano"></i> DEG Analysis (Volcano Plot)</h3>
+                        <p>Visualize differential gene expression with interactive thresholds and Nature-style static
+                            plots.</p>
+
+                        <ul class="feature-list">
+                            <li>Real-time Log2FC & P-value filtering</li>
+                            <li>Demo mode with synthetic data</li>
+                            <li>High-resolution PDF export (300 DPI)</li>
+                            <li>CSV/Excel file support</li>
+                        </ul>
+
+                        <div style="margin-top: 1rem;">
+                            <a href="/tools/deg/index.html" class="btn">Launch Tool <i
+                                    class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Coming Soon Placeholder -->
+                    <div class="card" style="opacity: 0.6;">
+                        <div class="tool-preview" style="background: var(--bg-secondary);">
+                            <i class="fas fa-flask"></i>
+                        </div>
+
+                        <div class="tool-tags">
+                            <span class="tool-tag">Coming Soon</span>
+                        </div>
+
+                        <h3><i class="fas fa-project-diagram"></i> Pathway Enrichment</h3>
+                        <p>GO/KEGG enrichment analysis with bubble plots and network visualization.</p>
+
+                        <ul class="feature-list">
+                            <li>Multiple database support</li>
+                            <li>Interactive pathway networks</li>
+                            <li>Export publication figures</li>
+                        </ul>
+
+                        <div style="margin-top: 1rem;">
+                            <button class="btn btn-outline" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
