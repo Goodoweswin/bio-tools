@@ -30,6 +30,9 @@
     - **AI Gateway**: Integrated Cloudflare AI Gateway for unified logging, caching, and rate limiting across all providers.
     - **Documentation**: Created `AI_CONFIG.md` to guide model switching and configuration.
     - **Identity**: Updated System Prompt to give the AI a clear persona as the "Bio-Tools Research Assistant".
+    - **Scientific Visualization (Bar Chart V2.0)**:
+        - Achieved "CNS-standard" plotting: **Wide Mode** (Multi-metric), **Group Shapes** (Accessibility), and **Rigorous Stats** (Kruskal-Wallis + Dunn).
+        - **Transparency**: Implemented "White-box" statistical reporting.
 
 ## Next Steps
 1. **RAG Implementation (Priority)**:
@@ -42,4 +45,8 @@
     - [Done] Basic Stlite/WASM pipeline established (Weight Analysis).
     - [todo] Develop "DEG Analysis" (Volcano Plot) using the same Stlite architecture.
 5. **Mobile Optimization**: Fine-tune CSS Grid/Flexbox for smaller screens.
+6. **Advanced Features (Roadmap)**:
+    - **Refactoring**: Split `app.py` into modular components (`modules/`, `utils/`) for maintainability.
+    - **AI Integration**: Auto-generate "Figure Legends" using LLM based on plot metadata.
+    - **Vector Export**: Support SVG/PDF download for high-quality publication figures.
 

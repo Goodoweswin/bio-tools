@@ -5,6 +5,21 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 ## [Unreleased]
 - **Planned**: Interactive Volcano Plot tool (`tools/deg.html`).
 - **Planned**: Publications page population.
+
+## [2026-01-20] - Phase 5.4: Bar Chart V2.0 & High-Impact Styling
+### Added
+- **Statistical Powerhouse**:
+    - **Wide Mode**: Native support for multi-metric analysis (e.g., Weight + Glucose side-by-side).
+    - **Rigorous Alignment**: Standardized statistical tests across all modes. NOW: >2 groups automatically triggers **Kruskal-Wallis + Dunn's Test (Holm)** for "CNS-level" validity.
+    - **Transparency**: Added "📊 Statistical Methodology Report" panel to expose exact p-values and test logic.
+- **Aesthetic "Pixel-Perfect" Control**:
+    - **Group Shapes**: New toggle to distinguish groups by shape (Circle, Square, Triangle) + Color.
+    - **Fine-Tuning**: Added granular controls for **Y-axis Font Size**, **Significance Line Width**, and **Line Height** (Bracket vs Flat).
+    - **Clean Style**: Option to remove black bar edges.
+
+### Changed
+- **UX**: Fixed `DuplicateWidgetID` errors and optimized layout for multi-metric views (auto-rotating X-labels).
+
 ## [2026-01-14] - Phase 5.2: Scientific Styling & Infrastructure Hardening
 ### Added
 - **Scientific Visualization Upgrade**:
