@@ -177,6 +177,48 @@ st.markdown("""
         border-radius: 8px;
     }
 
+    /* --- Sidebar Navigation Revamp --- */
+    /* Remove default radio circles and style as buttons */
+    section[data-testid="stSidebar"] [data-testid="stRadio"] > div {
+        gap: 6px;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stRadio"] label {
+        padding: 10px 15px;
+        background: transparent;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+        margin-bottom: 2px;
+    }
+
+    /* Hide the radio circle */
+    section[data-testid="stSidebar"] [data-testid="stRadio"] label > div:first-child {
+        display: none;
+    }
+
+    /* Hover State */
+    section[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #10b981 !important;
+        cursor: pointer;
+    }
+
+    /* Active State (Checked) */
+    section[data-testid="stSidebar"] [data-testid="stRadio"] label:has(input:checked) {
+        background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, transparent 100%);
+        border-left: 4px solid #10b981;
+        color: #10b981 !important;
+        font-weight: 600;
+        padding-left: 11px; /* Compensate for border width to align text perfectly */
+    }
+
+    /* Icon/Text adjustment */
+    section[data-testid="stSidebar"] [data-testid="stRadio"] label p {
+        font-size: 1rem;
+        margin: 0;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
