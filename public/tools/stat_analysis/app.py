@@ -1129,8 +1129,8 @@ def render_barplot_module(data):
                 
                 get_download_buttons(fig, f"Bar_{y_col}", "bar", report_title=f"Bar Chart: {y_col} by {x_col}")
         
-        # --- Line Chart Module ---
-        def render_linechart_module(data):
+# --- Line Chart Module ---
+def render_linechart_module(data):
     st.header("📈 折线图 (Line Chart)")
     st.markdown("绘制折线图，支持多组数据趋势比较和误差带显示。")
 
