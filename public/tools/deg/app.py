@@ -173,24 +173,34 @@ if uploaded_file and df is not None:
 
 else:
     # --- Demo Data Generaton ---
+    # --- Demo Data Generation ---
     if st.button("Load Demo Data"):
-        # Generate some synthetic data
         np.random.seed(42)
         n_genes = 2000
         genes = [f"Gene_{i}" for i in range(1, n_genes+1)]
         log2fc = np.random.normal(0, 1.5, n_genes)
         pvals = np.random.uniform(0, 1, n_genes)
         # Make some genes clearly significant
-        log2fc[:50] += 3  # Upregulated
-        pvals[:50] /= 1000
-        log2fc[50:100] -= 3 # Downregulated
-        pvals[50:100] /= 1000
+        log2fc[:50] += 3.5  # Upregulated
+        pvals[:50] = np.random.uniform(0, 0.001, 50)
+        log2fc[50:100] -= 3.5 # Downregulated
+        pvals[50:100] = np.random.uniform(0, 0.001, 50)
         
-        demo_df = pd.DataFrame({'Gene': genes, 'log2FC': log2fc, 'P-value': pvals})
-        # Save to session state to simulate upload
-        # For simplicity, we just display it directly
-        # But in a real app, we'd loop back. Here we just ask user to download demo and upload it?
-        # Better: create a CSV in memory to allow 'load_data' to read it? 
-        # Easier: Just set a flag
-        st.info("Demo mode not fully implemented in this MVP. Please upload a CSV with columns: Gene, log2FC, P-value")
+        # Store in session state to persist across reruns
+        st.session_state['demo_df'] = pd.DataFrame({'Gene': genes, 'log2FC': log2fc, 'P-value': pvals})
+        st.experimental_rerun()
+
+# Check for demo data in session state if no file is uploaded
+if uploaded_file is None and 'demo_df' in st.session_state:
+    df = st.session_state['demo_df']
+    st.success("Loaded Demo Data (2000 synthetic genes)")
+    
+    # Auto-map columns for demo
+    with st.sidebar:
+        st.header("2. Column mapping (Demo)")
+        gene_col = "Gene"
+        log2fc_col = "log2FC"
+        pval_col = "P-value"
+        st.caption(f"Gene: {gene_col}, Log2FC: {log2fc_col}, P-val: {pval_col}")
+
         
