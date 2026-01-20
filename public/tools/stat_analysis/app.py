@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import pandas as pd
 import scipy.stats as stats
 import seaborn as sns
@@ -69,7 +70,12 @@ except ImportError:
             sns.set_style("ticks")
             sns.set_context("paper")
 
-st.set_page_config(page_title="ElementPrism - Visual Workbench", page_icon="💎", layout="wide", initial_sidebar_state="expanded")
+# Check for custom icon
+page_icon = "💎"
+if os.path.exists("icon.png"):
+    page_icon = "icon.png"
+
+st.set_page_config(page_title="ElementPrism - Visual Workbench", page_icon=page_icon, layout="wide", initial_sidebar_state="expanded")
 
 # --- ElementPrism Brand Theme (Emerald Green) ---
 st.markdown("""
