@@ -338,10 +338,10 @@ def render_difference_module(data):
     st.header("📊 箱线图 (Boxplot)")
     render_stat_guide() # Insert Guide Here
     
-    # --- Dashboard Layout ---
-    left_col, right_col = st.columns([1, 2], gap="large")
+    # --- Dashboard Layout (Plot Left, Controls Right) ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
 
-    with left_col:
+    with ctrl_col:
         with st.container(border=True):
             st.markdown("### 🔧 参数设置")
             cols = data.columns.tolist()
@@ -382,8 +382,8 @@ def render_difference_module(data):
         st.warning("请至少选择一个分组")
         return
 
-    # --- Plotting Logic (Moved to Right Column) ---
-    with right_col:
+    # --- Plotting Logic (Left Column) ---
+    with plot_col:
         if st.session_state.get('diff_active', False):
             with st.container(border=True):
                 st.markdown("### 📈 分析结果")
@@ -671,10 +671,10 @@ def render_barplot_module(data):
     cols = data.columns.tolist()
     num_cols = data.select_dtypes(include=['number']).columns.tolist()
     
-    # --- Dashboard Layout ---
-    left_col, right_col = st.columns([1, 2], gap="large")
+    # --- Dashboard Layout (Plot Left, Controls Right) ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
 
-    with left_col:
+    with ctrl_col:
         with st.container(border=True):
             st.markdown("### 🔧 参数设置")
             
@@ -742,8 +742,8 @@ def render_barplot_module(data):
             
             show_debug = st.checkbox("显示调试信息", value=False, key="bar_debug")
 
-    # --- Result Panel (Right) ---
-    with right_col:
+    # --- Result Panel (Right -> Left) ---
+    with plot_col:
         if st.session_state.get('bar_active', False):
             with st.container(border=True):
                 st.markdown("### 📈 分析结果")
@@ -1179,113 +1179,107 @@ def render_linechart_module(data):
     cols = data.columns.tolist()
     num_cols = data.select_dtypes(include=['number']).columns.tolist()
 
-    c1, c2, c3 = st.columns(3)
-    x_col = c1.selectbox("X轴 (Time/Category)", cols, index=0, key="line_x")
-    y_col = c2.selectbox("Y轴 (Value)", num_cols, index=0, key="line_y")
-    hue_col = c3.selectbox("分组 (Group, 可选)", ["无"] + cols, index=0, key="line_hue")
+    # --- Dashboard Layout (Plot Left, Controls Right) ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
 
-    # Options
-    c_opt1, c_opt2, c_opt3 = st.columns(3)
-    error_type = c_opt1.selectbox("误差带", ["sd", "se", "ci (95%)", "无"], index=0, key="line_err")
-    show_points = c_opt2.checkbox("显示数据点", value=True, key="line_points")
-    
-    palette_keys = list(PALETTES.keys())
-    default_idx = next((i for i, k in enumerate(palette_keys) if "Sci" in k), 0)
-    palette_name = c_opt3.selectbox("配色方案", palette_keys, index=default_idx, key="line_palette")
+    with ctrl_col:
+        with st.container(border=True):
+            st.markdown("### 🔧 参数设置")
+            
+            x_col = st.selectbox("X轴 (Time/Category)", cols, index=0, key="line_x")
+            y_col = st.selectbox("Y轴 (Value)", num_cols, index=0, key="line_y")
+            hue_col = st.selectbox("分组 (Group, 可选)", ["无"] + cols, index=0, key="line_hue")
 
-    # Advanced Settings (Displayed directly to avoid Expander issues)
-    st.markdown("#### 🎨 高级设置")
-    c_a1, c_a2 = st.columns(2)
-    # Use text_input as safe fallback for Stlite component issues
-    lw_str = c_a1.text_input("线宽 (Line Width)", "2.0", key="line_lw")
-    try: line_width = float(lw_str)
-    except: line_width = 2.0
-    
-    ps_str = c_a2.text_input("点大小 (Point Size)", "6.0", key="line_ps")
-    try: point_size = float(ps_str)
-    except: point_size = 6.0
-    
-    c_a3, c_a4 = st.columns(2)
-    show_reg = c_a3.checkbox("添加回归线 (Linear Fit for X-Numeric)", value=False, key="line_reg")
-        # smooth = c_a4.checkbox("平滑曲线 (注: 仅视觉效果)", value=False, key="line_smooth")
+            with st.expander("📊 样式与计算", expanded=False):
+                error_type = st.selectbox("误差带", ["sd", "se", "ci (95%)", "无"], index=0, key="line_err")
+                show_points = st.checkbox("显示数据点", value=True, key="line_points")
+                show_reg = st.checkbox("回归线 (Linear Fit)", value=False, key="line_reg")
+                
+                palette_keys = list(PALETTES.keys())
+                default_idx = next((i for i, k in enumerate(palette_keys) if "Sci" in k), 0)
+                palette_name = st.selectbox("配色方案", palette_keys, index=default_idx, key="line_palette")
 
-    # Custom color
-    custom_colors = None
-    if palette_name == CUSTOM_PALETTE_KEY:
-        custom_colors = st.text_input("输入自定义颜色 (逗号分隔)", placeholder="#FF0000, #00FF00", key="line_custom")
+                c_a1, c_a2 = st.columns(2)
+                lw_str = c_a1.text_input("线宽", "2.0", key="line_lw")
+                ps_str = c_a2.text_input("点大", "6.0", key="line_ps")
+                try: line_width = float(lw_str)
+                except: line_width = 2.0
+                try: point_size = float(ps_str)
+                except: point_size = 6.0
 
-    if st.button("🚀 绘制折线图", type="primary", key="line_btn"):
-        st.session_state['line_active'] = True
+            if palette_name == CUSTOM_PALETTE_KEY:
+                custom_colors = st.text_input("自定义颜色 (#...)", key="line_custom")
+            else:
+                custom_colors = None
 
-    if st.session_state.get('line_active', False):
-        st.divider()
-        nature_style.apply_nature_style()
-        fig, ax = plt.subplots(figsize=(6, 5))
+            if st.button("🚀 绘制折线图", type="primary", use_container_width=True, key="line_btn"):
+                st.session_state['line_active'] = True
 
-        # Data Prep
-        plot_data = data.dropna(subset=[x_col, y_col]).copy()
-        
-        # Ensure X is sorted for line plot if numeric to avoid spaghetti plot
-        is_numeric_x = pd.api.types.is_numeric_dtype(plot_data[x_col])
-        if is_numeric_x:
-             plot_data = plot_data.sort_values(by=x_col)
+    # --- Plotting Panel (Left) ---
+    with plot_col:
+        if st.session_state.get('line_active', False):
+            with st.container(border=True):
+                st.markdown("### 📈 分析图表")
+                nature_style.apply_nature_style()
+                fig, ax = plt.subplots(figsize=(6, 5))
 
-        hue = None if hue_col == "无" else hue_col
-        
-        # Determine N colors
-        if hue:
-            n_groups = plot_data[hue].nunique()
-            colors = get_palette_colors(palette_name, n_colors=n_groups, custom_colors=custom_colors)
-        else:
-            colors = get_palette_colors(palette_name, n_colors=1, custom_colors=custom_colors)
+                plot_data = data.dropna(subset=[x_col, y_col]).copy()
+                is_numeric_x = pd.api.types.is_numeric_dtype(plot_data[x_col])
+                if is_numeric_x:
+                     plot_data = plot_data.sort_values(by=x_col)
 
-        # Map error type to seaborn param
-        # sns.lineplot errorbar: 'sd', 'se', ('ci', 95), None
-        if error_type == "sd": err_param = "sd"
-        elif error_type == "se": err_param = "se"
-        elif "ci" in error_type: err_param = ("ci", 95)
-        else: err_param = None
+                hue = None if hue_col == "无" else hue_col
+                
+                if hue:
+                    n_groups = plot_data[hue].nunique()
+                    colors = get_palette_colors(palette_name, n_colors=n_groups, custom_colors=custom_colors)
+                else:
+                    colors = get_palette_colors(palette_name, n_colors=1, custom_colors=custom_colors)
 
-        # Main Plot
-        sns.lineplot(data=plot_data, x=x_col, y=y_col, hue=hue, 
+                if error_type == "sd": err_param = "sd"
+                elif error_type == "se": err_param = "se"
+                elif "ci" in error_type: err_param = ("ci", 95)
+                else: err_param = None
+
+                sns.lineplot(data=plot_data, x=x_col, y=y_col, hue=hue, 
                      errorbar=err_param, palette=colors, ax=ax,
                      linewidth=line_width, marker="o" if show_points else None,
                      markersize=point_size)
 
         # Linear Regression
-        if show_reg:
-            if is_numeric_x:
-                if hue:
-                    st.warning("⚠️ 分组回归线在此简易模式下暂不支持叠加，仅绘制全局趋势作为参考。")
+                if show_reg:
+                    if is_numeric_x:
+                        if hue:
+                            st.warning("⚠️ 分组回归线在此简易模式下暂不支持叠加，仅绘制全局趋势作为参考。")
+                        
+                        # Draw global trend line
+                        sns.regplot(data=plot_data, x=x_col, y=y_col, scatter=False, ax=ax, 
+                                    color="gray", line_kws={"linestyle": "--", "alpha": 0.5})
+                    else:
+                        st.warning(f"⚠️ 无法绘制回归线：X轴 '{x_col}' 为非数值列 (文本/类别)。请选择时间或浓度等数值列作为 X 轴。")
+        
+                ax.set_xlabel(x_col)
+                ax.set_ylabel(y_col)
                 
-                # Draw global trend line
-                sns.regplot(data=plot_data, x=x_col, y=y_col, scatter=False, ax=ax, 
-                            color="gray", line_kws={"linestyle": "--", "alpha": 0.5})
-            else:
-                st.warning(f"⚠️ 无法绘制回归线：X轴 '{x_col}' 为非数值列 (文本/类别)。请选择时间或浓度等数值列作为 X 轴。")
-
-        ax.set_xlabel(x_col)
-        ax.set_ylabel(y_col)
+                # Legend (Seaborn handles it, but we force position)
+                if hue:
+                    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                else:
+                    # Remove legend if no hue (regplot might add one if not careful, but here ok)
+                    pass
         
-        # Legend (Seaborn handles it, but we force position)
-        if hue:
-            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-        else:
-            # Remove legend if no hue (regplot might add one if not careful, but here ok)
-            pass
-
-        sns.despine()
-        st.pyplot(fig)
+                sns.despine()
+                st.pyplot(fig)
+                
+                # Stats info
+                if is_numeric_x:
+                     try:
+                         # Simple Regression Stats
+                         res = stats.linregress(plot_data[x_col], plot_data[y_col])
+                         st.info(f"📈 全局线性趋势 (Global Trend): R² = {res.rvalue**2:.3f}, p = {res.pvalue:.4e}")
+                     except: pass
         
-        # Stats info
-        if is_numeric_x:
-             try:
-                 # Simple Regression Stats
-                 res = stats.linregress(plot_data[x_col], plot_data[y_col])
-                 st.info(f"📈 全局线性趋势 (Global Trend): R² = {res.rvalue**2:.3f}, p = {res.pvalue:.4e}")
-             except: pass
-
-        get_download_buttons(fig, f"Line_{y_col}", "line", report_title=f"Line Chart: {y_col} vs {x_col}")
+                get_download_buttons(fig, f"Line_{y_col}", "line", report_title=f"Line Chart: {y_col} vs {x_col}")
 
 
 # --- Density Plot Module ---
@@ -1300,168 +1294,288 @@ def render_density_module(data):
         st.error("数据集中没有数值列")
         return
 
-    c1, c2 = st.columns(2)
-    val_col = c1.selectbox("数值列 (Value)", cols, key="kde_val")
-    group_col = c2.selectbox("分组列 (Group, 可选)", ["无"] + all_cols, index=0, key="kde_group")
+    # --- Dashboard Layout ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
 
-    c_opt1, c_opt2, c_opt3 = st.columns(3)
-    fill_area = c_opt1.checkbox("填充区域 (Fill)", value=True, key="kde_fill")
-    common_norm = c_opt2.checkbox("Common Norm", value=False, help="如果选中，所有组的总面积归一化为1；否则每组归一化为1（推荐）。")
-    
-    bw_str = c_opt3.text_input("平滑度 (Bandwidth, 0.1-2.0)", "1.0", key="kde_bw")
-    try: bw_adjust = float(bw_str)
-    except: bw_adjust = 1.0
+    with ctrl_col:
+        with st.container(border=True):
+            st.markdown("### 🔧 参数设置")
+            
+            val_col = st.selectbox("数值列 (Value)", cols, key="kde_val")
+            group_col = st.selectbox("分组列 (Group, 可选)", ["无"] + all_cols, index=0, key="kde_group")
+            
+            with st.expander("🎨 绘图选项", expanded=False):
+                fill_area = st.checkbox("填充区域 (Fill)", value=True, key="kde_fill")
+                common_norm = st.checkbox("Common Norm", value=False, help="若选中，组间面积归一；否则组内归一。")
+                
+                bw_str = st.text_input("平滑度 (Bandwidth)", "1.0", key="kde_bw")
+                try: bw_adjust = float(bw_str)
+                except: bw_adjust = 1.0
+                
+                palette_keys = list(PALETTES.keys())
+                palette_name = st.selectbox("配色方案", palette_keys, index=0, key="kde_palette")
 
-    palette_keys = list(PALETTES.keys())
-    default_idx = next((i for i, k in enumerate(palette_keys) if "Sci" in k), 0)
-    palette_name = st.selectbox("配色方案", palette_keys, index=default_idx, key="kde_palette")
+            # Custom color
+            custom_colors = None
+            if palette_name == CUSTOM_PALETTE_KEY:
+                custom_colors = st.text_input("自定义颜色 (#...)", key="kde_custom")
 
-    # Custom color
-    custom_colors = None
-    if palette_name == CUSTOM_PALETTE_KEY:
-        custom_colors = st.text_input("输入自定义颜色 (逗号分隔)", key="kde_custom")
+            if st.button("🚀 绘制密度图", type="primary", use_container_width=True, key="kde_btn"):
+                st.session_state['kde_active'] = True
 
-    if st.button("🚀 绘制密度图", type="primary", key="kde_btn"):
-        st.session_state['kde_active'] = True
+    with plot_col:
+        if st.session_state.get('kde_active', False):
+            with st.container(border=True):
+                st.markdown("### 📈 分布密度图")
+                
+                nature_style.apply_nature_style()
+                fig, ax = plt.subplots(figsize=(6, 5))
+                
+                plot_data = data.dropna(subset=[val_col])
+                hue = None if group_col == "无" else group_col
+                
+                # Colors
+                if hue:
+                    n_groups = plot_data[hue].nunique()
+                    colors = get_palette_colors(palette_name, n_colors=n_groups, custom_colors=custom_colors)
+                else:
+                    colors = get_palette_colors(palette_name, n_colors=1, custom_colors=custom_colors)
 
-    if st.session_state.get('kde_active', False):
-        st.divider()
-        nature_style.apply_nature_style()
-        fig, ax = plt.subplots(figsize=(6, 5))
-        
-        plot_data = data.dropna(subset=[val_col])
-        hue = None if group_col == "无" else group_col
-        
-        # Colors
-        if hue:
-            n_groups = plot_data[hue].nunique()
-            colors = get_palette_colors(palette_name, n_colors=n_groups, custom_colors=custom_colors)
-        else:
-            colors = get_palette_colors(palette_name, n_colors=1, custom_colors=custom_colors)
+                sns.kdeplot(data=plot_data, x=val_col, hue=hue, 
+                            fill=fill_area, common_norm=common_norm, bw_adjust=bw_adjust,
+                            palette=colors, alpha=0.5, linewidth=1.5, ax=ax)
 
-        sns.kdeplot(data=plot_data, x=val_col, hue=hue, 
-                    fill=fill_area, common_norm=common_norm, bw_adjust=bw_adjust,
-                    palette=colors, alpha=0.5, linewidth=1.5, ax=ax)
+                ax.set_xlabel(val_col)
+                sns.despine()
+                
+                if hue:
+                    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
-        ax.set_xlabel(val_col)
-        sns.despine()
-        
-        if hue:
-            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-
-        st.pyplot(fig)
-        get_download_buttons(fig, f"KDE_{val_col}", "kde", report_title=f"Density Plot: {val_col}")
+                st.pyplot(fig)
+                get_download_buttons(fig, f"KDE_{val_col}", "kde", report_title=f"Density Plot: {val_col}")
 
 def render_survival_module(data):
     st.header("💀 生存分析 (Survival Analysis - KM)")
+    st.markdown("Kaplan-Meier 生存曲线绘制，自动进行 Log-rank 统计检验。")
+
     cols = data.columns.tolist()
     
-    c1, c2, c3 = st.columns(3)
-    time_col = c1.selectbox("时间列 (Time)", cols, key="surv_time")
-    event_col = c2.selectbox("事件列 (Event, 1=Dead)", cols, key="surv_event")
-    group_col = c3.selectbox("分组列 (Group)", cols, key="surv_group")
-    
-    palette_name = st.selectbox("配色方案", list(PALETTES.keys()), index=0, key="surv_palette")
-    
-    if st.button("🚀 绘制生存曲线", type="primary"):
-        st.session_state['surv_active'] = True
+    # --- Dashboard Layout (Plot Left, Controls Right) ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
 
-    if st.session_state.get('surv_active', False):
-        st.divider()
-        nature_style.apply_nature_style()
-        fig, ax = plt.subplots(figsize=(6, 6))
-        
-        kmf = KaplanMeierFitter()
-        groups = sorted(data[group_col].unique())
-        colors = get_palette_colors(palette_name, n_colors=len(groups))
-        
-        results_text = []
-        
-        for i, g in enumerate(groups):
-            mask = data[group_col] == g
-            kmf.fit(data.loc[mask, time_col], data.loc[mask, event_col], label=str(g))
-            kmf.plot_survival_function(ax=ax, ci_show=False, linewidth=2, color=colors[i])
+    with ctrl_col:
+        with st.container(border=True):
+            st.markdown("### 🔧 参数设置")
             
-        # Log-rank test
-        if len(groups) == 2:
-            g1, g2 = groups[0], groups[1]
-            try:
-                res = logrank_test(
-                    data[data[group_col]==g1][time_col], data[data[group_col]==g2][time_col],
-                    event_observed_A=data[data[group_col]==g1][event_col], event_observed_B=data[data[group_col]==g2][event_col]
-                )
-                p_val = res.p_value
-                ax.text(0.05, 0.1, f"Log-rank p = {p_val:.4f}", transform=ax.transAxes, fontsize=10)
-                results_text.append(f"Log-rank test ({g1} vs {g2}): p={p_val:.4f}")
-            except Exception as e:
-                st.write(f"Log-rank Warning: {e}")
+            time_col = st.selectbox("时间列 (Time)", cols, key="surv_time")
+            event_col = st.selectbox("事件列 (Event, 1/True=Dead)", cols, key="surv_event")
+            group_col = st.selectbox("分组列 (Group)", cols, key="surv_group")
+            
+            with st.expander("🎨 绘图选项", expanded=False):
+                palette_keys = list(PALETTES.keys())
+                palette_name = st.selectbox("配色方案", palette_keys, index=0, key="surv_palette")
+                
+                show_ci = st.checkbox("显示置信区间 (95% CI)", value=False, key="surv_ci")
+                line_width = st.slider("线宽", 1.0, 5.0, 2.0, key="surv_lw")
 
-        ax.set_xlabel("Time")
-        ax.set_ylabel("Survival Probability")
-        ax.set_ylim(0, 1.05)
-        sns.despine()
-        st.pyplot(fig)
+            if st.button("🚀 绘制生存曲线", type="primary", use_container_width=True, key="surv_btn"):
+                st.session_state['surv_active'] = True
+
+    with plot_col:
+        if st.session_state.get('surv_active', False):
+            with st.container(border=True):
+                st.markdown("### 📈 生存曲线")
+                nature_style.apply_nature_style()
+                fig, ax = plt.subplots(figsize=(6, 6))
+                
+                kmf = KaplanMeierFitter()
+                
+                # Filter valid data
+                valid_data = data.dropna(subset=[time_col, event_col, group_col]).copy()
+                groups = sorted(valid_data[group_col].unique())
+                colors = get_palette_colors(palette_name, n_colors=len(groups))
+                
+                results_text = []
+                
+                for i, g in enumerate(groups):
+                    mask = valid_data[group_col] == g
+                    kmf.fit(valid_data.loc[mask, time_col], valid_data.loc[mask, event_col], label=str(g))
+                    kmf.plot_survival_function(ax=ax, ci_show=show_ci, linewidth=line_width, color=colors[i])
+                    
+                # Log-rank test
+                if len(groups) == 2:
+                    g1, g2 = groups[0], groups[1]
+                    try:
+                        d1 = valid_data[valid_data[group_col]==g1]
+                        d2 = valid_data[valid_data[group_col]==g2]
+                        
+                        res = logrank_test(
+                            d1[time_col], d2[time_col],
+                            event_observed_A=d1[event_col], event_observed_B=d2[event_col]
+                        )
+                        p_val = res.p_value
+                        
+                        # Annotate P-value
+                        ax.text(0.05, 0.1, f"Log-rank p = {p_val:.4f}", transform=ax.transAxes, fontsize=10, 
+                                bbox=dict(facecolor='white', alpha=0.5, edgecolor='none'))
+                        
+                        results_text.append(f"Log-rank test ({g1} vs {g2}): p={p_val:.4f}")
+                        st.info(f"📊 统计检验结果: Log-rank p = **{p_val:.4f}**")
+                        
+                    except Exception as e:
+                        st.warning(f"Log-rank Warning: {e}")
+                
+                elif len(groups) > 2:
+                     # Multistate logrank
+                     from lifelines.statistics import multivariate_logrank_test
+                     try:
+                         res = multivariate_logrank_test(valid_data[time_col], valid_data[group_col], valid_data[event_col])
+                         p_val = res.p_value
+                         ax.text(0.05, 0.1, f"Multi-Log-rank p = {p_val:.4f}", transform=ax.transAxes, fontsize=10)
+                         st.info(f"📊 多组 Log-rank 检验: p = **{p_val:.4f}**")
+                     except: pass
         
-        get_download_buttons(fig, "Survival_Curve", "surv", report_title="Kaplan-Meier Survival Analysis")
+                ax.set_xlabel(time_col)
+                ax.set_ylabel("Survival Probability")
+                ax.set_ylim(0, 1.05)
+                sns.despine()
+                
+                # Legend Position
+                if len(groups) > 0:
+                     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                
+                st.pyplot(fig)
+                
+                get_download_buttons(fig, "Survival_Curve", "surv", report_title="Kaplan-Meier Survival Analysis")
 
 def render_heatmap_module(data):
     st.header("🔥 热图聚类 (Heatmap)")
+    st.markdown("绘制层次聚类热图，展示样本和特征的相关性模式。")
+
     num_cols = data.select_dtypes(include=['number']).columns.tolist()
     all_cols = data.columns.tolist()
     
-    cols = st.multiselect("数据列", num_cols, default=num_cols[:10])
-    idx = st.selectbox("索引列 (Row Label)", ["Auto-Index"] + all_cols)
-    
-    if st.button("🚀 绘制热图", type="primary"):
-        st.session_state['heat_active'] = True
+    # --- Dashboard Layout ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
 
-    if st.session_state.get('heat_active', False):
-        df_heat = data[cols].copy()
-        if idx != "Auto-Index": df_heat.index = data[idx]
-        df_heat = df_heat.dropna()
-        
-        nature_style.apply_nature_style()
-        g = sns.clustermap(df_heat, z_score=0, cmap="vlag", center=0, figsize=(6,6))
-        st.pyplot(g)
-        get_download_buttons(g, "Heatmap", "heat", report_title="Hierarchical Clustering Heatmap")
+    with ctrl_col:
+        with st.container(border=True):
+            st.markdown("### 🔧 参数设置")
+            cols = st.multiselect("数值列 (Features)", num_cols, default=num_cols[:10], key="heat_cols")
+            idx = st.selectbox("行标签 (Row Label)", ["Auto-Index"] + all_cols, key="heat_idx")
+            
+            with st.expander("🎨 绘图选项", expanded=False):
+                z_score = st.selectbox("标准化 (Z-score)", ["None", "Row (0)", "Col (1)"], index=1, key="heat_z")
+                cmap_name = st.selectbox("颜色映射 (Colormap)", ["vlag", "mako", "rocket", "viridis"], index=0, key="heat_cmap")
+
+            if st.button("🚀 绘制热图", type="primary", use_container_width=True, key="heat_btn"):
+                st.session_state['heat_active'] = True
+
+    with plot_col:
+        if st.session_state.get('heat_active', False):
+            if not cols:
+                st.warning("⚠️ 请至少选择一列数值数据。")
+            else:
+                with st.container(border=True):
+                    st.markdown("### 📈 聚类热图")
+                    df_heat = data[cols].copy()
+                    if idx != "Auto-Index": 
+                        df_heat.index = data[idx]
+                        df_heat.index.name = idx
+                    
+                    df_heat = df_heat.dropna()
+                    
+                    nature_style.apply_nature_style()
+                    
+                    z_val = None
+                    if z_score == "Row (0)": z_val = 0
+                    elif z_score == "Col (1)": z_val = 1
+                    
+                    try:
+                        g = sns.clustermap(df_heat, z_score=z_val, cmap=cmap_name, center=0, figsize=(8, 8),
+                                           linewidths=0.5, linecolor='white' if len(df_heat) < 50 else None)
+                        st.pyplot(g)
+                        get_download_buttons(g, "Heatmap", "heat", report_title="Hierarchical Clustering Heatmap")
+                    except Exception as e:
+                        st.error(f"绘图错误 (可能是因为数据方差为0或含有NaN): {e}")
 
 def render_pca_module(data):
     st.header("🧬 PCA 分析 (3D Supported)")
-    num_cols = data.select_dtypes(include=['number']).columns.tolist()
-    feats = st.multiselect("特征列", num_cols, default=num_cols[:5])
-    
-    c1, c2 = st.columns(2)
-    label = c1.selectbox("着色", data.columns)
-    palette_name = c2.selectbox("配色方案", list(PALETTES.keys()), index=0, key="pca_palette")
-    
-    use_3d = st.checkbox("3D 模式")
-    
-    if st.button("🚀 运行 PCA"):
-        st.session_state['pca_active'] = True
+    st.markdown("主成分分析 (PCA) 用于降维和可视化样本分布。")
 
-    if st.session_state.get('pca_active', False):
-        df_pca = data[feats].dropna()
-        scaler = StandardScaler()
-        pcs = PCA(n_components=3).fit_transform(scaler.fit_transform(df_pca))
-        pca_df = pd.DataFrame(pcs, columns=['PC1','PC2','PC3'])
-        
-        # Ensure label matches index of cleaned data
-        labels_aligned = data.loc[df_pca.index, label].values
-        pca_df['Label'] = labels_aligned
-        
-        unique_labels = sorted(list(set(labels_aligned)))
-        colors = get_palette_colors(palette_name, n_colors=len(unique_labels))
-        
-        nature_style.apply_nature_style()
-        fig = plt.figure(figsize=(6,6))
-        
-        if use_3d:
-            ax = fig.add_subplot(111, projection='3d')
-            # Manually map colors for 3D scatter
-            color_map = {lbl: col for lbl, col in zip(unique_labels, colors)}
-            c_array = [color_map[l] for l in pca_df['Label']]
+    num_cols = data.select_dtypes(include=['number']).columns.tolist()
+    
+    # --- Dashboard Layout ---
+    plot_col, ctrl_col = st.columns([2.5, 1], gap="large")
+
+    with ctrl_col:
+        with st.container(border=True):
+            st.markdown("### 🔧 参数设置")
+            feats = st.multiselect("特征列 (Features)", num_cols, default=num_cols[:5], key="pca_feats")
             
-            sc = ax.scatter(pca_df.PC1, pca_df.PC2, pca_df.PC3, c=c_array, s=50)
+            label = st.selectbox("样本着色 (Color Group)", data.columns, index=0, key="pca_label")
+            
+            with st.expander("🎨 绘图选项", expanded=False):
+                palette_keys = list(PALETTES.keys())
+                palette_name = st.selectbox("配色方案", palette_keys, index=0, key="pca_palette")
+                use_3d = st.checkbox("启用 3D 模式", value=False, key="pca_3d")
+
+            if st.button("🚀 运行 PCA", type="primary", use_container_width=True, key="pca_btn"):
+                st.session_state['pca_active'] = True
+
+    with plot_col:
+        if st.session_state.get('pca_active', False):
+            if len(feats) < 2:
+                st.warning("⚠️ 请至少选择 2 个特征列进行 PCA 分析")
+            else:
+                with st.container(border=True):
+                    st.markdown("### 📈 PCA 投影图")
+                    df_pca = data[feats].dropna()
+                    
+                    try:
+                        scaler = StandardScaler()
+                        pcs = PCA(n_components=3).fit_transform(scaler.fit_transform(df_pca))
+                        pca_df = pd.DataFrame(pcs, columns=['PC1','PC2','PC3'])
+                        
+                        # Ensure label matches index of cleaned data
+                        labels_aligned = data.loc[df_pca.index, label].values
+                        pca_df['Label'] = labels_aligned.astype(str)
+                        
+                        unique_labels = sorted(list(set(pca_df['Label'])))
+                        colors = get_palette_colors(palette_name, n_colors=len(unique_labels))
+                        
+                        nature_style.apply_nature_style()
+                        fig = plt.figure(figsize=(7, 6))
+                        
+                        if use_3d:
+                            ax = fig.add_subplot(111, projection='3d')
+                            # Manually map colors for 3D scatter
+                            color_map = {lbl: col for lbl, col in zip(unique_labels, colors)}
+                            c_array = [color_map[l] for l in pca_df['Label']]
+                            
+                            ax.scatter(pca_df.PC1, pca_df.PC2, pca_df.PC3, c=c_array, s=50, edgecolors='w', linewidth=0.5)
+                            ax.set_xlabel('PC1')
+                            ax.set_ylabel('PC2')
+                            ax.set_zlabel('PC3')
+                            
+                            # Custom Legend for 3D
+                            patches = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=c, label=l, markersize=8) 
+                                       for l, c in zip(unique_labels, colors)]
+                            ax.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2)
+                            
+                        else:
+                            # 2D Plot
+                            sns.scatterplot(data=pca_df, x='PC1', y='PC2', hue='Label', palette=colors, style='Label', s=100)
+                            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                        
+                        st.pyplot(fig)
+                        get_download_buttons(fig, "PCA_Plot", "pca", report_title="PCA Analysis")
+                        
+                        # Explanation
+                        st.caption("PC1/PC2 代表数据中方差最大的两个方向。点聚类越近，样本相似度越高。")
+                        
+                    except Exception as e:
+                        st.error(f"PCA 计算错误: {e}")
             
             # Create manual legend
             import matplotlib.patches as mpatches
