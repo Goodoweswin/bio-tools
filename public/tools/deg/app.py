@@ -3,15 +3,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.express as px
-import plotly.graph_objects as go
 from io import BytesIO
 
 # --- Setup Style ---
 try:
     from tools.common import nature_style
 except ImportError:
-    # Fallback if module loading fails (though stlite handles file mapping)
+    # Fallback if module loading fails
     class nature_style:
         @staticmethod
         def apply_nature_style():
@@ -50,19 +48,54 @@ Upload your differential expression results (CSV/Excel) to explore key genes.
 **Required Columns**: `Gene` (name), `Log2FC` (fold change), `P-value` (significance).
 """)
 
+# Initialize session state for demo data if not exists
+if 'demo_df' not in st.session_state:
+    st.session_state['demo_df'] = None
+
 # Sidebar Controls
 with st.sidebar:
     st.header("1. Upload Data")
     uploaded_file = st.file_uploader("Choose a file", type=['csv', 'xlsx'])
     
-    st.header("2. Column mapping")
+    # Check for demo data load request
+    if st.button("Load Demo Data"):
+        np.random.seed(42)
+        n_genes = 2000
+        genes = [f"Gene_{i}" for i in range(1, n_genes+1)]
+        log2fc = np.random.normal(0, 1.5, n_genes)
+        pvals = np.random.uniform(0, 1, n_genes)
+        # Make some genes clearly significant
+        log2fc[:50] += 3.5  # Upregulated
+        pvals[:50] = np.random.uniform(0, 0.0001, 50)
+        log2fc[50:100] -= 3.5 # Downregulated
+        pvals[50:100] = np.random.uniform(0, 0.0001, 50)
+        
+        st.session_state['demo_df'] = pd.DataFrame({'Gene': genes, 'log2FC': log2fc, 'P-value': pvals})
+        st.experimental_rerun()
+
+    # Logic to determine which dataframe to use
+    df = None
     if uploaded_file:
         df = load_data(uploaded_file)
-        if df is not None:
-            cols = df.columns.tolist()
-            gene_col = st.selectbox("Gene Name Column", cols, index=0 if 'Gene' not in cols else cols.index('Gene'))
-            log2fc_col = st.selectbox("Log2FC Column", cols, index=1 if 'log2FC' not in cols else cols.index('log2FC'))
-            pval_col = st.selectbox("P-value/Padj Column", cols, index=2 if 'P-value' not in cols else cols.index('P-value'))
+    elif st.session_state['demo_df'] is not None:
+        df = st.session_state['demo_df']
+        st.success("Loaded Demo Data (2000 synthetic genes)")
+
+    st.header("2. Column mapping")
+    if df is not None:
+        cols = df.columns.tolist()
+        # Intelligent defaults
+        default_gene = 0
+        default_log2fc = 1
+        default_pval = 2
+        
+        if 'Gene' in cols: default_gene = cols.index('Gene')
+        if 'log2FC' in cols: default_log2fc = cols.index('log2FC')
+        if 'P-value' in cols: default_pval = cols.index('P-value')
+
+        gene_col = st.selectbox("Gene Name Column", cols, index=default_gene)
+        log2fc_col = st.selectbox("Log2FC Column", cols, index=default_log2fc)
+        pval_col = st.selectbox("P-value/Padj Column", cols, index=default_pval)
     
     st.header("3. Thresholds")
     log2fc_thresh = st.slider("Log2FC Cutoff", 0.0, 5.0, 1.0, 0.1)
@@ -74,64 +107,66 @@ with st.sidebar:
     color_ns = st.color_picker("NS Color", "#B0B0B0")     # Grey
     point_size = st.slider("Point Size", 2, 20, 6)
 
-    # --- Data Processing ---
+# --- Visualization Logic ---
+if df is not None:
     # Classify genes
     df['Regulation'] = df.apply(lambda row: classify_gene(row, log2fc_thresh, pval_thresh, log2fc_col, pval_col), axis=1)
     
     # Calculate -log10(P-value)
     df['neg_log10_p'] = -np.log10(df[pval_col] + 1e-300)
 
-    # --- Debug Mode: Direct Plotting (No Tabs, No Style) ---
-    st.subheader("Static Plot (Simplified)")
-    
-    # Create simple figure without custom nature_style (to rule out font issues)
-    fig, ax = plt.subplots(figsize=(6, 5))
-    
-    # Simple scatter
-    colors = {'Up': '#DC0000', 'Down': '#3C5488', 'NS': '#B0B0B0'}
-    for group in ['NS', 'Up', 'Down']:
-        subset = df[df['Regulation'] == group]
-        ax.scatter(subset[log2fc_col], subset['neg_log10_p'], c=colors[group], label=group, alpha=0.6)
-    
-    ax.axvline(x=log2fc_thresh, c='k', ls='--')
-    ax.axvline(x=-log2fc_thresh, c='k', ls='--')
-    ax.axhline(y=-np.log10(pval_thresh), c='k', ls='--')
-    ax.legend()
-    
-    st.pyplot(fig)
-    
-    st.write("Debug: Plot generation code executed.")
+    # Tabs
+    tab1, tab2 = st.tabs(["📈 Volcano Plot", "💾 Data Table"])
 
-else:
-    # --- Demo Data Generaton ---
-    # --- Demo Data Generation ---
-    if st.button("Load Demo Data"):
-        np.random.seed(42)
-        n_genes = 2000
-        genes = [f"Gene_{i}" for i in range(1, n_genes+1)]
-        log2fc = np.random.normal(0, 1.5, n_genes)
-        pvals = np.random.uniform(0, 1, n_genes)
-        # Make some genes clearly significant
-        log2fc[:50] += 3.5  # Upregulated
-        pvals[:50] = np.random.uniform(0, 0.001, 50)
-        log2fc[50:100] -= 3.5 # Downregulated
-        pvals[50:100] = np.random.uniform(0, 0.001, 50)
+    with tab1:
+        st.subheader("Volcano Plot (Nature Style)")
         
-        # Store in session state to persist across reruns
-        st.session_state['demo_df'] = pd.DataFrame({'Gene': genes, 'log2FC': log2fc, 'P-value': pvals})
-        st.experimental_rerun()
-
-# Check for demo data in session state if no file is uploaded
-if uploaded_file is None and 'demo_df' in st.session_state:
-    df = st.session_state['demo_df']
-    st.success("Loaded Demo Data (2000 synthetic genes)")
-    
-    # Auto-map columns for demo
-    with st.sidebar:
-        st.header("2. Column mapping (Demo)")
-        gene_col = "Gene"
-        log2fc_col = "log2FC"
-        pval_col = "P-value"
-        st.caption(f"Gene: {gene_col}, Log2FC: {log2fc_col}, P-val: {pval_col}")
-
+        # Apply style
+        nature_style.apply_nature_style()
         
+        fig, ax = plt.subplots(figsize=(6, 5))
+        
+        # Plot groups
+        for group, color in [('NS', color_ns), ('Up', color_up), ('Down', color_down)]:
+            subset = df[df['Regulation'] == group]
+            if not subset.empty:
+                ax.scatter(subset[log2fc_col], subset['neg_log10_p'], c=color, s=point_size*2, 
+                         alpha=0.8, label=group, edgecolors='none')
+        
+        # Threshold lines
+        ax.axvline(x=log2fc_thresh, color='black', linestyle='--', linewidth=0.8, alpha=0.5)
+        ax.axvline(x=-log2fc_thresh, color='black', linestyle='--', linewidth=0.8, alpha=0.5)
+        ax.axhline(y=-np.log10(pval_thresh), color='black', linestyle='--', linewidth=0.8, alpha=0.5)
+        
+        # Labels
+        ax.set_xlabel(f"Log2 Fold Change ({log2fc_col})")
+        ax.set_ylabel(f"-Log10 P-value")
+        ax.legend(frameon=False)
+        sns.despine()
+        
+        st.pyplot(fig)
+        
+        # Download PDF
+        buf = BytesIO()
+        fig.savefig(buf, format="pdf", dpi=300, bbox_inches='tight')
+        st.download_button(
+            label="Download PDF Figure",
+            data=buf.getvalue(),
+            file_name="volcano_plot.pdf",
+            mime="application/pdf"
+        )
+        
+    with tab2:
+        st.subheader("Significant Genes")
+        sig_df = df[df['Regulation'] != 'NS'].sort_values('neg_log10_p', ascending=False)
+        st.write(f"Found {len(sig_df)} significant genes (Up: {len(df[df['Regulation']=='Up'])}, Down: {len(df[df['Regulation']=='Down'])})")
+        st.dataframe(sig_df)
+        
+        csv = sig_df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            "Download Significant Genes (CSV)",
+            csv,
+            "significant_genes.csv",
+            "text/csv",
+            key='download-csv'
+        )
