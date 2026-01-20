@@ -21,6 +21,13 @@ All notable changes to the **Bio-Tools** project will be documented in this file
 - **UX**: Fixed `DuplicateWidgetID` errors and optimized layout for multi-metric views (auto-rotating X-labels).
 - **Homepage**: Updated news section with Chinese Medical Association report and Westlake conference.
 
+### Added
+- **DEG Analysis Tool (Volcano Plot) 🌋**:
+    - **Location**: `/tools/deg/index.html`.
+    - **Scientific Styling**: Generates high-resolution "Nature Style" plots via Matplotlib.
+    - **Features**: Interactive File Upload (CSV/Excel), Demo Data Mode (no file required), Real-time Threshold Sliders (Log2FC/P-val).
+    - **Stability**: Defaulted to static image generation to bypass network instability with heavy JS libraries (Plotly).
+
 ### Infrastructure & Deployment Fixes
 - **Stlite Loading Fix**:
     - **Issue**: Tool stuck at "Installing packages" (Pyodide load failure).

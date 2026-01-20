@@ -42,8 +42,8 @@
 2. **Knowledge Base**: Populate `knowledge/` with content to feed the AI's RAG system.
 3. **UI Enhancements**: Add Markdown rendering (highlight.js) and streaming responses to the chat widget.
 4. **Interactive Tools (Phase 5)**: 
-    - [Done] Basic Stlite/WASM pipeline established (Weight Analysis).
-    - [todo] Develop "DEG Analysis" (Volcano Plot) using the same Stlite architecture.
+    - [x] Basic Stlite/WASM pipeline established (Weight Analysis).
+    - [x] Develop "DEG Analysis" (Volcano Plot) using the same Stlite architecture.
 5. **Mobile Optimization**: Fine-tune CSS Grid/Flexbox for smaller screens.
 6. **Advanced Features (Roadmap)**:
     - **Refactoring**: Split `app.py` into modular components (`modules/`, `utils/`) for maintainability.

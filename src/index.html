@@ -16,10 +16,19 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container" style="display: flex; align-items: center; gap: 2rem;">
-            <div class="hero-content">
+        <div class="container">
+            <!-- Profile in corner (absolute positioned via CSS) -->
+            <div class="hero-image">
+                <div class="profile-placeholder">
+                    <img src="assets/profile.png" alt="Dr. Candidate" class="profile-photo">
+                </div>
+            </div>
+
+            <!-- Main content centered -->
+            <div class="hero-content"
+                style="position: relative; text-align: center; max-width: 800px; margin: 0 auto; padding-top: 2rem;">
                 <h1>Plastic Surgery & <br>Single-Cell Omics</h1>
-                <p>
+                <p style="margin-left: auto; margin-right: auto;">
                     MD Candidate specializing in <strong>AI for Medicine</strong>, <strong>Skin Aging</strong>, and
                     <strong>Regenerative Medicine</strong>.
                     Leveraging single-cell sequencing and bioinformatics to uncover the mechanisms of tissue
@@ -29,11 +38,6 @@
                     <a href="#contact" class="btn">Contact Me</a>
                     <a href="assets/cv.pdf" class="btn btn-outline" target="_blank"><i class="fas fa-download"></i>
                         Download CV</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-placeholder">
-                    <img src="assets/profile.png" alt="Dr. Candidate" class="profile-photo">
                 </div>
             </div>
         </div>
