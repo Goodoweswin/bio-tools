@@ -69,7 +69,7 @@ except ImportError:
             sns.set_style("ticks")
             sns.set_context("paper")
 
-st.set_page_config(page_title="ElementPrism - Visual Workbench", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="ElementPrism - Visual Workbench", page_icon="💎", layout="wide", initial_sidebar_state="expanded")
 
 # --- ElementPrism Brand Theme (Emerald Green) ---
 st.markdown("""
@@ -1691,7 +1691,12 @@ mode = st.sidebar.radio("功能模块", [
 ])
 
 if mode == "🏠 首页 & 指南":
-    st.title("💎 ElementPrism Workbench")
+    # Custom Gradient Title
+    st.markdown("""<h1 style='text-align: left; margin-bottom: 2rem;'>
+        <span style='background: linear-gradient(135deg, #10b981 0%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>ElementPrism</span> 
+        <span style='background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>Workbench</span>
+    </h1>""", unsafe_allow_html=True)
+    
     st.markdown("欢迎使用 ElementPrism 生物数据可视化分析套件。请在左侧上传数据并选择模块。")
     render_data_guide()
     
