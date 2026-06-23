@@ -1,0 +1,135 @@
+body {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--text-color) !important;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(32, 199, 181, 0.12), transparent 28rem),
+        linear-gradient(180deg, #081013 0%, #0a1317 48%, #071014 100%) !important;
+}
+
+body > .back-link,
+body > .header,
+body > h2,
+body > h3,
+body > p,
+body > ul,
+body > ol,
+body > pre,
+body > .highlight-box,
+body > .method-card,
+body > .cell-type-card,
+body > hr,
+body > p:last-child {
+    width: min(100% - 40px, 900px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+body > .back-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    padding: 0.55rem 0.8rem !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-secondary) !important;
+    background: var(--surface-bg) !important;
+    text-decoration: none !important;
+}
+
+body > .back-link:hover {
+    color: var(--accent-color) !important;
+    border-color: var(--border-strong) !important;
+}
+
+.header {
+    padding-bottom: 1.75rem !important;
+    margin-bottom: 2rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+h1 {
+    color: var(--text-color) !important;
+    font-size: clamp(2.35rem, 5vw, 4rem) !important;
+    line-height: 1.08 !important;
+}
+
+h2 {
+    margin-top: 3rem !important;
+    margin-bottom: 1rem !important;
+    padding-left: 0 !important;
+    color: var(--text-color) !important;
+    border-left: 0 !important;
+    border-bottom: 0 !important;
+    font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+}
+
+h3 {
+    color: var(--text-color) !important;
+}
+
+p,
+li,
+.meta {
+    color: var(--text-secondary) !important;
+}
+
+a {
+    color: var(--primary-color) !important;
+}
+
+.tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: 28px !important;
+    margin: 0 0.35rem 0.45rem 0 !important;
+    padding: 0 0.65rem !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 999px !important;
+    color: var(--primary-color) !important;
+    background: rgba(125, 211, 252, 0.07) !important;
+    font-size: 0.82rem !important;
+    font-weight: 650 !important;
+}
+
+.highlight-box,
+.method-card,
+.cell-type-card {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    padding: 1.25rem !important;
+    border: 1px solid var(--border-color) !important;
+    border-left: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--surface-bg) !important;
+}
+
+.highlight-box {
+    border-color: rgba(32, 199, 181, 0.34) !important;
+}
+
+code {
+    color: var(--primary-color) !important;
+    background: rgba(125, 211, 252, 0.08) !important;
+    border-radius: 4px !important;
+}
+
+pre {
+    overflow-x: auto !important;
+    padding: 1rem !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    background: rgba(4, 12, 15, 0.9) !important;
+}
+
+pre code {
+    background: transparent !important;
+}
+
+hr {
+    border: 0 !important;
+    border-top: 1px solid var(--border-color) !important;
+}

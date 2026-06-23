@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI驱动的细胞类型自动注释 - 知识库</title>
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../styles/article.css">
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; line-height: 1.8; color: #333; }
@@ -96,14 +97,14 @@ sc.pl.umap(adata, color='predicted_celltype', legend_loc='on data')</code></pre>
 
     <h2>评估注释质量</h2>
     <ul>
-        <li><strong>预测置信度分数：</strong>检查低置信度细胞（score < 0.5），可能为稀有亚型或低质量细胞</li>
+        <li><strong>预测置信度分数：</strong>检查低置信度细胞（score &lt; 0.5），可能为稀有亚型或低质量细胞</li>
         <li><strong>生物学验证：</strong>绘制已知marker基因的表达热图，验证注释一致性</li>
         <li><strong>跨方法比较：</strong>使用2-3种工具进行注释，检查一致性（建议Azimuth + SingleR）</li>
     </ul>
 
     <h2>未来展望</h2>
     <p>
-        随着基础模型（Foundation Models）如scGPT、Geneformer的兴起，细胞注释正在向"零样本学习"（zero-shot learning）迈进——
+        随着基础模型（Foundation Models）如scGPT、Geneformer的兴起，细胞注释正在向"零样本学习"（zero-shot learning）迈进。
         模型可以通过自然语言描述细胞类型特征，直接进行注释，无需额外训练。这将大幅降低注释门槛，加速单细胞研究的民主化。
     </p>
 

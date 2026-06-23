@@ -4,79 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioTools | AI for Medicine</title>
+    <title>Jackson Dai | AI for Regenerative Medicine</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Navigation -->
     <load src="./components/header.html" />
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <!-- Profile in corner (absolute positioned via CSS) -->
-            <div class="hero-image">
-                <div class="profile-placeholder">
-                    <img src="assets/profile.png" alt="Dr. Candidate" class="profile-photo">
-                </div>
-            </div>
-
-            <!-- Main content centered -->
-            <div class="hero-content"
-                style="position: relative; text-align: center; max-width: 800px; margin: 0 auto; padding-top: 2rem;">
-                <h1>BioTools</h1>
-                <p style="margin-left: auto; margin-right: auto;">
-                    BioTools is a collection of bioinformatics tools for AI for Medicine, Skin Aging, and Regenerative
-                    Medicine.
-                    Leveraging single-cell sequencing and bioinformatics to uncover the mechanisms of tissue
-                    regeneration.
-                </p>
+            <div class="hero-content">
+                <span class="eyebrow">Plastic surgery research</span>
+                <h1>AI and single-cell biology for regenerative medicine</h1>
+                <p>I study vascular skin aging with single-cell omics, AI methods, and translational regeneration models.</p>
                 <div class="cta-buttons">
-                    <a href="#contact" class="btn">Contact Me</a>
-                    <a href="assets/cv.pdf" class="btn btn-outline" target="_blank"><i class="fas fa-download"></i>
-                        Download CV</a>
+                    <a href="research.html" class="btn">View Research</a>
+                    <a href="assets/cv.pdf" class="btn btn-outline" target="_blank" rel="noopener">
+                        <i class="fas fa-download"></i>
+                        Download CV
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="portrait-panel">
+                    <img src="assets/profile-hero.webp" alt="Jackson Dai profile portrait" class="profile-photo">
+                    <div class="portrait-caption">
+                        <strong>Vascular-skin axis, cellular senescence, AI4Med</strong>
+                        <span>Personal academic site and browser-based bioinformatics toolkit.</span>
+                    </div>
+                </div>
+                <div class="signal-strip" aria-label="Research themes">
+                    <span>single-cell omics</span>
+                    <span>skin aging biology</span>
+                    <span>clinical translation</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Articles Carousel -->
-    <section class="carousel-section">
+    <section id="research-highlights">
         <div class="container">
-            <h2>Tools</h2>
-            <div class="carousel-container">
-                <a href="tools/ai-single-cell/annotation.html" class="carousel-card">
-                    <img src="assets/knowledge/封面scVI.png" alt="scVI Annotation">
-                    <div class="carousel-card-content">
-                        <h4>AI 驱动的细胞注释</h4>
-                        <p>使用 scVI 进行单细胞 RNA-seq 数据分析</p>
+            <h2>Research Focus</h2>
+            <p class="section-intro">My work connects endothelial senescence, tissue regeneration, and computational biology into testable translational programs.</p>
+
+            <div class="feature-layout">
+                <article class="feature-panel">
+                    <img src="assets/skin_aging/websummary_scEC.png" alt="Single-cell endothelial aging research summary">
+                    <div class="feature-panel-content">
+                        <h3>Deciphering the vascular-skin axis</h3>
+                        <p>Single-cell transcriptomics and molecular validation are used to map senescent endothelial programs that may drive dermal aging.</p>
+                        <div class="tags">
+                            <span class="tag">Endothelial senescence</span>
+                            <span class="tag">scRNA-seq</span>
+                            <span class="tag">Skin aging</span>
+                        </div>
                     </div>
-                </a>
-                <a href="tools/ai-single-cell/batch-correction.html" class="carousel-card">
-                    <img src="assets/knowledge/封面scVI.png" alt="Batch Correction">
-                    <div class="carousel-card-content">
-                        <h4>批次效应校正</h4>
-                        <p>单细胞数据整合的最佳实践</p>
-                    </div>
-                </a>
-                <a href="tools/skin-aging/aging-clock.html" class="carousel-card">
-                    <img src="assets/knowledge/封面scVI.png" alt="Aging Clock">
-                    <div class="carousel-card-content">
-                        <h4>衰老时钟</h4>
-                        <p>表观遗传学与皮肤衰老</p>
-                    </div>
-                </a>
-                <!-- Add more cards as needed -->
+                </article>
+
+                <div class="focus-stack">
+                    <article class="card">
+                        <h3>AI for Medicine</h3>
+                        <p>Modeling tissue repair and treatment response from imaging, omics, and clinical signals.</p>
+                        <div class="tags">
+                            <span class="tag">Deep learning</span>
+                            <span class="tag">Pathology</span>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Regeneration</h3>
+                        <p>Identifying intervention points for wound healing, vascular normalization, and scar reduction.</p>
+                        <div class="tags">
+                            <span class="tag">Wound healing</span>
+                            <span class="tag">Therapeutics</span>
+                        </div>
+                    </article>
+
+                    <a href="research.html" class="btn btn-outline">All Research</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- News Section -->
+    <section class="tools-section">
+        <div class="container">
+            <h2>BioTools</h2>
+            <p class="section-intro">Browser-based analysis utilities for wet-lab researchers. No local installation, no login, designed for fast figure iteration.</p>
+
+            <div class="tools-grid">
+                <a href="/tools/stat_analysis/index.html" class="tool-card">
+                    <img src="assets/knowledge/封面scVI.png" alt="ElementPrism statistical analysis tool preview">
+                    <div>
+                        <h3>ElementPrism</h3>
+                        <p>A statistical workbench for survival analysis, PCA, heatmaps, difference tests, and publication-ready export.</p>
+                    </div>
+                    <div class="tool-meta">
+                        <span class="tool-tag">WASM</span>
+                        <span class="tool-tag">PDF/SVG export</span>
+                        <span class="tool-tag">No login</span>
+                    </div>
+                </a>
+
+                <a href="/tools/deg/index.html" class="tool-card">
+                    <img src="assets/skin_aging/web_scanalysis.png" alt="DEG volcano plot tool preview">
+                    <div>
+                        <h3>DEG Analysis</h3>
+                        <p>Interactive volcano plotting with threshold control, demo data, and high-resolution figure output.</p>
+                    </div>
+                    <div class="tool-meta">
+                        <span class="tool-tag">Volcano plot</span>
+                        <span class="tool-tag">CSV/Excel</span>
+                        <span class="tool-tag">Static export</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section id="news">
         <div class="container">
             <h2>Latest News</h2>
@@ -93,78 +142,29 @@
                         <li class="news-item">
                             <span class="news-date">Nov 2025</span>
                             <div class="news-content">
-                                Presented poster at the "Stem Cells Across the Lifespan – Embryogenesis, Aging, Therapy"
-                                conference, jointly-organized by Westlake Laboratory, Westlake University and Nature
+                                Presented poster at the "Stem Cells Across the Lifespan - Embryogenesis, Aging, Therapy"
+                                conference, jointly organized by Westlake Laboratory, Westlake University and Nature
                                 Conferences.
                             </div>
                         </li>
                         <li class="news-item">
                             <span class="news-date">Nov 2025</span>
                             <div class="news-content">
-                                This is the first day of my website! Welcome to my personal page.
+                                The first version of this personal academic site is online.
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="news-sidebar">
-                    <img src="assets/knowledge/QRcode4公众号.jpg" alt="WeChat QR Code">
+                    <img src="assets/knowledge/QRcode4公众号.jpg" alt="WeChat QR code">
                     <p>关注公众号</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Research Highlights -->
-    <section id="research-highlights" style="background-color: var(--light-bg);">
-        <div class="container">
-            <h2>Research Focus</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>AI for Medicine</h3>
-                    <p>Developing deep learning models to predict tissue regeneration outcomes from histological images.
-                    </p>
-                    <div class="tags">
-                        <span class="tag">Deep Learning</span>
-                        <span class="tag">Pathology</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Skin Aging</h3>
-                    <p>Investigating the cellular heterogeneity of aging skin using single-cell RNA sequencing.</p>
-                    <div class="tags">
-                        <span class="tag">scRNA-seq</span>
-                        <span class="tag">Aging</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Regeneration</h3>
-                    <p>Exploring novel therapeutic targets for wound healing and scar reduction.</p>
-                    <div class="tags">
-                        <span class="tag">Wound Healing</span>
-                        <span class="tag">Therapeutics</span>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="research.html" class="btn btn-outline">View All Research</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <load src="./components/footer.html" />
 
-    <script>
-        // Simple mobile menu toggle (placeholder for now)
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        if (menuBtn) {
-            menuBtn.addEventListener('click', () => {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            });
-        }
-    </script>
 </body>
 
 </html>

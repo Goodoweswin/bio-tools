@@ -4,73 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research | MD Candidate</title>
+    <title>Research | Jackson Dai</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Research Specific Styles */
         .research-header {
-            text-align: center;
-            margin-bottom: 3rem;
+            max-width: 920px;
+            margin-bottom: 2.5rem;
         }
 
         .research-header h1 {
-            font-size: 2.5rem;
+            font-size: clamp(2.4rem, 5vw, 4.4rem);
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--text-color);
         }
 
         .research-header h2 {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            font-weight: normal;
+            max-width: 820px;
+            font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+            color: var(--text-secondary);
+            font-weight: 520;
             border-bottom: none;
         }
 
         .summary-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+            gap: clamp(1.25rem, 4vw, 3rem);
             align-items: center;
-            margin-bottom: 4rem;
+            margin-bottom: 4.5rem;
             background: var(--surface-bg);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 12px;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
+            box-shadow: 0 18px 50px rgba(0, 18, 24, 0.2);
         }
 
         .summary-text h3 {
-            color: var(--primary-color);
+            color: var(--text-color);
             margin-bottom: 1rem;
-            border-bottom: 2px solid var(--accent-color);
-            display: inline-block;
         }
 
         .summary-image img {
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
         }
 
         .pillar-card {
             background: var(--surface-bg);
-            backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
         }
 
         .pillar-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px var(--glow-blue);
-            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            background: var(--surface-strong);
+            border-color: var(--border-strong);
         }
 
         .pillar-image {
@@ -88,7 +85,7 @@
         }
 
         .pillar-content h3 {
-            color: var(--primary-color);
+            color: var(--text-color);
             margin-bottom: 1rem;
             font-size: 1.2rem;
         }
@@ -114,12 +111,21 @@
 
         .roadmap-item {
             background: var(--surface-bg);
-            backdrop-filter: blur(10px);
             padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
+            border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-color);
+        }
+
+        .research-divider {
+            margin: 5rem 0;
+            border: 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .research-section-title {
+            display: block;
+            margin-bottom: 2rem;
+            border: 0;
         }
 
         @media (max-width: 768px) {
@@ -128,7 +134,7 @@
             }
 
             .research-header h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -168,8 +174,7 @@
             </div>
 
             <!-- Pillars Grid -->
-            <h2 style="text-align: center; display: block; border: none; margin-bottom: 3rem;">Key Research Pillars /
-                核心研究版块</h2>
+            <h2 class="research-section-title">Key Research Pillars / 核心研究版块</h2>
             <div class="grid">
                 <!-- Pillar 1 -->
                 <div class="pillar-card">
@@ -220,8 +225,7 @@
 
             <!-- Future Roadmap -->
             <div class="roadmap-section">
-                <h2 style="border-bottom: 3px solid var(--accent-color); display: inline-block;">Future Roadmap / 未来规划
-                </h2>
+                <h2 class="research-section-title">Future Roadmap / 未来规划</h2>
                 <div class="roadmap-grid" style="margin-top: 2rem;">
                     <div class="roadmap-item">
                         <h3><i class="fas fa-map-marked-alt"></i> Spatial Transcriptomics</h3>
@@ -241,7 +245,7 @@
             <!-- ========================================== -->
             <!-- PROJECT DIVIDER -->
             <!-- ========================================== -->
-            <hr style="margin: 5rem 0; border: none; border-top: 1px solid #e0e0e0;">
+            <hr class="research-divider">
 
             <!-- PROJECT 2: Alopecia & Assembloids -->
             <div class="research-project">
@@ -282,8 +286,7 @@
                 </div>
 
                 <!-- Methodology Grid -->
-                <h2 style="text-align: center; display: block; border: none; margin-bottom: 3rem;">Methodology &
-                    Mechanism / 技术路线与机制</h2>
+                <h2 class="research-section-title">Methodology & Mechanism / 技术路线与机制</h2>
                 <div class="grid">
                     <!-- Pillar 1: Design & Model -->
                     <div class="pillar-card">
@@ -319,9 +322,8 @@
                 </div>
 
                 <!-- Keywords -->
-                <div
-                    style="margin-top: 3rem; padding: 1.5rem; background: var(--surface-bg); backdrop-filter: blur(10px); border-radius: 8px; border: 1px solid var(--border-color);">
-                    <h4 style="margin-bottom: 1rem; color: var(--secondary-color);">Keywords / 关键词</h4>
+                <div class="card" style="margin-top: 3rem;">
+                    <h4 style="margin-bottom: 1rem;">Keywords / 关键词</h4>
                     <div>
                         <span class="tag">Vascularized Assembloids</span>
                         <span class="tag">Angio-Follicular Crosstalk</span>
