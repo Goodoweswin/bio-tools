@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>ElementPrism | Bio-Tools</title>
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
   <!-- Stlite Styles -->
   <link rel="stylesheet" href="../assets/stlite/stlite.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -15,13 +15,13 @@
   <style>
     /* Tool-Specific Emerald Theme */
     :root {
-      --ep-primary: #10b981;
-      --ep-secondary: #059669;
-      --ep-bg: #0d1117;
-      --ep-text: #e6edf3;
-      --ep-text-dim: #8b949e;
-      --ep-glass: rgba(13, 17, 23, 0.7);
-      --ep-glass-border: rgba(16, 185, 129, 0.2);
+      --ep-primary: #20c7b5;
+      --ep-secondary: #7dd3fc;
+      --ep-bg: #081013;
+      --ep-text: #eef7fb;
+      --ep-text-dim: #9cb1bd;
+      --ep-glass: rgba(15, 29, 34, 0.78);
+      --ep-glass-border: rgba(174, 224, 238, 0.16);
     }
 
     * {
@@ -32,7 +32,9 @@
 
     body {
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--ep-bg);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(32, 199, 181, 0.12), transparent 28rem),
+        linear-gradient(180deg, #081013 0%, #0a1317 48%, #071014 100%);
       color: var(--ep-text);
       overflow-x: hidden;
       /* Prevent scrollbar flash during anims */
@@ -68,13 +70,15 @@
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--ep-primary);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ep-text);
       text-decoration: none;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     /* Hero Section */
@@ -93,32 +97,17 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--ep-glass-border);
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 3rem;
       max-width: 800px;
       width: 90%;
-      box-shadow: 0 0 40px rgba(16, 185, 129, 0.1);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
+      box-shadow: 0 28px 80px rgba(0, 18, 24, 0.45);
     }
 
     .hero h1 {
       font-size: clamp(2.5rem, 5vw, 4rem);
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--ep-text);
     }
 
     .hero p {
@@ -132,8 +121,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, var(--ep-primary) 0%, var(--ep-secondary) 100%);
-      color: white;
+      background: var(--ep-primary);
+      color: #04211f;
       padding: 1rem 2.5rem;
       border-radius: 12px;
       font-size: 1.2rem;
@@ -142,12 +131,12 @@
       border: none;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 16px 34px rgba(32, 199, 181, 0.18);
     }
 
     .cta-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5);
+      box-shadow: 0 16px 34px rgba(32, 199, 181, 0.24);
     }
 
     /* Features Grid */
@@ -178,7 +167,7 @@
     .stats {
       margin-top: 2rem;
       padding-top: 2rem;
-      border-top: 1px dashed var(--ep-glass-border);
+      border-top: 1px solid var(--ep-glass-border);
       color: var(--ep-text-dim);
       font-size: 0.9rem;
     }
@@ -248,7 +237,7 @@
       right: 1rem;
       z-index: 10000;
       /* Above Streamlit */
-      background: rgba(13, 17, 23, 0.8);
+      background: rgba(8, 16, 19, 0.86);
       border: 1px solid var(--ep-glass-border);
       color: var(--ep-text-dim);
       padding: 0.5rem 1rem;
@@ -272,9 +261,8 @@
   <!-- Landing Page UI -->
   <div id="landing-page">
     <nav class="nav">
-      <a href="/" class="logo"><i class="fas fa-cube"></i> ElementPrism</a>
-      <a href="/" style="color: var(--ep-text-dim); text-decoration: none;"><i class="fas fa-arrow-left"></i> Back to
-        Bio-Tools</a>
+      <a href="/" class="logo">Jackson Dai <span style="color: var(--ep-primary);">BioTools</span></a>
+      <a href="/tools" style="color: var(--ep-text-dim); text-decoration: none;"><i class="fas fa-arrow-left"></i> Tools</a>
     </nav>
 
     <section class="hero">
@@ -284,7 +272,7 @@
           click.</p>
 
         <button class="cta-btn" onclick="launchApp()">
-          <i class="fas fa-rocket"></i> Launch Workbench
+          <i class="fas fa-chart-line"></i> Open Workbench
         </button>
 
         <div class="features">
@@ -295,14 +283,14 @@
         </div>
 
         <div class="stats">
-          <i class="fas fa-users"></i> Trusted by <strong>500+</strong> Researchers | <i class="fas fa-bolt"></i>
+          <i class="fas fa-lock"></i> Runs in your browser | <i class="fas fa-bolt"></i>
           Powered by WebAssembly
         </div>
       </div>
     </section>
 
     <footer>
-      &copy; 2025 Bio-Tools Platform. All rights reserved.
+      &copy; 2026 Jackson Dai
     </footer>
   </div>
 
@@ -311,7 +299,7 @@
     <button id="back-home" onclick="closeApp()"><i class="fas fa-times"></i> Exit Tool</button>
     <div id="loading-overlay">
       <div class="spinner"></div>
-      <div style="color: var(--ep-primary); margin-top: 10px;">Loading Model...</div>
+      <div style="color: var(--ep-primary); margin-top: 10px;">Loading Python runtime...</div>
     </div>
     <div id="root"></div>
   </div>
