@@ -5,80 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioTools | Jackson Dai</title>
+    <meta name="description"
+        content="Browser-based bioinformatics tools for wet-lab researchers, including ElementPrism and DEG Analysis.">
+    <link rel="canonical" href="https://daiger.top/tools">
+    <meta property="og:title" content="BioTools | Jackson Dai">
+    <meta property="og:description"
+        content="Local-file browser tools for quick statistics, clean plots, and export-ready wet-lab figures.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daiger.top/tools">
+    <meta property="og:image" content="https://daiger.top/assets/profile.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BioTools | Jackson Dai">
+    <meta name="twitter:description"
+        content="Browser-based analysis utilities for wet-lab researchers and publication-ready figures.">
+    <meta name="twitter:image" content="https://daiger.top/assets/profile.png">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .tool-suite {
-            display: grid;
-            gap: 1.25rem;
-        }
-
-        .tool-entry {
-            display: grid;
-            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-            gap: clamp(1.25rem, 4vw, 2rem);
-            align-items: stretch;
-            padding: clamp(1rem, 2.5vw, 1.5rem);
-            border: 1px solid var(--border-color);
-            background: var(--surface-bg);
-        }
-
-        .tool-entry img {
-            width: 100%;
-            height: 100%;
-            min-height: 260px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-entry-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .feature-list {
-            display: grid;
-            gap: 0.55rem;
-            list-style: none;
-        }
-
-        .feature-list li {
-            color: var(--text-secondary);
-        }
-
-        .feature-list i {
-            width: 1.4rem;
-            color: var(--accent-color);
-        }
-
-        .roadmap-panel {
-            margin-top: 1.25rem;
-        }
-
-        @media (max-width: 768px) {
-            .tool-entry {
-                grid-template-columns: 1fr;
-            }
-
-            .tool-entry img {
-                min-height: 220px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
     <load src="./components/header.html" />
 
-    <section class="page-hero">
-        <div class="container">
-            <h1>Browser-based bioinformatics tools</h1>
-            <p>Lightweight analysis utilities for wet-lab researchers, built to run in the browser with local files and publication-ready export.</p>
+    <section class="tools-hero">
+        <div class="container tools-hero-layout">
+            <div>
+                <span class="eyebrow">BioTools workbench</span>
+                <h1>Browser tools for fast wet-lab figure decisions</h1>
+                <p>Local-file analysis utilities for researchers who need quick statistics, clean plots, and export-ready results without installing a full pipeline.</p>
+            </div>
+            <aside class="workbench-panel" aria-label="Tool design principles">
+                <div class="workbench-row">
+                    <span>runtime</span>
+                    <p>Runs in the browser with WASM or client-side workflows.</p>
+                </div>
+                <div class="workbench-row">
+                    <span>data</span>
+                    <p>Designed for local CSV, Excel, and tabular biology results.</p>
+                </div>
+                <div class="workbench-row">
+                    <span>output</span>
+                    <p>Figure export first, exploration second, login never.</p>
+                </div>
+            </aside>
         </div>
     </section>
 
@@ -86,8 +57,12 @@
         <div class="container">
             <div class="tool-suite">
                 <article class="tool-entry">
-                    <img src="assets/knowledge/封面scVI.webp" alt="ElementPrism statistical workbench preview">
+                    <div class="tool-entry-media">
+                        <img src="assets/knowledge/封面scVI.webp" alt="ElementPrism statistical workbench preview">
+                        <span class="tool-number">tool 01</span>
+                    </div>
                     <div class="tool-entry-content">
+                        <span class="tool-field">statistics workbench</span>
                         <div class="tool-meta">
                             <span class="tool-tag">Statistical analysis</span>
                             <span class="tool-tag">WASM</span>
@@ -109,8 +84,12 @@
                 </article>
 
                 <article class="tool-entry">
-                    <img src="assets/skin_aging/web_scanalysis.webp" alt="DEG analysis workflow preview">
+                    <div class="tool-entry-media">
+                        <img src="assets/skin_aging/web_scanalysis.webp" alt="DEG analysis workflow preview">
+                        <span class="tool-number">tool 02</span>
+                    </div>
                     <div class="tool-entry-content">
+                        <span class="tool-field">expression analysis</span>
                         <div class="tool-meta">
                             <span class="tool-tag">Expression analysis</span>
                             <span class="tool-tag">Volcano plot</span>
@@ -132,9 +111,12 @@
                 </article>
             </div>
 
-            <div class="card roadmap-panel">
-                <h3>Next tool under consideration</h3>
-                <p>Pathway enrichment with GO/KEGG analysis, bubble plots, and export-ready summaries.</p>
+            <div class="roadmap-panel">
+                <div>
+                    <span class="roadmap-kicker">next module</span>
+                    <h3>Pathway enrichment</h3>
+                    <p>GO/KEGG analysis, bubble plots, and export-ready summaries for common differential expression workflows.</p>
+                </div>
                 <div class="tags">
                     <span class="tag">Pathway enrichment</span>
                     <span class="tag">GO/KEGG</span>

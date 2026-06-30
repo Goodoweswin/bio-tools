@@ -43,6 +43,8 @@ Status: implemented on `src/research.html`.
 - Move long Chinese explanatory text into secondary notes or compact panels.
 
 ### Phase 3: Layout Rhythm Upgrade
+Status: partially implemented on `src/tools.html`, `src/knowledge.html`, and `src/publications.html`.
+
 - Reduce repeated card grids.
 - Use mixed layouts:
   - one large visual panel
@@ -64,6 +66,8 @@ Status: implemented on `src/research.html`.
 - Avoid scroll hijacking or heavy animation libraries unless the page is intentionally rebuilt for scroll storytelling.
 
 ### Phase 5: Performance and Deployment Hygiene
+Status: partially implemented with main-page meta tags, `robots.txt`, and `sitemap.xml`.
+
 - Keep WebP versions for public-facing research images.
 - Remove unreferenced large PNG files after confirming WebP replacements are live.
 - Preserve original source images outside the deployable `public/` tree if they are needed for editing.
@@ -92,3 +96,9 @@ Status: implemented on `src/research.html`.
 - Homepage hero now uses a portrait, research image, single-cell dot matrix, and compact research axis.
 - Homepage research section now uses a translational loop layout instead of repeated cards.
 - Research page now presents each project as a four-part editorial brief with Chinese summaries in compact disclosure panels.
+- Tools page now presents BioTools as a browser workbench with runtime, data, and output principles plus two product-like tool entries.
+- Knowledge page now presents articles as a visible research-note index with a sticky search console and stable filtering.
+- Publications page now presents scholarly output as a conservative ledger without fake metrics or invented bibliographic claims.
+- Main page-level layouts for Research, Tools, Knowledge, and Publications are consolidated in `src/css/style.css` instead of inline page styles.
+- Main pages now include descriptions, canonical URLs, Open Graph tags, and Twitter card metadata.
+- `public/robots.txt` and `public/sitemap.xml` are present for deployment.

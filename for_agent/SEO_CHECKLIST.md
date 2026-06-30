@@ -7,12 +7,12 @@
 
 ## Required Per Main Page
 Each main HTML page should have:
-- descriptive `<title>`
-- `meta charset`
-- `meta viewport`
-- consistent favicon
-- semantic `h1`
-- clear internal navigation
+- [x] descriptive `<title>`
+- [x] `meta charset`
+- [x] `meta viewport`
+- [x] consistent favicon
+- [x] semantic `h1`
+- [x] clear internal navigation
 
 Priority pages:
 - `/`
@@ -21,17 +21,17 @@ Priority pages:
 - `/knowledge`
 - `/publications`
 
-## Recommended Meta Improvements
-Future work should add:
-- `meta name="description"` on each main page
-- Open Graph tags:
-  - `og:title`
-  - `og:description`
-  - `og:type`
-  - `og:url`
-  - `og:image`
-- Twitter card tags if social sharing matters
-- canonical links for pretty URLs
+## Main Page Meta
+Implemented for `/`, `/research`, `/tools`, `/knowledge`, and `/publications`:
+- [x] `meta name="description"`
+- [x] Open Graph tags:
+  - [x] `og:title`
+  - [x] `og:description`
+  - [x] `og:type`
+  - [x] `og:url`
+  - [x] `og:image`
+- [x] Twitter card tags
+- [x] canonical links for pretty URLs
 
 ## Knowledge Articles
 For every article in `src/knowledge/**`:
@@ -42,8 +42,8 @@ For every article in `src/knowledge/**`:
 - if article content becomes important for search, add page-specific meta description
 
 ## Technical SEO
-- Add `robots.txt` if not already present.
-- Add `sitemap.xml` once page structure stabilizes.
+- [x] Add `robots.txt` if not already present.
+- [x] Add `sitemap.xml` once page structure stabilizes.
 - Ensure 404 behavior is acceptable on Cloudflare Pages.
 - Avoid breaking route slugs after they are indexed.
 

@@ -1,164 +1,226 @@
-<!-- 知识库主页 - AI·单细胞·皮肤衰老三方向
-   布局：顶部搜索框（前端过滤），3个方向卡片（AI×单细胞, 皮肤衰老, AI4Med）
-   每个卡片：标题、简介、文章数量、最新更新时间
-   数据：硬编码12篇核心文章（每方向4篇）
-   交互：点击方向→进入该方向索引页，搜索框支持关键词过滤
-   样式：学术卡片式，悬停阴影效果，移动端响应式 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>知识库 - AI·单细胞·皮肤衰老</title>
+  <title>Knowledge | Jackson Dai</title>
+  <meta name="description"
+    content="Research notes on AI4Med, single-cell biology, skin aging mechanisms, and computational methods.">
+  <link rel="canonical" href="https://daiger.top/knowledge">
+  <meta property="og:title" content="Knowledge | Jackson Dai">
+  <meta property="og:description"
+    content="A searchable research-note index for AI, single-cell biology, AI4Med, and skin aging.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://daiger.top/knowledge">
+  <meta property="og:image" content="https://daiger.top/assets/profile.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Knowledge | Jackson Dai">
+  <meta name="twitter:description"
+    content="Research notes across AI, single-cell biology, AI4Med, and skin aging.">
+  <meta name="twitter:image" content="https://daiger.top/assets/profile.png">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    /* Keep existing specific styles but remove body padding/margin as it's handled by global style */
-    .search-box {
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm);
-      margin-bottom: 30px;
-      background: var(--surface-bg);
-      color: var(--text-color);
-      backdrop-filter: blur(10px);
-    }
-
-    .search-box::placeholder {
-      color: var(--text-secondary);
-    }
-
-    .direction-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-
-    .direction-card {
-      background: var(--surface-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 25px;
-      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-      cursor: pointer;
-    }
-
-    .direction-card:hover {
-      transform: translateY(-5px);
-      background: var(--surface-strong);
-      border-color: var(--border-strong);
-    }
-
-    .direction-card h2 {
-      color: var(--text-color);
-      margin-top: 0;
-      border: 0;
-      display: block;
-      font-size: 1.35rem;
-    }
-
-    .direction-card .count {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-
-    .article-list {
-      margin-top: 15px;
-      display: none;
-    }
-
-    .article-list li {
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .article-list a {
-      text-decoration: none;
-      color: var(--primary-color);
-    }
-  </style>
 </head>
 
 <body>
 
   <load src="./components/header.html" />
 
-  <section class="page-hero">
-  <div class="container">
-    <h1>知识库：AI、单细胞组学、皮肤衰老</h1>
-    <p>围绕 AI4Med、单细胞分析和皮肤衰老机制整理的研究笔记与方法入口。</p>
-  </div>
+  <section class="knowledge-hero">
+    <div class="container">
+      <span class="eyebrow">Knowledge base</span>
+      <h1>Research notes across AI, single-cell biology, and skin aging</h1>
+      <p>一个面向长期积累的研究笔记索引，把 AI4Med、单细胞分析和皮肤衰老机制整理成可检索的知识轨道。</p>
+    </div>
   </section>
 
   <section>
-  <div class="container">
-    <input type="text" class="search-box" placeholder="搜索知识库（如：HES1、批次校正、Transformer）..."
-      onkeyup="filterArticles(this.value)">
+    <div class="container knowledge-shell">
+      <aside class="knowledge-console" aria-label="Knowledge index controls">
+        <div>
+          <span class="console-label">search</span>
+          <input type="text" class="search-box" placeholder="HES1, batch correction, Transformer"
+            oninput="filterArticles(this.value)">
+        </div>
+        <div>
+          <span class="console-label">tracks</span>
+          <ul class="track-axis">
+            <li>
+              <strong>AI × Single-cell</strong>
+              <span>Annotation, batch correction, GRN, trajectory</span>
+            </li>
+            <li>
+              <strong>Skin aging</strong>
+              <span>Fibroblast states, IL-17, HES1/KLF6, aging clocks</span>
+            </li>
+            <li>
+              <strong>AI4Med</strong>
+              <span>Drug screening, imaging, multi-omics, decision support</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
 
-    <div class="direction-grid">
-      <div class="direction-card" onclick="toggleArticles('ai-sc')">
-        <h2>AI × 单细胞组学</h2>
-        <p>探索人工智能如何革新单细胞数据分析，从自动注释到调控网络预测。</p>
-        <span class="count">4篇文章 · 最后更新：2025-01-15</span>
-        <ul class="article-list" id="ai-sc-list">
-          <li><a href="knowledge/ai-single-cell/annotation.html">AI驱动的细胞类型自动注释</a></li>
-          <li><a href="knowledge/ai-single-cell/batch-correction.html">深度学习批次效应校正</a></li>
-          <li><a href="knowledge/ai-single-cell/grn-inference.html">Transformer推断基因调控网络</a></li>
-          <li><a href="knowledge/ai-single-cell/trajectory.html">AI优化细胞轨迹分析</a></li>
-        </ul>
-      </div>
+      <div>
+        <div class="knowledge-grid" id="knowledge-grid">
+          <a class="article-entry" href="knowledge/ai-single-cell/annotation.html"
+            data-keywords="ai single-cell annotation cell type 自动注释">
+            <span class="article-meta">AI single-cell</span>
+            <div>
+              <span class="article-track">method note</span>
+              <h2>AI驱动的细胞类型自动注释</h2>
+              <p>用机器学习和深度学习模型提高单细胞注释的一致性与可复用性。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
 
-      <div class="direction-card" onclick="toggleArticles('skin-aging')">
-        <h2>单细胞视角下的皮肤衰老</h2>
-        <p>基于单细胞测序解析皮肤衰老的分子机制与细胞异质性。</p>
-        <span class="count">4篇文章 · 最后更新：2025-01-20</span>
-        <ul class="article-list" id="skin-aging-list">
-          <li><a href="knowledge/skin-aging/fibroblast.html">成纤维细胞亚群异质性研究</a></li>
-          <li><a href="knowledge/skin-aging/il17-signaling.html">IL-17信号轴在衰老中的作用</a></li>
-          <li><a href="knowledge/skin-aging/hes1-klf6.html">HES1/KLF6调控机制解析</a></li>
+          <a class="article-entry" href="knowledge/ai-single-cell/batch-correction.html"
+            data-keywords="ai single-cell batch correction 深度学习 批次效应">
+            <span class="article-meta">AI single-cell</span>
+            <div>
+              <span class="article-track">method note</span>
+              <h2>深度学习批次效应校正</h2>
+              <p>梳理单细胞整合中的批次效应问题，以及深度模型如何保持生物差异。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
 
-          <li><a href="knowledge/skin-aging/aging-clock.html">皮肤衰老时钟构建</a></li>
-        </ul>
-      </div>
+          <a class="article-entry" href="knowledge/ai-single-cell/grn-inference.html"
+            data-keywords="transformer grn gene regulatory network 基因调控网络">
+            <span class="article-meta">AI single-cell</span>
+            <div>
+              <span class="article-track">model note</span>
+              <h2>Transformer推断基因调控网络</h2>
+              <p>从表达矩阵到调控关系，理解注意力模型在 GRN 推断中的用途与边界。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
 
-      <div class="direction-card" onclick="toggleArticles('ai4med')">
-        <h2>AI4Med临床应用</h2>
-        <p>AI在医学诊断、药物筛选和衰老干预中的转化应用。</p>
-        <span class="count">4篇文章 · 最后更新：2025-01-18</span>
-        <ul class="article-list" id="ai4med-list">
-          <li><a href="knowledge/ai4med/drug-screening.html">AI预测抗衰老药物靶点</a></li>
-          <li><a href="knowledge/ai4med/skin-imaging.html">皮肤影像AI诊断模型</a></li>
-          <li><a href="knowledge/ai4med/multi-omics.html">多组学数据AI整合</a></li>
-          <li><a href="knowledge/ai4med/clinical-decision.html">临床决策支持系统</a></li>
-        </ul>
+          <a class="article-entry" href="knowledge/ai-single-cell/trajectory.html"
+            data-keywords="trajectory pseudotime ai 轨迹分析">
+            <span class="article-meta">AI single-cell</span>
+            <div>
+              <span class="article-track">method note</span>
+              <h2>AI优化细胞轨迹分析</h2>
+              <p>记录轨迹推断、伪时间建模和细胞状态转变分析中的 AI 方法。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/skin-aging/fibroblast.html"
+            data-keywords="skin aging fibroblast 成纤维细胞 皮肤衰老">
+            <span class="article-meta">skin aging</span>
+            <div>
+              <span class="article-track">biology note</span>
+              <h2>成纤维细胞亚群异质性研究</h2>
+              <p>从单细胞视角理解成纤维细胞状态、细胞外基质和皮肤衰老结构变化。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/skin-aging/il17-signaling.html"
+            data-keywords="skin aging il17 signaling inflammation 皮肤衰老 炎症">
+            <span class="article-meta">skin aging</span>
+            <div>
+              <span class="article-track">biology note</span>
+              <h2>IL-17信号轴在衰老中的作用</h2>
+              <p>整理炎症信号、屏障改变和衰老微环境之间的可能联系。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/skin-aging/hes1-klf6.html"
+            data-keywords="hes1 klf6 skin aging transcription factor">
+            <span class="article-meta">skin aging</span>
+            <div>
+              <span class="article-track">mechanism note</span>
+              <h2>HES1/KLF6调控机制解析</h2>
+              <p>追踪衰老相关转录因子模块，连接细胞状态和可验证机制。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/skin-aging/aging-clock.html"
+            data-keywords="skin aging clock biomarker 衰老时钟">
+            <span class="article-meta">skin aging</span>
+            <div>
+              <span class="article-track">model note</span>
+              <h2>皮肤衰老时钟构建</h2>
+              <p>记录生物年龄、特征选择和皮肤衰老预测模型的构建思路。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/ai4med/drug-screening.html"
+            data-keywords="ai4med drug screening aging target 药物筛选">
+            <span class="article-meta">AI4Med</span>
+            <div>
+              <span class="article-track">translation note</span>
+              <h2>AI预测抗衰老药物靶点</h2>
+              <p>从数据驱动靶点发现到候选药物排序，记录 AI 药筛的关键假设。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/ai4med/skin-imaging.html"
+            data-keywords="ai4med skin imaging diagnosis 皮肤影像">
+            <span class="article-meta">AI4Med</span>
+            <div>
+              <span class="article-track">imaging note</span>
+              <h2>皮肤影像AI诊断模型</h2>
+              <p>整理皮肤影像建模、标注策略和临床可解释性问题。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/ai4med/multi-omics.html"
+            data-keywords="ai4med multi-omics integration 多组学">
+            <span class="article-meta">AI4Med</span>
+            <div>
+              <span class="article-track">integration note</span>
+              <h2>多组学数据AI整合</h2>
+              <p>记录跨模态整合、特征对齐和转化医学解释中的常见方法。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+
+          <a class="article-entry" href="knowledge/ai4med/clinical-decision.html"
+            data-keywords="ai4med clinical decision support 临床决策">
+            <span class="article-meta">AI4Med</span>
+            <div>
+              <span class="article-track">clinical note</span>
+              <h2>临床决策支持系统</h2>
+              <p>关注模型输出如何进入临床流程，以及风险、解释和验证要求。</p>
+            </div>
+            <i class="fas fa-arrow-right article-arrow"></i>
+          </a>
+        </div>
+        <p class="empty-state" id="empty-state">没有匹配的笔记。换一个关键词试试。</p>
       </div>
     </div>
-  </div>
   </section>
 
-    <script>
-      function toggleArticles(id) {
-        const list = document.getElementById(id + '-list');
-        list.style.display = list.style.display === 'block' ? 'none' : 'block';
-      }
+  <script>
+    function filterArticles(keyword) {
+      const normalized = keyword.trim().toLowerCase();
+      const articles = document.querySelectorAll('.article-entry');
+      let visibleCount = 0;
 
-      function filterArticles(keyword) {
-        const articles = document.querySelectorAll('.article-list li');
-        articles.forEach(article => {
-          const match = article.textContent.toLowerCase().includes(keyword.toLowerCase());
-          article.style.display = match ? 'block' : 'none';
-        });
-      }
-    </script>
+      articles.forEach(article => {
+        const haystack = `${article.textContent} ${article.dataset.keywords}`.toLowerCase();
+        const isVisible = !normalized || haystack.includes(normalized);
+        article.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
 
-    <load src="./components/footer.html" />
+      document.getElementById('empty-state').classList.toggle('is-visible', visibleCount === 0);
+    }
+  </script>
+
+  <load src="./components/footer.html" />
 
 </body>
 
