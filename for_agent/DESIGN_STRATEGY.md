@@ -56,6 +56,8 @@ Status: partially implemented on `src/tools.html`, `src/knowledge.html`, and `sr
 - Ensure each major homepage section has a distinct layout family.
 
 ### Phase 4: Light Motion Layer
+Status: implemented with lightweight scroll reveal in `src/js/site.js`.
+
 - Add restrained motion only where it clarifies hierarchy.
 - Recommended effects:
   - hero text and visual layer entrance
@@ -102,3 +104,4 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Main page-level layouts for Research, Tools, Knowledge, and Publications are consolidated in `src/css/style.css` instead of inline page styles.
 - Main pages now include descriptions, canonical URLs, Open Graph tags, and Twitter card metadata.
 - `public/robots.txt` and `public/sitemap.xml` are present for deployment.
+- Main pages now load `src/js/site.js` for reduced-motion-aware scroll reveal on research, tool, knowledge, publication, and homepage entries.
