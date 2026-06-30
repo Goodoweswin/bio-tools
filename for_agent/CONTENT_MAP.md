@@ -1,11 +1,11 @@
 # Content Map
 
 ## Main Pages
-- `public/index.html`: **Home**. Hero section, News, Research Highlights.
-- `public/research.html`: **Research**. Detailed project descriptions.
-- `public/publications.html`: **Publications**. List of papers.
-- `public/tools.html`: **Tools**. Bioinformatics software showcase.
-- `public/knowledge.html`: **Knowledge Base Index**. Entry point for articles.
+- `src/index.html`: **Home**. Personal hero, research focus, BioTools entries, news.
+- `src/research.html`: **Research**. Detailed project descriptions and research visuals.
+- `src/publications.html`: **Publications**. Public-facing scholarly output placeholder and future list.
+- `src/tools.html`: **Tools**. Browser-based tool directory.
+- `src/knowledge.html`: **Knowledge Base Index**. Entry point for articles.
 
 ## Components (`src/components/`)
 - `header.html`: Global navigation bar.
@@ -20,9 +20,17 @@
 
 ## Documentation
 - `AI_CONFIG.md`: **Critical Guide**. Instructions for configuring AI providers and models in Cloudflare Dashboard.
+- `DESIGN_STRATEGY.md`: **Design Roadmap**. Taste-skill based plan for the next signature design upgrade.
+- `DESIGN_SYSTEM.md`: **Visual System**. Tokens, layout rules, motion rules, and copy rules.
+- `DEPLOYMENT.md`: **Deployment Guide**. Cloudflare Pages workflow and live smoke checks.
+- `SEO_CHECKLIST.md`: **SEO Guide**. Metadata, route, and search hygiene.
+- `ASSET_POLICY.md`: **Asset Guide**. Image optimization and deployable asset policy.
+- `TEST_CHECKLIST.md`: **QA Guide**. Build, link, visual, and live verification checklist.
+- `PROJECT_MANIFEST.md`: **Project identity and status**.
+- `CONTENT_MAP.md`: **Page, component, and asset index**.
 
 ## Knowledge Base Categories
-Located in `public/knowledge/`:
+Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
 
 ### 1. AI x Single-Cell (`ai-single-cell/`)
 - `annotation.html`: AI-driven cell type annotation.
@@ -46,5 +54,12 @@ Located in `public/knowledge/`:
 - *(Currently Empty)*
 
 ## Assets
-- `public/assets/profile.jpg`: User profile photo.
+- `src/assets/profile-hero.webp`: Optimized homepage portrait.
+- `public/assets/*.webp`: Optimized public research images used by main pages.
 - `public/assets/cv.pdf`: User CV.
+
+## Tools
+- `public/tools/stat_analysis/index.html`: ElementPrism entry page.
+- `public/tools/stat_analysis/app.py`: ElementPrism Stlite application.
+- `public/tools/deg/index.html`: DEG Analysis entry page.
+- `public/tools/deg/app.py`: DEG Analysis Stlite application.
