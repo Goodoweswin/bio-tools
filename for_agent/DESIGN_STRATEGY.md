@@ -4,7 +4,7 @@
 - **Site type**: Personal academic portfolio plus browser-based bioinformatics toolkit.
 - **Audience**: Research collaborators, mentors, clinicians, wet-lab users, and visitors evaluating credibility.
 - **Vibe**: Academic cyber-future, restrained, research-driven, not generic dark SaaS.
-- **Current issue**: The site is clean and coherent, but still reads a little template-like because the hero, card rhythm, and research structure are conventional.
+- **Current issue**: The design direction is strong, but the homepage first screen still feels slightly poster-like because the headline is large, the hero runs to four lines on common desktop widths, and the right collage carries many competing elements.
 
 ## Target Dials
 - **Design variance**: Move from 6 to 8.
@@ -14,7 +14,7 @@
 ## Signature Upgrade Plan
 
 ### Phase 1: Hero Recomposition
-Status: implemented on `src/index.html`.
+Status: implemented on `src/index.html`; now entering a sharpening pass after live screenshot review.
 
 - Rebuild the home hero around a memorable research identity, not only a standard left-text/right-image split.
 - Candidate headline direction: `Regeneration, decoded at single-cell resolution`.
@@ -29,6 +29,16 @@ Status: implemented on `src/index.html`.
   - `endothelial senescence`
   - `regenerative medicine`
   - `browser tools`
+
+### Phase 1A: Hero Sharpening Pass
+Status: implemented on `src/index.html` and `src/css/style.css` after local desktop and mobile screenshot review.
+
+- Keep the current identity, but make the first screen more precise and less heavy.
+- Shorten or rebalance the headline so the desktop hero reads in roughly 2-3 lines.
+- Shift CTA language from generic portfolio copy to system-entry copy.
+- Tune the collage so the portrait and vascular aging image stay primary while the dot matrix, labels, and axis become quieter supporting structure.
+- Preserve small-radius visual rules and avoid soft rounded rectangles for research image assets.
+- Keep the section below the hero slightly discoverable on common desktop viewports.
 
 ### Phase 2: Research Page Editorial Rewrite
 Status: implemented on `src/research.html`.
@@ -93,6 +103,7 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Research should be scannable in 30 seconds.
 - The site should feel more like a personal research system than a generic SaaS landing page.
 - Main pages should preserve current URLs and Cloudflare Pages deployment behavior.
+- The homepage hero should feel sharp, controlled, and interface-like rather than simply large.
 
 ## Implementation Notes
 - Homepage hero now uses a portrait, research image, single-cell dot matrix, and compact research axis.
@@ -105,3 +116,4 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Main pages now include descriptions, canonical URLs, Open Graph tags, and Twitter card metadata.
 - `public/robots.txt` and `public/sitemap.xml` are present for deployment.
 - Main pages now load `src/js/site.js` for reduced-motion-aware scroll reveal on research, tool, knowledge, publication, and homepage entries.
+- Homepage Phase 1A shortened the hero headline, changed the primary CTA to `Open Research System`, reduced collage crowding, softened first-frame animation opacity loss, and tightened mobile navigation spacing.

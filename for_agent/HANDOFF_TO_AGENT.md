@@ -1,41 +1,83 @@
-# Engineering Handoff: 2026-01-13
+# Engineering Handoff
 
-**Status**: Live / Cloudflare & Offline Synchronized
-**Last Feature**: Layout Micro-Adjustment & Manual Guides
-**Repository**: `bio-tools` (v4.1.0)
+## Current Status
+- **Project**: Jackson Dai personal research website plus browser BioTools.
+- **Repository**: `/home/y417954/biotools/bio-tools`.
+- **Public URL**: `https://daiger.top/`.
+- **Deployment**: GitHub main branch to Cloudflare Pages.
+- **Latest verified build command**: `./node_modules/.bin/vite build`.
 
-## 1. Session Summary
-Completed major visual upgrades for publication-grade charts and solved critical deployment constraints.
-- **Visuals**: Implemented "Single Metric Mode" and "Sci Palette" for Bar/Box plots, matching top-tier journal aesthetics.
-- **Infrastructure**:
-    - Encountered Cloudflare 25MB limit with local Scipy wheel.
-    - **Solution**: Reverted git to lightweight state (Scipy via CDN) for Cloudflare.
-    - **Deliverable**: Generated `bio-tools-server-deploy.zip` (full offline bundle) for private server deployment.
-- **Refinement**:
-    - Solved "Single Metric Mode" misalignment via "Conservative Alignment" (Fixed Width + xlim padding).
-    - Produced `CODE_STYLE_ADJUSTMENT.md` for manual styling control.
-## 2. Current Architecture
-- **Frontend**: Vite + HTML/JS.
-- **Tools**: Client-side Python (Pyodide/Stlite) via Hybrid Loading.
-    - **Workbench**: `/tools/stat_analysis/index.html` -> `app.py` (v4.0).
-    - **DEG Tool**: `/tools/deg/index.html` -> `app.py` (Placeholder).
-- **Backend**: Cloudflare Pages Functions (`/api/chat`).
+## Current Site Shape
+- `/` is a research-led landing page with hero collage, research focus, tools, and news.
+- `/research` is an editorial research brief page with structured project sections.
+- `/tools` presents BioTools as a browser workbench.
+- `/knowledge` is a searchable index of 12 research notes.
+- `/publications` is a conservative scholarly output ledger.
+- `/tools/stat_analysis/index.html` serves ElementPrism.
+- `/tools/deg/index.html` serves DEG Analysis.
 
-## 3. Next Steps (Prioritized)
+## Design System Notes
+- Primary design language: academic, precise, restrained, research-led.
+- Avoid generic SaaS softness, large rounded cards, fake metrics, and decorative hype.
+- Main styling is centralized in `src/css/style.css`.
+- Main pages should not reintroduce page-local `<style>` blocks unless there is a strong reason.
+- Shape language:
+  - small controls: 3px radius
+  - panels: 6px radius
+  - large visual panels: 8px radius
+  - research images should generally stay square or near-square
+  - tags and dot markers may stay fully rounded
+- Motion is handled by `src/js/site.js` and must continue to honor `prefers-reduced-motion`.
 
-### A. DEG Tool Development (Immediate)
-- The file `public/tools/deg/app.py` is currently a basic template.
-- **Action**: Implement full Volcano Plot logic (using matplotlib/seaborn) similar to `stat_analysis`.
-- **Assets**: Reuse `tools/assets` for local wheels if needed.
+## Files To Know
+- `src/index.html`: homepage content structure.
+- `src/research.html`: research project structure.
+- `src/tools.html`: BioTools workbench page.
+- `src/knowledge.html`: searchable note index.
+- `src/publications.html`: scholarly output ledger.
+- `src/css/style.css`: central visual system.
+- `src/js/site.js`: lightweight scroll reveal.
+- `public/robots.txt`: search crawler policy.
+- `public/sitemap.xml`: public route map.
+- `for_agent/DESIGN_STRATEGY.md`: design plan and implementation notes.
+- `for_agent/DESIGN_SYSTEM.md`: visual rules.
+- `for_agent/SEO_CHECKLIST.md`: SEO status.
+- `for_agent/DEPLOYMENT.md`: deployment notes.
+- `for_agent/ASSET_POLICY.md`: image and asset policy.
+- `for_agent/TEST_CHECKLIST.md`: verification checklist.
 
-### B. RAG Implementation
-- (Carry over from previous) Enable Cloudflare Vectorize and build ingestion script for `public/knowledge/`.
+## Verification Checklist
+Run before pushing:
+```bash
+./node_modules/.bin/vite build
+git diff --check
+xmllint --noout public/sitemap.xml
+```
 
-### C. Content & UI
-- Populate `public/knowledge` (Feed the RAG).
-- Improve Chat UI (Add Markdown rendering/Highlight.js).
+After pushing, check:
+- `https://daiger.top/`
+- `https://daiger.top/research`
+- `https://daiger.top/tools`
+- `https://daiger.top/knowledge`
+- `https://daiger.top/publications`
+- `https://daiger.top/robots.txt`
+- `https://daiger.top/sitemap.xml`
 
-## 4. Operational Notes
-- **Git Strategy**: Keep repo lightweight (<100MB). Do NOT commit large wheels (Scipy) directly. Use `enable_offline_mode.py` on server to fetch them.
-- **Offline Package**: A full backup is at `/home/cy410080/biotools/bio-tools-server-deploy.zip`.
-- **Debugging**: If Cloudflare fails, check if `scipy` was accidentally committed locally.
+## Known Open Work
+- Phase 1A homepage hero sharpening has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
+- After deployment, recheck the live homepage at `https://daiger.top/` to confirm Cloudflare has served the new build.
+- Decide whether `NRX` in research copy should remain a placeholder, become a real target, or be reframed as a candidate regulator.
+- Add real publications, posters, abstracts, or links when cleared for public sharing.
+- Add tool documentation for accepted input formats, demo datasets, and validation assumptions.
+- Consider adding a pathway enrichment module as the next BioTools entry.
+- Consider per-article SEO descriptions for `src/knowledge/**`.
+- Consider generating `sitemap.xml` automatically once content grows.
+
+## Git Notes
+- Do not revert user changes without explicit permission.
+- Keep unrelated dirty files out of commits.
+- If push fails due GitHub credentials in the agent environment, ask the user to run:
+```bash
+cd /home/y417954/biotools/bio-tools
+git push origin main
+```
