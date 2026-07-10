@@ -65,8 +65,9 @@ After pushing, check:
 
 ## Known Open Work
 - Phase 1A homepage hero sharpening has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
+- Phase 2 content accuracy has started: public text now reframes `NRX` as candidate endothelial regulators, while image-embedded labels remain unchanged until image assets are revised.
 - After deployment, recheck the live homepage at `https://daiger.top/` to confirm Cloudflare has served the new build.
-- Decide whether `NRX` in research copy should remain a placeholder, become a real target, or be reframed as a candidate regulator.
+- Decide whether image-embedded `NRX` labels should be revised in the underlying figure assets.
 - Add real publications, posters, abstracts, or links when cleared for public sharing.
 - Add tool documentation for accepted input formats, demo datasets, and validation assumptions.
 - Consider adding a pathway enrichment module as the next BioTools entry.

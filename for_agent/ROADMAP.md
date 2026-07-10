@@ -27,6 +27,8 @@ Status: implemented and locally verified on 1440px desktop and 390px mobile scre
   - mobile hero remains readable without overlapping panels
 
 ## Phase 2: Content Accuracy
+Status: started. Public copy now reframes `NRX` as candidate endothelial regulators unless the term appears inside existing image assets.
+
 - Replace or reframe placeholder scientific terms such as `NRX`.
 - Add real publication metadata when available:
   - title

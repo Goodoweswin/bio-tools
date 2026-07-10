@@ -11,6 +11,7 @@ All notable changes to the **bio-tools** personal research website are documente
   - quieted secondary collage layers while preserving the portrait and vascular aging figure
   - reduced mobile navigation spacing and hid the mobile scrollbar
   - adjusted first-frame hero animation so content remains readable during screenshot and load states
+- Research and Publications copy now reframes `NRX` as candidate endothelial regulators in public text.
 
 ### Verified
 - `./node_modules/.bin/vite build` passes.
