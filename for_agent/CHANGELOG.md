@@ -5,6 +5,13 @@ All notable changes to the **bio-tools** personal research website are documente
 ## Unreleased
 
 ### Changed
+- Homepage Phase 1B Future Lab OS redesign:
+  - replaced the split collage hero with a `Regeneration OS` atlas hero
+  - added semantic route grid entries for Map, Niche, Tools, and Notes
+  - replaced the old research focus block with a translational research loop
+  - reframed BioTools as browser instruments with workflow steps
+  - changed Latest News into a compact signal feed
+  - added atlas scan, matrix pulse, hover depth, and scroll reveal targets
 - Homepage Phase 1A hero sharpening pass after live screenshot review:
   - shortened the hero headline to reduce poster-like first-screen weight
   - changed primary CTA copy to `Open Research System`
@@ -16,6 +23,7 @@ All notable changes to the **bio-tools** personal research website are documente
 ### Verified
 - `./node_modules/.bin/vite build` passes.
 - Local Firefox screenshots checked at 1440px desktop and 390px mobile.
+- Homepage Phase 1B checked with local Firefox screenshots at 1440px desktop and 390px mobile.
 
 ## [2026-07-01] - Research Website Redesign and Deployment Hygiene
 

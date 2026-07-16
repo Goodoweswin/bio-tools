@@ -26,6 +26,22 @@ Status: implemented and locally verified on 1440px desktop and 390px mobile scre
   - right-side collage has one clear focal point
   - mobile hero remains readable without overlapping panels
 
+## Phase 1B: Future Lab OS Homepage
+Status: implemented and locally verified on 1440px desktop and 390px mobile screenshots.
+
+- Rebuild homepage into a stronger future-facing research operating system.
+- Use `Regeneration OS` as the first-screen identity.
+- Replace generic split-hero rhythm with:
+  - atlas core
+  - semantic route grid
+  - translational research loop
+  - BioTools instrument dock
+  - compact signal feed
+- Keep existing routes, navigation, assets, and deployment behavior.
+- Next acceptance check:
+  - verify the deployed `https://daiger.top/` homepage after push
+  - decide whether Research, Tools, and Knowledge should receive the same OS treatment
+
 ## Phase 2: Content Accuracy
 Status: started. Public copy now reframes `NRX` as candidate endothelial regulators unless the term appears inside existing image assets.
 

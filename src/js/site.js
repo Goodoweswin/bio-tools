@@ -3,8 +3,12 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 if (!prefersReducedMotion) {
   const revealTargets = [
     ".feature-panel",
+    ".route-cell",
+    ".loop-card",
     ".research-brief",
     ".tool-card",
+    ".tool-instrument",
+    ".signal-row",
     ".news-item",
     ".project-brief",
     ".brief-cell",
