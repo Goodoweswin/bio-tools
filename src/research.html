@@ -29,63 +29,86 @@
 
     <load src="./components/header.html" />
 
-    <section class="research-page-hero">
-        <div class="container">
-            <span class="eyebrow">Research system</span>
-            <h1>Vascular aging, follicle repair, and AI-guided regeneration</h1>
-            <p>Jackson Dai studies how senescent vascular niches reshape skin and hair repair, using single-cell biology, organoid models, and computational tools.</p>
-            <div class="research-index" aria-label="Research structure">
-                <span>core question</span>
-                <span>model system</span>
-                <span>computational layer</span>
-                <span>translational angle</span>
+    <section class="research-os-hero">
+        <div class="container research-os-shell">
+            <div class="research-os-copy">
+                <span class="system-kicker">Research modules</span>
+                <h1>Vascular aging to regenerative control</h1>
+                <p>Two programs connect single-cell maps, vascularized models, and clinical repair hypotheses.</p>
             </div>
+
+            <div class="research-orbit" aria-label="Research module overview">
+                <figure class="orbit-image orbit-image-large">
+                    <img src="/assets/skin_aging/websummary_scEC.webp" alt="Single-cell endothelial aging research summary">
+                </figure>
+                <figure class="orbit-image orbit-image-small">
+                    <img src="/assets/vHFO_exos/web_vHFO.webp" alt="Vascularized hair follicle assembloid model">
+                </figure>
+                <div class="orbit-readout">
+                    <strong>Research route</strong>
+                    <span>cell states, vascular niches, regenerative models</span>
+                </div>
+            </div>
+
+            <nav class="research-module-rail" aria-label="Research module routes">
+                <a href="#vascular-skin-axis">
+                    <span>Skin axis</span>
+                    <strong>Endothelial aging</strong>
+                </a>
+                <a href="#angio-follicular-crosstalk">
+                    <span>Follicle repair</span>
+                    <strong>Vascularized assembloids</strong>
+                </a>
+                <a href="#validation-layers">
+                    <span>Validation</span>
+                    <strong>Spatial and clinical layers</strong>
+                </a>
+            </nav>
         </div>
     </section>
 
-    <main>
-        <article class="project-brief">
-            <div class="container project-layout">
-                <aside class="project-media">
+    <main class="research-os-main">
+        <article class="research-module" id="vascular-skin-axis">
+            <div class="container research-module-grid">
+                <aside class="module-visual">
                     <img src="/assets/skin_aging/websummary_scEC.webp" alt="Single-cell endothelial aging research summary">
-                    <div class="project-media-caption">
-                        <span>project 01</span>
-                        <strong>Vascular-skin axis in dermal aging</strong>
+                    <div class="module-caption">
+                        <strong>Vascular-skin axis</strong>
+                        <span>Single-cell endothelial aging map</span>
                     </div>
                 </aside>
 
-                <div class="project-content">
-                    <span class="eyebrow">Skin aging biology</span>
+                <div class="module-content">
                     <h2>Deciphering the vascular-skin axis</h2>
-                    <p class="project-subtitle">Endothelial senescence and candidate endothelial regulators are framed as upstream drivers of dermal aging rather than passive consequences of tissue decline.</p>
+                    <p class="module-lede">Endothelial senescence and candidate endothelial regulators are framed as upstream drivers of dermal aging rather than passive consequences of tissue decline.</p>
 
-                    <div class="brief-grid">
-                        <section class="brief-cell">
-                            <span>core question</span>
+                    <div class="module-board">
+                        <section>
+                            <span>Question</span>
                             <h3>What makes aged skin less repairable?</h3>
                             <p>The project tests whether senescent endothelial programs actively reshape fibroblast behavior and extracellular matrix maintenance.</p>
                         </section>
-                        <section class="brief-cell">
-                            <span>model system</span>
+                        <section>
+                            <span>Model</span>
                             <h3>Human skin and endothelial senescence</h3>
-                            <p>Single-cell datasets, clinical samples, endothelial culture, and fibroblast co-culture are used to map vascular niche behavior.</p>
+                            <p>Single-cell datasets, clinical samples, endothelial culture, and fibroblast co-culture map vascular niche behavior.</p>
                         </section>
-                        <section class="brief-cell">
-                            <span>computational layer</span>
+                        <section>
+                            <span>Computation</span>
                             <h3>Single-cell mapping to target nomination</h3>
                             <p>scRNA-seq reanalysis identifies regulator-low endothelial states, inflammatory secretome programs, and candidate crosstalk signals.</p>
                         </section>
-                        <section class="brief-cell">
-                            <span>translational angle</span>
+                        <section>
+                            <span>Translation</span>
                             <h3>Vascular normalization and repair</h3>
                             <p>Small molecules and engineered exosomes are explored as ways to restore vascular support and improve dermal regeneration.</p>
                         </section>
                     </div>
 
-                    <div class="method-strip">
-                        <span>current route</span>
+                    <div class="module-route">
+                        <h3>Validation route</h3>
                         <p>Discovery starts from public and clinical single-cell profiles, moves into mechanistic validation of candidate-regulator endothelial states, then returns to intervention models for skin aging and wound repair.</p>
-                        <div class="figure-row">
+                        <div class="module-figures">
                             <img src="/assets/skin_aging/web_scanalysis.webp" alt="Single-cell skin aging analysis">
                             <img src="/assets/skin_aging/web_workflow_EC.webp" alt="Endothelial mechanism workflow">
                         </div>
@@ -99,48 +122,47 @@
             </div>
         </article>
 
-        <article class="project-brief">
-            <div class="container project-layout">
-                <aside class="project-media">
+        <article class="research-module" id="angio-follicular-crosstalk">
+            <div class="container research-module-grid">
+                <aside class="module-visual">
                     <img src="/assets/vHFO_exos/web_vHFO.webp" alt="Vascularized hair follicle assembloid model">
-                    <div class="project-media-caption">
-                        <span>project 02</span>
-                        <strong>Angio-follicular crosstalk in alopecia</strong>
+                    <div class="module-caption">
+                        <strong>Angio-follicular crosstalk</strong>
+                        <span>Vascularized hair follicle assembloid model</span>
                     </div>
                 </aside>
 
-                <div class="project-content">
-                    <span class="eyebrow">Regenerative model systems</span>
+                <div class="module-content">
                     <h2>Restoring angio-follicular crosstalk</h2>
-                    <p class="project-subtitle">A vascularized assembloid strategy is used to study how vascular signals may reverse senescence in alopecia-derived dermal papilla cells.</p>
+                    <p class="module-lede">A vascularized assembloid strategy is used to study how vascular signals may reverse senescence in alopecia-derived dermal papilla cells.</p>
 
-                    <div class="brief-grid">
-                        <section class="brief-cell">
-                            <span>core question</span>
+                    <div class="module-board">
+                        <section>
+                            <span>Question</span>
                             <h3>Can a vascular niche rescue follicle aging?</h3>
                             <p>The project asks whether vascularized hair follicle assembloids can restore missing signals in androgenetic alopecia models.</p>
                         </section>
-                        <section class="brief-cell">
-                            <span>model system</span>
+                        <section>
+                            <span>Model</span>
                             <h3>vHFO assembloids and patient DPCs</h3>
                             <p>Human hair follicle organoids and blood vessel organoids are fused, then tested against oxidative stress models of DPC senescence.</p>
                         </section>
-                        <section class="brief-cell">
-                            <span>computational layer</span>
+                        <section>
+                            <span>Computation</span>
                             <h3>Multi-omics signal discovery</h3>
                             <p>RNA-seq and proteomics screen vHFO-derived exosomes for angiocrine factors and miRNAs linked to Wnt and antioxidant rescue.</p>
                         </section>
-                        <section class="brief-cell">
-                            <span>translational angle</span>
+                        <section>
+                            <span>Translation</span>
                             <h3>Exosome-guided follicle repair</h3>
                             <p>vHFO-Exos are evaluated for their ability to restore proliferation, ALP, Versican, and hair-inductive properties in aged DPCs.</p>
                         </section>
                     </div>
 
-                    <div class="method-strip">
-                        <span>experimental route</span>
+                    <div class="module-route">
+                        <h3>Experimental route</h3>
                         <p>The workflow combines assembloid construction, patient-derived DPC stress modeling, exosome profiling, and functional validation of senescence reversal.</p>
-                        <div class="figure-row">
+                        <div class="module-figures">
                             <img src="/assets/vHFO_exos/web_exp_design.webp" alt="vHFO experimental design">
                             <img src="/assets/vHFO_exos/web_cellular_mechnism.webp" alt="vHFO cellular mechanism">
                         </div>
@@ -154,16 +176,18 @@
             </div>
         </article>
 
-        <section class="roadmap-band">
-            <div class="container">
-                <span class="eyebrow">Forward path</span>
-                <h2>Next validation layers</h2>
-                <div class="roadmap-list">
-                    <article class="roadmap-item">
+        <section class="validation-layers" id="validation-layers">
+            <div class="container validation-shell">
+                <div>
+                    <h2>Next validation layers</h2>
+                    <p class="section-intro">The next pass connects spatial proximity, clinical sampling, and intervention response into a tighter evidence chain.</p>
+                </div>
+                <div class="validation-grid">
+                    <article class="validation-card">
                         <h3><i class="fas fa-map-marked-alt"></i> Spatial Transcriptomics</h3>
                         <p>Profile candidate-regulator-low endothelial niches in situ and test their proximity to senescent fibroblast states.</p>
                     </article>
-                    <article class="roadmap-item">
+                    <article class="validation-card">
                         <h3><i class="fas fa-user-md"></i> Clinical Validation</h3>
                         <p>Expand human skin biopsy validation across ages and test whether candidate endothelial regulators can support diagnostic or therapeutic stratification.</p>
                     </article>

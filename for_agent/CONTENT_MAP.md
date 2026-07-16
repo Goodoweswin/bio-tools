@@ -1,8 +1,8 @@
 # Content Map
 
 ## Main Pages
-- `src/index.html`: **Home**. Personal hero, research focus, BioTools entries, news.
-- `src/research.html`: **Research**. Detailed project descriptions and research visuals.
+- `src/index.html`: **Home**. Future Lab OS landing page with atlas hero, research loop, BioTools dock, and signal feed.
+- `src/research.html`: **Research**. Future Lab OS module page with research orbit, module rail, visual project boards, validation routes, and Chinese summaries.
 - `src/publications.html`: **Publications**. Public-facing scholarly output placeholder and future list.
 - `src/tools.html`: **Tools**. Browser-based tool directory.
 - `src/knowledge.html`: **Knowledge Base Index**. Entry point for articles.

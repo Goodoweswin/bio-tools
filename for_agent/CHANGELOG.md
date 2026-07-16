@@ -5,6 +5,13 @@ All notable changes to the **bio-tools** personal research website are documente
 ## Unreleased
 
 ### Changed
+- Research page Future Lab OS module redesign:
+  - replaced proposal-like project briefs with a research operating-system hero
+  - added module rail navigation for skin axis, follicle repair, and validation layers
+  - rebuilt project content as visual module boards with real research assets
+  - added responsive Research OS layouts for desktop, tall desktop, tablet, and mobile
+  - added Research OS reveal targets and restrained hover motion
+  - tightened mobile navigation so all primary links are visible at 390px width
 - Homepage Phase 1B Future Lab OS redesign:
   - replaced the split collage hero with a `Regeneration OS` atlas hero
   - added semantic route grid entries for Map, Niche, Tools, and Notes
@@ -24,6 +31,7 @@ All notable changes to the **bio-tools** personal research website are documente
 - `./node_modules/.bin/vite build` passes.
 - Local Firefox screenshots checked at 1440px desktop and 390px mobile.
 - Homepage Phase 1B checked with local Firefox screenshots at 1440px desktop and 390px mobile.
+- Research OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
 
 ## [2026-07-01] - Research Website Redesign and Deployment Hygiene
 

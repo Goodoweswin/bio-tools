@@ -17,6 +17,11 @@ if (!prefersReducedMotion) {
     ".output-entry",
     ".roadmap-panel",
     ".roadmap-list",
+    ".research-module",
+    ".research-module-rail a",
+    ".module-board section",
+    ".module-route",
+    ".validation-card",
   ];
 
   const elements = document.querySelectorAll(revealTargets.join(","));

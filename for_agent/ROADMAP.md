@@ -40,7 +40,24 @@ Status: implemented and locally verified on 1440px desktop and 390px mobile scre
 - Keep existing routes, navigation, assets, and deployment behavior.
 - Next acceptance check:
   - verify the deployed `https://daiger.top/` homepage after push
-  - decide whether Research, Tools, and Knowledge should receive the same OS treatment
+  - decide whether Tools and Knowledge should receive the same OS treatment
+
+## Phase 1C: Research OS Modules
+Status: implemented and locally verified on 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
+
+- Rebuild `/research` into a Future Lab OS module page.
+- Keep existing research programs, Chinese summaries, and public route stable.
+- Replace the older editorial brief rhythm with:
+  - research module hero
+  - skin axis, follicle repair, and validation module rail
+  - real research-asset orbit
+  - Question, Model, Computation, and Translation boards
+  - validation route panels
+- Acceptance checks passed:
+  - mobile navigation shows all primary links at 390px width
+  - hero avoids oversized empty space on tall desktop viewports
+  - module boards do not overlap or collapse in screenshot QA
+  - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
 
 ## Phase 2: Content Accuracy
 Status: started. Public copy now reframes `NRX` as candidate endothelial regulators unless the term appears inside existing image assets.

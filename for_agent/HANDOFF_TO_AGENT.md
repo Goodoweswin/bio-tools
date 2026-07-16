@@ -9,7 +9,7 @@
 
 ## Current Site Shape
 - `/` is a Future Lab OS-style landing page with atlas hero, route grid, research loop, BioTools dock, and signal feed.
-- `/research` is an editorial research brief page with structured project sections.
+- `/research` is a Future Lab OS-style module page with research orbit, module rail, visual project boards, validation routes, and compact Chinese summaries.
 - `/tools` presents BioTools as a browser workbench.
 - `/knowledge` is a searchable index of 12 research notes.
 - `/publications` is a conservative scholarly output ledger.
@@ -65,10 +65,11 @@ After pushing, check:
 
 ## Known Open Work
 - Phase 1B homepage Future Lab OS redesign has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
+- Phase 1C Research OS module redesign has been implemented and locally verified with 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
 - Phase 1A homepage hero sharpening has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
 - Phase 2 content accuracy has started: public text now reframes `NRX` as candidate endothelial regulators, while image-embedded labels remain unchanged until image assets are revised.
-- After deployment, recheck the live homepage at `https://daiger.top/` to confirm Cloudflare has served the new build.
-- Decide whether Research, Tools, and Knowledge should be visually upgraded to match the Future Lab OS homepage.
+- After deployment, recheck the live homepage and research page at `https://daiger.top/` to confirm Cloudflare has served the new build.
+- Decide whether Tools and Knowledge should be visually upgraded to match the Future Lab OS language.
 - Decide whether image-embedded `NRX` labels should be revised in the underlying figure assets.
 - Add real publications, posters, abstracts, or links when cleared for public sharing.
 - Add tool documentation for accepted input formats, demo datasets, and validation assumptions.

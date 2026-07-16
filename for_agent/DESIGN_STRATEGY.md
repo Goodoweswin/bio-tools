@@ -4,7 +4,7 @@
 - **Site type**: Personal academic portfolio plus browser-based bioinformatics toolkit.
 - **Audience**: Research collaborators, mentors, clinicians, wet-lab users, and visitors evaluating credibility.
 - **Vibe**: Academic cyber-future, restrained, research-driven, not generic dark SaaS.
-- **Current issue**: The homepage now has a stronger Future Lab OS direction, but the rest of the site still needs to catch up to that sharper research-system language.
+- **Current issue**: Homepage and Research now share the Future Lab OS direction; Tools, Knowledge, and Publications should be tightened next so the site feels like one system.
 
 ## Target Dials
 - **Design variance**: Move from 6 to 8.
@@ -50,8 +50,22 @@ Status: implemented on `src/index.html`, `src/css/style.css`, and `src/js/site.j
 - Added atlas scan motion, cell-matrix pulse, hover depth, and reveal targets while keeping reduced-motion support.
 - Kept page URLs, navigation, real research assets, and the existing dark academic theme stable.
 
+### Phase 1C: Research OS Modules
+Status: implemented on `src/research.html`, `src/css/style.css`, and `src/js/site.js`.
+
+- Rebuilt Research as an OS-style module page rather than a proposal-like brief page.
+- Added a first-screen research module hero using real vascular aging and vHFO assets.
+- Added a module rail for:
+  - `Skin Axis`
+  - `Follicle Repair`
+  - `Validation`
+- Converted each project into a visual module board with Question, Model, Computation, and Translation panels.
+- Kept Chinese summaries in compact disclosure panels.
+- Added responsive handling for desktop, tall desktop, tablet, and mobile.
+- Added scroll reveal targets and restrained hover motion while preserving reduced-motion support.
+
 ### Phase 2: Research Page Editorial Rewrite
-Status: implemented on `src/research.html`.
+Status: superseded by Phase 1C while preserving the same project content and bilingual summaries.
 
 - Reframe each major project as an editorial research brief instead of proposal-style long-form copy.
 - For every project, use the same four-part structure:
@@ -128,3 +142,4 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Main pages now load `src/js/site.js` for reduced-motion-aware scroll reveal on research, tool, knowledge, publication, and homepage entries.
 - Homepage Phase 1A shortened the hero headline, changed the primary CTA to `Open Research System`, reduced collage crowding, softened first-frame animation opacity loss, and tightened mobile navigation spacing.
 - Homepage Phase 1B rebuilt the first page as a Future Lab OS with atlas hero, semantic route grid, translational research loop, BioTools instrument dock, and signal feed.
+- Research Phase 1C rebuilt `/research` as a Future Lab OS module page with a module rail, visual research orbit, module boards, validation route panels, and responsive screenshot QA.
