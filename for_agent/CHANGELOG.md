@@ -5,6 +5,13 @@ All notable changes to the **bio-tools** personal research website are documente
 ## Unreleased
 
 ### Changed
+- Tools page BioTools Control Room redesign:
+  - replaced the browser workbench hero with a `BioTools control room` OS hero
+  - added a runtime console for local-file, no-login, WASM-oriented analysis
+  - rebuilt live tool entries as instrument stations for ElementPrism and DEG Analysis
+  - added an analysis loop section for input, compute, and export flow
+  - retained the pathway enrichment module as the next planned instrument
+  - added Tools OS reveal targets, hover motion, and mobile layout handling
 - Research page Future Lab OS module redesign:
   - replaced proposal-like project briefs with a research operating-system hero
   - added module rail navigation for skin axis, follicle repair, and validation layers
@@ -32,6 +39,7 @@ All notable changes to the **bio-tools** personal research website are documente
 - Local Firefox screenshots checked at 1440px desktop and 390px mobile.
 - Homepage Phase 1B checked with local Firefox screenshots at 1440px desktop and 390px mobile.
 - Research OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
+- Tools OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
 
 ## [2026-07-01] - Research Website Redesign and Deployment Hygiene
 

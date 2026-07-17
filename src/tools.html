@@ -29,102 +29,156 @@
 
     <load src="./components/header.html" />
 
-    <section class="tools-hero">
-        <div class="container tools-hero-layout">
-            <div>
-                <span class="eyebrow">BioTools workbench</span>
-                <h1>Browser tools for fast wet-lab figure decisions</h1>
-                <p>Local-file analysis utilities for researchers who need quick statistics, clean plots, and export-ready results without installing a full pipeline.</p>
+    <section class="tools-os-hero">
+        <div class="container tools-os-shell">
+            <div class="tools-os-copy">
+                <span class="system-kicker">BioTools control room</span>
+                <h1>Browser instruments for wet-lab decisions</h1>
+                <p>Local-file analysis, fast statistical checks, and export-ready figures without installing a full pipeline.</p>
             </div>
-            <aside class="workbench-panel" aria-label="Tool design principles">
-                <div class="workbench-row">
-                    <span>runtime</span>
-                    <p>Runs in the browser with WASM or client-side workflows.</p>
+
+            <aside class="tools-console" aria-label="BioTools runtime status">
+                <div class="console-screen">
+                    <span class="console-label">Runtime route</span>
+                    <strong>File in, figure out</strong>
+                    <p>CSV, Excel, and tabular biology results stay local while browser runtimes handle analysis and export.</p>
                 </div>
-                <div class="workbench-row">
-                    <span>data</span>
-                    <p>Designed for local CSV, Excel, and tabular biology results.</p>
+                <div class="console-grid">
+                    <div>
+                        <span>Live modules</span>
+                        <strong>2</strong>
+                    </div>
+                    <div>
+                        <span>Login</span>
+                        <strong>Never</strong>
+                    </div>
+                    <div>
+                        <span>Runtime</span>
+                        <strong>WASM</strong>
+                    </div>
                 </div>
-                <div class="workbench-row">
-                    <span>output</span>
-                    <p>Figure export first, exploration second, login never.</p>
+                <div class="tools-flow" aria-label="BioTools analysis loop">
+                    <span>Import</span>
+                    <span>Analyze</span>
+                    <span>Export</span>
                 </div>
             </aside>
+
+            <nav class="tools-module-rail" aria-label="BioTools page routes">
+                <a href="#live-instruments">
+                    <span>Live</span>
+                    <strong>Open instruments</strong>
+                </a>
+                <a href="#analysis-loop">
+                    <span>Loop</span>
+                    <strong>Local analysis flow</strong>
+                </a>
+                <a href="#next-instrument">
+                    <span>Next</span>
+                    <strong>Pathway enrichment</strong>
+                </a>
+            </nav>
         </div>
     </section>
 
-    <section>
-        <div class="container">
-            <div class="tool-suite">
-                <article class="tool-entry">
-                    <div class="tool-entry-media">
-                        <img src="assets/knowledge/封面scVI.webp" alt="ElementPrism statistical workbench preview">
-                        <span class="tool-number">tool 01</span>
-                    </div>
-                    <div class="tool-entry-content">
-                        <span class="tool-field">statistics workbench</span>
-                        <div class="tool-meta">
-                            <span class="tool-tag">Statistical analysis</span>
-                            <span class="tool-tag">WASM</span>
-                            <span class="tool-tag">No login</span>
+    <main class="tools-os-main">
+        <section class="live-instruments" id="live-instruments">
+            <div class="container">
+                <div class="tools-section-header">
+                    <span class="system-kicker">Live instruments</span>
+                    <h2>Analysis modules that open directly in the browser</h2>
+                </div>
+
+                <div class="tool-station-grid">
+                    <article class="tool-station">
+                        <div class="station-media">
+                            <img src="assets/knowledge/封面scVI.webp" alt="ElementPrism statistical workbench preview">
+                            <span class="station-status">Ready</span>
                         </div>
-                        <div>
-                            <h2>ElementPrism</h2>
-                            <p>A statistical workbench for wet-lab biology: survival analysis, PCA, heatmaps, difference tests, and vector export.</p>
-                        </div>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Kaplan-Meier survival analysis</li>
-                            <li><i class="fas fa-check"></i>Heatmap and PCA workflows</li>
-                            <li><i class="fas fa-check"></i>PDF and SVG figure export</li>
-                        </ul>
-                        <div class="cta-buttons">
+                        <div class="station-body">
+                            <span class="station-kicker">Statistics workbench</span>
+                            <h3>ElementPrism</h3>
+                            <p>A statistical workbench for survival analysis, PCA, heatmaps, difference tests, and vector export.</p>
+                            <div class="station-capabilities">
+                                <span>Kaplan-Meier</span>
+                                <span>PCA</span>
+                                <span>Heatmap</span>
+                                <span>PDF/SVG</span>
+                            </div>
                             <a href="/tools/stat_analysis/index.html" class="btn">Open ElementPrism</a>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <article class="tool-entry">
-                    <div class="tool-entry-media">
-                        <img src="assets/skin_aging/web_scanalysis.webp" alt="DEG analysis workflow preview">
-                        <span class="tool-number">tool 02</span>
-                    </div>
-                    <div class="tool-entry-content">
-                        <span class="tool-field">expression analysis</span>
-                        <div class="tool-meta">
-                            <span class="tool-tag">Expression analysis</span>
-                            <span class="tool-tag">Volcano plot</span>
-                            <span class="tool-tag">CSV/Excel</span>
+                    <article class="tool-station">
+                        <div class="station-media">
+                            <img src="assets/skin_aging/web_scanalysis.webp" alt="DEG analysis workflow preview">
+                            <span class="station-status">Ready</span>
                         </div>
-                        <div>
-                            <h2>DEG Analysis</h2>
-                            <p>Interactive volcano plotting for differential expression results with threshold control and high-resolution static output.</p>
-                        </div>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Log2FC and P-value threshold control</li>
-                            <li><i class="fas fa-check"></i>Demo mode for quick exploration</li>
-                            <li><i class="fas fa-check"></i>High-resolution export for figures</li>
-                        </ul>
-                        <div class="cta-buttons">
+                        <div class="station-body">
+                            <span class="station-kicker">Expression analysis</span>
+                            <h3>DEG Analysis</h3>
+                            <p>Interactive volcano plotting for differential expression tables with threshold control and high-resolution output.</p>
+                            <div class="station-capabilities">
+                                <span>Volcano plot</span>
+                                <span>Thresholds</span>
+                                <span>Demo mode</span>
+                                <span>PNG export</span>
+                            </div>
                             <a href="/tools/deg/index.html" class="btn">Open DEG Analysis</a>
                         </div>
-                    </div>
-                </article>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <div class="roadmap-panel">
+        <section class="analysis-loop" id="analysis-loop">
+            <div class="container analysis-loop-shell">
                 <div>
-                    <span class="roadmap-kicker">next module</span>
-                    <h3>Pathway enrichment</h3>
-                    <p>GO/KEGG analysis, bubble plots, and export-ready summaries for common differential expression workflows.</p>
+                    <span class="system-kicker">Analysis loop</span>
+                    <h2>Designed for quick figure decisions</h2>
+                    <p class="section-intro">BioTools keeps the workflow close to the bench: load a result table, tune the analysis, then export a figure or table for the next discussion.</p>
                 </div>
-                <div class="tags">
-                    <span class="tag">Pathway enrichment</span>
-                    <span class="tag">GO/KEGG</span>
-                    <span class="tag">Planned</span>
+                <div class="analysis-step-grid">
+                    <article>
+                        <span>Input</span>
+                        <h3>Local tables</h3>
+                        <p>CSV, Excel, and common tabular results remain on the researcher side of the browser workflow.</p>
+                    </article>
+                    <article>
+                        <span>Compute</span>
+                        <h3>Browser runtime</h3>
+                        <p>WASM and client-side analysis patterns keep setup light for wet-lab users and collaborators.</p>
+                    </article>
+                    <article>
+                        <span>Output</span>
+                        <h3>Figure export</h3>
+                        <p>Modules prioritize clean static output that can move into reports, manuscripts, and lab meetings.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="next-instrument" id="next-instrument">
+            <div class="container next-instrument-shell">
+                <div>
+                    <span class="system-kicker">Next instrument</span>
+                    <h2>Pathway enrichment module</h2>
+                    <p class="section-intro">The next slot is planned for GO/KEGG analysis, bubble plots, and export-ready summaries for differential expression workflows.</p>
+                </div>
+                <div class="next-module-card">
+                    <span class="station-status">Planned</span>
+                    <h3>DEG to pathway report</h3>
+                    <p>Candidate route: upload a gene list or DEG table, choose pathway libraries, review enrichment signals, and export a compact summary.</p>
+                    <div class="station-capabilities">
+                        <span>GO/KEGG</span>
+                        <span>Bubble plot</span>
+                        <span>UpSet-ready</span>
+                        <span>Export</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <load src="./components/footer.html" />
 

@@ -40,7 +40,7 @@ Status: implemented and locally verified on 1440px desktop and 390px mobile scre
 - Keep existing routes, navigation, assets, and deployment behavior.
 - Next acceptance check:
   - verify the deployed `https://daiger.top/` homepage after push
-  - decide whether Tools and Knowledge should receive the same OS treatment
+  - decide whether Knowledge should receive the same OS treatment
 
 ## Phase 1C: Research OS Modules
 Status: implemented and locally verified on 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
@@ -57,6 +57,25 @@ Status: implemented and locally verified on 1440px desktop, 1440px tall desktop,
   - mobile navigation shows all primary links at 390px width
   - hero avoids oversized empty space on tall desktop viewports
   - module boards do not overlap or collapse in screenshot QA
+  - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
+
+## Phase 1D: BioTools Control Room
+Status: implemented and locally verified on 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
+
+- Rebuild `/tools` into a BioTools OS control room.
+- Keep current tool URLs stable:
+  - `/tools/stat_analysis/index.html`
+  - `/tools/deg/index.html`
+- Replace the older workbench list rhythm with:
+  - control-room hero
+  - runtime console
+  - live instrument stations
+  - input, compute, and export analysis loop
+  - pathway enrichment as the next planned instrument
+- Acceptance checks:
+  - mobile navigation remains visible at 390px width
+  - hero avoids oversized empty space on tall desktop viewports
+  - tool station cards do not overlap or trap CTA buttons
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
 
 ## Phase 2: Content Accuracy

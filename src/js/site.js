@@ -22,6 +22,10 @@ if (!prefersReducedMotion) {
     ".module-board section",
     ".module-route",
     ".validation-card",
+    ".tools-module-rail a",
+    ".tool-station",
+    ".analysis-step-grid article",
+    ".next-module-card",
   ];
 
   const elements = document.querySelectorAll(revealTargets.join(","));
