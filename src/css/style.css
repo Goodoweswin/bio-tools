@@ -2604,6 +2604,456 @@ p {
     font-size: 0.9rem;
 }
 
+/* Publications OS */
+.publication-os-hero {
+    position: relative;
+    min-height: calc(100dvh - 72px);
+    display: flex;
+    align-items: center;
+    padding: clamp(3.5rem, 7vw, 6.5rem) 0 0;
+    overflow: hidden;
+}
+
+.publication-os-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(125, 211, 252, 0.08), transparent 42%),
+        linear-gradient(180deg, transparent 76%, rgba(8, 16, 19, 0.84));
+}
+
+.publication-os-shell {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(370px, 0.92fr);
+    gap: clamp(2rem, 6vw, 5.8rem);
+    align-items: center;
+}
+
+.publication-os-copy {
+    display: grid;
+    gap: 1.25rem;
+    align-content: center;
+}
+
+.publication-os-copy h1 {
+    max-width: 10.5ch;
+    margin: 0;
+    font-size: clamp(3.5rem, 5.6vw, 6.2rem);
+}
+
+.publication-os-copy p {
+    max-width: 39ch;
+    font-size: clamp(1rem, 1.45vw, 1.18rem);
+}
+
+.publication-os-states {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.publication-os-states span {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.9rem 0.55rem 0;
+    margin-right: 0.9rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.publication-os-states span:last-child {
+    margin-right: 0;
+}
+
+.publication-os-states i,
+.publication-ledger-key i {
+    width: 7px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent-color);
+}
+
+.publication-os-states span:nth-child(2) i,
+.publication-ledger-key span:nth-child(2) i {
+    background: var(--primary-color);
+}
+
+.publication-os-states span:nth-child(3) i,
+.publication-ledger-key span:nth-child(3) i {
+    background: var(--accent-warm);
+}
+
+.publication-record-visual {
+    position: relative;
+    min-height: 500px;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--border-strong);
+    background: #071116;
+    box-shadow: 24px 30px 72px rgba(0, 12, 17, 0.3);
+}
+
+.publication-record-visual::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(8, 16, 19, 0.56), transparent 56%),
+        linear-gradient(180deg, transparent 48%, rgba(8, 16, 19, 0.9));
+}
+
+.publication-record-visual img {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    filter: saturate(0.58) contrast(1.08) brightness(0.72);
+}
+
+.publication-visual-overlay {
+    position: absolute;
+    z-index: 2;
+    left: clamp(1rem, 4vw, 2rem);
+    right: clamp(1rem, 4vw, 2rem);
+    bottom: clamp(1rem, 4vw, 2rem);
+    display: grid;
+    gap: 0.5rem;
+    max-width: 32ch;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(238, 247, 251, 0.28);
+}
+
+.publication-visual-overlay strong {
+    font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+}
+
+.publication-visual-overlay p {
+    max-width: 36ch;
+    font-size: 0.94rem;
+}
+
+.publication-visual-markers {
+    position: absolute;
+    z-index: 2;
+    top: 1.35rem;
+    right: 1.35rem;
+    display: grid;
+    grid-template-columns: repeat(3, 10px);
+    gap: 7px;
+}
+
+.publication-visual-markers span {
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(125, 211, 252, 0.42);
+    box-shadow: 0 0 12px rgba(125, 211, 252, 0.15);
+}
+
+.publication-visual-markers span:nth-child(3n),
+.publication-visual-markers span:nth-child(4n) {
+    background: rgba(32, 199, 181, 0.84);
+}
+
+.publication-module-rail {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+.publication-module-rail a {
+    min-height: 80px;
+    display: grid;
+    align-content: center;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    color: inherit;
+    text-decoration: none;
+    background: rgba(9, 20, 24, 0.4);
+}
+
+.publication-module-rail span,
+.publication-track-header > div > span,
+.publication-record-code > span,
+.publication-record-state > span {
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.publication-module-rail strong {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.publication-os-main {
+    overflow: hidden;
+}
+
+.publication-principles {
+    padding: clamp(3.4rem, 7vw, 6rem) 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(8, 18, 22, 0.54);
+}
+
+.publication-section-header {
+    max-width: 740px;
+}
+
+.publication-section-header h2 {
+    max-width: 14ch;
+}
+
+.publication-principle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+.publication-principle-grid article {
+    min-height: 202px;
+    padding: clamp(1.2rem, 3vw, 1.65rem);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(13, 27, 32, 0.52);
+}
+
+.publication-principle-grid article > span {
+    display: block;
+    margin-bottom: 1.8rem;
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+}
+
+.publication-principle-grid h3 {
+    margin-bottom: 0.6rem;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.publication-principle-grid p {
+    max-width: 28ch;
+    font-size: 0.93rem;
+}
+
+.publication-ledger {
+    padding-top: clamp(3.4rem, 7vw, 6rem);
+    border-top: 1px solid var(--border-color);
+    background: rgba(7, 16, 20, 0.3);
+}
+
+.publication-ledger-shell {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
+    gap: clamp(1.8rem, 5vw, 4rem);
+    align-items: start;
+}
+
+.publication-ledger-intro {
+    position: sticky;
+    top: 100px;
+}
+
+.publication-ledger-intro h2 {
+    max-width: 9ch;
+    margin-top: 0.8rem;
+}
+
+.publication-ledger-intro p {
+    max-width: 31ch;
+}
+
+.publication-ledger-key {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1.6rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.publication-ledger-key span {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+}
+
+.publication-record-groups {
+    display: grid;
+    gap: 2.8rem;
+}
+
+.publication-track-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-strong);
+}
+
+.publication-track-header h2 {
+    margin: 0.2rem 0 0;
+    font-size: clamp(1.65rem, 3vw, 2.4rem);
+}
+
+.publication-track-header p {
+    max-width: 30ch;
+    align-self: end;
+    font-size: 0.9rem;
+}
+
+.publication-record {
+    display: grid;
+    grid-template-columns: minmax(125px, 0.24fr) minmax(0, 1fr) minmax(150px, 0.28fr);
+    gap: clamp(1rem, 3vw, 1.6rem);
+    align-items: start;
+    padding: clamp(1.25rem, 3vw, 1.65rem) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.publication-record-code {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.publication-record-code small {
+    color: var(--muted-text);
+    font-size: 0.76rem;
+    line-height: 1.45;
+}
+
+.publication-record-main h3 {
+    margin-bottom: 0.55rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+}
+
+.publication-record-main p {
+    max-width: 58ch;
+    font-size: 0.94rem;
+}
+
+.publication-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+}
+
+.publication-tags span {
+    min-height: 26px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    border: 1px solid rgba(32, 199, 181, 0.25);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.publication-record-state {
+    display: grid;
+    gap: 0.34rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-color);
+}
+
+.publication-record-state strong {
+    color: var(--text-color);
+    font-size: 0.98rem;
+}
+
+.publication-record-state p {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.publication-record-state a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: fit-content;
+    margin-top: 0.18rem;
+    color: var(--accent-color);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.publication-record-state a:hover {
+    color: var(--text-color);
+}
+
+.publication-release {
+    padding-top: clamp(3.4rem, 7vw, 6rem);
+    border-top: 1px solid var(--border-color);
+}
+
+.publication-release-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+    gap: clamp(1.8rem, 5vw, 4rem);
+    align-items: end;
+}
+
+.publication-release h2 {
+    max-width: 10ch;
+}
+
+.publication-release-line {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+.publication-release-line span {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.publication-release-line span:last-child {
+    color: var(--accent-color);
+    background: rgba(32, 199, 181, 0.06);
+}
+
 .knowledge-shell,
 .output-shell {
     display: grid;
@@ -2988,6 +3438,10 @@ footer a:hover {
         animation: rise-in 0.8s 0.08s ease both;
     }
 
+    .publication-record-visual {
+        animation: rise-in 0.8s 0.08s ease both;
+    }
+
     .tools-module-rail a,
     .tool-station,
     .analysis-step-grid article,
@@ -3044,6 +3498,36 @@ footer a:hover {
 
     .knowledge-atlas:hover img {
         filter: saturate(0.94) contrast(1.07) brightness(0.9);
+        transform: scale(1.012);
+    }
+
+    .publication-module-rail a,
+    .publication-principle-grid article,
+    .publication-record {
+        transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.22s ease, padding-left 0.22s ease;
+    }
+
+    .publication-module-rail a:hover,
+    .publication-principle-grid article:hover,
+    .publication-record:hover {
+        background-color: rgba(20, 38, 44, 0.9);
+    }
+
+    .publication-module-rail a:hover,
+    .publication-principle-grid article:hover {
+        transform: translateY(-2px);
+    }
+
+    .publication-record:hover {
+        padding-left: 0.6rem;
+    }
+
+    .publication-record-visual img {
+        transition: filter 0.28s ease, transform 0.28s ease;
+    }
+
+    .publication-record-visual:hover img {
+        filter: saturate(0.74) contrast(1.1) brightness(0.8);
         transform: scale(1.012);
     }
 
@@ -3147,6 +3631,9 @@ footer a:hover {
     .knowledge-os-shell,
     .knowledge-command-shell,
     .knowledge-ledger-shell,
+    .publication-os-shell,
+    .publication-ledger-shell,
+    .publication-release-shell,
     .tools-hero-layout,
     .roadmap-panel,
     .knowledge-shell,
@@ -3203,6 +3690,11 @@ footer a:hover {
         padding-top: 3.2rem;
     }
 
+    .publication-os-hero {
+        min-height: auto;
+        padding-top: 3.2rem;
+    }
+
     .knowledge-query-status {
         padding: 0.75rem 0 0;
         border-top: 1px solid var(--border-color);
@@ -3210,6 +3702,10 @@ footer a:hover {
     }
 
     .knowledge-ledger-intro {
+        position: static;
+    }
+
+    .publication-ledger-intro {
         position: static;
     }
 
@@ -3354,6 +3850,7 @@ footer a:hover {
     .research-module-rail,
     .tools-module-rail,
     .knowledge-module-rail,
+    .publication-module-rail,
     .tool-station-grid,
     .console-grid,
     .brief-grid,
@@ -3361,6 +3858,9 @@ footer a:hover {
     .module-board,
     .module-figures,
     .validation-grid,
+    .publication-principle-grid,
+    .publication-record,
+    .publication-release-line,
     .roadmap-list,
     .tool-entry,
     .article-entry,
@@ -3675,6 +4175,87 @@ footer a:hover {
 
     .knowledge-note-meta {
         grid-column: 1 / -1;
+    }
+
+    .publication-os-copy h1 {
+        max-width: 11ch;
+        font-size: clamp(3.25rem, 13vw, 4.7rem);
+    }
+
+    .publication-os-copy p {
+        max-width: 34ch;
+    }
+
+    .publication-os-states {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .publication-os-states span {
+        min-height: 42px;
+        padding: 0.35rem 0;
+        margin: 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .publication-os-states span:last-child {
+        border-bottom: 0;
+    }
+
+    .publication-record-visual,
+    .publication-record-visual img {
+        min-height: 330px;
+    }
+
+    .publication-visual-overlay {
+        max-width: 29ch;
+    }
+
+    .publication-module-rail {
+        grid-template-columns: 1fr;
+    }
+
+    .publication-module-rail a {
+        min-height: 76px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .publication-module-rail a:last-child {
+        border-bottom: 0;
+    }
+
+    .publication-section-header h2 {
+        max-width: 11ch;
+        font-size: 2.05rem;
+    }
+
+    .publication-track-header {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .publication-track-header p {
+        max-width: 33ch;
+    }
+
+    .publication-record {
+        gap: 0.85rem;
+    }
+
+    .publication-record-state {
+        padding: 0.85rem 0 0;
+        border-top: 1px solid var(--border-color);
+        border-left: 0;
+    }
+
+    .publication-release h2 {
+        max-width: 11ch;
+        font-size: 2.05rem;
+    }
+
+    .publication-release-line span {
+        min-height: 58px;
     }
 
     .tool-station {

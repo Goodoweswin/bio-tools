@@ -5,6 +5,12 @@ All notable changes to the **bio-tools** personal research website are documente
 ## Unreleased
 
 ### Changed
+- Publications page Publications OS Ledger redesign:
+  - replaced the generic scholarly-output list with an evidence-led public-record system
+  - added a public-record protocol that prevents invented citations, metrics, and inaccessible claims
+  - rebuilt manuscripts, conference materials, and technical notes as explicit readiness-aware records
+  - added a release route for future citable records and retained the BioTools route for technical methods
+  - added Publications reveal targets, hover motion, and mobile layout handling
 - Knowledge page Knowledge Atlas redesign:
   - replaced the sidebar-plus-list index with an asset-led `Knowledge system` hero
   - added visible note count, English and Chinese search, and segmented track filters
@@ -46,6 +52,7 @@ All notable changes to the **bio-tools** personal research website are documente
 - Research OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
 - Tools OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
 - Knowledge Atlas checked with local Firefox screenshots at 1440px desktop, 390px mobile, and 390px tall mobile.
+- Publications OS Ledger checked with local Firefox screenshots at 1440px desktop, 390px mobile, and 390px tall mobile.
 
 ## [2026-07-01] - Research Website Redesign and Deployment Hygiene
 

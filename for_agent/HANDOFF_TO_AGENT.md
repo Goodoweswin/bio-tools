@@ -12,7 +12,7 @@
 - `/research` is a Future Lab OS-style module page with research orbit, module rail, visual project boards, validation routes, and compact Chinese summaries.
 - `/tools` is a BioTools Control Room with runtime console, live instrument stations, analysis loop, and next-instrument panel.
 - `/knowledge` is a Knowledge Atlas with a real single-cell integration visual, a search command strip, segmented filters, research routes, and a grouped index of 12 research notes.
-- `/publications` is a conservative scholarly output ledger.
+- `/publications` is a Publications OS Ledger with an evidence-led hero, public-record protocol, readiness-aware output records, and a release route for future citations.
 - `/tools/stat_analysis/index.html` serves ElementPrism.
 - `/tools/deg/index.html` serves DEG Analysis.
 
@@ -34,7 +34,7 @@
 - `src/research.html`: research project structure.
 - `src/tools.html`: BioTools workbench page.
 - `src/knowledge.html`: searchable Knowledge Atlas and grouped note ledger.
-- `src/publications.html`: scholarly output ledger.
+- `src/publications.html`: evidence-led Publications OS Ledger.
 - `src/css/style.css`: central visual system.
 - `src/js/site.js`: lightweight scroll reveal.
 - `public/robots.txt`: search crawler policy.
@@ -67,11 +67,12 @@ After pushing, check:
 - Phase 1B homepage Future Lab OS redesign has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
 - Phase 1C Research OS module redesign has been implemented and locally verified with 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
 - Phase 1D Tools Control Room redesign has been implemented and locally verified with 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
-- Phase 1E Knowledge Atlas redesign has been implemented and locally verified with 1440px desktop, 390px mobile, and 390px tall mobile screenshots. It must be committed, pushed, and checked on the deployed site before Publications work begins.
+- Phase 1E Knowledge Atlas redesign was committed and pushed as `8fc835d`; live-site verification is deferred because the agent environment could not reach the public route. The user explicitly approved starting Publications work before that check completed.
+- Phase 1F Publications OS Ledger redesign has been implemented and locally verified with 1440px desktop, 390px mobile, and 390px tall mobile screenshots. It must be committed, pushed, and checked on the deployed site before Phase 2 begins.
 - Phase 1A homepage hero sharpening has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
 - Phase 2 content accuracy has started: public text now reframes `NRX` as candidate endothelial regulators, while image-embedded labels remain unchanged until image assets are revised.
 - After deployment, recheck the live homepage and research page at `https://daiger.top/` to confirm Cloudflare has served the new build.
-- Do not begin the Publications OS work until the Knowledge Atlas checkpoint is committed, pushed, and verified at `https://daiger.top/knowledge`.
+- Do not begin Phase 2 content work until the Publications OS Ledger checkpoint is committed, pushed, and verified at `https://daiger.top/publications`.
 - Decide whether image-embedded `NRX` labels should be revised in the underlying figure assets.
 - Add real publications, posters, abstracts, or links when cleared for public sharing.
 - Add tool documentation for accepted input formats, demo datasets, and validation assumptions.

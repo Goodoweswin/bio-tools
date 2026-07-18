@@ -29,79 +29,200 @@
 
     <load src="./components/header.html" />
 
-    <section class="output-hero">
-        <div class="container">
-            <span class="eyebrow">Scholarly output</span>
-            <h1>Manuscripts, conference materials, and technical notes</h1>
-            <p>A public-facing ledger for Jackson Dai's research communication. Items are listed conservatively and updated when materials become shareable.</p>
-        </div>
-    </section>
-
-    <section>
-        <div class="container output-shell">
-            <aside class="output-index" aria-label="Publication categories">
-                <div>
-                    <span class="output-label">scope</span>
-                    <p>Research outputs are grouped by readiness rather than inflated citation claims.</p>
-                </div>
-                <div>
-                    <span class="output-label">categories</span>
-                    <ul class="output-index-list">
-                        <li><a href="#manuscripts">Manuscripts</a></li>
-                        <li><a href="#conference">Conference materials</a></li>
-                        <li><a href="#technical-notes">Technical notes</a></li>
-                    </ul>
-                </div>
-            </aside>
-
-            <div>
-                <div class="output-ledger">
-                    <article class="output-entry" id="manuscripts">
-                        <span class="output-kind">manuscript</span>
-                        <div>
-                            <h2>Skin aging, endothelial senescence, and regenerative medicine</h2>
-                            <p>Manuscript materials related to the vascular-skin axis, candidate-regulator-low endothelial states, and dermal regeneration will be added after public release.</p>
-                            <div class="output-meta">
-                                <span class="output-status">in preparation</span>
-                                <span class="output-status">skin aging</span>
-                                <span class="output-status">single-cell biology</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="output-entry" id="conference">
-                        <span class="output-kind">conference</span>
-                        <div>
-                            <h2>Cell senescence and anti-aging therapy</h2>
-                            <p>Conference reports and posters will be linked here when slides, abstracts, or public summaries are cleared for sharing.</p>
-                            <div class="output-meta">
-                                <span class="output-status">materials pending</span>
-                                <span class="output-status">senescence</span>
-                                <span class="output-status">regeneration</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="output-entry" id="technical-notes">
-                        <span class="output-kind">technical note</span>
-                        <div>
-                            <h2>Browser-based bioinformatics utilities</h2>
-                            <p>Methods notes for ElementPrism, DEG Analysis, and future BioTools modules will document assumptions, input formats, export behavior, and validation checks.</p>
-                            <div class="output-meta">
-                                <span class="output-status">living documentation</span>
-                                <span class="output-status">BioTools</span>
-                                <span class="output-status">methods</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="output-note">
-                    <p>This page intentionally avoids fake publication counts, impact metrics, or citation badges. Confirmed bibliographic records can be added once manuscripts are public.</p>
+    <section class="publication-os-hero">
+        <div class="container publication-os-shell">
+            <div class="publication-os-copy">
+                <span class="system-kicker">Scholarly output</span>
+                <h1>Research output, held to the evidence</h1>
+                <p>A public record for manuscripts, conference materials, and methods. Entries appear when the underlying material is ready to be shared.</p>
+                <div class="publication-os-states" aria-label="Publication record categories">
+                    <span><i></i> Manuscripts</span>
+                    <span><i></i> Conference material</span>
+                    <span><i></i> Technical methods</span>
                 </div>
             </div>
+
+            <figure class="publication-record-visual" aria-label="Research output record visual">
+                <img src="/assets/vHFO_exos/web_exp_design.webp" alt="Experimental design for a vascularized hair follicle exosome study">
+                <div class="publication-visual-overlay">
+                    <span class="console-label">Record policy</span>
+                    <strong>Public when the evidence is ready</strong>
+                    <p>No fabricated citation counts, venue claims, or inaccessible materials.</p>
+                </div>
+                <div class="publication-visual-markers" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                </div>
+            </figure>
+
+            <nav class="publication-module-rail" aria-label="Publications page routes">
+                <a href="#record-policy">
+                    <span>Policy</span>
+                    <strong>Public record rules</strong>
+                </a>
+                <a href="#output-ledger">
+                    <span>Ledger</span>
+                    <strong>Current outputs</strong>
+                </a>
+                <a href="#release-route">
+                    <span>Release</span>
+                    <strong>Future citations</strong>
+                </a>
+            </nav>
         </div>
     </section>
+
+    <main class="publication-os-main">
+        <section class="publication-principles" id="record-policy">
+            <div class="container">
+                <div class="publication-section-header">
+                    <span class="system-kicker">Public record protocol</span>
+                    <h2>Every listed output should be inspectable</h2>
+                    <p class="section-intro">This page favors an honest, useful research record over premature bibliographic polish.</p>
+                </div>
+
+                <div class="publication-principle-grid">
+                    <article>
+                        <span>01</span>
+                        <h3>Evidence first</h3>
+                        <p>Titles, authorship, venues, and links appear only when they can be verified or publicly shared.</p>
+                    </article>
+                    <article>
+                        <span>02</span>
+                        <h3>Readiness is explicit</h3>
+                        <p>In-preparation work, pending materials, and living documentation are labeled as such.</p>
+                    </article>
+                    <article>
+                        <span>03</span>
+                        <h3>Methods stay useful</h3>
+                        <p>Technical output records connect browser tools to their inputs, assumptions, and export behavior.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="publication-ledger" id="output-ledger">
+            <div class="container publication-ledger-shell">
+                <aside class="publication-ledger-intro">
+                    <span class="system-kicker">Output ledger</span>
+                    <h2>A conservative record of work in motion</h2>
+                    <p>Three output lanes reflect what can be responsibly communicated today, while keeping a clear place for future public records.</p>
+                    <div class="publication-ledger-key">
+                        <span><i></i> Discovery and manuscript work</span>
+                        <span><i></i> Talks, posters, and reports</span>
+                        <span><i></i> Browser-based methods</span>
+                    </div>
+                </aside>
+
+                <div class="publication-record-groups">
+                    <section class="publication-record-group" id="manuscripts">
+                        <header class="publication-track-header">
+                            <div>
+                                <span>Output 01</span>
+                                <h2>Manuscripts</h2>
+                            </div>
+                            <p>Research narratives that will become citable once public release is appropriate.</p>
+                        </header>
+                        <article class="publication-record">
+                            <div class="publication-record-code">
+                                <span>MAN / 01</span>
+                                <small>Discovery to translation</small>
+                            </div>
+                            <div class="publication-record-main">
+                                <h3>Skin aging, endothelial senescence, and regenerative medicine</h3>
+                                <p>Materials related to the vascular-skin axis, candidate-regulator-low endothelial states, and dermal regeneration will be added after public release.</p>
+                                <div class="publication-tags">
+                                    <span>Skin aging</span>
+                                    <span>Single-cell biology</span>
+                                    <span>Regeneration</span>
+                                </div>
+                            </div>
+                            <div class="publication-record-state">
+                                <span>Readiness</span>
+                                <strong>In preparation</strong>
+                                <p>Bibliographic record pending</p>
+                            </div>
+                        </article>
+                    </section>
+
+                    <section class="publication-record-group" id="conference">
+                        <header class="publication-track-header">
+                            <div>
+                                <span>Output 02</span>
+                                <h2>Conference material</h2>
+                            </div>
+                            <p>Public summaries, posters, and slides are released only after clearance for sharing.</p>
+                        </header>
+                        <article class="publication-record">
+                            <div class="publication-record-code">
+                                <span>CONF / 01</span>
+                                <small>Senescence and therapy</small>
+                            </div>
+                            <div class="publication-record-main">
+                                <h3>Cell senescence and anti-aging therapy</h3>
+                                <p>Conference reports and posters will be linked here when slides, abstracts, or public summaries are cleared for sharing.</p>
+                                <div class="publication-tags">
+                                    <span>Senescence</span>
+                                    <span>Regeneration</span>
+                                    <span>Clinical translation</span>
+                                </div>
+                            </div>
+                            <div class="publication-record-state">
+                                <span>Readiness</span>
+                                <strong>Materials pending</strong>
+                                <p>Public artifact pending</p>
+                            </div>
+                        </article>
+                    </section>
+
+                    <section class="publication-record-group" id="technical-notes">
+                        <header class="publication-track-header">
+                            <div>
+                                <span>Output 03</span>
+                                <h2>Technical notes</h2>
+                            </div>
+                            <p>Methods documentation keeps browser tools legible, inspectable, and easier to reuse.</p>
+                        </header>
+                        <article class="publication-record">
+                            <div class="publication-record-code">
+                                <span>TECH / 01</span>
+                                <small>BioTools methods</small>
+                            </div>
+                            <div class="publication-record-main">
+                                <h3>Browser-based bioinformatics utilities</h3>
+                                <p>Methods notes for ElementPrism, DEG Analysis, and future BioTools modules will document assumptions, input formats, export behavior, and validation checks.</p>
+                                <div class="publication-tags">
+                                    <span>BioTools</span>
+                                    <span>Methods</span>
+                                    <span>Browser runtime</span>
+                                </div>
+                            </div>
+                            <div class="publication-record-state">
+                                <span>Readiness</span>
+                                <strong>Living documentation</strong>
+                                <a href="/tools">Open BioTools <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            </div>
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="publication-release" id="release-route">
+            <div class="container publication-release-shell">
+                <div>
+                    <span class="system-kicker">Release route</span>
+                    <h2>From active work to citable record</h2>
+                    <p class="section-intro">When a manuscript, poster, or methods note becomes public, this ledger will add its full citation, stable link, and any material that can be inspected directly.</p>
+                </div>
+                <div class="publication-release-line" aria-label="Publication release sequence">
+                    <span>Research work</span>
+                    <span>Shareable material</span>
+                    <span>Verified record</span>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <load src="./components/footer.html" />
 

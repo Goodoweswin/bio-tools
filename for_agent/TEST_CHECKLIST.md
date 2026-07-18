@@ -53,6 +53,17 @@ Confirm:
 - code blocks are readable
 - no broken local assets
 
+## Publications Page Smoke Test
+Verify:
+- `/publications.html`
+- manuscript, conference, and technical-method anchors work
+- technical-method record still links to `/tools`
+
+Confirm:
+- no citation count, venue claim, or bibliographic record is shown without a public source
+- readiness labels remain explicit
+- desktop and mobile record layouts do not overlap
+
 ## Tool Smoke Test
 Verify:
 - `/tools/stat_analysis/`

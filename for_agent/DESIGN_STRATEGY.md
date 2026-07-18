@@ -4,7 +4,7 @@
 - **Site type**: Personal academic portfolio plus browser-based bioinformatics toolkit.
 - **Audience**: Research collaborators, mentors, clinicians, wet-lab users, and visitors evaluating credibility.
 - **Vibe**: Academic cyber-future, restrained, research-driven, not generic dark SaaS.
-- **Current issue**: Homepage, Research, Tools, and Knowledge now share the Future Lab OS direction; Publications is the remaining major page to bring into the same system.
+- **Current issue**: All primary pages now share the Future Lab OS direction. The next design work should be content accuracy and the details that make each public record more useful.
 
 ## Target Dials
 - **Design variance**: Move from 6 to 8.
@@ -83,6 +83,16 @@ Status: implemented and locally verified on 1440px desktop, 390px mobile, and 39
 - Added segmented filters for all notes, AI x Single-cell, Skin aging, and AI4Med.
 - Extended the lightweight motion system with Knowledge route and ledger reveals, while retaining reduced-motion support.
 
+### Phase 1F: Publications OS Ledger
+Status: implemented and locally verified on 1440px desktop, 390px mobile, and 390px tall mobile screenshots. Commit and deployed-site verification remain before the checkpoint closes.
+
+- Rebuilt `/publications` as a public-record system rather than a generic output list.
+- Added an evidence-led hero using the existing vHFO experimental-design asset.
+- Added a public-record protocol so citations, authorship, links, and public materials are never invented.
+- Rebuilt manuscripts, conference materials, and technical notes as separate readiness-aware output records.
+- Added a release route for future citable records and preserved the direct `/tools` route for technical methods.
+- Extended lightweight motion with Publications reveal targets and restrained hover states.
+
 ### Phase 2: Research Page Editorial Rewrite
 Status: superseded by Phase 1C while preserving the same project content and bilingual summaries.
 
@@ -96,7 +106,7 @@ Status: superseded by Phase 1C while preserving the same project content and bil
 - Move long Chinese explanatory text into secondary notes or compact panels.
 
 ### Phase 3: Layout Rhythm Upgrade
-Status: implemented on `src/tools.html` and `src/knowledge.html`; Publications remains to be redesigned.
+Status: implemented on `src/tools.html`, `src/knowledge.html`, and `src/publications.html`.
 
 - Reduce repeated card grids.
 - Use mixed layouts:
@@ -164,3 +174,4 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Research Phase 1C rebuilt `/research` as a Future Lab OS module page with a module rail, visual research orbit, module boards, validation route panels, and responsive screenshot QA.
 - Tools Phase 1D rebuilt `/tools` as a BioTools Control Room with a runtime console, live stations for ElementPrism and DEG Analysis, an analysis loop, and pathway enrichment as the next instrument.
 - Knowledge Phase 1E rebuilt `/knowledge` as a Knowledge Atlas with an existing single-cell integration asset, a search command strip, research-track filters, and an indexed three-track note ledger.
+- Publications Phase 1F rebuilt `/publications` as an evidence-led output ledger with a public-record protocol, readiness-aware output records, and a release route for future citations.

@@ -28,6 +28,9 @@ if (!prefersReducedMotion) {
     ".next-module-card",
     ".knowledge-route",
     ".knowledge-track-group",
+    ".publication-principle-grid article",
+    ".publication-record-group",
+    ".publication-module-rail a",
   ];
 
   const elements = document.querySelectorAll(revealTargets.join(","));

@@ -81,7 +81,7 @@ Status: implemented and locally verified on 1440px desktop, 1440px tall desktop,
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
 
 ## Phase 1E: Knowledge Atlas
-Status: implemented and locally verified. Checkpoint remains open until the changes are committed and pushed.
+Status: implemented, committed, and pushed. Deployed-site verification remains pending because the agent environment could not reach the public route.
 
 - Rebuild `/knowledge` as a searchable Future Lab OS knowledge module.
 - Keep all 12 note URLs and their original Chinese article titles stable.
@@ -97,19 +97,34 @@ Status: implemented and locally verified. Checkpoint remains open until the chan
   - 390px mobile hero, image, navigation, search, and filters remain legible without horizontal overflow
   - article links remain unchanged
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
-- Checkpoint close criteria:
-  - commit the Knowledge Atlas changes
-  - push to `origin/main`
-  - verify deployed `/knowledge` on `https://daiger.top/`
+- Remaining verification:
+  - verify deployed `/knowledge` on `https://daiger.top/` when public access is available
 
-Do not begin Phase 1F or Phase 2 before this checkpoint is closed.
+Exception: on 2026-07-18, the user explicitly approved starting Phase 1F before the deferred deployed-site check could be completed.
 
 ## Phase 1F: Publications OS Ledger
-Status: locked until Phase 1E is committed, pushed, and verified on the deployed site.
+Status: implemented and locally verified. Checkpoint remains open until the changes are committed and pushed.
 
 - Rebuild `/publications` as the final Future Lab OS module page.
 - Preserve the conservative public-claims policy and existing status language.
 - Establish clear locations for future citation records, conference materials, and technical notes.
+- Replace the generic output list with:
+  - evidence-led output hero using an existing experimental-design asset
+  - public record protocol
+  - grouped manuscript, conference, and technical-method ledgers
+  - explicit readiness state for each output
+  - release route for future citable records
+- Acceptance checks passed locally:
+  - 1440px desktop hero keeps the module rail visible at the viewport edge
+  - 390px mobile hero, protocol, and output records remain legible without horizontal overflow
+  - `/tools` route remains available from the technical-method record
+  - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
+- Checkpoint close criteria:
+  - commit the Publications OS Ledger changes
+  - push to `origin/main`
+  - verify deployed `/publications` on `https://daiger.top/`
+
+Do not begin Phase 2 before this checkpoint is closed.
 
 ## Phase 2: Content Accuracy
 Status: started. Public copy now reframes `NRX` as candidate endothelial regulators unless the term appears inside existing image assets.
