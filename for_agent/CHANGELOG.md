@@ -5,6 +5,10 @@ All notable changes to the **bio-tools** personal research website are documente
 ## Unreleased
 
 ### Changed
+- Phase 2A content-accuracy pass:
+  - removed editable public `NRX` and generic candidate-regulator placeholder language
+  - reframed Research and Publications around senescence-associated endothelial states and active hypotheses
+  - added `CONTENT_ACCURACY.md` to track bitmap-label debt and owner-provided records required for Phase 2B
 - Publications page Publications OS Ledger redesign:
   - replaced the generic scholarly-output list with an evidence-led public-record system
   - added a public-record protocol that prevents invented citations, metrics, and inaccessible claims

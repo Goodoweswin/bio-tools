@@ -28,6 +28,7 @@
 - `TEST_CHECKLIST.md`: **QA Guide**. Build, link, visual, and live verification checklist.
 - `PROJECT_MANIFEST.md`: **Project identity and status**.
 - `CONTENT_MAP.md`: **Page, component, and asset index**.
+- `CONTENT_ACCURACY.md`: **Content Register**. Editable-copy decisions, image-label debt, and owner inputs required for public records.
 
 ## Knowledge Base Categories
 Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:

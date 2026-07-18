@@ -2151,11 +2151,17 @@ p {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 0.88fr) minmax(370px, 0.92fr);
-    gap: clamp(2rem, 6vw, 5.8rem);
+    grid-template-areas:
+        "copy atlas"
+        "command atlas"
+        "rail rail";
+    column-gap: clamp(2rem, 6vw, 5.8rem);
+    row-gap: clamp(1.25rem, 2vw, 1.75rem);
     align-items: center;
 }
 
 .knowledge-os-copy {
+    grid-area: copy;
     display: grid;
     gap: 1.25rem;
     align-content: center;
@@ -2164,7 +2170,7 @@ p {
 .knowledge-os-copy h1 {
     max-width: 10.5ch;
     margin: 0;
-    font-size: clamp(3.5rem, 5.6vw, 6.3rem);
+    font-size: clamp(3.5rem, 4.9vw, 5.5rem);
 }
 
 .knowledge-os-copy p {
@@ -2201,6 +2207,7 @@ p {
 }
 
 .knowledge-atlas {
+    grid-area: atlas;
     position: relative;
     min-height: 500px;
     margin: 0;
@@ -2275,6 +2282,7 @@ p {
 }
 
 .knowledge-module-rail {
+    grid-area: rail;
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2316,11 +2324,12 @@ p {
     overflow: hidden;
 }
 
-.knowledge-command {
-    padding: clamp(2.4rem, 5vw, 4.4rem) 0;
+.knowledge-hero-command {
+    grid-area: command;
+    display: grid;
+    gap: 1rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    background: rgba(8, 18, 22, 0.56);
 }
 
 .knowledge-command-shell {
@@ -2394,7 +2403,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     gap: 0;
-    margin-top: 1.15rem;
+    margin: 0;
 }
 
 .knowledge-filter {
@@ -2696,77 +2705,86 @@ p {
 }
 
 .publication-record-visual {
-    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-self: stretch;
     min-height: 500px;
     margin: 0;
-    overflow: hidden;
     border: 1px solid var(--border-strong);
-    background: #071116;
+    background:
+        linear-gradient(90deg, rgba(174, 224, 238, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(174, 224, 238, 0.07) 1px, transparent 1px),
+        #071116;
+    background-size: 28px 28px;
     box-shadow: 24px 30px 72px rgba(0, 12, 17, 0.3);
 }
 
-.publication-record-visual::before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    pointer-events: none;
-    background:
-        linear-gradient(90deg, rgba(8, 16, 19, 0.56), transparent 56%),
-        linear-gradient(180deg, transparent 48%, rgba(8, 16, 19, 0.9));
-}
-
-.publication-record-visual img {
-    width: 100%;
-    height: 100%;
-    min-height: 500px;
-    object-fit: cover;
-    filter: saturate(0.58) contrast(1.08) brightness(0.72);
-}
-
-.publication-visual-overlay {
-    position: absolute;
-    z-index: 2;
-    left: clamp(1rem, 4vw, 2rem);
-    right: clamp(1rem, 4vw, 2rem);
-    bottom: clamp(1rem, 4vw, 2rem);
+.publication-visual-header,
+.publication-visual-footer {
     display: grid;
-    gap: 0.5rem;
-    max-width: 32ch;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(238, 247, 251, 0.28);
+    gap: 0.45rem;
+    padding: clamp(1.15rem, 3vw, 1.75rem);
+    background: rgba(8, 16, 19, 0.88);
 }
 
-.publication-visual-overlay strong {
-    font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+.publication-visual-header {
+    border-bottom: 1px solid var(--border-color);
 }
 
-.publication-visual-overlay p {
-    max-width: 36ch;
+.publication-visual-header strong {
+    color: var(--text-color);
+    font-size: clamp(1.5rem, 2.7vw, 2.2rem);
+    line-height: 1;
+}
+
+.publication-visual-header > span:last-child {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.publication-visual-ledger {
+    display: grid;
+    align-content: center;
+    margin: 0;
+    padding: 0 clamp(1.15rem, 3vw, 1.75rem);
+}
+
+.publication-visual-ledger > div {
+    display: grid;
+    grid-template-columns: minmax(116px, 0.46fr) minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.15rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.publication-visual-ledger > div:first-child {
+    border-top: 0;
+}
+
+.publication-visual-ledger dt,
+.publication-visual-footer > span {
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.publication-visual-ledger dd {
+    margin: 0;
+    color: var(--text-secondary);
     font-size: 0.94rem;
+    line-height: 1.5;
 }
 
-.publication-visual-markers {
-    position: absolute;
-    z-index: 2;
-    top: 1.35rem;
-    right: 1.35rem;
-    display: grid;
-    grid-template-columns: repeat(3, 10px);
-    gap: 7px;
+.publication-visual-footer {
+    border-top: 1px solid var(--border-color);
 }
 
-.publication-visual-markers span {
-    width: 10px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: rgba(125, 211, 252, 0.42);
-    box-shadow: 0 0 12px rgba(125, 211, 252, 0.15);
-}
-
-.publication-visual-markers span:nth-child(3n),
-.publication-visual-markers span:nth-child(4n) {
-    background: rgba(32, 199, 181, 0.84);
+.publication-visual-footer p {
+    color: var(--text-color);
+    font-size: 1rem;
 }
 
 .publication-module-rail {
@@ -3522,15 +3540,6 @@ footer a:hover {
         padding-left: 0.6rem;
     }
 
-    .publication-record-visual img {
-        transition: filter 0.28s ease, transform 0.28s ease;
-    }
-
-    .publication-record-visual:hover img {
-        filter: saturate(0.74) contrast(1.1) brightness(0.8);
-        transform: scale(1.012);
-    }
-
     .route-cell,
     .loop-card,
     .tool-instrument {
@@ -3646,6 +3655,14 @@ footer a:hover {
     .project-media,
     .module-visual {
         position: static;
+    }
+
+    .knowledge-os-shell {
+        grid-template-areas:
+            "copy"
+            "command"
+            "atlas"
+            "rail";
     }
 
     .research-index span {
@@ -4121,10 +4138,6 @@ footer a:hover {
         max-width: 29ch;
     }
 
-    .knowledge-command {
-        padding: 2rem 0;
-    }
-
     .knowledge-filter-row {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4202,13 +4215,13 @@ footer a:hover {
         border-bottom: 0;
     }
 
-    .publication-record-visual,
-    .publication-record-visual img {
+    .publication-record-visual {
         min-height: 330px;
     }
 
-    .publication-visual-overlay {
-        max-width: 29ch;
+    .publication-visual-ledger > div {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
     }
 
     .publication-module-rail {

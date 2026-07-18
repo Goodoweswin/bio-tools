@@ -1,42 +1,50 @@
 <!-- AI Chat Widget Component -->
 <style>
-    /* Floating Button */
+    /* A quiet, system-aligned entry point that stays out of the first mobile viewport. */
     #sc-chat-toggle {
         position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        background: var(--primary-color, #0072B2);
-        color: white;
-        border-radius: 50%;
-        border: none;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        right: 24px;
+        bottom: 24px;
+        width: 50px;
+        height: 50px;
+        border: 1px solid var(--border-strong, rgba(125, 211, 252, 0.3));
+        border-radius: var(--radius-sm, 3px);
+        background: rgba(13, 23, 27, 0.94);
+        color: var(--accent-color, #20c7b5);
+        box-shadow: 0 14px 32px rgba(0, 18, 24, 0.28);
         cursor: pointer;
         z-index: 9999;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
-        transition: transform 0.3s;
+        font-size: 19px;
+        transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
     }
-    #sc-chat-toggle:hover { transform: scale(1.1); }
+    #sc-chat-toggle:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-color, #20c7b5);
+        background: rgba(20, 38, 44, 0.98);
+    }
+    #sc-chat-toggle:focus-visible {
+        outline: 2px solid var(--accent-color, #20c7b5);
+        outline-offset: 3px;
+    }
 
     /* Chat Window */
     #sc-chat-window {
         position: fixed;
-        bottom: 100px;
-        right: 30px;
-        width: 350px;
-        height: 500px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        right: 24px;
+        bottom: 88px;
+        width: min(360px, calc(100vw - 48px));
+        height: min(540px, calc(100dvh - 112px));
+        background: #0d171b;
+        border-radius: var(--radius-sm, 3px);
+        box-shadow: 0 24px 56px rgba(0, 12, 17, 0.48);
         z-index: 9999;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        border: 1px solid #eee;
+        border: 1px solid var(--border-strong, rgba(125, 211, 252, 0.3));
         opacity: 0;
         pointer-events: none;
         transform: translateY(20px);
@@ -50,22 +58,23 @@
 
     /* Header */
     .chat-header {
-        background: var(--primary-color, #0072B2);
-        color: white;
-        padding: 15px;
+        background: rgba(20, 38, 44, 0.96);
+        color: var(--text-color, #eef7fb);
+        padding: 14px 15px;
+        border-bottom: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
     .chat-header h3 { margin: 0; font-size: 16px; }
-    .close-btn { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+    .close-btn { background: none; border: none; color: var(--text-secondary, #9cb1bd); font-size: 20px; cursor: pointer; }
 
     /* Content Area */
     .chat-body {
         flex: 1;
         padding: 15px;
         overflow-y: auto;
-        background: #f9f9f9;
+        background: #0d171b;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -82,15 +91,17 @@
     #auth-view input {
         padding: 10px;
         margin: 10px 0;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        border: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
+        border-radius: 0;
+        background: #081013;
+        color: var(--text-color, #eef7fb);
     }
     #auth-view button {
         padding: 10px;
-        background: var(--accent-color, #FF7F50);
-        color: white;
-        border: none;
-        border-radius: 4px;
+        background: var(--accent-color, #20c7b5);
+        color: #04211f;
+        border: 1px solid var(--accent-color, #20c7b5);
+        border-radius: 0;
         cursor: pointer;
     }
 
@@ -98,27 +109,28 @@
     .message {
         max-width: 80%;
         padding: 10px 14px;
-        border-radius: 10px;
+        border-radius: 3px;
         font-size: 14px;
         line-height: 1.4;
     }
     .message.user {
         align-self: flex-end;
-        background: var(--primary-color, #0072B2);
-        color: white;
-        border-bottom-right-radius: 2px;
+        background: rgba(32, 199, 181, 0.18);
+        color: var(--text-color, #eef7fb);
+        border: 1px solid rgba(32, 199, 181, 0.3);
+        border-bottom-right-radius: 0;
     }
     .message.ai {
         align-self: flex-start;
-        background: white;
-        border: 1px solid #e0e0e0;
-        color: #333;
-        border-bottom-left-radius: 2px;
+        background: rgba(20, 38, 44, 0.9);
+        border: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
+        color: var(--text-color, #eef7fb);
+        border-bottom-left-radius: 0;
     }
     .message.system {
         align-self: center;
         font-size: 12px;
-        color: #888;
+        color: var(--muted-text, #718690);
         background: none;
         border: none;
     }
@@ -126,33 +138,59 @@
     /* Input Area */
     .chat-footer {
         padding: 10px;
-        border-top: 1px solid #eee;
+        border-top: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
         display: flex;
         gap: 10px;
-        background: white;
+        background: rgba(13, 23, 27, 0.98);
     }
     .chat-footer input {
         flex: 1;
         padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 20px;
+        border: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
+        border-radius: 0;
+        background: #081013;
+        color: var(--text-color, #eef7fb);
         outline: none;
     }
     .chat-footer button {
         background: none;
         border: none;
-        color: var(--primary-color, #0072B2);
+        color: var(--accent-color, #20c7b5);
         cursor: pointer;
         font-size: 18px;
     }
     
     /* Loading Dot */
-    .typing-indicator { font-style: italic; color: #aaa; font-size: 12px; margin-left: 10px; }
+    .typing-indicator { font-style: italic; color: var(--muted-text, #718690); font-size: 12px; margin-left: 10px; }
+
+    @media (max-width: 768px) {
+        #sc-chat-toggle {
+            right: max(16px, env(safe-area-inset-right));
+            bottom: max(16px, env(safe-area-inset-bottom));
+            width: 46px;
+            height: 46px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px);
+        }
+        .chat-trigger-visible #sc-chat-toggle {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        #sc-chat-window {
+            right: 15px;
+            left: 15px;
+            bottom: calc(max(16px, env(safe-area-inset-bottom)) + 58px);
+            width: auto;
+            height: min(560px, calc(100dvh - 96px));
+        }
+    }
 </style>
 
 <div id="sc-chat-widget">
     <!-- Toggle Button -->
-    <button id="sc-chat-toggle" onclick="toggleChat()">
+    <button id="sc-chat-toggle" type="button" onclick="toggleChat()" aria-label="Open research assistant" title="Open research assistant">
         <i class="fas fa-robot"></i>
     </button>
 
@@ -198,12 +236,21 @@
         showChatInterface();
     }
 
+    function syncChatTriggerVisibility() {
+        const compactViewport = window.matchMedia('(max-width: 768px)').matches;
+        document.documentElement.classList.toggle('chat-trigger-visible', !compactViewport || window.scrollY > 180);
+    }
+
     function toggleChat() {
         isOpen = !isOpen;
         const win = document.getElementById('sc-chat-window');
         if (isOpen) win.classList.add('open');
         else win.classList.remove('open');
     }
+
+    window.addEventListener('scroll', syncChatTriggerVisibility, { passive: true });
+    window.addEventListener('resize', syncChatTriggerVisibility);
+    syncChatTriggerVisibility();
 
     function handleAuthKey(e) {
         if (e.key === 'Enter') authenticate();

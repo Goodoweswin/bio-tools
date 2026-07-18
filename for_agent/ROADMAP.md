@@ -81,7 +81,7 @@ Status: implemented and locally verified on 1440px desktop, 1440px tall desktop,
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
 
 ## Phase 1E: Knowledge Atlas
-Status: implemented, committed, and pushed. Deployed-site verification remains pending because the agent environment could not reach the public route.
+Status: complete. Implementation was committed and pushed; deployed-site verification was confirmed by the owner on 2026-07-18.
 
 - Rebuild `/knowledge` as a searchable Future Lab OS knowledge module.
 - Keep all 12 note URLs and their original Chinese article titles stable.
@@ -97,13 +97,8 @@ Status: implemented, committed, and pushed. Deployed-site verification remains p
   - 390px mobile hero, image, navigation, search, and filters remain legible without horizontal overflow
   - article links remain unchanged
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
-- Remaining verification:
-  - verify deployed `/knowledge` on `https://daiger.top/` when public access is available
-
-Exception: on 2026-07-18, the user explicitly approved starting Phase 1F before the deferred deployed-site check could be completed.
-
 ## Phase 1F: Publications OS Ledger
-Status: implemented and locally verified. Checkpoint remains open until the changes are committed and pushed.
+Status: complete. Implementation was committed and pushed; deployed-site verification was confirmed by the owner on 2026-07-18.
 
 - Rebuild `/publications` as the final Future Lab OS module page.
 - Preserve the conservative public-claims policy and existing status language.
@@ -119,17 +114,16 @@ Status: implemented and locally verified. Checkpoint remains open until the chan
   - 390px mobile hero, protocol, and output records remain legible without horizontal overflow
   - `/tools` route remains available from the technical-method record
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
-- Checkpoint close criteria:
-  - commit the Publications OS Ledger changes
-  - push to `origin/main`
-  - verify deployed `/publications` on `https://daiger.top/`
-
-Do not begin Phase 2 before this checkpoint is closed.
-
 ## Phase 2: Content Accuracy
-Status: started. Public copy now reframes `NRX` as candidate endothelial regulators unless the term appears inside existing image assets.
+Status: Phase 2A complete. Editable public copy and availability labels were audited on 2026-07-18; Phase 2B waits for owner-provided primary records.
 
-- Replace or reframe placeholder scientific terms such as `NRX`.
+- Completed in Phase 2A:
+  - removed editable public `NRX` references and generic candidate-regulator placeholders
+  - reframed active research around senescence-associated endothelial states and testable programs
+  - recorded bitmap assets that still contain `NRX` labels for a later scientific-figure revision
+  - confirmed Manuscript, Conference, and Technical Method readiness labels remain explicit
+- Source of truth: `for_agent/CONTENT_ACCURACY.md`.
+- Phase 2B owner input needed:
 - Add real publication metadata when available:
   - title
   - authors
@@ -137,7 +131,7 @@ Status: started. Public copy now reframes `NRX` as candidate endothelial regulat
   - year
   - DOI or public link
 - Add public conference materials when cleared.
-- Add clearer project status labels for manuscripts and posters.
+- Add tool documentation for accepted input formats, demo data, export behavior, and statistical assumptions.
 
 ## Phase 3: BioTools Expansion
 - Document current tools:

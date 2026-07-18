@@ -42,6 +42,29 @@
         </div>
       </div>
 
+      <section class="knowledge-hero-command" id="knowledge-command" aria-label="Search the research index">
+        <div class="knowledge-command-shell">
+          <div class="knowledge-search-field">
+            <label class="console-label" for="knowledge-search">Search the research index</label>
+            <div class="knowledge-search-input">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input id="knowledge-search" type="search" autocomplete="off" placeholder="HES1, batch correction, Transformer">
+            </div>
+          </div>
+          <div class="knowledge-query-status" aria-live="polite">
+            <span class="console-label">Visible notes</span>
+            <strong id="knowledge-count">12 / 12</strong>
+            <span id="knowledge-query-label">All tracks</span>
+          </div>
+        </div>
+        <div class="knowledge-filter-row" aria-label="Filter knowledge notes by research track">
+          <button class="knowledge-filter is-active" type="button" data-track="all" aria-pressed="true">All notes</button>
+          <button class="knowledge-filter" type="button" data-track="ai-single-cell" aria-pressed="false">AI x Single-cell</button>
+          <button class="knowledge-filter" type="button" data-track="skin-aging" aria-pressed="false">Skin aging</button>
+          <button class="knowledge-filter" type="button" data-track="ai4med" aria-pressed="false">AI4Med</button>
+        </div>
+      </section>
+
       <figure class="knowledge-atlas" aria-label="Knowledge system atlas">
         <img src="/assets/knowledge/封面scVI.webp" alt="Single-cell data and model integration illustration">
         <div class="knowledge-atlas-overlay">
@@ -73,29 +96,6 @@
   </section>
 
   <main class="knowledge-os-main">
-    <section class="knowledge-command" id="knowledge-command">
-      <div class="container knowledge-command-shell">
-        <div class="knowledge-search-field">
-          <label class="console-label" for="knowledge-search">Search the research index</label>
-          <div class="knowledge-search-input">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <input id="knowledge-search" type="search" autocomplete="off" placeholder="HES1, batch correction, Transformer">
-          </div>
-        </div>
-        <div class="knowledge-query-status" aria-live="polite">
-          <span class="console-label">Visible notes</span>
-          <strong id="knowledge-count">12 / 12</strong>
-          <span id="knowledge-query-label">All tracks</span>
-        </div>
-      </div>
-      <div class="container knowledge-filter-row" aria-label="Filter knowledge notes by research track">
-        <button class="knowledge-filter is-active" type="button" data-track="all" aria-pressed="true">All notes</button>
-        <button class="knowledge-filter" type="button" data-track="ai-single-cell" aria-pressed="false">AI x Single-cell</button>
-        <button class="knowledge-filter" type="button" data-track="skin-aging" aria-pressed="false">Skin aging</button>
-        <button class="knowledge-filter" type="button" data-track="ai4med" aria-pressed="false">AI4Med</button>
-      </div>
-    </section>
-
     <section class="knowledge-routes" id="knowledge-routes">
       <div class="container">
         <div class="knowledge-section-header">
