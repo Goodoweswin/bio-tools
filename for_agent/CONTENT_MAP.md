@@ -5,7 +5,7 @@
 - `src/research.html`: **Research**. Future Lab OS module page with research orbit, module rail, visual project boards, validation routes, and Chinese summaries.
 - `src/publications.html`: **Publications**. Public-facing scholarly output placeholder and future list.
 - `src/tools.html`: **Tools**. BioTools Control Room with runtime console, live instrument stations, analysis loop, and next-instrument panel.
-- `src/knowledge.html`: **Knowledge Base Index**. Entry point for articles.
+- `src/knowledge.html`: **Knowledge Atlas**. Searchable Future Lab OS index with track filters, research routes, and grouped article ledger.
 
 ## Components (`src/components/`)
 - `header.html`: Global navigation bar.

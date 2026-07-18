@@ -39,11 +39,15 @@ Live:
 
 ## Knowledge Page Smoke Test
 Verify at least:
+- `/knowledge.html`
 - `/knowledge/ai-single-cell/annotation`
 - `/knowledge/skin-aging/fibroblast`
 - `/knowledge/ai4med/drug-screening`
 
 Confirm:
+- search accepts English, Chinese, and method-specific terms
+- each segmented track filter updates the visible-note count and hides empty groups
+- all 12 note links still point to their original article pages
 - article CSS loads
 - back link works
 - code blocks are readable

@@ -4,6 +4,8 @@
 Make `daiger.top` feel like Jackson Dai's personal research system: credible academic identity, clear research programs, useful browser tools, and a growing knowledge base.
 
 ## Phase 1: Live Visual QA
+Status: in progress. Homepage, Research, Tools, and Knowledge have local desktop and mobile visual checks; Publications and deployed-site confirmation remain.
+
 - Review `/` on desktop, tablet, and mobile.
 - Confirm homepage hero is strong but not crowded.
 - Check Research, Tools, Knowledge, and Publications pages for text overflow.
@@ -77,6 +79,37 @@ Status: implemented and locally verified on 1440px desktop, 1440px tall desktop,
   - hero avoids oversized empty space on tall desktop viewports
   - tool station cards do not overlap or trap CTA buttons
   - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
+
+## Phase 1E: Knowledge Atlas
+Status: implemented and locally verified. Checkpoint remains open until the changes are committed and pushed.
+
+- Rebuild `/knowledge` as a searchable Future Lab OS knowledge module.
+- Keep all 12 note URLs and their original Chinese article titles stable.
+- Replace the former sidebar-plus-list rhythm with:
+  - knowledge-atlas hero using the existing single-cell integration image
+  - search command strip with visible-result status
+  - segmented research-track filters
+  - computation, biology, and translation routes
+  - grouped public-note ledger
+- Keep search responsive to English, Chinese, and method-specific terms.
+- Acceptance checks passed locally:
+  - 1440px desktop hero fits with the next module visible at the viewport edge
+  - 390px mobile hero, image, navigation, search, and filters remain legible without horizontal overflow
+  - article links remain unchanged
+  - `npm run build`, `git diff --check`, and `xmllint --noout public/sitemap.xml` pass
+- Checkpoint close criteria:
+  - commit the Knowledge Atlas changes
+  - push to `origin/main`
+  - verify deployed `/knowledge` on `https://daiger.top/`
+
+Do not begin Phase 1F or Phase 2 before this checkpoint is closed.
+
+## Phase 1F: Publications OS Ledger
+Status: locked until Phase 1E is committed, pushed, and verified on the deployed site.
+
+- Rebuild `/publications` as the final Future Lab OS module page.
+- Preserve the conservative public-claims policy and existing status language.
+- Establish clear locations for future citation records, conference materials, and technical notes.
 
 ## Phase 2: Content Accuracy
 Status: started. Public copy now reframes `NRX` as candidate endothelial regulators unless the term appears inside existing image assets.

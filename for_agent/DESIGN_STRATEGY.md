@@ -4,7 +4,7 @@
 - **Site type**: Personal academic portfolio plus browser-based bioinformatics toolkit.
 - **Audience**: Research collaborators, mentors, clinicians, wet-lab users, and visitors evaluating credibility.
 - **Vibe**: Academic cyber-future, restrained, research-driven, not generic dark SaaS.
-- **Current issue**: Homepage, Research, and Tools now share the Future Lab OS direction; Knowledge and Publications should be tightened next so the site feels like one system.
+- **Current issue**: Homepage, Research, Tools, and Knowledge now share the Future Lab OS direction; Publications is the remaining major page to bring into the same system.
 
 ## Target Dials
 - **Design variance**: Move from 6 to 8.
@@ -74,6 +74,15 @@ Status: implemented on `src/tools.html`, `src/css/style.css`, and `src/js/site.j
 - Kept pathway enrichment as the next planned instrument.
 - Added responsive handling and reveal targets while preserving reduced-motion support.
 
+### Phase 1E: Knowledge Atlas
+Status: implemented and locally verified on 1440px desktop, 390px mobile, and 390px tall mobile screenshots. Commit and deployed-site verification remain before the checkpoint closes.
+
+- Rebuilt `/knowledge` as a Knowledge System rather than a sidebar index.
+- Added an asset-led atlas hero, three research-track routes, a search command strip, and a grouped note ledger.
+- Preserved every existing note route and Chinese note title.
+- Added segmented filters for all notes, AI x Single-cell, Skin aging, and AI4Med.
+- Extended the lightweight motion system with Knowledge route and ledger reveals, while retaining reduced-motion support.
+
 ### Phase 2: Research Page Editorial Rewrite
 Status: superseded by Phase 1C while preserving the same project content and bilingual summaries.
 
@@ -87,7 +96,7 @@ Status: superseded by Phase 1C while preserving the same project content and bil
 - Move long Chinese explanatory text into secondary notes or compact panels.
 
 ### Phase 3: Layout Rhythm Upgrade
-Status: implemented on `src/tools.html`; partially implemented on `src/knowledge.html` and `src/publications.html`.
+Status: implemented on `src/tools.html` and `src/knowledge.html`; Publications remains to be redesigned.
 
 - Reduce repeated card grids.
 - Use mixed layouts:
@@ -144,7 +153,7 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Homepage research section now uses a translational loop layout instead of repeated cards.
 - Research page now presents each project as a four-part editorial brief with Chinese summaries in compact disclosure panels.
 - Tools page now presents BioTools as a control room with a runtime console, live instrument stations, an analysis loop, and a next-instrument panel.
-- Knowledge page now presents articles as a visible research-note index with a sticky search console and stable filtering.
+- Knowledge page now presents a searchable research atlas with track filters, visible-result status, and a grouped public-note ledger.
 - Publications page now presents scholarly output as a conservative ledger without fake metrics or invented bibliographic claims.
 - Main page-level layouts for Research, Tools, Knowledge, and Publications are consolidated in `src/css/style.css` instead of inline page styles.
 - Main pages now include descriptions, canonical URLs, Open Graph tags, and Twitter card metadata.
@@ -154,3 +163,4 @@ Status: partially implemented with main-page meta tags, `robots.txt`, and `sitem
 - Homepage Phase 1B rebuilt the first page as a Future Lab OS with atlas hero, semantic route grid, translational research loop, BioTools instrument dock, and signal feed.
 - Research Phase 1C rebuilt `/research` as a Future Lab OS module page with a module rail, visual research orbit, module boards, validation route panels, and responsive screenshot QA.
 - Tools Phase 1D rebuilt `/tools` as a BioTools Control Room with a runtime console, live stations for ElementPrism and DEG Analysis, an analysis loop, and pathway enrichment as the next instrument.
+- Knowledge Phase 1E rebuilt `/knowledge` as a Knowledge Atlas with an existing single-cell integration asset, a search command strip, research-track filters, and an indexed three-track note ledger.

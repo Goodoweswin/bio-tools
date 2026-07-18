@@ -5,6 +5,11 @@ All notable changes to the **bio-tools** personal research website are documente
 ## Unreleased
 
 ### Changed
+- Knowledge page Knowledge Atlas redesign:
+  - replaced the sidebar-plus-list index with an asset-led `Knowledge system` hero
+  - added visible note count, English and Chinese search, and segmented track filters
+  - grouped all 12 stable article routes into computation, biology, and translation-led tracks
+  - added Knowledge Atlas reveal targets, hover motion, and mobile layout handling
 - Tools page BioTools Control Room redesign:
   - replaced the browser workbench hero with a `BioTools control room` OS hero
   - added a runtime console for local-file, no-login, WASM-oriented analysis
@@ -40,6 +45,7 @@ All notable changes to the **bio-tools** personal research website are documente
 - Homepage Phase 1B checked with local Firefox screenshots at 1440px desktop and 390px mobile.
 - Research OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
 - Tools OS checked with local Chrome screenshots at 1440px desktop, 1440px tall desktop, and 390px mobile.
+- Knowledge Atlas checked with local Firefox screenshots at 1440px desktop, 390px mobile, and 390px tall mobile.
 
 ## [2026-07-01] - Research Website Redesign and Deployment Hygiene
 
