@@ -21,6 +21,14 @@ The following public image assets still contain `NRX` inside the bitmap and shou
 
 - `public/assets/skin_aging/web_scanalysis.webp`
 - `public/assets/skin_aging/web_clinical_transl.webp`
+- `public/assets/skin_aging/websummary_scEC.webp`
+- `public/assets/skin_aging/web_workflow_EC.webp`
+
+The 2026-10-16 redesign keeps these images unchanged, removes them from the homepage hero, and labels working schematics and proposed outcomes in Research captions. The vHFO diagrams also depict repair outcomes that must remain framed as hypotheses, not demonstrated results.
+
+The new homepage concept art is AI-generated and visibly labeled as illustration. It contains no measured results or regulator labels; provenance is recorded in HERO_ASSET_PROVENANCE.md.
+
+Article body claims and code examples have not undergone scientific or runtime validation in this visual pass. Schedule a separate content audit before treating the notes as validated methods.
 
 The matching PNG files are deployable legacy copies and should be updated in the same source-asset pass, not by editing the compressed WebP alone.
 

@@ -1,5 +1,16 @@
 # Project Roadmap
 
+## Active Plan: 2026-10-16
+The light research-led redesign supersedes the historical Future Lab OS visual tasks below. See DESIGN_STRATEGY.md for the current decisions. Historical completion records are retained for context, not instructions to restore the old design.
+
+- Checkpoint 1, direction and copy: complete.
+- Checkpoint 2, five-page implementation and shared reading UI: complete.
+- Checkpoint 3, build and browser QA: complete. 66 production-preview checks passed, including 40 local links/assets. Desktop, tablet, mobile, and short-screen screenshots reviewed. Any future failed check reopens this gate.
+- Checkpoint 4, commit, push, and deployed checks: owner authorized commit/push on 2026-10-16; deployed checks remain pending.
+- Publication records and reviewed scientific figures remain open content work; neither is fabricated to close a checklist.
+
+## Historical Roadmap
+
 ## North Star
 Make `daiger.top` feel like Jackson Dai's personal research system: credible academic identity, clear research programs, useful browser tools, and a growing knowledge base.
 

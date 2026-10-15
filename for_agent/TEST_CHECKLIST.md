@@ -1,5 +1,47 @@
 # Test Checklist
 
+## Reproducible Browser Check
+`scripts/check-ui.mjs` uses Node 22+ and Firefox WebDriver BiDi without adding production dependencies. Run against a production preview as well as the dev server.
+
+Build first, then start the preview in a separate terminal:
+```bash
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
+```
+
+Start a dedicated test browser profile in another terminal; do not use a personal profile:
+```bash
+mkdir -p /tmp/daiger-ui-profile
+firefox --headless --no-remote --profile /tmp/daiger-ui-profile --remote-debugging-port 9224 about:blank
+```
+
+Run the checks:
+```bash
+BASE_URL=http://127.0.0.1:4173 node scripts/check-ui.mjs
+```
+
+- `BIDI_URL` overrides the default `ws://127.0.0.1:9224/session`.
+- `QA_OUTPUT` overrides the default `/tmp/daiger-ui` screenshot and JSON report folder.
+- Nonzero exit status blocks the local verification checkpoint.
+- Inspect the screenshots too: DOM overflow tests cannot detect artwork behind text.
+- Stop the dedicated Firefox process after verification.
+- The script mocks assistant success and 401 responses. It does not validate the live AI provider or run Python/WASM calculations.
+
+Coverage: five pages at 320, 390, 768, 1440, and 1920px; short-screen homepage checks; mobile menu/Escape; keyword and topic filters; empty reset; all 12 articles; full-aspect-ratio research images; local links/assets; assistant focus and response rendering.
+
+## Latest Local Verification: 2026-10-16
+- Production build passed, along with `git diff --check` and `xmllint --noout public/sitemap.xml`.
+- `scripts/check-ui.mjs` completed with 66/66 checks passing against `http://127.0.0.1:61532/`.
+- 40 unique local links/assets passed, including image and PDF content-type checks and internal anchors.
+- Five primary pages checked at 320, 390, 768, 1440, and 1920px widths; no horizontal overflow or missing current-page state.
+- Short-screen homepage checked at 320x568, 390x667, and 1440x768; next-section content remains visible.
+- All 12 articles loaded with the light reading layer; batch-correction table overflow was fixed.
+- All research figures and homepage lazy-loaded images decoded; scientific image proportions were preserved.
+- Mobile menu, Escape/focus return, English/Chinese search, topic filters, empty reset, assistant success and 401 UI states passed.
+- Core text/control contrast pairs are 14.59:1, 6.49:1, 4.69:1, and 6.81:1. This is not a claim of a full accessibility audit.
+- Screenshots and machine-readable report: `/tmp/daiger-ui-production/`. These are local artifacts; rerun the script to regenerate.
+- Known limits: Firefox-only visual verification; no live deployment, real assistant API, or Python/WASM calculations were tested in this pass. Tool application files and backend are unchanged.
+
 ## Before Every Commit
 ```bash
 npm run build

@@ -1,318 +1,363 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge | Jackson Dai</title>
-  <meta name="description"
-    content="Research notes on AI4Med, single-cell biology, skin aging mechanisms, and computational methods.">
-  <link rel="canonical" href="https://daiger.top/knowledge">
-  <meta property="og:title" content="Knowledge | Jackson Dai">
-  <meta property="og:description"
-    content="A searchable research-note index for AI, single-cell biology, AI4Med, and skin aging.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://daiger.top/knowledge">
-  <meta property="og:image" content="https://daiger.top/assets/profile.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Knowledge | Jackson Dai">
-  <meta name="twitter:description"
-    content="Research notes across AI, single-cell biology, AI4Med, and skin aging.">
-  <meta name="twitter:image" content="https://daiger.top/assets/profile.png">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-
-<body>
-
-  <load src="./components/header.html" />
-
-  <section class="knowledge-os-hero">
-    <div class="container knowledge-os-shell">
-      <div class="knowledge-os-copy">
-        <span class="system-kicker">Knowledge system</span>
-        <h1>Knowledge that keeps research moving</h1>
-        <p>A searchable working library for AI4Med, single-cell analysis, skin aging biology, and the decisions that connect them.</p>
-        <div class="knowledge-os-stats" aria-label="Knowledge library statistics">
-          <span><strong>12</strong> notes online</span>
-          <span><strong>3</strong> research tracks</span>
-          <span><strong>CN + EN</strong> search terms</span>
-        </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Notes | Jackson Dai</title>
+    <meta
+      name="description"
+      content="Notes on single-cell analysis, skin aging, and AI in medicine."
+    />
+    <link rel="canonical" href="https://daiger.top/knowledge" />
+    <meta property="og:title" content="Research Notes | Jackson Dai" />
+    <meta
+      property="og:description"
+      content="Notes on single-cell analysis, skin aging, and AI in medicine."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://daiger.top/knowledge" />
+    <meta property="og:image" content="https://daiger.top/assets/profile.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Research Notes | Jackson Dai" />
+    <meta
+      name="twitter:description"
+      content="Notes on single-cell analysis, skin aging, and AI in medicine."
+    />
+    <meta
+      name="twitter:image"
+      content="https://daiger.top/assets/profile.png"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23126750'/%3E%3Ctext x='32' y='43' fill='white' font-family='Arial' font-size='30' text-anchor='middle'%3EJD%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <load src="./components/header.html" />
+    <main class="notes-main" id="main" tabindex="-1">
+      <div class="container page-intro">
+        <h1>Research notes</h1>
+        <p>
+          Ideas, methods, and reading notes from my work in biology and
+          computation.
+        </p>
       </div>
-
-      <section class="knowledge-hero-command" id="knowledge-command" aria-label="Search the research index">
-        <div class="knowledge-command-shell">
-          <div class="knowledge-search-field">
-            <label class="console-label" for="knowledge-search">Search the research index</label>
-            <div class="knowledge-search-input">
-              <i class="fas fa-search" aria-hidden="true"></i>
-              <input id="knowledge-search" type="search" autocomplete="off" placeholder="HES1, batch correction, Transformer">
-            </div>
-          </div>
-          <div class="knowledge-query-status" aria-live="polite">
-            <span class="console-label">Visible notes</span>
-            <strong id="knowledge-count">12 / 12</strong>
-            <span id="knowledge-query-label">All tracks</span>
-          </div>
-        </div>
-        <div class="knowledge-filter-row" aria-label="Filter knowledge notes by research track">
-          <button class="knowledge-filter is-active" type="button" data-track="all" aria-pressed="true">All notes</button>
-          <button class="knowledge-filter" type="button" data-track="ai-single-cell" aria-pressed="false">AI x Single-cell</button>
-          <button class="knowledge-filter" type="button" data-track="skin-aging" aria-pressed="false">Skin aging</button>
-          <button class="knowledge-filter" type="button" data-track="ai4med" aria-pressed="false">AI4Med</button>
-        </div>
-      </section>
-
-      <figure class="knowledge-atlas" aria-label="Knowledge system atlas">
-        <img src="/assets/knowledge/封面scVI.webp" alt="Single-cell data and model integration illustration">
-        <div class="knowledge-atlas-overlay">
-          <span class="console-label">Semantic map</span>
-          <strong>Observe, model, translate</strong>
-          <p>Research notes link biological signals to computational choices and clinical questions.</p>
-        </div>
-        <div class="knowledge-atlas-points" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-      </figure>
-
-      <nav class="knowledge-module-rail" aria-label="Knowledge page routes">
-        <a href="#knowledge-command">
-          <span>Search</span>
-          <strong>Semantic index</strong>
-        </a>
-        <a href="#knowledge-routes">
-          <span>Tracks</span>
-          <strong>Research routes</strong>
-        </a>
-        <a href="#knowledge-ledger">
-          <span>Ledger</span>
-          <strong>All public notes</strong>
-        </a>
-      </nav>
-    </div>
-  </section>
-
-  <main class="knowledge-os-main">
-    <section class="knowledge-routes" id="knowledge-routes">
       <div class="container">
-        <div class="knowledge-section-header">
-          <span class="system-kicker">Research routes</span>
-          <h2>Three routes through the same research system</h2>
-          <p class="section-intro">The index is organized around the questions that recur across datasets, mechanisms, and translational work.</p>
-        </div>
-
-        <div class="knowledge-route-grid">
-          <a class="knowledge-route" href="#ai-single-cell">
-            <span class="knowledge-route-count">04</span>
-            <div>
-              <span class="knowledge-route-kicker">Computation</span>
-              <h3>AI x Single-cell</h3>
-              <p>Annotation, batch correction, regulatory networks, and trajectories.</p>
+        <section
+          class="notes-controls"
+          id="knowledge-command"
+          aria-label="Find a note"
+        >
+          <div class="search-field">
+            <label for="knowledge-search">Search notes</label>
+            <div class="search-input">
+              <i class="fas fa-search" aria-hidden="true"></i
+              ><input
+                id="knowledge-search"
+                type="search"
+                autocomplete="off"
+                placeholder="HES1, batch correction, 皮肤衰老"
+                aria-controls="knowledge-grid"
+              />
             </div>
-            <i class="fas fa-arrow-down" aria-hidden="true"></i>
-          </a>
-
-          <a class="knowledge-route" href="#skin-aging">
-            <span class="knowledge-route-count">04</span>
-            <div>
-              <span class="knowledge-route-kicker">Biology</span>
-              <h3>Skin aging</h3>
-              <p>Fibroblast states, inflammatory signals, regulators, and aging clocks.</p>
-            </div>
-            <i class="fas fa-arrow-down" aria-hidden="true"></i>
-          </a>
-
-          <a class="knowledge-route" href="#ai4med">
-            <span class="knowledge-route-count">04</span>
-            <div>
-              <span class="knowledge-route-kicker">Translation</span>
-              <h3>AI4Med</h3>
-              <p>Drug screening, imaging, multi-omics, and clinical decision support.</p>
-            </div>
-            <i class="fas fa-arrow-down" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="knowledge-ledger" id="knowledge-ledger">
-      <div class="container knowledge-ledger-shell">
-        <aside class="knowledge-ledger-intro">
-          <span class="system-kicker">Public note ledger</span>
-          <h2>Search the working library</h2>
-          <p>Each note is a compact research reference. The index supports English, Chinese, and method-specific search terms.</p>
-          <div class="knowledge-ledger-key">
-            <span><i></i> Method and model notes</span>
-            <span><i></i> Biological mechanism notes</span>
-            <span><i></i> Translational route notes</span>
           </div>
-        </aside>
-
-        <div class="knowledge-note-groups" id="knowledge-grid">
-          <section class="knowledge-track-group" id="ai-single-cell" data-group="ai-single-cell">
-            <header class="knowledge-track-header">
-              <div>
-                <span>Track 01</span>
-                <h2>AI x Single-cell</h2>
-              </div>
-              <p>Models for resolving cell identity, variation, and state transitions.</p>
-            </header>
-            <div class="knowledge-note-list">
-              <a class="knowledge-note" href="knowledge/ai-single-cell/annotation.html" data-track="ai-single-cell"
-                data-keywords="ai single-cell annotation cell type 自动注释">
-                <span class="knowledge-note-meta">Method note</span>
-                <div>
-                  <h3>AI驱动的细胞类型自动注释</h3>
-                  <p>用机器学习和深度学习模型提高单细胞注释的一致性与可复用性。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-
-              <a class="knowledge-note" href="knowledge/ai-single-cell/batch-correction.html" data-track="ai-single-cell"
-                data-keywords="ai single-cell batch correction 深度学习 批次效应">
-                <span class="knowledge-note-meta">Method note</span>
-                <div>
-                  <h3>深度学习批次效应校正</h3>
-                  <p>梳理单细胞整合中的批次效应问题，以及深度模型如何保持生物差异。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-
-              <a class="knowledge-note" href="knowledge/ai-single-cell/grn-inference.html" data-track="ai-single-cell"
-                data-keywords="transformer grn gene regulatory network 基因调控网络">
-                <span class="knowledge-note-meta">Model note</span>
-                <div>
-                  <h3>Transformer推断基因调控网络</h3>
-                  <p>从表达矩阵到调控关系，理解注意力模型在 GRN 推断中的用途与边界。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-
-              <a class="knowledge-note" href="knowledge/ai-single-cell/trajectory.html" data-track="ai-single-cell"
-                data-keywords="trajectory pseudotime ai 轨迹分析">
-                <span class="knowledge-note-meta">Method note</span>
-                <div>
-                  <h3>AI优化细胞轨迹分析</h3>
-                  <p>记录轨迹推断、伪时间建模和细胞状态转变分析中的 AI 方法。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+          <div class="notes-toolbar">
+            <div
+              class="knowledge-filter-row"
+              role="group"
+              aria-label="Filter notes by topic"
+            >
+              <button
+                class="knowledge-filter is-active"
+                type="button"
+                data-track="all"
+                aria-pressed="true"
+              >
+                All notes
+              </button>
+              <button
+                class="knowledge-filter"
+                type="button"
+                data-track="ai-single-cell"
+                aria-pressed="false"
+              >
+                AI &amp; single-cell
+              </button>
+              <button
+                class="knowledge-filter"
+                type="button"
+                data-track="skin-aging"
+                aria-pressed="false"
+              >
+                Skin aging
+              </button>
+              <button
+                class="knowledge-filter"
+                type="button"
+                data-track="ai4med"
+                aria-pressed="false"
+              >
+                AI in medicine
+              </button>
             </div>
-          </section>
+            <p class="knowledge-query-status" role="status">
+              <span id="knowledge-count">12 notes</span
+              ><span class="sr-only" id="knowledge-query-label">All notes</span>
+            </p>
+          </div>
+        </section>
+        <section id="knowledge-ledger" aria-label="Research notes">
+          <div id="knowledge-grid">
+            <section
+              class="knowledge-track-group"
+              id="ai-single-cell"
+              data-group="ai-single-cell"
+            >
+              <header class="knowledge-track-header">
+                <div>
+                  <span>Track 01</span>
+                  <h2>AI &amp; single-cell</h2>
+                </div>
+                <p>Cell annotation, batch correction, and trajectories.</p>
+              </header>
+              <div class="knowledge-note-list">
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai-single-cell/annotation.html"
+                  data-track="ai-single-cell"
+                  data-keywords="ai single-cell annotation cell type 自动注释"
+                >
+                  <span class="knowledge-note-meta">Method note</span>
+                  <div>
+                    <h3>AI驱动的细胞类型自动注释</h3>
+                    <p>
+                      用机器学习和深度学习模型提高单细胞注释的一致性与可复用性。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
 
-          <section class="knowledge-track-group" id="skin-aging" data-group="skin-aging">
-            <header class="knowledge-track-header">
-              <div>
-                <span>Track 02</span>
-                <h2>Skin aging</h2>
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai-single-cell/batch-correction.html"
+                  data-track="ai-single-cell"
+                  data-keywords="ai single-cell batch correction 深度学习 批次效应"
+                >
+                  <span class="knowledge-note-meta">Method note</span>
+                  <div>
+                    <h3>深度学习批次效应校正</h3>
+                    <p>
+                      梳理单细胞整合中的批次效应问题，以及深度模型如何保持生物差异。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai-single-cell/grn-inference.html"
+                  data-track="ai-single-cell"
+                  data-keywords="transformer grn gene regulatory network 基因调控网络"
+                >
+                  <span class="knowledge-note-meta">Model note</span>
+                  <div>
+                    <h3>Transformer推断基因调控网络</h3>
+                    <p>
+                      从表达矩阵到调控关系，理解注意力模型在 GRN
+                      推断中的用途与边界。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai-single-cell/trajectory.html"
+                  data-track="ai-single-cell"
+                  data-keywords="trajectory pseudotime ai 轨迹分析"
+                >
+                  <span class="knowledge-note-meta">Method note</span>
+                  <div>
+                    <h3>AI优化细胞轨迹分析</h3>
+                    <p>
+                      记录轨迹推断、伪时间建模和细胞状态转变分析中的 AI 方法。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
               </div>
-              <p>Cellular states and regulatory signals that reshape skin resilience.</p>
-            </header>
-            <div class="knowledge-note-list">
-              <a class="knowledge-note" href="knowledge/skin-aging/fibroblast.html" data-track="skin-aging"
-                data-keywords="skin aging fibroblast 成纤维细胞 皮肤衰老">
-                <span class="knowledge-note-meta">Biology note</span>
-                <div>
-                  <h3>成纤维细胞亚群异质性研究</h3>
-                  <p>从单细胞视角理解成纤维细胞状态、细胞外基质和皮肤衰老结构变化。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+            </section>
 
-              <a class="knowledge-note" href="knowledge/skin-aging/il17-signaling.html" data-track="skin-aging"
-                data-keywords="skin aging il17 signaling inflammation 皮肤衰老 炎症">
-                <span class="knowledge-note-meta">Biology note</span>
+            <section
+              class="knowledge-track-group"
+              id="skin-aging"
+              data-group="skin-aging"
+            >
+              <header class="knowledge-track-header">
                 <div>
-                  <h3>IL-17信号轴在衰老中的作用</h3>
-                  <p>整理炎症信号、屏障改变和衰老微环境之间的可能联系。</p>
+                  <span>Track 02</span>
+                  <h2>Skin aging</h2>
                 </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+                <p>Fibroblasts, inflammation, and changes in aging skin.</p>
+              </header>
+              <div class="knowledge-note-list">
+                <a
+                  class="knowledge-note"
+                  href="knowledge/skin-aging/fibroblast.html"
+                  data-track="skin-aging"
+                  data-keywords="skin aging fibroblast 成纤维细胞 皮肤衰老"
+                >
+                  <span class="knowledge-note-meta">Biology note</span>
+                  <div>
+                    <h3>成纤维细胞亚群异质性研究</h3>
+                    <p>
+                      从单细胞视角理解成纤维细胞状态、细胞外基质和皮肤衰老结构变化。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
 
-              <a class="knowledge-note" href="knowledge/skin-aging/hes1-klf6.html" data-track="skin-aging"
-                data-keywords="hes1 klf6 skin aging transcription factor">
-                <span class="knowledge-note-meta">Mechanism note</span>
-                <div>
-                  <h3>HES1/KLF6调控机制解析</h3>
-                  <p>追踪衰老相关转录因子模块，连接细胞状态和可验证机制。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+                <a
+                  class="knowledge-note"
+                  href="knowledge/skin-aging/il17-signaling.html"
+                  data-track="skin-aging"
+                  data-keywords="skin aging il17 signaling inflammation 皮肤衰老 炎症"
+                >
+                  <span class="knowledge-note-meta">Biology note</span>
+                  <div>
+                    <h3>IL-17信号轴在衰老中的作用</h3>
+                    <p>整理炎症信号、屏障改变和衰老微环境之间的可能联系。</p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
 
-              <a class="knowledge-note" href="knowledge/skin-aging/aging-clock.html" data-track="skin-aging"
-                data-keywords="skin aging clock biomarker 衰老时钟">
-                <span class="knowledge-note-meta">Model note</span>
-                <div>
-                  <h3>皮肤衰老时钟构建</h3>
-                  <p>记录生物年龄、特征选择和皮肤衰老预测模型的构建思路。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </section>
+                <a
+                  class="knowledge-note"
+                  href="knowledge/skin-aging/hes1-klf6.html"
+                  data-track="skin-aging"
+                  data-keywords="hes1 klf6 skin aging transcription factor 皮肤衰老 转录因子"
+                >
+                  <span class="knowledge-note-meta">Mechanism note</span>
+                  <div>
+                    <h3>HES1/KLF6调控机制解析</h3>
+                    <p>追踪衰老相关转录因子模块，连接细胞状态和可验证机制。</p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
 
-          <section class="knowledge-track-group" id="ai4med" data-group="ai4med">
-            <header class="knowledge-track-header">
-              <div>
-                <span>Track 03</span>
-                <h2>AI4Med</h2>
+                <a
+                  class="knowledge-note"
+                  href="knowledge/skin-aging/aging-clock.html"
+                  data-track="skin-aging"
+                  data-keywords="skin aging clock biomarker 衰老时钟"
+                >
+                  <span class="knowledge-note-meta">Model note</span>
+                  <div>
+                    <h3>皮肤衰老时钟构建</h3>
+                    <p>记录生物年龄、特征选择和皮肤衰老预测模型的构建思路。</p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
               </div>
-              <p>Data-driven routes from biological signal to clinical action.</p>
-            </header>
-            <div class="knowledge-note-list">
-              <a class="knowledge-note" href="knowledge/ai4med/drug-screening.html" data-track="ai4med"
-                data-keywords="ai4med drug screening aging target 药物筛选">
-                <span class="knowledge-note-meta">Translation note</span>
-                <div>
-                  <h3>AI预测抗衰老药物靶点</h3>
-                  <p>从数据驱动靶点发现到候选药物排序，记录 AI 药筛的关键假设。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+            </section>
 
-              <a class="knowledge-note" href="knowledge/ai4med/skin-imaging.html" data-track="ai4med"
-                data-keywords="ai4med skin imaging diagnosis 皮肤影像">
-                <span class="knowledge-note-meta">Imaging note</span>
+            <section
+              class="knowledge-track-group"
+              id="ai4med"
+              data-group="ai4med"
+            >
+              <header class="knowledge-track-header">
                 <div>
-                  <h3>皮肤影像AI诊断模型</h3>
-                  <p>整理皮肤影像建模、标注策略和临床可解释性问题。</p>
+                  <span>Track 03</span>
+                  <h2>AI in medicine</h2>
                 </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+                <p>Drug discovery, imaging, and medical data.</p>
+              </header>
+              <div class="knowledge-note-list">
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai4med/drug-screening.html"
+                  data-track="ai4med"
+                  data-keywords="ai4med drug screening aging target 药物筛选"
+                >
+                  <span class="knowledge-note-meta">Translation note</span>
+                  <div>
+                    <h3>AI预测抗衰老药物靶点</h3>
+                    <p>
+                      从数据驱动靶点发现到候选药物排序，记录 AI 药筛的关键假设。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
 
-              <a class="knowledge-note" href="knowledge/ai4med/multi-omics.html" data-track="ai4med"
-                data-keywords="ai4med multi-omics integration 多组学">
-                <span class="knowledge-note-meta">Integration note</span>
-                <div>
-                  <h3>多组学数据AI整合</h3>
-                  <p>记录跨模态整合、特征对齐和转化医学解释中的常见方法。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai4med/skin-imaging.html"
+                  data-track="ai4med"
+                  data-keywords="ai4med skin imaging diagnosis 皮肤影像"
+                >
+                  <span class="knowledge-note-meta">Imaging note</span>
+                  <div>
+                    <h3>皮肤影像AI诊断模型</h3>
+                    <p>整理皮肤影像建模、标注策略和临床可解释性问题。</p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
 
-              <a class="knowledge-note" href="knowledge/ai4med/clinical-decision.html" data-track="ai4med"
-                data-keywords="ai4med clinical decision support 临床决策">
-                <span class="knowledge-note-meta">Clinical note</span>
-                <div>
-                  <h3>临床决策支持系统</h3>
-                  <p>关注模型输出如何进入临床流程，以及风险、解释和验证要求。</p>
-                </div>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-              </a>
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai4med/multi-omics.html"
+                  data-track="ai4med"
+                  data-keywords="ai4med multi-omics integration 多组学"
+                >
+                  <span class="knowledge-note-meta">Integration note</span>
+                  <div>
+                    <h3>多组学数据AI整合</h3>
+                    <p>记录跨模态整合、特征对齐和转化医学解释中的常见方法。</p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+
+                <a
+                  class="knowledge-note"
+                  href="knowledge/ai4med/clinical-decision.html"
+                  data-track="ai4med"
+                  data-keywords="ai4med clinical decision support 临床决策"
+                >
+                  <span class="knowledge-note-meta">Clinical note</span>
+                  <div>
+                    <h3>临床决策支持系统</h3>
+                    <p>
+                      关注模型输出如何进入临床流程，以及风险、解释和验证要求。
+                    </p>
+                  </div>
+                  <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </section>
+
+            <div class="empty-state" id="empty-state" hidden>
+              <h2>No matching notes</h2>
+              <p lang="zh-CN">没有匹配的笔记。换一个关键词试试。</p>
+              <button
+                class="button button-secondary"
+                id="reset-notes"
+                type="button"
+              >
+                <i class="fas fa-arrow-rotate-left" aria-hidden="true"></i>
+                Clear filters
+              </button>
             </div>
-          </section>
-          <p class="empty-state" id="empty-state">没有匹配的笔记。换一个关键词试试。</p>
-        </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </main>
-
-  <load src="./components/footer.html" />
-
-  <script type="module" src="js/site.js"></script>
-</body>
-
+    </main>
+    <load src="./components/footer.html" />
+    <script type="module" src="/js/site.js"></script>
+  </body>
 </html>

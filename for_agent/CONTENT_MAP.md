@@ -1,11 +1,11 @@
 # Content Map
 
 ## Main Pages
-- `src/index.html`: **Home**. Future Lab OS landing page with atlas hero, research loop, BioTools dock, and signal feed.
-- `src/research.html`: **Research**. Future Lab OS module page with research orbit, module rail, visual project boards, validation routes, and Chinese summaries.
-- `src/publications.html`: **Publications OS Ledger**. Evidence-led public record for manuscripts, conference materials, and BioTools methods.
-- `src/tools.html`: **Tools**. BioTools Control Room with runtime console, live instrument stations, analysis loop, and next-instrument panel.
-- `src/knowledge.html`: **Knowledge Atlas**. Searchable Future Lab OS index with track filters, research routes, and grouped article ledger.
+- `src/index.html`: **Home**. Jackson Dai, concept illustration, color portrait, two research questions, tools, and updates.
+- `src/research.html`: **Research**. Questions, approaches, hypothesis-aware scientific figures, and Chinese summaries.
+- `src/publications.html`: **Publications**. Concise work-in-progress and public availability statements.
+- `src/tools.html`: **Tools**. Direct launch links for the two existing tools; pathway enrichment is planned.
+- `src/knowledge.html`: **Research notes**. Immediate keyword search, topic filters, and 12 original article links.
 
 ## Components (`src/components/`)
 - `header.html`: Global navigation bar.
@@ -20,7 +20,8 @@
 
 ## Documentation
 - `AI_CONFIG.md`: **Critical Guide**. Instructions for configuring AI providers and models in Cloudflare Dashboard.
-- `DESIGN_STRATEGY.md`: **Design Roadmap**. Taste-skill based plan for the next signature design upgrade.
+- `DESIGN_STRATEGY.md`: **Design Direction**. Current research-led redesign and gated checkpoints.
+- `HERO_ASSET_PROVENANCE.md`: **Image Provenance**. Homepage concept-art source, prompt, role, and limitations.
 - `DESIGN_SYSTEM.md`: **Visual System**. Tokens, layout rules, motion rules, and copy rules.
 - `DEPLOYMENT.md`: **Deployment Guide**. Cloudflare Pages workflow and live smoke checks.
 - `SEO_CHECKLIST.md`: **SEO Guide**. Metadata, route, and search hygiene.

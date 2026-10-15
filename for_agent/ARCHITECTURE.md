@@ -30,8 +30,9 @@ biotools/
 
 ## Design System (CSS Variables)
 Defined in `src/css/style.css`:
-- `--primary-color`: `#0072B2` (Nature Blue)
-- `--accent-color`: `#FF7F50` (Coral)
+- `--primary-color` and `--accent-color`: `#126750` (restrained green).
+- `--bg-color`: `#ffffff`; `--text-color`: `#202b29`.
+- See DESIGN_SYSTEM.md for the current complete token and component rules.
 
 ## Navigation Logic
 - **Vite Injection**: We use `vite-plugin-html-inject`.

@@ -1,114 +1,108 @@
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const menuButton = document.querySelector(".menu-toggle");
+const navigation = document.querySelector("#site-links");
 
-if (!prefersReducedMotion) {
-  const revealTargets = [
-    ".feature-panel",
-    ".route-cell",
-    ".loop-card",
-    ".research-brief",
-    ".tool-card",
-    ".tool-instrument",
-    ".signal-row",
-    ".news-item",
-    ".project-brief",
-    ".brief-cell",
-    ".tool-entry",
-    ".article-entry",
-    ".output-entry",
-    ".roadmap-panel",
-    ".roadmap-list",
-    ".research-module",
-    ".research-module-rail a",
-    ".module-board section",
-    ".module-route",
-    ".validation-card",
-    ".tools-module-rail a",
-    ".tool-station",
-    ".analysis-step-grid article",
-    ".next-module-card",
-    ".knowledge-route",
-    ".knowledge-track-group",
-    ".publication-principle-grid article",
-    ".publication-record-group",
-    ".publication-module-rail a",
-  ];
+if (menuButton && navigation) {
+  const setMenu = (open) => {
+    navigation.classList.toggle("is-open", open);
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuButton.title = open ? "Close menu" : "Open menu";
+    menuButton.querySelector("i").className = open
+      ? "fas fa-xmark"
+      : "fas fa-bars";
+  };
 
-  const elements = document.querySelectorAll(revealTargets.join(","));
-
-  if (elements.length) {
-    document.documentElement.classList.add("has-scroll-reveal");
-
-    elements.forEach((element, index) => {
-      element.classList.add("reveal-on-scroll");
-      element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 45}ms`);
-    });
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
-      );
-
-      elements.forEach((element) => observer.observe(element));
-    } else {
-      elements.forEach((element) => element.classList.add("is-visible"));
+  menuButton.addEventListener("click", () => {
+    setMenu(menuButton.getAttribute("aria-expanded") !== "true");
+  });
+  navigation.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      menuButton.getAttribute("aria-expanded") === "true"
+    ) {
+      setMenu(false);
+      menuButton.focus();
     }
-  }
+  });
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".site-nav")) setMenu(false);
+  });
+  window
+    .matchMedia("(min-width: 701px)")
+    .addEventListener("change", () => setMenu(false));
+
+  const normalizePath = (path) =>
+    path.replace(/\.html$/, "").replace(/\/$/, "") || "/index";
+  navigation.querySelectorAll("a").forEach((link) => {
+    if (
+      normalizePath(new URL(link.href).pathname) ===
+      normalizePath(location.pathname)
+    ) {
+      link.setAttribute("aria-current", "page");
+    }
+  });
+  document.documentElement.classList.add("js");
 }
 
 const knowledgeSearch = document.querySelector("#knowledge-search");
 
 if (knowledgeSearch) {
-  const filterButtons = document.querySelectorAll(".knowledge-filter");
-  const notes = document.querySelectorAll(".knowledge-note");
+  const filterButtons = [...document.querySelectorAll(".knowledge-filter")];
+  const notes = [...document.querySelectorAll(".knowledge-note")];
   const groups = document.querySelectorAll(".knowledge-track-group");
   const count = document.querySelector("#knowledge-count");
   const queryLabel = document.querySelector("#knowledge-query-label");
   const emptyState = document.querySelector("#empty-state");
   let activeTrack = "all";
 
-  const updateKnowledgeIndex = () => {
+  const updateNotes = () => {
     const query = knowledgeSearch.value.trim().toLowerCase();
     let visibleCount = 0;
-
     notes.forEach((note) => {
-      const text = `${note.textContent} ${note.dataset.keywords}`.toLowerCase();
-      const matchesQuery = !query || text.includes(query);
-      const matchesTrack = activeTrack === "all" || note.dataset.track === activeTrack;
-      const visible = matchesQuery && matchesTrack;
-
+      const text = (
+        note.textContent +
+        " " +
+        (note.dataset.keywords || "")
+      ).toLowerCase();
+      const visible =
+        (!query || text.includes(query)) &&
+        (activeTrack === "all" || note.dataset.track === activeTrack);
       note.hidden = !visible;
-      if (visible) visibleCount += 1;
+      if (visible) visibleCount++;
     });
-
     groups.forEach((group) => {
       group.hidden = !group.querySelector(".knowledge-note:not([hidden])");
     });
-
-    const activeButton = document.querySelector(".knowledge-filter.is-active");
-    count.textContent = `${visibleCount} / ${notes.length}`;
-    queryLabel.textContent = activeButton ? activeButton.textContent : "All tracks";
-    emptyState.classList.toggle("is-visible", visibleCount === 0);
+    count.textContent =
+      visibleCount + (visibleCount === 1 ? " note" : " notes");
+    queryLabel.textContent =
+      " · " +
+      filterButtons.find((button) => button.dataset.track === activeTrack)
+        .textContent;
+    emptyState.hidden = visibleCount !== 0;
   };
 
-  knowledgeSearch.addEventListener("input", updateKnowledgeIndex);
-
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      activeTrack = button.dataset.track;
-      filterButtons.forEach((item) => {
-        const selected = item === button;
-        item.classList.toggle("is-active", selected);
-        item.setAttribute("aria-pressed", String(selected));
-      });
-      updateKnowledgeIndex();
+  const selectTrack = (track) => {
+    activeTrack = track;
+    filterButtons.forEach((button) => {
+      const selected = button.dataset.track === track;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", String(selected));
     });
+    updateNotes();
+  };
+
+  knowledgeSearch.addEventListener("input", updateNotes);
+  filterButtons.forEach((button) =>
+    button.addEventListener("click", () => selectTrack(button.dataset.track)),
+  );
+  document.querySelector("#reset-notes").addEventListener("click", () => {
+    knowledgeSearch.value = "";
+    selectTrack("all");
+    knowledgeSearch.focus();
   });
+  updateNotes();
 }

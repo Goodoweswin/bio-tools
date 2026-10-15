@@ -1,89 +1,50 @@
 # Engineering Handoff
 
-## Current Status
-- **Project**: Jackson Dai personal research website plus browser BioTools.
-- **Repository**: `/home/y417954/biotools/bio-tools`.
-- **Public URL**: `https://daiger.top/`.
-- **Deployment**: GitHub main branch to Cloudflare Pages.
-- **Latest verified build command**: `./node_modules/.bin/vite build`.
+Updated: 2026-10-16.
 
-## Current Site Shape
-- `/` is a Future Lab OS-style landing page with atlas hero, route grid, research loop, BioTools dock, and signal feed.
-- `/research` is a Future Lab OS-style module page with research orbit, module rail, visual project boards, validation routes, and compact Chinese summaries.
-- `/tools` is a BioTools Control Room with runtime console, live instrument stations, analysis loop, and next-instrument panel.
-- `/knowledge` is a Knowledge Atlas with a real single-cell integration visual, a search command strip, segmented filters, research routes, and a grouped index of 12 research notes.
-- `/publications` is a Publications OS Ledger with an evidence-led hero, public-record protocol, readiness-aware output records, and a release route for future citations.
-- `/tools/stat_analysis/index.html` serves ElementPrism.
-- `/tools/deg/index.html` serves DEG Analysis.
+## Current State
+- Repository: `/home/y417954/biotools/bio-tools`
+- Owner / public name: Jackson Dai
+- Live site: https://daiger.top/
+- Deployment: GitHub main to Cloudflare Pages.
+- Current local change: light, research-led redesign replacing Future Lab OS.
+- Owner authorized commit and push on 2026-10-16. Check Git history and the remote for transport status; do not infer deployment from a local build or a successful push.
+- Checkpoint 3 (local QA) is complete: production build, 66 browser checks, 40 local links/assets, screenshot review, and sitemap validation passed. Checkpoint 4 is authorized but remains open until deployed-site verification.
 
-## Design System Notes
-- Primary design language: academic, precise, restrained, research-led.
-- Avoid generic SaaS softness, large rounded cards, fake metrics, and decorative hype.
-- Main styling is centralized in `src/css/style.css`.
-- Main pages should not reintroduce page-local `<style>` blocks unless there is a strong reason.
-- Shape language:
-  - small controls: 3px radius
-  - panels: 6px radius
-  - large visual panels: 8px radius
-  - research images should generally stay square or near-square
-  - tags and dot markers may stay fully rounded
-- Motion is handled by `src/js/site.js` and must continue to honor `prefers-reduced-motion`.
+## Site Shape
+- Home: Jackson Dai, skin-aging introduction, full-bleed conceptual illustration, original-color portrait, research questions, tools, updates.
+- Research: two questions with readable approaches, hypothesis-aware captions, Chinese summaries and optional diagrams.
+- Tools: direct links to ElementPrism and DEG Analysis; pathway enrichment remains planned.
+- Notes (existing `/knowledge` route): 12 original articles, keyword search, topic filtering, count, and reset state.
+- Publications: concise current availability, no invented bibliographic records.
+- Articles: light reading style; code and wide tables scroll within the page.
+- Assistant: existing `/api/chat` contract; light UI, nonmodal dialog, labeled controls, Escape and focus handling. No backend changes.
 
 ## Files To Know
-- `src/index.html`: homepage content structure.
-- `src/research.html`: research project structure.
-- `src/tools.html`: BioTools workbench page.
-- `src/knowledge.html`: searchable Knowledge Atlas and grouped note ledger.
-- `src/publications.html`: evidence-led Publications OS Ledger.
-- `src/css/style.css`: central visual system.
-- `src/js/site.js`: lightweight scroll reveal.
-- `public/robots.txt`: search crawler policy.
-- `public/sitemap.xml`: public route map.
-- `for_agent/DESIGN_STRATEGY.md`: design plan and implementation notes.
-- `for_agent/DESIGN_SYSTEM.md`: visual rules.
-- `for_agent/SEO_CHECKLIST.md`: SEO status.
-- `for_agent/DEPLOYMENT.md`: deployment notes.
-- `for_agent/ASSET_POLICY.md`: image and asset policy.
-- `for_agent/TEST_CHECKLIST.md`: verification checklist.
+- `src/index.html`, `research.html`, `tools.html`, `knowledge.html`, `publications.html`
+- `src/css/style.css`: central visual system, responsive rules, reduced motion.
+- `src/js/site.js`: mobile menu, current route, notes keyword filtering.
+- `src/styles/article.css`: shared reading layer for all 12 notes.
+- `src/components/`: header, footer, assistant.
+- `public/assets/skin-microvasculature-concept.webp`: new AI-generated editorial image.
+- `for_agent/DESIGN_STRATEGY.md`: current design direction and checkpoints.
+- `for_agent/DESIGN_SYSTEM.md`: current tokens and UI rules.
+- `for_agent/CONTENT_ACCURACY.md`: scientific asset debt and required owner records.
+- `for_agent/TEST_CHECKLIST.md`: verification scope.
 
-## Verification Checklist
-Run before pushing:
-```bash
-./node_modules/.bin/vite build
-git diff --check
-xmllint --noout public/sitemap.xml
-```
+## Guardrails
+- Do not restore OS/ledger/system jargon from old roadmap entries.
+- Keep the portrait in color and scientific diagrams uncropped.
+- Do not silently change labels baked into scientific assets.
+- No citation, journal, DOI, date, or result without a primary source.
+- Keep the original note routes and working tool URLs.
+- Do not revert user changes, change the backend, or modify tool calculations as part of styling.
+- Never put tokens in chat or project files.
 
-After pushing, check:
-- `https://daiger.top/`
-- `https://daiger.top/research`
-- `https://daiger.top/tools`
-- `https://daiger.top/knowledge`
-- `https://daiger.top/publications`
-- `https://daiger.top/robots.txt`
-- `https://daiger.top/sitemap.xml`
-
-## Known Open Work
-- Phase 1B homepage Future Lab OS redesign has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
-- Phase 1C Research OS module redesign has been implemented and locally verified with 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
-- Phase 1D Tools Control Room redesign has been implemented and locally verified with 1440px desktop, 1440px tall desktop, and 390px mobile screenshots.
-- Phase 1E Knowledge Atlas and Phase 1F Publications OS Ledger were committed, pushed, and deployment-verified by the owner on 2026-07-18.
-- Phase 1A homepage hero sharpening has been implemented and locally verified with 1440px desktop and 390px mobile screenshots.
-- Phase 2A content accuracy is complete: editable `NRX` and generic candidate-regulator wording was replaced with senescence-associated state and program language. See `for_agent/CONTENT_ACCURACY.md` for image-asset debt and Phase 2B owner inputs.
-- After deployment, recheck the live homepage and research page at `https://daiger.top/` to confirm Cloudflare has served the new build.
-- Do not fabricate publication metadata, conference materials, or tool-method details. Phase 2B proceeds only from owner-provided primary records listed in `for_agent/CONTENT_ACCURACY.md`.
-- Decide whether image-embedded `NRX` labels should be revised in the underlying figure assets.
-- Add real publications, posters, abstracts, or links when cleared for public sharing.
-- Add tool documentation for accepted input formats, demo datasets, and validation assumptions.
-- Consider adding a pathway enrichment module as the next BioTools entry.
-- Consider per-article SEO descriptions for `src/knowledge/**`.
-- Consider generating `sitemap.xml` automatically once content grows.
-
-## Git Notes
-- Do not revert user changes without explicit permission.
-- Keep unrelated dirty files out of commits.
-- If push fails due GitHub credentials in the agent environment, ask the user to run:
-```bash
-cd /home/y417954/biotools/bio-tools
-git push origin main
-```
+## Remaining Work
+- Local QA is complete and commit/push is authorized. Local preview is available at http://127.0.0.1:61532/ while the preview server is running.
+- After push, verify all five clean public URLs, article routes, tools, CV, and assistant on Cloudflare.
+- The assistant's live API and Python/WASM tool runtime require separate deployed checks; a Vite preview does not prove these services work.
+- Publication metadata and conference files require owner inputs.
+- Existing research bitmaps contain unreviewed labels and depicted outcomes; revise source figures with scientific approval.
+- Article scientific accuracy and runnable example code need a separate content review; this change addresses layout only.

@@ -1,135 +1,136 @@
 body {
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    color: var(--text-color) !important;
-    background:
-        radial-gradient(circle at 12% 8%, rgba(32, 199, 181, 0.12), transparent 28rem),
-        linear-gradient(180deg, #081013 0%, #0a1317 48%, #071014 100%) !important;
+  max-width: 780px !important;
+  margin: 0 auto !important;
+  padding: 40px 24px !important;
+  font-family: var(--font-main) !important;
+  line-height: 1.85 !important;
+  color: var(--text-color) !important;
+  background: var(--bg-color) !important;
 }
-
-body > .back-link,
-body > .header,
-body > h2,
-body > h3,
-body > p,
-body > ul,
-body > ol,
-body > pre,
-body > .highlight-box,
-body > .method-card,
-body > .cell-type-card,
-body > hr,
-body > p:last-child {
-    width: min(100% - 40px, 900px) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+.back-link {
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 28px !important;
+  color: var(--accent-color) !important;
 }
-
-body > .back-link {
-    display: inline-flex !important;
-    align-items: center !important;
-    width: auto !important;
-    margin-top: 2rem !important;
-    margin-bottom: 2rem !important;
-    padding: 0.55rem 0.8rem !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-sm) !important;
-    color: var(--text-secondary) !important;
-    background: var(--surface-bg) !important;
-    text-decoration: none !important;
-}
-
-body > .back-link:hover {
-    color: var(--accent-color) !important;
-    border-color: var(--border-strong) !important;
-}
-
 .header {
-    padding-bottom: 1.75rem !important;
-    margin-bottom: 2rem !important;
-    border-bottom: 1px solid var(--border-color) !important;
+  padding-bottom: 24px !important;
+  margin-bottom: 30px !important;
+  border-bottom: 1px solid var(--border-color) !important;
 }
-
 h1 {
-    color: var(--text-color) !important;
-    font-size: clamp(2.35rem, 5vw, 4rem) !important;
-    line-height: 1.08 !important;
+  color: var(--text-color) !important;
+  font-size: 2.4rem !important;
+  line-height: 1.35 !important;
+  margin-bottom: 20px !important;
+  overflow-wrap: anywhere;
 }
-
 h2 {
-    margin-top: 3rem !important;
-    margin-bottom: 1rem !important;
-    padding-left: 0 !important;
-    color: var(--text-color) !important;
-    border-left: 0 !important;
-    border-bottom: 0 !important;
-    font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+  margin: 40px 0 16px !important;
+  padding-left: 0 !important;
+  color: var(--text-color) !important;
+  border: 0 !important;
+  font-size: 1.65rem !important;
+  line-height: 1.4 !important;
 }
-
 h3 {
-    color: var(--text-color) !important;
+  color: var(--text-color) !important;
+  margin-bottom: 12px !important;
+  font-size: 1.2rem !important;
+  line-height: 1.5 !important;
 }
-
 p,
 li,
 .meta {
-    color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
 }
-
+p + p {
+  margin-top: 16px;
+}
 a {
-    color: var(--primary-color) !important;
+  color: var(--accent-color) !important;
 }
-
+li + li {
+  margin-top: 8px;
+}
 .tag {
-    display: inline-flex !important;
-    align-items: center !important;
-    min-height: 28px !important;
-    margin: 0 0.35rem 0.45rem 0 !important;
-    padding: 0 0.65rem !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 999px !important;
-    color: var(--primary-color) !important;
-    background: rgba(125, 211, 252, 0.07) !important;
-    font-size: 0.82rem !important;
-    font-weight: 650 !important;
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 28px;
+  margin: 0 8px 8px 0 !important;
+  padding: 2px 8px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 3px !important;
+  color: var(--accent-color) !important;
+  background: var(--bg-secondary) !important;
+  font-size: 0.8rem !important;
 }
-
 .highlight-box,
 .method-card,
 .cell-type-card {
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
-    padding: 1.25rem !important;
-    border: 1px solid var(--border-color) !important;
-    border-left: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-md) !important;
-    background: var(--surface-bg) !important;
+  margin: 20px 0 !important;
+  padding: 20px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px !important;
+  background: var(--bg-secondary) !important;
 }
-
 .highlight-box {
-    border-color: rgba(32, 199, 181, 0.34) !important;
+  border-left: 3px solid var(--accent-color) !important;
 }
-
 code {
-    color: var(--primary-color) !important;
-    background: rgba(125, 211, 252, 0.08) !important;
-    border-radius: 4px !important;
+  color: #244c40 !important;
+  background: #edf2ef !important;
+  border-radius: 2px !important;
+  overflow-wrap: anywhere;
 }
-
 pre {
-    overflow-x: auto !important;
-    padding: 1rem !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-md) !important;
-    background: rgba(4, 12, 15, 0.9) !important;
+  max-width: 100%;
+  overflow-x: auto !important;
+  padding: 20px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 3px !important;
+  background: #f3f6f5 !important;
+  font-size: 0.85rem;
 }
-
 pre code {
-    background: transparent !important;
+  background: transparent !important;
+  overflow-wrap: normal;
 }
-
 hr {
-    border: 0 !important;
-    border-top: 1px solid var(--border-color) !important;
+  border: 0 !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 20px;
+}
+.table-scroll table {
+  min-width: 580px;
+  margin: 0 !important;
+  font-size: 0.9rem;
+}
+.table-scroll th {
+  background: var(--accent-color) !important;
+}
+.warning-box {
+  background: #f8f4eb !important;
+  border-left-color: #9c753d !important;
+}
+@media (max-width: 600px) {
+  body {
+    padding: 24px 20px !important;
+  }
+  h1 {
+    font-size: 1.85rem !important;
+  }
+  h2 {
+    font-size: 1.4rem !important;
+  }
+  .highlight-box,
+  .method-card,
+  .cell-type-card {
+    padding: 16px !important;
+  }
 }

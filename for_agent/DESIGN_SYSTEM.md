@@ -1,75 +1,51 @@
 # Design System
 
-## Design Read
-The site should feel like a personal academic research system, not a generic dark SaaS template.
+Updated: 2026-10-16. Replaces the dark Future Lab OS system.
 
-Target language:
-- academic
-- precise
-- cyber-future
-- restrained
-- research-led
+## Character
+Clear, contemporary, human, and research-led. Scientific content carries the identity; interface decoration stays quiet.
 
-Avoid:
-- AI-purple gradients
-- heavy neon glow
-- repeated three-card sections
-- fake metrics or social proof
-- decorative status dots
-- ornamental scroll cues
-
-## Core Tokens
-Defined in `src/css/style.css`.
-
-- **Primary accent**: cyan/teal, currently `--accent-color: #20c7b5`
-- **Primary text**: off-white, currently `--text-color: #eef7fb`
-- **Secondary text**: muted blue-gray, currently `--text-secondary: #9cb1bd`
-- **Background**: off-black, currently `--bg-color: #081013`
-- **Surface**: translucent dark panels, currently `--surface-bg`
-- **Border**: low-contrast cool border, currently `--border-color`
+## Tokens
+Defined in `src/css/style.css`:
+- Background: `#ffffff`
+- Secondary surface: `#f3f6f5`
+- Primary text: `#202b29`
+- Secondary text: `#53615d`
+- Muted text: `#64716c`
+- Accent and links: `#126750`
+- Border: `#dce3df`; stronger control border: `#a1b4ab`
+- Font: Aptos, Segoe UI, Roboto, Helvetica, Arial, sans-serif
+- Control radius: 3px; framed tools: 4px; scientific images: 0px
 
 ## Typography
-- Use the existing sans-serif stack unless a future font migration is planned.
-- Do not introduce serif display fonts by default.
-- Keep body copy readable and compact.
-- Hero headings should be strong, but not oversized to the point of wrapping into four lines.
+- Homepage name: 4.5rem desktop; smaller fixed sizes at compact breakpoints.
+- Page titles: 3.5rem desktop and 2.5rem mobile.
+- Section headings: 2.25rem; product headings and rows are smaller.
+- Body: 17px desktop and 16px mobile.
+- No negative or expanded letter spacing. No viewport-relative type sizes.
+- Chinese notes retain their original titles; specialist English abbreviations remain searchable.
 
-## Shape
-- Buttons: `--radius-sm`, currently 3px.
-- Cards/panels: `--radius-md`, currently 6px.
-- Large visual panels: `--radius-lg`, currently 8px.
-- Research image assets: square corners or near-square corners.
-- Pills/tags and circular data marks: full radius.
+## Layout
+- Shared content width: up to 1200px, with 20px mobile gutters.
+- Main header: 80px desktop and 66px compact; accessible collapsed menu at 700px and below.
+- Sections use full-width bands or unframed constrained content.
+- Homepage image is full-bleed concept art with a clear annotation, not an experimental figure.
+- Portrait is separate, in original color; no grayscale, blend mode, or colored overlays.
+- Scientific images retain their full aspect ratio; each links to the original image for inspection.
+- Tools and Notes show useful entries immediately; do not add large decorative introductions.
 
-Use this shape system consistently. The site should feel precise and research-led, so avoid soft 12-20px rounded rectangles around scientific figures.
+## Interaction
+- Current-page navigation uses an underline and `aria-current`.
+- Mobile menu exposes `aria-expanded`, closes on Escape, and restores focus.
+- Search combines substring matching with a topic filter; live count and empty reset state remain available.
+- Assistant uses hidden closed content, labeled inputs, Escape dismissal, and focus restoration.
+- Skip link targets main content.
+- All content remains visible without reveal observers; no essential information depends on animation.
+- Hover transitions are 180ms; reduced-motion disables transitions and smooth scrolling.
 
-## Layout Rules
-- Homepage hero should remain distinctive and research-led.
-- Research page should prioritize scanning: core question, model system, computational layer, translational angle.
-- Use cards only where the card itself communicates a grouped object.
-- Prefer mixed section rhythms over repeated grids.
-- Keep navigation one line on desktop.
-
-## Motion
-Allowed motion:
-- opacity and transform entry transitions
-- subtle hover translation
-- image clip or opacity reveal
-
-Rules:
-- Honor `prefers-reduced-motion`.
-- Do not animate layout properties like width, height, top, or left.
-- Do not add scroll hijacking unless a full scroll-story page is intentionally designed.
-
-## Copy Rules
-- Use `Jackson Dai` as the public pen name.
-- Avoid fake metrics and fake social proof.
-- Avoid visible em dashes and en dashes.
-- Button labels should be short and specific.
-- The site voice should be clear, academic, and concrete.
-
-## Images
-- Use WebP for public-facing large images.
-- Keep original editing assets outside deployable `public/` when possible.
-- Do not use div-based fake screenshots.
-- Major landing/portfolio sections need real visuals.
+## Content Integrity
+- Use Jackson Dai as the public name.
+- Do not invent publications, numbers, roles, claims, or science results.
+- AI-generated editorial art must be distinguishable from evidence.
+- Never use unrelated scientific art as an alleged screenshot of a tool.
+- Publication policy belongs in project documentation, not a decorative public hero.

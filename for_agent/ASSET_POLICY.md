@@ -19,6 +19,7 @@
   - it is an editable source asset intentionally kept outside the deploy path
 
 ## Current Optimized Assets
+- `public/assets/skin-microvasculature-concept.webp`: AI-generated editorial concept, not scientific evidence. See HERO_ASSET_PROVENANCE.md for source, prompt, and conversion.
 - `src/assets/profile-hero.webp`
 - `public/assets/knowledge/封面scVI.webp`
 - `public/assets/skin_aging/*.webp`

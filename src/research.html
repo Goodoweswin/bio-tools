@@ -1,204 +1,304 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Research | Jackson Dai</title>
-    <meta name="description"
-        content="Research briefs on vascular aging, follicle repair, single-cell biology, organoid models, and AI-guided regeneration.">
-    <link rel="canonical" href="https://daiger.top/research">
-    <meta property="og:title" content="Research | Jackson Dai">
-    <meta property="og:description"
-        content="Editorial research briefs covering the vascular-skin axis, angio-follicular crosstalk, and translational regeneration models.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://daiger.top/research">
-    <meta property="og:image" content="https://daiger.top/assets/profile.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Research | Jackson Dai">
-    <meta name="twitter:description"
-        content="Vascular aging, follicle repair, single-cell biology, and AI-guided regeneration.">
-    <meta name="twitter:image" content="https://daiger.top/assets/profile.png">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23081013%22/><path d=%22M22 68L48 18L78 68H62L48 40L36 68Z%22 fill=%22%2320c7b5%22/></svg>">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-
-<body>
-
+    <meta
+      name="description"
+      content="Research on how blood vessels shape skin aging and hair follicle repair, combining single-cell analysis with experimental models."
+    />
+    <link rel="canonical" href="https://daiger.top/research" />
+    <meta property="og:title" content="Research | Jackson Dai" />
+    <meta
+      property="og:description"
+      content="Research on how blood vessels shape skin aging and hair follicle repair, combining single-cell analysis with experimental models."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://daiger.top/research" />
+    <meta property="og:image" content="https://daiger.top/assets/profile.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Research | Jackson Dai" />
+    <meta
+      name="twitter:description"
+      content="Research on how blood vessels shape skin aging and hair follicle repair, combining single-cell analysis with experimental models."
+    />
+    <meta
+      name="twitter:image"
+      content="https://daiger.top/assets/profile.png"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23126750'/%3E%3Ctext x='32' y='43' fill='white' font-family='Arial' font-size='30' text-anchor='middle'%3EJD%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
     <load src="./components/header.html" />
+    <main id="main" tabindex="-1">
+      <div class="container page-intro">
+        <span class="eyebrow">What I'm working on</span>
+        <h1>Research</h1>
+        <p>
+          How does the vascular environment change as skin ages? And can
+          understanding those changes help us study repair?
+        </p>
+        <nav class="page-nav" aria-label="Research topics">
+          <a href="#vascular-skin-axis">Skin aging</a
+          ><a href="#angio-follicular-crosstalk">Hair follicle repair</a
+          ><a href="#validation-layers">Next questions</a>
+        </nav>
+      </div>
 
-    <section class="research-os-hero">
-        <div class="container research-os-shell">
-            <div class="research-os-copy">
-                <span class="system-kicker">Research modules</span>
-                <h1>Vascular aging to regenerative control</h1>
-                <p>Two programs connect single-cell maps, vascularized models, and clinical repair hypotheses.</p>
+      <article class="research-project" id="vascular-skin-axis">
+        <div class="container">
+          <div class="project-heading">
+            <span class="project-number">01</span>
+            <div>
+              <h2>How do aging blood vessels affect the skin?</h2>
+              <p>
+                I study whether senescent endothelial cells contribute to skin
+                aging by changing the signals they send to surrounding cells.
+              </p>
             </div>
-
-            <div class="research-orbit" aria-label="Research module overview">
-                <figure class="orbit-image orbit-image-large">
-                    <img src="/assets/skin_aging/websummary_scEC.webp" alt="Single-cell endothelial aging research summary">
-                </figure>
-                <figure class="orbit-image orbit-image-small">
-                    <img src="/assets/vHFO_exos/web_vHFO.webp" alt="Vascularized hair follicle assembloid model">
-                </figure>
-                <div class="orbit-readout">
-                    <strong>Research route</strong>
-                    <span>cell states, vascular niches, regenerative models</span>
-                </div>
+          </div>
+          <div class="research-content">
+            <figure class="scientific-figure">
+              <a
+                href="/assets/skin_aging/websummary_scEC.webp"
+                target="_blank"
+                rel="noopener"
+                aria-label="View the vascular-skin working schematic at full size"
+                ><img
+                  src="/assets/skin_aging/websummary_scEC.webp"
+                  alt="Working schematic of a blood vessel, surrounding skin matrix, and senescence-associated signals"
+                  width="1800"
+                  height="982"
+              /></a>
+              <figcaption>
+                Working schematic of the vascular-skin relationship. Embedded
+                regulator labels are under review; this illustration is not a
+                validated result.
+              </figcaption>
+            </figure>
+            <div class="research-text">
+              <h3>The question</h3>
+              <p>
+                Endothelial cells line our blood vessels. I ask whether changes
+                in these cells influence fibroblast behavior and the
+                extracellular matrix that gives skin its structure.
+              </p>
+              <h3>The approach</h3>
+              <ul>
+                <li>
+                  Reanalyze single-cell datasets to identify endothelial states
+                  associated with aging.
+                </li>
+                <li>
+                  Study their signals in human skin samples, endothelial
+                  cultures, and fibroblast co-cultures.
+                </li>
+                <li>
+                  Explore small molecules and engineered exosomes as
+                  experimental approaches to tissue repair.
+                </li>
+              </ul>
+              <details class="cn-note">
+                <summary lang="zh-CN">中文摘要</summary>
+                <p lang="zh-CN">
+                  本项目研究衰老的血管内皮细胞是否通过改变细胞间信号，影响成纤维细胞和皮肤细胞外基质。我们结合单细胞分析、临床样本与细胞共培养模型，寻找可进一步验证的机制，并探索组织修复的实验策略。
+                </p>
+              </details>
             </div>
-
-            <nav class="research-module-rail" aria-label="Research module routes">
-                <a href="#vascular-skin-axis">
-                    <span>Skin axis</span>
-                    <strong>Endothelial aging</strong>
-                </a>
-                <a href="#angio-follicular-crosstalk">
-                    <span>Follicle repair</span>
-                    <strong>Vascularized assembloids</strong>
-                </a>
-                <a href="#validation-layers">
-                    <span>Validation</span>
-                    <strong>Spatial and clinical layers</strong>
-                </a>
-            </nav>
+          </div>
+          <details class="supporting-figures">
+            <summary>Supporting research schematics</summary>
+            <div class="figure-pair">
+              <figure class="scientific-figure">
+                <a
+                  href="/assets/skin_aging/web_scanalysis.webp"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="View the single-cell analysis schematic"
+                  ><img
+                    src="/assets/skin_aging/web_scanalysis.webp"
+                    alt="Single-cell analysis working schematic"
+                    loading="lazy"
+                    width="1800"
+                    height="982"
+                /></a>
+                <figcaption>
+                  Single-cell analysis concept. Labels and depicted outcomes
+                  require scientific review.
+                </figcaption>
+              </figure>
+              <figure class="scientific-figure">
+                <a
+                  href="/assets/skin_aging/web_workflow_EC.webp"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="View the endothelial experiment schematic"
+                  ><img
+                    src="/assets/skin_aging/web_workflow_EC.webp"
+                    alt="Proposed endothelial experiments from cell culture to tissue assessment"
+                    loading="lazy"
+                    width="1800"
+                    height="982"
+                /></a>
+                <figcaption>
+                  Proposed experimental workflow, not a report of established
+                  treatment effects.
+                </figcaption>
+              </figure>
+            </div>
+          </details>
         </div>
-    </section>
+      </article>
 
-    <main class="research-os-main">
-        <article class="research-module" id="vascular-skin-axis">
-            <div class="container research-module-grid">
-                <aside class="module-visual">
-                    <img src="/assets/skin_aging/websummary_scEC.webp" alt="Single-cell endothelial aging research summary">
-                    <div class="module-caption">
-                        <strong>Vascular-skin axis</strong>
-                        <span>Single-cell endothelial aging map</span>
-                    </div>
-                </aside>
-
-                <div class="module-content">
-                    <h2>Deciphering the vascular-skin axis</h2>
-                    <p class="module-lede">This program tests whether endothelial senescence and associated regulatory programs act as upstream contributors to dermal aging rather than passive consequences of tissue decline.</p>
-
-                    <div class="module-board">
-                        <section>
-                            <span>Question</span>
-                            <h3>What makes aged skin less repairable?</h3>
-                            <p>The project tests whether senescent endothelial programs actively reshape fibroblast behavior and extracellular matrix maintenance.</p>
-                        </section>
-                        <section>
-                            <span>Model</span>
-                            <h3>Human skin and endothelial senescence</h3>
-                            <p>Single-cell datasets, clinical samples, endothelial culture, and fibroblast co-culture map vascular niche behavior.</p>
-                        </section>
-                        <section>
-                            <span>Computation</span>
-                            <h3>Single-cell mapping to target nomination</h3>
-                            <p>scRNA-seq reanalysis maps senescence-associated endothelial states, inflammatory secretome programs, and candidate crosstalk signals.</p>
-                        </section>
-                        <section>
-                            <span>Translation</span>
-                            <h3>Vascular normalization and repair</h3>
-                            <p>Small molecules and engineered exosomes are explored as ways to restore vascular support and improve dermal regeneration.</p>
-                        </section>
-                    </div>
-
-                    <div class="module-route">
-                        <h3>Validation route</h3>
-                        <p>Discovery starts from public and clinical single-cell profiles, moves into mechanistic validation of senescence-associated endothelial states, then returns to intervention models for skin aging and wound repair.</p>
-                        <div class="module-figures">
-                            <img src="/assets/skin_aging/web_scanalysis.webp" alt="Single-cell skin aging analysis">
-                            <img src="/assets/skin_aging/web_workflow_EC.webp" alt="Endothelial mechanism workflow">
-                        </div>
-                    </div>
-
-                    <details class="cn-note">
-                        <summary>中文摘要</summary>
-                        <p>本项目聚焦微血管在皮肤衰老中的主动作用，研究内皮细胞衰老及其相关调控程序失衡是否可能参与真皮老化。研究整合单细胞转录组、临床样本验证和分子生物学模型，绘制血管-皮肤轴的调控网络，并探索血管正常化与真皮再生的干预策略。</p>
-                    </details>
-                </div>
+      <article
+        class="research-project section-tint"
+        id="angio-follicular-crosstalk"
+      >
+        <div class="container">
+          <div class="project-heading">
+            <span class="project-number">02</span>
+            <div>
+              <h2>Can vascular signals support hair follicle repair?</h2>
+              <p>
+                I use vascularized hair follicle models to investigate how
+                signals from blood vessels may affect stressed or aging follicle
+                cells.
+              </p>
             </div>
-        </article>
-
-        <article class="research-module" id="angio-follicular-crosstalk">
-            <div class="container research-module-grid">
-                <aside class="module-visual">
-                    <img src="/assets/vHFO_exos/web_vHFO.webp" alt="Vascularized hair follicle assembloid model">
-                    <div class="module-caption">
-                        <strong>Angio-follicular crosstalk</strong>
-                        <span>Vascularized hair follicle assembloid model</span>
-                    </div>
-                </aside>
-
-                <div class="module-content">
-                    <h2>Restoring angio-follicular crosstalk</h2>
-                    <p class="module-lede">A vascularized assembloid strategy is used to study how vascular signals may reverse senescence in alopecia-derived dermal papilla cells.</p>
-
-                    <div class="module-board">
-                        <section>
-                            <span>Question</span>
-                            <h3>Can a vascular niche rescue follicle aging?</h3>
-                            <p>The project asks whether vascularized hair follicle assembloids can restore missing signals in androgenetic alopecia models.</p>
-                        </section>
-                        <section>
-                            <span>Model</span>
-                            <h3>vHFO assembloids and patient DPCs</h3>
-                            <p>Human hair follicle organoids and blood vessel organoids are fused, then tested against oxidative stress models of DPC senescence.</p>
-                        </section>
-                        <section>
-                            <span>Computation</span>
-                            <h3>Multi-omics signal discovery</h3>
-                            <p>RNA-seq and proteomics screen vHFO-derived exosomes for angiocrine factors and miRNAs linked to Wnt and antioxidant rescue.</p>
-                        </section>
-                        <section>
-                            <span>Translation</span>
-                            <h3>Exosome-guided follicle repair</h3>
-                            <p>vHFO-Exos are evaluated for their ability to restore proliferation, ALP, Versican, and hair-inductive properties in aged DPCs.</p>
-                        </section>
-                    </div>
-
-                    <div class="module-route">
-                        <h3>Experimental route</h3>
-                        <p>The workflow combines assembloid construction, patient-derived DPC stress modeling, exosome profiling, and functional validation of senescence reversal.</p>
-                        <div class="module-figures">
-                            <img src="/assets/vHFO_exos/web_exp_design.webp" alt="vHFO experimental design">
-                            <img src="/assets/vHFO_exos/web_cellular_mechnism.webp" alt="vHFO cellular mechanism">
-                        </div>
-                    </div>
-
-                    <details class="cn-note">
-                        <summary>中文摘要</summary>
-                        <p>本项目针对雄激素性脱发中毛乳头细胞衰老和功能微型化问题，构建血管化毛囊组装体，并利用其来源外泌体研究血管-毛囊对话如何影响 DPC 衰老逆转。核心路线包括 vHFO 构建、AGA 患者来源 DPC 氧化应激模型、多组学筛选和功能验证。</p>
-                    </details>
-                </div>
+          </div>
+          <div class="research-content">
+            <figure class="scientific-figure">
+              <a
+                href="/assets/vHFO_exos/web_vHFO.webp"
+                target="_blank"
+                rel="noopener"
+                aria-label="View the hair follicle model schematic at full size"
+                ><img
+                  src="/assets/vHFO_exos/web_vHFO.webp"
+                  alt="Concept for combining hair follicle and blood vessel organoids to study exosome signaling"
+                  loading="lazy"
+                  width="1800"
+                  height="982"
+              /></a>
+              <figcaption>
+                Proposed vascularized hair follicle assembloid model. The repair
+                effects shown are hypotheses to be tested.
+              </figcaption>
+            </figure>
+            <div class="research-text">
+              <h3>The question</h3>
+              <p>
+                Dermal papilla cells help regulate hair growth. I ask whether
+                signals from a vascularized model can support their function in
+                experimental models of androgenetic alopecia.
+              </p>
+              <h3>The approach</h3>
+              <ul>
+                <li>
+                  Combine hair follicle and blood vessel organoids into
+                  vascularized assembloids.
+                </li>
+                <li>
+                  Profile their exosomes using RNA sequencing and proteomics.
+                </li>
+                <li>
+                  Test candidate signals in patient-derived dermal papilla cells
+                  under oxidative stress, measuring proliferation and
+                  hair-inductive properties.
+                </li>
+              </ul>
+              <details class="cn-note">
+                <summary lang="zh-CN">中文摘要</summary>
+                <p lang="zh-CN">
+                  本项目结合毛囊类器官和血管类器官，构建血管化毛囊组装体。通过外泌体分析和患者来源毛乳头细胞的氧化应激模型，研究血管信号是否有助于维持毛囊细胞功能。修复效果仍需实验验证。
+                </p>
+              </details>
             </div>
-        </article>
-
-        <section class="validation-layers" id="validation-layers">
-            <div class="container validation-shell">
-                <div>
-                    <h2>Next validation layers</h2>
-                    <p class="section-intro">The next pass connects spatial proximity, clinical sampling, and intervention response into a tighter evidence chain.</p>
-                </div>
-                <div class="validation-grid">
-                    <article class="validation-card">
-                        <h3><i class="fas fa-map-marked-alt"></i> Spatial Transcriptomics</h3>
-                        <p>Profile senescence-associated endothelial niches in situ and test their proximity to senescent fibroblast states.</p>
-                    </article>
-                    <article class="validation-card">
-                        <h3><i class="fas fa-user-md"></i> Clinical Validation</h3>
-                        <p>Expand human skin biopsy validation across ages and test whether endothelial-state features can support diagnostic or therapeutic stratification.</p>
-                    </article>
-                </div>
+          </div>
+          <details class="supporting-figures">
+            <summary>Experimental design &amp; proposed mechanisms</summary>
+            <div class="figure-pair">
+              <figure class="scientific-figure">
+                <a
+                  href="/assets/vHFO_exos/web_exp_design.webp"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="View the hair follicle experimental design"
+                  ><img
+                    src="/assets/vHFO_exos/web_exp_design.webp"
+                    alt="Proposed experimental design for vascularized hair follicle models"
+                    loading="lazy"
+                    width="1800"
+                    height="982"
+                /></a>
+                <figcaption>
+                  Experimental design for testing candidate repair signals.
+                </figcaption>
+              </figure>
+              <figure class="scientific-figure">
+                <a
+                  href="/assets/vHFO_exos/web_cellular_mechnism.webp"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="View the proposed cellular mechanisms"
+                  ><img
+                    src="/assets/vHFO_exos/web_cellular_mechnism.webp"
+                    alt="Hypothesized cellular mechanisms in the hair follicle project"
+                    loading="lazy"
+                    width="1800"
+                    height="982"
+                /></a>
+                <figcaption>
+                  Proposed mechanisms, subject to functional validation.
+                </figcaption>
+              </figure>
             </div>
-        </section>
+          </details>
+        </div>
+      </article>
+
+      <section class="section" id="validation-layers">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Next questions</span>
+              <h2>From a cell signal to its place in the tissue.</h2>
+            </div>
+          </div>
+          <div class="validation-list">
+            <div>
+              <h3>Where do these cells interact?</h3>
+              <p>
+                Planned spatial transcriptomics work will examine whether
+                aging-associated endothelial states sit near senescent
+                fibroblasts in skin.
+              </p>
+            </div>
+            <div>
+              <h3>Do the patterns hold across people?</h3>
+              <p>
+                Further human skin biopsy studies will test how endothelial
+                features vary with age and tissue state.
+              </p>
+            </div>
+          </div>
+          <a class="text-link" href="/publications.html"
+            >Research outputs
+            <i class="fas fa-arrow-right" aria-hidden="true"></i
+          ></a>
+        </div>
+      </section>
     </main>
-
     <load src="./components/footer.html" />
-
-    <script type="module" src="js/site.js"></script>
-</body>
-
+    <script type="module" src="/js/site.js"></script>
+  </body>
 </html>

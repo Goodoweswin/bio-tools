@@ -1,350 +1,336 @@
-<!-- AI Chat Widget Component -->
 <style>
-    /* A quiet, system-aligned entry point that stays out of the first mobile viewport. */
+  #sc-chat-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--accent-color);
+    box-shadow: 0 3px 14px #203b2912;
+    cursor: pointer;
+    z-index: 50;
+    font-size: 18px;
+  }
+  #sc-chat-toggle:hover {
+    background: var(--bg-secondary);
+  }
+  #sc-chat-window {
+    position: fixed;
+    right: 20px;
+    bottom: 76px;
+    width: min(360px, calc(100% - 40px));
+    height: min(520px, calc(100dvh - 110px));
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 12px 40px #203b2920;
+    z-index: 50;
+    overflow: hidden;
+  }
+  .chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .chat-header h2 {
+    font-size: 1rem;
+  }
+  .chat-close {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+  .chat-body {
+    flex: 1;
+    min-height: 0;
+    padding: 16px;
+    overflow-y: auto;
+  }
+  #auth-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+  #auth-view label {
+    font-size: 0.9rem;
+  }
+  #auth-view input,
+  .chat-footer input {
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    color: var(--text-color);
+    background: #fff;
+  }
+  #messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .message {
+    max-width: 92%;
+    padding: 10px 12px;
+    border-radius: 3px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+  .message.ai {
+    background: var(--bg-secondary);
+    align-self: flex-start;
+  }
+  .message.user {
+    background: #e3eee8;
+    align-self: flex-end;
+  }
+  .message.system {
+    color: #854637;
+    padding: 6px 0;
+  }
+  .chat-footer {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+    border-top: 1px solid var(--border-color);
+  }
+  .chat-footer input {
+    flex: 1;
+    width: 0;
+    font-size: 0.9rem;
+  }
+  .chat-footer button {
+    width: 44px;
+    background: var(--accent-color);
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+  }
+  #typing-status {
+    font-size: 0.8rem;
+    color: var(--muted-text);
+    padding-top: 12px;
+  }
+  @media (max-width: 700px) {
     #sc-chat-toggle {
-        position: fixed;
-        right: 24px;
-        bottom: 24px;
-        width: 50px;
-        height: 50px;
-        border: 1px solid var(--border-strong, rgba(125, 211, 252, 0.3));
-        border-radius: var(--radius-sm, 3px);
-        background: rgba(13, 23, 27, 0.94);
-        color: var(--accent-color, #20c7b5);
-        box-shadow: 0 14px 32px rgba(0, 18, 24, 0.28);
-        cursor: pointer;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 19px;
-        transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+      right: 14px;
+      bottom: max(14px, env(safe-area-inset-bottom));
     }
-    #sc-chat-toggle:hover {
-        transform: translateY(-2px);
-        border-color: var(--accent-color, #20c7b5);
-        background: rgba(20, 38, 44, 0.98);
-    }
-    #sc-chat-toggle:focus-visible {
-        outline: 2px solid var(--accent-color, #20c7b5);
-        outline-offset: 3px;
-    }
-
-    /* Chat Window */
     #sc-chat-window {
-        position: fixed;
-        right: 24px;
-        bottom: 88px;
-        width: min(360px, calc(100vw - 48px));
-        height: min(540px, calc(100dvh - 112px));
-        background: #0d171b;
-        border-radius: var(--radius-sm, 3px);
-        box-shadow: 0 24px 56px rgba(0, 12, 17, 0.48);
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        border: 1px solid var(--border-strong, rgba(125, 211, 252, 0.3));
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(20px);
-        transition: all 0.3s;
+      right: 14px;
+      width: calc(100% - 28px);
+      bottom: calc(max(14px, env(safe-area-inset-bottom)) + 54px);
     }
-    #sc-chat-window.open {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
-    }
-
-    /* Header */
-    .chat-header {
-        background: rgba(20, 38, 44, 0.96);
-        color: var(--text-color, #eef7fb);
-        padding: 14px 15px;
-        border-bottom: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .chat-header h3 { margin: 0; font-size: 16px; }
-    .close-btn { background: none; border: none; color: var(--text-secondary, #9cb1bd); font-size: 20px; cursor: pointer; }
-
-    /* Content Area */
-    .chat-body {
-        flex: 1;
-        padding: 15px;
-        overflow-y: auto;
-        background: #0d171b;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* Auth View */
-    #auth-view {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        text-align: center;
-    }
-    #auth-view input {
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
-        border-radius: 0;
-        background: #081013;
-        color: var(--text-color, #eef7fb);
-    }
-    #auth-view button {
-        padding: 10px;
-        background: var(--accent-color, #20c7b5);
-        color: #04211f;
-        border: 1px solid var(--accent-color, #20c7b5);
-        border-radius: 0;
-        cursor: pointer;
-    }
-
-    /* Messages */
-    .message {
-        max-width: 80%;
-        padding: 10px 14px;
-        border-radius: 3px;
-        font-size: 14px;
-        line-height: 1.4;
-    }
-    .message.user {
-        align-self: flex-end;
-        background: rgba(32, 199, 181, 0.18);
-        color: var(--text-color, #eef7fb);
-        border: 1px solid rgba(32, 199, 181, 0.3);
-        border-bottom-right-radius: 0;
-    }
-    .message.ai {
-        align-self: flex-start;
-        background: rgba(20, 38, 44, 0.9);
-        border: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
-        color: var(--text-color, #eef7fb);
-        border-bottom-left-radius: 0;
-    }
-    .message.system {
-        align-self: center;
-        font-size: 12px;
-        color: var(--muted-text, #718690);
-        background: none;
-        border: none;
-    }
-
-    /* Input Area */
-    .chat-footer {
-        padding: 10px;
-        border-top: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
-        display: flex;
-        gap: 10px;
-        background: rgba(13, 23, 27, 0.98);
-    }
-    .chat-footer input {
-        flex: 1;
-        padding: 8px;
-        border: 1px solid var(--border-color, rgba(174, 224, 238, 0.16));
-        border-radius: 0;
-        background: #081013;
-        color: var(--text-color, #eef7fb);
-        outline: none;
-    }
-    .chat-footer button {
-        background: none;
-        border: none;
-        color: var(--accent-color, #20c7b5);
-        cursor: pointer;
-        font-size: 18px;
-    }
-    
-    /* Loading Dot */
-    .typing-indicator { font-style: italic; color: var(--muted-text, #718690); font-size: 12px; margin-left: 10px; }
-
-    @media (max-width: 768px) {
-        #sc-chat-toggle {
-            right: max(16px, env(safe-area-inset-right));
-            bottom: max(16px, env(safe-area-inset-bottom));
-            width: 46px;
-            height: 46px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(8px);
-        }
-        .chat-trigger-visible #sc-chat-toggle {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-        #sc-chat-window {
-            right: 15px;
-            left: 15px;
-            bottom: calc(max(16px, env(safe-area-inset-bottom)) + 58px);
-            width: auto;
-            height: min(560px, calc(100dvh - 96px));
-        }
-    }
+  }
 </style>
-
 <div id="sc-chat-widget">
-    <!-- Toggle Button -->
-    <button id="sc-chat-toggle" type="button" onclick="toggleChat()" aria-label="Open research assistant" title="Open research assistant">
-        <i class="fas fa-robot"></i>
-    </button>
-
-    <!-- Window -->
-    <div id="sc-chat-window">
-        <div class="chat-header">
-            <h3><i class="fas fa-dna"></i> Bio-Assistant</h3>
-            <button class="close-btn" onclick="toggleChat()">&times;</button>
-        </div>
-
-        <!-- Auth Screen -->
-        <div id="auth-view" class="chat-body">
-            <p>Please enter access password:</p>
-            <input type="password" id="chat-password" placeholder="Password" onkeypress="handleAuthKey(event)">
-            <button onclick="authenticate()">Start Chat</button>
-        </div>
-
-        <!-- Chat Screen -->
-        <div id="chat-view" class="chat-body" style="display: none;">
-            <div id="messages-container">
-                <div class="message ai">Hello! I am your Single-Cell research assistant. Ask me anything about the projects.</div>
-            </div>
-            <div id="typing-status" class="typing-indicator" style="display: none;">AI is thinking...</div>
-        </div>
-
-        <div id="input-area" class="chat-footer" style="display: none;">
-            <input type="text" id="chat-input" placeholder="Type a question..." onkeypress="handleChatKey(event)">
-            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-        </div>
+  <button
+    id="sc-chat-toggle"
+    type="button"
+    onclick="toggleChat()"
+    aria-label="Open research assistant"
+    title="Open research assistant"
+    aria-controls="sc-chat-window"
+    aria-expanded="false"
+  >
+    <i class="fas fa-comment-dots" aria-hidden="true"></i>
+  </button>
+  <div id="sc-chat-window" role="dialog" aria-labelledby="chat-title" hidden>
+    <div class="chat-header">
+      <h2 id="chat-title">Research assistant</h2>
+      <button
+        class="chat-close"
+        type="button"
+        onclick="toggleChat()"
+        aria-label="Close assistant"
+        title="Close assistant"
+      >
+        <i class="fas fa-xmark" aria-hidden="true"></i>
+      </button>
     </div>
+    <div id="auth-view" class="chat-body">
+      <label for="chat-password">Access password</label>
+      <input
+        type="password"
+        id="chat-password"
+        autocomplete="current-password"
+        onkeydown="handleAuthKey(event)"
+      />
+      <button class="button" type="button" onclick="authenticate()">
+        Start chat <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="chat-view" class="chat-body" hidden>
+      <div
+        id="messages-container"
+        role="log"
+        aria-label="Conversation"
+        aria-live="polite"
+      >
+        <div class="message ai">
+          Hello. What would you like to know about the research?
+        </div>
+      </div>
+      <div id="typing-status" role="status" hidden>Thinking...</div>
+    </div>
+    <div id="input-area" class="chat-footer" hidden>
+      <label class="sr-only" for="chat-input">Your question</label>
+      <input
+        type="text"
+        id="chat-input"
+        placeholder="Your question"
+        onkeydown="handleChatKey(event)"
+      />
+      <button
+        id="chat-send"
+        type="button"
+        onclick="sendMessage()"
+        aria-label="Send message"
+        title="Send message"
+      >
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
 </div>
-
 <script>
-    // CONFIGURATION - REPLACE THIS WITH YOUR WORKER URL
-    const API_ENDPOINT = "/api/chat"; // Relative path for Pages Functions
+  const API_ENDPOINT = "/api/chat";
+  let isOpen = false;
+  let sending = false;
+  let password = "";
+  try {
+    password = localStorage.getItem("sc_chat_password") || "";
+  } catch {}
+  if (password) showChatInterface();
 
-    // State
-    let isOpen = false;
-    let password = localStorage.getItem('sc_chat_password') || '';
-
-    // Initialize
-    if (password) {
-        showChatInterface();
+  function toggleChat() {
+    isOpen = !isOpen;
+    document.getElementById("sc-chat-window").hidden = !isOpen;
+    const trigger = document.getElementById("sc-chat-toggle");
+    trigger.setAttribute("aria-expanded", String(isOpen));
+    trigger.setAttribute(
+      "aria-label",
+      isOpen ? "Close research assistant" : "Open research assistant",
+    );
+    trigger.title = isOpen
+      ? "Close research assistant"
+      : "Open research assistant";
+    if (isOpen)
+      document
+        .getElementById(password ? "chat-input" : "chat-password")
+        .focus();
+    else trigger.focus();
+  }
+  document
+    .getElementById("sc-chat-window")
+    .addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isOpen) {
+        event.stopPropagation();
+        toggleChat();
+      }
+    });
+  function handleAuthKey(event) {
+    if (event.key === "Enter") authenticate();
+  }
+  function authenticate() {
+    const input = document.getElementById("chat-password");
+    if (!input.value.trim()) {
+      input.focus();
+      return;
     }
-
-    function syncChatTriggerVisibility() {
-        const compactViewport = window.matchMedia('(max-width: 768px)').matches;
-        document.documentElement.classList.toggle('chat-trigger-visible', !compactViewport || window.scrollY > 180);
-    }
-
-    function toggleChat() {
-        isOpen = !isOpen;
-        const win = document.getElementById('sc-chat-window');
-        if (isOpen) win.classList.add('open');
-        else win.classList.remove('open');
-    }
-
-    window.addEventListener('scroll', syncChatTriggerVisibility, { passive: true });
-    window.addEventListener('resize', syncChatTriggerVisibility);
-    syncChatTriggerVisibility();
-
-    function handleAuthKey(e) {
-        if (e.key === 'Enter') authenticate();
-    }
-
-    function authenticate() {
-        const input = document.getElementById('chat-password');
-        if (input.value.trim()) {
-            password = input.value.trim();
-            localStorage.setItem('sc_chat_password', password);
-            showChatInterface();
-        }
-    }
-
-    function showChatInterface() {
-        document.getElementById('auth-view').style.display = 'none';
-        document.getElementById('chat-view').style.display = 'flex';
-        document.getElementById('input-area').style.display = 'flex';
-    }
-
-    function handleChatKey(e) {
-        if (e.key === 'Enter') sendMessage();
-    }
-
-    async function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const text = input.value.trim();
-        if (!text) return;
-
-        // Add User Message
-        addMessage(text, 'user');
-        input.value = '';
-
-        // Show Loading
-        const loading = document.getElementById('typing-status');
-        loading.style.display = 'block';
-
+    password = input.value.trim();
+    try {
+      localStorage.setItem("sc_chat_password", password);
+    } catch {}
+    input.value = "";
+    showChatInterface();
+    document.getElementById("chat-input").focus();
+  }
+  function showChatInterface() {
+    document.getElementById("auth-view").hidden = true;
+    document.getElementById("chat-view").hidden = false;
+    document.getElementById("input-area").hidden = false;
+  }
+  function handleChatKey(event) {
+    if (event.key === "Enter" && !event.isComposing) sendMessage();
+  }
+  async function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const text = input.value.trim();
+    if (!text || sending) return;
+    sending = true;
+    document.getElementById("chat-send").disabled = true;
+    addMessage(text, "user");
+    input.value = "";
+    const loading = document.getElementById("typing-status");
+    loading.hidden = false;
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa("user:" + password),
+        },
+        body: JSON.stringify({ question: text }),
+      });
+      if (response.status === 401) {
+        password = "";
         try {
-            const response = await fetch(API_ENDPOINT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + btoa('user:' + password)
-                },
-                body: JSON.stringify({ question: text })
-            });
-
-            loading.style.display = 'none';
-
-            if (response.status === 401) {
-                addMessage("Incorrect password. Please try again.", 'system');
-                localStorage.removeItem('sc_chat_password');
-                setTimeout(() => {
-                    document.getElementById('auth-view').style.display = 'flex';
-                    document.getElementById('chat-view').style.display = 'none';
-                    document.getElementById('input-area').style.display = 'none';
-                }, 2000);
-                return;
-            }
-
-            if (!response.ok) {
-                const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.error || `API Error: ${response.status}`);
-            }
-
-            const data = await response.json();
-            addMessage(data.answer, 'ai');
-
-        } catch (error) {
-            loading.style.display = 'none';
-            addMessage(`Error: ${error.message}`, 'system');
-            console.error(error);
+          localStorage.removeItem("sc_chat_password");
+        } catch {}
+        document.getElementById("auth-view").hidden = false;
+        document.getElementById("chat-view").hidden = true;
+        document.getElementById("input-area").hidden = true;
+        const authInput = document.getElementById("chat-password");
+        authInput.setCustomValidity("Incorrect password. Please try again.");
+        if (isOpen) {
+          authInput.focus();
+          authInput.reportValidity();
         }
+        return;
+      }
+      if (!response.ok)
+        throw new Error(
+          "The assistant is unavailable. Please try again later.",
+        );
+      const data = await response.json();
+      addMessage(
+        data.answer || "No answer was returned. Please try again.",
+        "ai",
+      );
+    } catch (error) {
+      addMessage(error.message, "system");
+    } finally {
+      sending = false;
+      loading.hidden = true;
+      document.getElementById("chat-send").disabled = false;
     }
-
-    function addMessage(text, type) {
-        const container = document.getElementById('messages-container');
-        const div = document.createElement('div');
-        div.className = `message ${type}`;
-        
-        // Simple Markdown parsing for AI response
-        if (type === 'ai') {
-            // Convert **bold** to <b>
-            let html = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            // Convert * to bullet points if at start of line
-            html = html.replace(/^\* (.*)/gm, '• $1');
-            // Convert newlines
-            html = html.replace(/\n/g, '<br>');
-            div.innerHTML = html;
-        } else {
-            div.textContent = text;
-        }
-        
-        container.appendChild(div);
-        container.scrollTop = container.scrollHeight;
-    }
+  }
+  document
+    .getElementById("chat-password")
+    .addEventListener("input", (event) => event.target.setCustomValidity(""));
+  function addMessage(text, type) {
+    const container = document.getElementById("messages-container");
+    const message = document.createElement("div");
+    message.className = "message " + type;
+    message.textContent = text;
+    container.appendChild(message);
+    const body = document.getElementById("chat-view");
+    body.scrollTop = body.scrollHeight;
+  }
 </script>

@@ -4,6 +4,20 @@ All notable changes to the **bio-tools** personal research website are documente
 
 ## Unreleased
 
+### 2026-10-16: Clearer Research Portfolio
+- Replaced the dark Future Lab OS visual system with white surfaces, readable charcoal text, restrained green controls, and a full-bleed conceptual skin illustration.
+- Made Jackson Dai the homepage identity, simplified copy across all five pages, and retained the portrait in its original color.
+- Put tool launch links and note search directly in view. Preserved all 12 note routes and the two tool application URLs.
+- Replaced publication-policy framing with concise availability statements; no citations or scientific findings were invented.
+- Kept research diagrams uncropped, linked to original images, and distinguished working hypotheses from results in captions.
+- Added accessible mobile navigation, current-page indication, note empty/reset states, and focus-aware assistant controls.
+- Replaced assistant response HTML insertion with plain text rendering; kept the existing API contract and backend unchanged.
+- Updated shared article reading styles and contained the batch-correction comparison table on mobile.
+- Added image provenance and updated active design documentation. Owner authorized commit/push on 2026-10-16; deployed verification remains pending.
+- Verified production build, 66 Firefox browser checks, 40 local links/assets, responsive screenshots, and sitemap XML. Live service and deployment checks remain separate.
+
+The older OS entries below describe previous iterations, not the active design.
+
 ### Changed
 - Phase 2A content-accuracy pass:
   - removed editable public `NRX` and generic candidate-regulator placeholder language
