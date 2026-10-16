@@ -41,6 +41,12 @@ After Cloudflare Pages deploys, verify:
 
 Cloudflare Pages may redirect `.html` URLs to pretty URLs, for example `/research.html` to `/research`. This is expected.
 
+## CV Updates
+- Keep the canonical PDF in `public/assets/cv.pdf`; do not add a duplicate under `src/assets/`.
+- When replacing the PDF, update the `v` query value in the homepage and footer CV links.
+- The CV response requires cache revalidation via `public/_headers`.
+- Verify the deployed PDF bytes against the source PDF. A successful Git push does not confirm a successful Pages deployment.
+
 ## Tool Runtime Notes
 - Tool apps are under `public/tools/`.
 - Stlite/Pyodide is loaded through local Stlite assets plus CDN Pyodide, depending on the tool entry page.

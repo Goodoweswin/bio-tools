@@ -5,6 +5,9 @@
   Cross-Origin-Opener-Policy: same-origin
 
 # Ensure WASM and Wheels are served with correct MIME types
+/assets/cv.pdf
+  Cache-Control: public, max-age=0, must-revalidate
+
 /*.wasm
   Content-Type: application/wasm
 
