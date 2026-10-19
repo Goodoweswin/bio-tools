@@ -10,6 +10,17 @@ Keep public copy useful without presenting hypotheses, unshared materials, or im
 - Prefer descriptive state language such as `senescence-associated endothelial states` over undefined placeholder regulators.
 - Treat labels baked into image assets separately from editable HTML text.
 
+## Resume-Based Update: 2026-10-19
+- Primary source: owner-provided `public/assets/cv.pdf`, checked visually because its extracted Chinese text has a broken character mapping.
+- Added education, BGI internship, clinical rotations, project roles, research periods, selected honors, community founding, and digital projects directly from that resume.
+- Master's graduation in 2027 and research completion dates remain explicitly expected; both research projects remain ongoing.
+- Replaced the unsupported 2025 Westlake poster claim with attendance. Removed unconfirmed conference months and the previous talk title.
+- Conference record now says speaking and attendance at the 22nd Chinese Medical Association plastic surgery academic exchange meeting (Beijing, 2025), and attendance at Westlake x Nature's Stem Cells Across the Lifespan (2025).
+- Replaced manuscript-preparation placeholders with Research & Activities at the existing `/publications` route. The resume supplies no publication citations or public conference files.
+- Public email updated to `daijie@hust.edu.cn`. Jackson Dai remains the public name; About includes 代杰.
+- Personal projects without owner-provided public URLs have descriptions only. No product readiness, adoption figures, or public demos are inferred.
+- Experimental methods and basic R/Python skills follow the resume; no proficiency ratings or validated-tool claims are added.
+
 ## Completed in Phase 2A
 - Removed editable public references to `NRX`; no `NRX` text remains in `src/` HTML.
 - Replaced generic candidate-regulator wording in Research and Publications with state- and program-level language.
@@ -33,7 +44,7 @@ Article body claims and code examples have not undergone scientific or runtime v
 The matching PNG files are deployable legacy copies and should be updated in the same source-asset pass, not by editing the compressed WebP alone.
 
 ## Owner Input Needed
-Phase 2B requires source material from Jackson Dai before it can add public records:
+The resume now supports the education, experience, activities, honors, and project records above. Additional source material is still required for:
 
 - publication title, full author list, venue, year, DOI or stable link
 - conference title, event date, public abstract, poster, or slide link

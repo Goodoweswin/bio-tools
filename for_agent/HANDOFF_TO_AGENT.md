@@ -1,22 +1,22 @@
 # Engineering Handoff
 
-Updated: 2026-10-16.
+Updated: 2026-10-19.
 
 ## Current State
 - Repository: `/home/y417954/biotools/bio-tools`
 - Owner / public name: Jackson Dai
 - Live site: https://daiger.top/
 - Deployment: GitHub main to Cloudflare Pages.
-- Current local change: light, research-led redesign replacing Future Lab OS.
+- Current local change: resume-based content update on the existing light research-led design. See RESUME_CONTENT_UPDATE.md for current checkpoint states.
 - Owner authorized commit and push on 2026-10-16. Check Git history and the remote for transport status; do not infer deployment from a local build or a successful push.
-- Checkpoint 3 (local QA) is complete: production build, 66 browser checks, 40 local links/assets, screenshot review, and sitemap validation passed. Checkpoint 4 is authorized but remains open until deployed-site verification.
+- Baseline redesign QA passed in the previous iteration. The 2026-10-19 resume update also passes build, 66 Firefox checks, 40 local links/assets, and desktop/mobile screenshot review. Its release checkpoint remains pending; earlier authorization does not describe a deployment of this update.
 
 ## Site Shape
-- Home: Jackson Dai, skin-aging introduction, full-bleed conceptual illustration, original-color portrait, research questions, tools, updates.
-- Research: two questions with readable approaches, hypothesis-aware captions, Chinese summaries and optional diagrams.
+- Home: Jackson Dai / 代杰, master's identity, full-bleed illustration, color portrait, research, tools, projects, education and experience, and confirmed activities.
+- Research: two ongoing projects with dates, owner roles and contributions, hypothesis-aware captions, Chinese summaries, optional diagrams, and earlier research training.
 - Tools: direct links to ElementPrism and DEG Analysis; pathway enrichment remains planned.
 - Notes (existing `/knowledge` route): 12 original articles, keyword search, topic filtering, count, and reset state.
-- Publications: concise current availability, no invented bibliographic records.
+- Activities: resume-supported academic exchange, research, community work, and honors at the unchanged `/publications` route. No invented bibliographic records.
 - Articles: light reading style; code and wide tables scroll within the page.
 - Assistant: existing `/api/chat` contract; light UI, nonmodal dialog, labeled controls, Escape and focus handling. No backend changes.
 
@@ -42,7 +42,8 @@ Updated: 2026-10-16.
 - Never put tokens in chat or project files.
 
 ## Remaining Work
-- Local QA is complete and commit/push is authorized. Local preview is available at http://127.0.0.1:61532/ while the preview server is running.
+- The 2026-10-19 content update is locally verified. Owner requested a local Git commit on 2026-10-19; inspect Git history for its identifier. Push and deployed verification remain pending.
+- Local previews are available at http://127.0.0.1:61531/ (development) and http://127.0.0.1:61532/ (production build) while the servers are running.
 - After push, verify all five clean public URLs, article routes, tools, CV, and assistant on Cloudflare.
 - The assistant's live API and Python/WASM tool runtime require separate deployed checks; a Vite preview does not prove these services work.
 - Publication metadata and conference files require owner inputs.

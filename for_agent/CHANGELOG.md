@@ -4,6 +4,15 @@ All notable changes to the **bio-tools** personal research website are documente
 
 ## Unreleased
 
+### 2026-10-19: Resume-Based Content
+- Added the owner's HUST master's identity, education, BGI internship, clinical rotations, and selected research methods.
+- Added Pilotus Studio, voice-based work management, Lab circle, and a responsive experience timeline to Home.
+- Updated research with resume-supported dates, responsibilities, ongoing status, and earlier undergraduate training.
+- Replaced manuscript placeholders with Research & Activities at the original `/publications` route, retaining existing section anchors.
+- Corrected conference participation, added selected honors and football association founding, and updated public email to `daijie@hust.edu.cn`.
+- Added a gated implementation plan and updated source-accuracy and handoff documentation.
+- Local verification: production build, 66 Firefox checks, 40 local links/assets, desktop and mobile screenshots, and whitespace checks passed. Owner requested a local commit on 2026-10-19; push and live verification remain pending.
+
 ### 2026-10-16: Clearer Research Portfolio
 - Replaced the dark Future Lab OS visual system with white surfaces, readable charcoal text, restrained green controls, and a full-bleed conceptual skin illustration.
 - Made Jackson Dai the homepage identity, simplified copy across all five pages, and retained the portrait in its original color.

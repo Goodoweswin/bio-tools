@@ -1,9 +1,9 @@
 # Content Map
 
 ## Main Pages
-- `src/index.html`: **Home**. Jackson Dai, concept illustration, color portrait, two research questions, tools, and updates.
-- `src/research.html`: **Research**. Questions, approaches, hypothesis-aware scientific figures, and Chinese summaries.
-- `src/publications.html`: **Publications**. Concise work-in-progress and public availability statements.
+- `src/index.html`: **Home**. Jackson Dai / 代杰, master's identity, color portrait, research, tools, selected projects, education/experience timeline, and confirmed activities.
+- `src/research.html`: **Research**. Two ongoing projects, dates, owner contributions, hypothesis-aware scientific figures, Chinese summaries, and earlier training.
+- `src/publications.html`: **Research & Activities**. Confirmed academic exchange, community projects, selected honors, tools, and notes. Navigation label: Activities. Existing route and section anchors retained.
 - `src/tools.html`: **Tools**. Direct launch links for the two existing tools; pathway enrichment is planned.
 - `src/knowledge.html`: **Research notes**. Immediate keyword search, topic filters, and 12 original article links.
 
@@ -30,6 +30,7 @@
 - `PROJECT_MANIFEST.md`: **Project identity and status**.
 - `CONTENT_MAP.md`: **Page, component, and asset index**.
 - `CONTENT_ACCURACY.md`: **Content Register**. Editable-copy decisions, image-label debt, and owner inputs required for public records.
+- `RESUME_CONTENT_UPDATE.md`: **Resume Update**. Source decisions and sequential acceptance checkpoints for the 2026-10-19 content update.
 
 ## Knowledge Base Categories
 Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
