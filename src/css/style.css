@@ -241,6 +241,25 @@ button:disabled {
 .text-link:hover {
   text-decoration: underline;
 }
+.cv-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  font-size: 0.9rem;
+}
+.cv-links > span {
+  color: var(--muted-text);
+}
+.cv-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+}
+.section-heading > .cv-links {
+  flex-shrink: 0;
+}
 .eyebrow {
   display: block;
   color: var(--accent-color);

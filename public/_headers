@@ -8,6 +8,9 @@
 /assets/cv.pdf
   Cache-Control: public, max-age=0, must-revalidate
 
+/assets/cv-en.pdf
+  Cache-Control: public, max-age=0, must-revalidate
+
 /*.wasm
   Content-Type: application/wasm
 

@@ -59,7 +59,8 @@ Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
 ## Assets
 - `src/assets/profile-hero.webp`: Optimized homepage portrait.
 - `public/assets/*.webp`: Optimized public research images used by main pages.
-- `public/assets/cv.pdf`: User CV.
+- `public/assets/cv.pdf`: Chinese CV, owner-provided revision 2026-10-27; legacy public URL retained.
+- `public/assets/cv-en.pdf`: English CV, owner-provided revision 2026-10-27.
 
 ## Tools
 - `public/tools/stat_analysis/index.html`: ElementPrism entry page.

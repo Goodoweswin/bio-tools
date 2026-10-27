@@ -4,6 +4,13 @@ All notable changes to the **bio-tools** personal research website are documente
 
 ## Unreleased
 
+### 2026-10-27: Bilingual CV
+- Replaced the Chinese CV with the new owner-provided PDF and added the English PDF.
+- Added direct English/Chinese links in the homepage hero, experience section, and shared footer, including language metadata.
+- Preserved `/assets/cv.pdf` for Chinese; added `/assets/cv-en.pdf` for English. Updated link revision to `20261027` and cache revalidation for both PDFs.
+- This update replaces downloadable documents and their UI only; it does not revise biographical or research copy from the new resumes. Commit/push and deployed verification remain separate.
+- Verified production build, exact source/output PDF hashes, valid PDF responses for both languages and the legacy link, and Firefox layouts at 320, 390, 768, and 1440 pixels. Mobile/desktop screenshots reviewed.
+
 ### 2026-10-19: Resume-Based Content
 - Added the owner's HUST master's identity, education, BGI internship, clinical rotations, and selected research methods.
 - Added Pilotus Studio, voice-based work management, Lab circle, and a responsive experience timeline to Home.

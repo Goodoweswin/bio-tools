@@ -38,14 +38,17 @@ After Cloudflare Pages deploys, verify:
 - `https://daiger.top/tools/stat_analysis/`
 - `https://daiger.top/tools/deg/`
 - `https://daiger.top/assets/cv.pdf`
+- `https://daiger.top/assets/cv-en.pdf`
 
 Cloudflare Pages may redirect `.html` URLs to pretty URLs, for example `/research.html` to `/research`. This is expected.
 
 ## CV Updates
-- Keep the canonical PDF in `public/assets/cv.pdf`; do not add a duplicate under `src/assets/`.
-- When replacing the PDF, update the `v` query value in the homepage and footer CV links.
-- The CV response requires cache revalidation via `public/_headers`.
-- Verify the deployed PDF bytes against the source PDF. A successful Git push does not confirm a successful Pages deployment.
+- Chinese CV: `public/assets/cv.pdf` (preserves the original public URL).
+- English CV: `public/assets/cv-en.pdf`. Do not add duplicate PDFs under `src/assets/`.
+- Homepage hero, education/experience section, and shared footer offer direct, language-labeled links with `hreflang` metadata.
+- When replacing either PDF, update the `v` query value in its homepage and footer links. Current revision: `20261027`.
+- Both CV responses require cache revalidation via `public/_headers`.
+- Verify each deployed PDF against its matching owner-provided source. A successful Git push does not confirm a successful Pages deployment.
 
 ## Tool Runtime Notes
 - Tool apps are under `public/tools/`.
