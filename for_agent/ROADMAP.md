@@ -1,11 +1,16 @@
 # Project Roadmap
 
-## Active Content Plan: 2026-10-19
+## Active Plan: 2026-10-29
+Owner authorized identity/content correction, typography implementation, commit, and push. See MD_TYPOGRAPHY_UPDATE.md. Sequential gates: source review, implementation, local verification, release. Earlier content decisions about master's studies and conference participation are historical and superseded by the current source register.
+- Checkpoints 1-3 passed: build, 70 Firefox checks, 43 local links/assets, font loading and desktop/mobile screenshot review.
+- Release authorized; inspect Git history/remote for transport status. Production deployment verification remains open.
+
+## Previous Content Plan: 2026-10-19
 Resume-based identity, experience, project, research-role, and activities update. See RESUME_CONTENT_UPDATE.md for source decisions and sequential checkpoints. No later checkpoint may proceed while its prerequisite is incomplete.
 - Checkpoints 1-3 complete: source review, implementation, production build, 66 Firefox checks, 40 local links/assets, and desktop/mobile screenshot review passed.
-- Checkpoint 4 partially authorized: owner requested a local commit on 2026-10-19. Push and live deployment verification remain pending; inspect Git history for commit status.
+- Content update committed and pushed as `096893f`; bilingual CV update followed as `0ae0647`. Live deployment verification remains separate.
 
-## Active Plan: 2026-10-16
+## Previous Visual Plan: 2026-10-16
 The light research-led redesign supersedes the historical Future Lab OS visual tasks below. See DESIGN_STRATEGY.md for the current decisions. Historical completion records are retained for context, not instructions to restore the old design.
 
 - Checkpoint 1, direction and copy: complete.

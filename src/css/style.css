@@ -1,3 +1,31 @@
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/assets/fonts/source-sans-3-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/assets/fonts/source-sans-3-semibold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/assets/fonts/source-serif-4-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/assets/fonts/source-serif-4-semibold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
 :root {
   color-scheme: light;
   --bg-color: #fff;
@@ -5,13 +33,17 @@
   --surface-bg: #f3f6f5;
   --surface-strong: #e9efed;
   --text-color: #202b29;
-  --text-secondary: #53615d;
-  --muted-text: #64716c;
+  --text-secondary: #45534d;
+  --muted-text: #596760;
   --accent-color: #126750;
   --primary-color: #126750;
   --border-color: #dce3df;
   --border-strong: #a1b4ab;
-  --font-main: "Aptos", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-main:
+    "Source Sans 3", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+  --font-display:
+    "Source Serif 4", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
   --radius-sm: 3px;
   --radius-md: 4px;
   --radius-lg: 4px;
@@ -42,22 +74,26 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 600;
+  line-height: 1.25;
   letter-spacing: 0;
   text-wrap: balance;
 }
 h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
   font-size: 3.5rem;
 }
 h2 {
-  font-size: 2.25rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
 }
 h3 {
-  font-size: 1.45rem;
+  font-size: 1.375rem;
 }
 p {
   color: var(--text-secondary);
+  text-wrap: pretty;
 }
 a {
   color: var(--accent-color);
@@ -262,7 +298,7 @@ button:disabled {
 }
 .eyebrow {
   display: block;
-  color: var(--accent-color);
+  color: var(--muted-text);
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 20px;
@@ -287,15 +323,27 @@ button:disabled {
 .hero-copy {
   width: 55%;
   max-width: 660px;
-  padding-block: 68px 100px;
+  padding-block: 48px 68px;
 }
 .hero-copy h1 {
-  font-size: 4.5rem;
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.hero-identity {
+  display: grid;
+  gap: 4px;
   margin-bottom: 24px;
+  font-size: 1rem;
+}
+.hero-identity strong {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
 }
 .hero-lede {
-  font-size: 2.25rem;
-  line-height: 1.25;
+  font-size: 1.65rem;
+  line-height: 1.35;
   color: var(--text-color);
   max-width: 580px;
   text-wrap: balance;
@@ -303,7 +351,7 @@ button:disabled {
 .hero-description {
   max-width: 485px;
   font-size: 1.1rem;
-  margin-top: 22px;
+  margin-top: 16px;
 }
 .art-caption {
   position: absolute;
@@ -315,7 +363,7 @@ button:disabled {
   padding: 2px 6px;
 }
 .section {
-  padding-block: 80px;
+  padding-block: 64px;
 }
 .section-tint {
   background: var(--bg-secondary);
@@ -349,7 +397,7 @@ button:disabled {
   opacity: 1;
 }
 .about-copy h2 {
-  font-size: 1.85rem;
+  font-size: 2rem;
   margin-bottom: 18px;
 }
 .about-copy p + p {
@@ -372,6 +420,30 @@ button:disabled {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
+}
+.selected-work {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: end;
+  padding-block: 28px;
+  margin-bottom: 36px;
+  border-block: 1px solid var(--border-strong);
+}
+.selected-work .eyebrow {
+  margin-bottom: 12px;
+}
+.selected-work h3 {
+  max-width: 720px;
+  margin-bottom: 12px;
+}
+.selected-work .work-role {
+  color: var(--text-color);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.selected-work p {
+  max-width: 760px;
 }
 .personal-projects {
   display: grid;
@@ -399,9 +471,19 @@ button:disabled {
   border-top: 1px solid var(--border-color);
 }
 .experience-list h3 {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   line-height: 1.4;
   margin-bottom: 8px;
+}
+.experience-role {
+  color: var(--text-color);
+  font-weight: 600;
+}
+.experience-date,
+.project-facts dd,
+.news-list time,
+.honors-list time {
+  font-variant-numeric: tabular-nums;
 }
 .experience-date {
   font-size: 0.85rem;
@@ -426,7 +508,7 @@ button:disabled {
   border-block: 1px solid var(--border-color);
 }
 .project-facts dt {
-  color: var(--accent-color);
+  color: var(--muted-text);
   font-size: 0.8rem;
   margin-bottom: 8px;
 }
@@ -454,7 +536,7 @@ button:disabled {
 .honors-list li + li {
   border-top: 1px solid var(--border-color);
 }
-.honors-list li > :last-child {
+.honors-list li > :last-child:not(:first-child) {
   flex-shrink: 0;
   font-size: 0.85rem;
 }
@@ -475,7 +557,7 @@ button:disabled {
   margin-bottom: 10px;
 }
 .project-preview h3 {
-  font-size: 1.65rem;
+  font-size: 1.375rem;
   margin-bottom: 14px;
 }
 .project-preview p {
@@ -680,6 +762,7 @@ details p {
   background: #f8efed;
 }
 .tool-product h2 {
+  font-family: var(--font-main);
   font-size: 1.8rem;
   margin-bottom: 12px;
 }
@@ -704,6 +787,7 @@ details p {
   border-top: 1px solid var(--border-color);
 }
 .planned-tool h2 {
+  font-family: var(--font-main);
   font-size: 1.3rem;
   margin-bottom: 12px;
 }
@@ -806,6 +890,7 @@ details p {
   display: none;
 }
 .knowledge-track-header h2 {
+  font-family: var(--font-main);
   font-size: 1.4rem;
 }
 .knowledge-track-header p {
@@ -846,6 +931,7 @@ details p {
   padding-block: 50px;
 }
 .empty-state h2 {
+  font-family: var(--font-main);
   font-size: 1.3rem;
   margin-bottom: 12px;
 }
@@ -867,15 +953,25 @@ details p {
   padding-block: 32px;
 }
 .publication-row > h2 {
+  font-family: var(--font-main);
   font-size: 1rem;
   line-height: 1.6;
+  color: var(--muted-text);
 }
 .publication-row h3 {
   font-size: 1.35rem;
   margin: 10px 0 14px;
 }
 .publication-row .status {
-  color: #7c5538;
+  color: var(--muted-text);
+}
+.publication-row h3:not(:first-of-type) {
+  margin-top: 28px;
+}
+.publication-row .work-role {
+  color: var(--text-color);
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 .site-footer {
   border-top: 1px solid var(--border-color);
@@ -923,10 +1019,10 @@ details p {
     width: 62%;
   }
   .hero-copy h1 {
-    font-size: 3.75rem;
+    font-size: 3.5rem;
   }
   .hero-lede {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
   }
   .about-layout {
     grid-template-columns: 160px 1fr;
@@ -967,7 +1063,8 @@ details p {
 }
 @media (max-width: 700px) {
   .personal-projects,
-  .project-facts {
+  .project-facts,
+  .selected-work {
     grid-template-columns: 1fr;
     gap: 24px;
   }
@@ -1026,31 +1123,38 @@ details p {
     display: flex;
   }
   .home-hero {
-    min-height: 640px;
+    min-height: 0;
     align-items: start;
   }
   .hero-art {
     object-fit: cover;
     object-position: right bottom;
     top: auto;
-    height: 245px;
+    height: 180px;
   }
   .hero-copy {
     width: 100%;
     max-width: 480px;
-    padding-block: 40px 240px;
+    padding-block: 32px 180px;
   }
   .hero-copy h1 {
-    font-size: 3rem;
+    font-size: 2.75rem;
     margin-bottom: 18px;
   }
   .hero-lede {
-    font-size: 1.65rem;
+    font-size: 1.35rem;
     max-width: 350px;
   }
   .hero-description {
     font-size: 1rem;
-    margin-top: 18px;
+    margin-top: 14px;
+  }
+  .hero-identity {
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+  .hero-identity strong {
+    font-size: 1.05rem;
   }
   .hero-copy .eyebrow {
     margin-bottom: 14px;
@@ -1079,19 +1183,19 @@ details p {
     margin-top: 14px;
   }
   .about-layout {
-    grid-template-columns: 88px 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
     align-items: start;
   }
   .portrait {
-    width: 88px;
+    width: 104px;
   }
   .about-copy h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 14px;
   }
   .about-copy p {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   .project-list,
   .tool-links,
@@ -1100,7 +1204,7 @@ details p {
     gap: 36px;
   }
   .project-preview h3 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
   }
   .tool-links {
     gap: 0;
@@ -1244,7 +1348,7 @@ details p {
     margin-bottom: 14px;
   }
   .hero-lede {
-    font-size: 1.5rem;
+    display: none;
   }
   .hero-art {
     height: 140px;

@@ -24,6 +24,7 @@ BASE_URL=http://127.0.0.1:4173 node scripts/check-ui.mjs
 - `QA_OUTPUT` overrides the default `/tmp/daiger-ui` screenshot and JSON report folder.
 - Nonzero exit status blocks the local verification checkpoint.
 - Inspect the screenshots too: DOM overflow tests cannot detect artwork behind text.
+- Current suite also checks all four self-hosted font faces, M.D. student identity, submitted-work role/status, and full-width mobile biography. The next-section hint uses the first About content element, including the stacked portrait on mobile.
 - Stop the dedicated Firefox process after verification.
 - The script mocks assistant success and 401 responses. It does not validate the live AI provider or run Python/WASM calculations.
 

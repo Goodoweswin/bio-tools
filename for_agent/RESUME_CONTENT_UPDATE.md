@@ -1,6 +1,7 @@
 # Resume Content Update
 
 Source: owner-provided `public/assets/cv.pdf`, visually reviewed on 2026-10-19.
+Historical plan: identity, conference, and honors decisions have been corrected from the newer PDFs and owner's clarification. Use MD_TYPOGRAPHY_UPDATE.md and CONTENT_ACCURACY.md (2026-10-29) for current facts.
 Scope: homepage, research, activities at the existing `/publications` route, shared contact/navigation, and content documentation.
 
 ## Checkpoint 1: Source and Plan

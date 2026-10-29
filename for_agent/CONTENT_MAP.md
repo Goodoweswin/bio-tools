@@ -1,9 +1,9 @@
 # Content Map
 
 ## Main Pages
-- `src/index.html`: **Home**. Jackson Dai / 代杰, master's identity, color portrait, research, tools, selected projects, education/experience timeline, and confirmed activities.
+- `src/index.html`: **Home**. Jackson Dai / Jie Dai / 代杰, M.D. student identity, color portrait, submitted work, research, tools, selected projects, education/experience timeline, and talks/posters.
 - `src/research.html`: **Research**. Two ongoing projects, dates, owner contributions, hypothesis-aware scientific figures, Chinese summaries, and earlier training.
-- `src/publications.html`: **Research & Activities**. Confirmed academic exchange, community projects, selected honors, tools, and notes. Navigation label: Activities. Existing route and section anchors retained.
+- `src/publications.html`: **Work & Talks**. Submitted manuscript contribution, ongoing projects, named talks/poster, community projects, training/service, tools, and notes. Existing route and section anchors retained.
 - `src/tools.html`: **Tools**. Direct launch links for the two existing tools; pathway enrichment is planned.
 - `src/knowledge.html`: **Research notes**. Immediate keyword search, topic filters, and 12 original article links.
 
@@ -31,6 +31,7 @@
 - `CONTENT_MAP.md`: **Page, component, and asset index**.
 - `CONTENT_ACCURACY.md`: **Content Register**. Editable-copy decisions, image-label debt, and owner inputs required for public records.
 - `RESUME_CONTENT_UPDATE.md`: **Resume Update**. Source decisions and sequential acceptance checkpoints for the 2026-10-19 content update.
+- `MD_TYPOGRAPHY_UPDATE.md`: **Current Update**. M.D. identity correction, current resume synchronization, typography, verification, and release checkpoints.
 
 ## Knowledge Base Categories
 Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
@@ -61,6 +62,7 @@ Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
 - `public/assets/*.webp`: Optimized public research images used by main pages.
 - `public/assets/cv.pdf`: Chinese CV, owner-provided revision 2026-10-27; legacy public URL retained.
 - `public/assets/cv-en.pdf`: English CV, owner-provided revision 2026-10-27.
+- `public/assets/fonts/`: Self-hosted Adobe Source Sans 3 / Source Serif 4, licenses, and source provenance.
 
 ## Tools
 - `public/tools/stat_analysis/index.html`: ElementPrism entry page.

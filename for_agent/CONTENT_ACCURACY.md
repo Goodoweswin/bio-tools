@@ -11,6 +11,7 @@ Keep public copy useful without presenting hypotheses, unshared materials, or im
 - Treat labels baked into image assets separately from editable HTML text.
 
 ## Resume-Based Update: 2026-10-19
+Historical decisions below are superseded where noted by the 2026-10-29 correction. The source PDF at the same path has since been replaced by the 2026-10-27 revision.
 - Primary source: owner-provided `public/assets/cv.pdf`, checked visually because its extracted Chinese text has a broken character mapping.
 - Added education, BGI internship, clinical rotations, project roles, research periods, selected honors, community founding, and digital projects directly from that resume.
 - Master's graduation in 2027 and research completion dates remain explicitly expected; both research projects remain ongoing.
@@ -20,6 +21,16 @@ Keep public copy useful without presenting hypotheses, unshared materials, or im
 - Public email updated to `daijie@hust.edu.cn`. Jackson Dai remains the public name; About includes 代杰.
 - Personal projects without owner-provided public URLs have descriptions only. No product readiness, adoption figures, or public demos are inferred.
 - Experimental methods and basic R/Python skills follow the resume; no proficiency ratings or validated-tool claims are added.
+
+## Current Identity and Resume Correction: 2026-10-29
+- Owner explicitly confirmed clinical medicine doctoral studies, M.D. in progress, expected 2027. Both current Chinese and English PDFs confirm this. Never restore the previous master's label or substitute Ph.D.; do not append M.D. as an earned suffix.
+- Public name remains Jackson Dai; About includes Jie Dai / 代杰.
+- The current resumes support the DLP-printed scaffold project, June 2025-October 2026: submitted manuscript, co-first author listed second, single-cell analysis/visualization of a 28,563-cell study dataset, study-design discussions and methodological feasibility assessment. Web headings describe the project; no journal, full author list, DOI, acceptance, or citable publication record is inferred.
+- BGI internship duties now include spatial-omics annotation, alignment, segmentation, and experiments as a hospital-side contributor to hair graying/vitiligo research.
+- Pilotus is a four-person team; resumes support platform showcase development, SOP management, AI-assisted coding with manual review, and ridge-regression work for the 2026 Virtual Cell Competition.
+- Both ongoing aging projects remain ongoing. Removed completion-year estimates absent from the newest resumes.
+- Conference records now include the named Beijing 2025 and Shenyang 2026 presentations and Westlake 2025 poster, directly supported by the current PDFs. This supersedes the earlier attendance-only decision; public slides/poster files are still not supplied.
+- Corrected Tongji Cup record to runner-up in 2022/2026 and third place in 2025; removed the stale champion claim. Current resumes also support a Grade III football referee qualification and laboratory setup service.
 
 ## Completed in Phase 2A
 - Removed editable public references to `NRX`; no `NRX` text remains in `src/` HTML.

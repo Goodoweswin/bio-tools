@@ -19,6 +19,12 @@ body {
   margin-bottom: 30px !important;
   border-bottom: 1px solid var(--border-color) !important;
 }
+h1,
+h2,
+h3 {
+  font-family: var(--font-main);
+  font-weight: 600;
+}
 h1 {
   color: var(--text-color) !important;
   font-size: 2.4rem !important;
@@ -41,9 +47,13 @@ h3 {
   line-height: 1.5 !important;
 }
 p,
-li,
-.meta {
+li {
   color: var(--text-secondary) !important;
+}
+.meta {
+  color: var(--muted-text) !important;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
 }
 p + p {
   margin-top: 16px;

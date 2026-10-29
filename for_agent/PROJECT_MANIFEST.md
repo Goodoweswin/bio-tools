@@ -5,6 +5,7 @@
 - **Description**: A personal academic website and bioinformatics toolkit for Jackson Dai, focusing on AI4Med, Single-Cell Omics, Skin Aging, and Regenerative Medicine.
 - **Goal**: To showcase research, share bioinformatics tools, and build a knowledge base.
 - **Owner / Pen Name**: Jackson Dai
+- **Academic identity**: Jie Dai / 代杰, M.D. student in clinical medicine (plastic surgery), HUST; expected graduation 2027.
 
 ## Core Identity
 - **Theme**: Light research portfolio with white surfaces, charcoal text, a restrained green accent, and full-color imagery.
@@ -20,11 +21,11 @@
 
 ## Current Status
 - **Phase**: Light five-page redesign implemented locally; verification and release checkpoints tracked in DESIGN_STRATEGY.md. Publication metadata and scientific-figure review remain separate open work.
-- **Last Update**: 2026-10-16
+- **Last Update**: 2026-10-29
 - **Deployment**: 
     - Full Stack: Cloudflare Pages (Frontend + Functions).
     - Live site: `https://daiger.top/`
-- **Current Change**: Five main pages rewritten with direct language, independent color portrait, conceptual skin illustration, accessible mobile navigation, immediate note search, light article styles, and a quieter assistant. Commit/push authorized on 2026-10-16; deployed verification remains pending.
+- **Current Change**: M.D. identity and latest-resume synchronization, self-hosted Source Sans 3 / Source Serif 4, clearer type hierarchy, and full-width mobile biography. Implementation, QA, and authorized release tracked in MD_TYPOGRAPHY_UPDATE.md.
 - **Historical Achievements** (OS layouts below have since been superseded):
     - **Academic Website Redesign**: Reworked homepage, research, tools, publications, and knowledge pages around the Jackson Dai identity.
     - **Future Lab OS Homepage**: Rebuilt `/` with atlas hero, route grid, translational research loop, BioTools dock, and signal feed.

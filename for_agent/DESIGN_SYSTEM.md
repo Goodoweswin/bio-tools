@@ -1,6 +1,6 @@
 # Design System
 
-Updated: 2026-10-16. Replaces the dark Future Lab OS system.
+Updated: 2026-10-29. Light research portfolio with distinct editorial and reading typography.
 
 ## Character
 Clear, contemporary, human, and research-led. Scientific content carries the identity; interface decoration stays quiet.
@@ -10,18 +10,23 @@ Defined in `src/css/style.css`:
 - Background: `#ffffff`
 - Secondary surface: `#f3f6f5`
 - Primary text: `#202b29`
-- Secondary text: `#53615d`
-- Muted text: `#64716c`
+- Secondary text: `#45534d`
+- Muted text: `#596760`
 - Accent and links: `#126750`
 - Border: `#dce3df`; stronger control border: `#a1b4ab`
-- Font: Aptos, Segoe UI, Roboto, Helvetica, Arial, sans-serif
+- Body/UI: self-hosted Source Sans 3, regular and semibold.
+- Display: self-hosted Source Serif 4, regular and semibold. Chinese fallbacks explicitly name Noto CJK, PingFang/Microsoft YaHei for sans, and Noto Serif CJK/Songti for display.
 - Control radius: 3px; framed tools: 4px; scientific images: 0px
 
 ## Typography
-- Homepage name: 4.5rem desktop; smaller fixed sizes at compact breakpoints.
+- Homepage name: 4rem desktop, Source Serif 4 regular; smaller fixed sizes at compact breakpoints.
 - Page titles: 3.5rem desktop and 2.5rem mobile.
-- Section headings: 2.25rem; product headings and rows are smaller.
+- Section headings: 2rem Source Serif 4 semibold; descriptive labels replace slogans.
+- Institution and project titles: approximately 20-22px Source Sans 3 semibold, with smaller fixed sizes for dense interfaces.
 - Body: 17px desktop and 16px mobile.
+- Dates/status: 13-14px; dates and numeric metadata use tabular numerals.
+- Keep the M.D. student identity directly beneath the homepage name and emphasize institution/role in the experience list.
+- Use sans-serif for article headings and dense tool/note interfaces. Licenses and source URLs live under `public/assets/fonts/`.
 - No negative or expanded letter spacing. No viewport-relative type sizes.
 - Chinese notes retain their original titles; specialist English abbreviations remain searchable.
 
@@ -31,6 +36,7 @@ Defined in `src/css/style.css`:
 - Sections use full-width bands or unframed constrained content.
 - Homepage image is full-bleed concept art with a clear annotation, not an experimental figure.
 - Portrait is separate, in original color; no grayscale, blend mode, or colored overlays.
+- Mobile About stacks the portrait above full-width biography text.
 - Scientific images retain their full aspect ratio; each links to the original image for inspection.
 - Tools and Notes show useful entries immediately; do not add large decorative introductions.
 

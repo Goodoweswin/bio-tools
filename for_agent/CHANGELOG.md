@@ -4,6 +4,14 @@ All notable changes to the **bio-tools** personal research website are documente
 
 ## Unreleased
 
+### 2026-10-29: M.D. Identity and Type Hierarchy
+- Corrected master's labels to M.D. student in clinical medicine (plastic surgery), expected graduation 2027, in visible content and social/search metadata.
+- Self-hosted Source Serif 4 for editorial headings and Source Sans 3 for reading/UI, with official licenses and explicit Chinese fallbacks.
+- Rebalanced name, section, institution/project, body, and metadata typography; replaced slogan headings with descriptive labels and stacked mobile portrait/biography.
+- Synchronized submitted scaffold work, co-first authorship, BGI spatial-omics duties, Pilotus team and modeling work, named talks/poster, and corrected football results from both current resumes.
+- Preserved original routes, bilingual CV files, scientific images, tools, and backend behavior. Public work headings describe contributions without inventing bibliographic metadata or acceptance.
+- Local verification: build and whitespace checks, 70 Firefox checks, 43 local links/assets, all four font faces loaded, desktop/mobile screenshots, and short-screen framing passed. Commit/push authorized by owner; Git history records transport state. Deployed verification remains open.
+
 ### 2026-10-27: Bilingual CV
 - Replaced the Chinese CV with the new owner-provided PDF and added the English PDF.
 - Added direct English/Chinese links in the homepage hero, experience section, and shared footer, including language metadata.

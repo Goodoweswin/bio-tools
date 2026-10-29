@@ -62,7 +62,12 @@ const screenshot = async (name, full = false) => {
       image.loading = 'eager';
       return image.decode().catch(() => null);
     })).then(() => true)`);
-    check("Images in " + name, await evaluate(`[...document.images].every(image => image.complete && image.naturalWidth > 0)`));
+    check(
+      "Images in " + name,
+      await evaluate(
+        `[...document.images].every(image => image.complete && image.naturalWidth > 0)`,
+      ),
+    );
   }
   const shot = await call("browsingContext.captureScreenshot", {
     context,
@@ -115,6 +120,45 @@ try {
           !info.overflow.length,
         info,
       );
+      if (route === "/" && width === 1440) {
+        const fonts = await json(`Promise.all([
+          document.fonts.load('400 17px "Source Sans 3"'),
+          document.fonts.load('600 20px "Source Sans 3"'),
+          document.fonts.load('400 64px "Source Serif 4"'),
+          document.fonts.load('600 32px "Source Serif 4"')
+        ]).then(groups=>groups.map(group=>group.map(face=>({family:face.family,status:face.status}))))`);
+        check(
+          "Self-hosted fonts loaded",
+          fonts.every(
+            (group) =>
+              group.length > 0 &&
+              group.every((face) => face.status === "loaded"),
+          ),
+          fonts,
+        );
+        check(
+          "M.D. student identity",
+          await evaluate(
+            `document.querySelector('.hero-identity').textContent.includes('M.D. Student') && document.querySelector('meta[name="description"]').content.includes('M.D. student') && !document.body.textContent.toLowerCase().includes("master's student")`,
+          ),
+        );
+      }
+      if (route === "/" && width === 390) {
+        check(
+          "Mobile biography has full reading width",
+          await evaluate(
+            `document.querySelector('.about-copy').getBoundingClientRect().width >= innerWidth-64`,
+          ),
+        );
+      }
+      if (route === "/publications.html" && width === 1440) {
+        check(
+          "Submitted work and contribution are explicit",
+          await evaluate(
+            `document.querySelector('#manuscripts').textContent.includes('Manuscript submitted') && document.querySelector('#manuscripts').textContent.includes('Co-first author, listed second')`,
+          ),
+        );
+      }
       if ([1440, 390].includes(width))
         await screenshot(
           (route === "/" ? "home" : route.slice(1, -5)) + "-" + width,
@@ -151,7 +195,7 @@ try {
     });
     await settle();
     const next = await json(
-      `({top:document.querySelector('.about-copy').getBoundingClientRect().top,viewport:innerHeight})`,
+      `({top:document.querySelector('.about-layout > :first-child').getBoundingClientRect().top,viewport:innerHeight})`,
     );
     check(
       "Next content visible " + width + "x" + height,
