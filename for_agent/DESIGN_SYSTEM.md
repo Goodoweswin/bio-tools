@@ -1,6 +1,6 @@
 # Design System
 
-Updated: 2026-10-29. Light research portfolio with distinct editorial and reading typography.
+Updated: 2026-10-30. Personal showcase with distinct editorial and reading typography.
 
 ## Character
 Clear, contemporary, human, and research-led. Scientific content carries the identity; interface decoration stays quiet.
@@ -25,7 +25,7 @@ Defined in `src/css/style.css`:
 - Institution and project titles: approximately 20-22px Source Sans 3 semibold, with smaller fixed sizes for dense interfaces.
 - Body: 17px desktop and 16px mobile.
 - Dates/status: 13-14px; dates and numeric metadata use tabular numerals.
-- Keep the M.D. student identity directly beneath the homepage name and emphasize institution/role in the experience list.
+- Keep the M.D. student identity secondary on Home. Institution, graduation, and CV belong to About; author order and measured contributions belong to research detail records.
 - Use sans-serif for article headings and dense tool/note interfaces. Licenses and source URLs live under `public/assets/fonts/`.
 - No negative or expanded letter spacing. No viewport-relative type sizes.
 - Chinese notes retain their original titles; specialist English abbreviations remain searchable.
@@ -37,6 +37,9 @@ Defined in `src/css/style.css`:
 - Homepage image is full-bleed concept art with a clear annotation, not an experimental figure.
 - Portrait is separate, in original color; no grayscale, blend mode, or colored overlays.
 - Mobile About stacks the portrait above full-width biography text.
+- Home has four sections: compact introduction, three selected works, three note links, and brief About/contact. Do not restore the resume timeline, methods inventory, or talks feed on Home.
+- Primary navigation is Home / Work / Notes / About. Research, tools, and publication records retain their URLs under the Work navigation group.
+- Project media uses uncropped owner schematics, actual screenshots, or clearly typographic wordmarks. Never present a wordmark as a product screenshot.
 - Scientific images retain their full aspect ratio; each links to the original image for inspection.
 - Tools and Notes show useful entries immediately; do not add large decorative introductions.
 

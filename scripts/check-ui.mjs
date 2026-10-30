@@ -86,6 +86,8 @@ try {
   const base = process.env.BASE_URL || "http://127.0.0.1:61531";
   const routes = [
     "/",
+    "/work.html",
+    "/about.html",
     "/research.html",
     "/tools.html",
     "/knowledge.html",
@@ -120,6 +122,18 @@ try {
           !info.overflow.length,
         info,
       );
+      const expectedNav =
+        route === "/"
+          ? "Home"
+          : route === "/about.html"
+            ? "About"
+            : route === "/knowledge.html"
+              ? "Notes"
+              : "Work";
+      check(
+        "Navigation group " + route + " @" + width,
+        info.active[0] === expectedNav,
+      );
       if (route === "/" && width === 1440) {
         const fonts = await json(`Promise.all([
           document.fonts.load('400 17px "Source Sans 3"'),
@@ -139,7 +153,19 @@ try {
         check(
           "M.D. student identity",
           await evaluate(
-            `document.querySelector('.hero-identity').textContent.includes('M.D. Student') && document.querySelector('meta[name="description"]').content.includes('M.D. student') && !document.body.textContent.toLowerCase().includes("master's student")`,
+            `document.querySelector('.hero-identity').textContent.includes('M.D. student') && !document.body.textContent.toLowerCase().includes("master's student")`,
+          ),
+        );
+        check(
+          "Showcase homepage stays concise",
+          await evaluate(
+            `document.querySelectorAll('main > section').length===4 && document.querySelectorAll('.showcase-item').length===3 && document.querySelectorAll('.featured-notes > a').length===3 && !document.querySelector('.experience-list') && !document.querySelector('main').textContent.includes('Co-first author') && !document.querySelector('main').textContent.includes('2027')`,
+          ),
+        );
+        check(
+          "Four primary navigation entries",
+          await evaluate(
+            `document.querySelectorAll('#site-links a').length===4`,
           ),
         );
       }
@@ -158,6 +184,22 @@ try {
             `document.querySelector('#manuscripts').textContent.includes('Manuscript submitted') && document.querySelector('#manuscripts').textContent.includes('Co-first author, listed second')`,
           ),
         );
+      }
+      if (route === "/about.html" && width === 390) {
+        check(
+          "About identity and bilingual CV",
+          await evaluate(
+            `document.querySelector('.profile-copy').textContent.includes('M.D. student') && document.querySelector('.profile-copy').textContent.includes('2027') && document.querySelectorAll('#cv a[hreflang]').length===2 && !document.querySelector('#background').open`,
+          ),
+        );
+        await evaluate(`document.querySelector('#background summary').click()`);
+        check(
+          "Optional background expands",
+          await evaluate(
+            `document.querySelector('#background').open && document.documentElement.scrollWidth<=innerWidth`,
+          ),
+        );
+        await evaluate(`document.querySelector('#background summary').click()`);
       }
       if ([1440, 390].includes(width))
         await screenshot(
@@ -195,7 +237,7 @@ try {
     });
     await settle();
     const next = await json(
-      `({top:document.querySelector('.about-layout > :first-child').getBoundingClientRect().top,viewport:innerHeight})`,
+      `({top:document.querySelector('#selected-work .section-heading').getBoundingClientRect().top,viewport:innerHeight})`,
     );
     check(
       "Next content visible " + width + "x" + height,

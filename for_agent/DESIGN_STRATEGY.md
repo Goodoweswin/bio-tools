@@ -1,7 +1,7 @@
 # Design Strategy
 
 ## Current Direction: A Researcher's Website
-Updated: 2026-10-16. This direction supersedes the previous Future Lab OS design.
+Updated: 2026-10-30. The personal-showcase direction supersedes the resume-heavy homepage while retaining the light visual system and self-hosted typography.
 
 Jackson Dai should be the first thing a visitor understands, followed by the research questions, useful tools, and writing. The site is a personal research portfolio, not a fictional operating system.
 
@@ -16,7 +16,10 @@ The Virtual Cell Challenge site (https://virtualcellchallenge.org/) informed the
 - No invented citations, dates, metrics, outcomes, or affiliations.
 
 ## Page Decisions
-- Home: full-width conceptual skin illustration, name and plain introduction; separate full-color portrait and biography; two research questions; tools; updates.
+- Home: compact name/introduction, three selected visual projects, three existing notes, and brief personal About/contact. Institution detail, graduation, CV, dates, author ordering, methods, and talks do not belong on Home.
+- Work: new project index with research and direct tool launches; legacy detail pages stay available.
+- About: concise biography, M.D. student identity, expected graduation, bilingual CV, and optional collapsed background.
+- Primary navigation: Home / Work / Notes / About. Research, Tools, and publication records are grouped under Work.
 - Research: two project questions, approach, full-aspect-ratio scientific figures, captions that distinguish proposed models from demonstrated results; optional supporting diagrams and Chinese summaries.
 - Tools: the two existing tool launch links appear immediately. Pathway enrichment remains explicitly planned.
 - Notes: search and category filters lead directly into the 12 original articles. This is keyword matching, not semantic search.

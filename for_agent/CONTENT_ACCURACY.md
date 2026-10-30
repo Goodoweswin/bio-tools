@@ -10,6 +10,12 @@ Keep public copy useful without presenting hypotheses, unshared materials, or im
 - Prefer descriptive state language such as `senescence-associated endothelial states` over undefined placeholder regulators.
 - Treat labels baked into image assets separately from editable HTML text.
 
+## Presentation Update: 2026-10-30
+- The owner requested a personal showcase instead of a web resume. Homepage credentials are intentionally limited to a secondary M.D. student line; the full identity and bilingual CV are on About.
+- Retain source-supported authorship and submission state on Research/records details, not on Home. Moving a fact out of Home does not invalidate its source.
+- Scores, training certificates, procurement details, and football placements remain in the owner PDFs rather than standalone public lists. About retains football as a personal interest.
+- The featured hair-follicle image is a working schematic, not a result. ElementPrism media captures its real entry page and does not imply a validated analysis session. Pilotus is represented by a CSS wordmark; external availability was not confirmed. See `public/assets/showcase/README.md`.
+
 ## Resume-Based Update: 2026-10-19
 Historical decisions below are superseded where noted by the 2026-10-29 correction. The source PDF at the same path has since been replaced by the 2026-10-27 revision.
 - Primary source: owner-provided `public/assets/cv.pdf`, checked visually because its extracted Chinese text has a broken character mapping.

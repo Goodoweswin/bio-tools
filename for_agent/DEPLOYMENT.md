@@ -18,6 +18,8 @@ npm run build
 - Run `npm run build`.
 - Confirm `dist/` includes:
   - `index.html`
+  - `work.html`
+  - `about.html`
   - `research.html`
   - `tools.html`
   - `knowledge.html`
@@ -31,6 +33,8 @@ npm run build
 ## Live Smoke Test
 After Cloudflare Pages deploys, verify:
 - `https://daiger.top/`
+- `https://daiger.top/work`
+- `https://daiger.top/about`
 - `https://daiger.top/research`
 - `https://daiger.top/tools`
 - `https://daiger.top/knowledge`
@@ -45,8 +49,8 @@ Cloudflare Pages may redirect `.html` URLs to pretty URLs, for example `/researc
 ## CV Updates
 - Chinese CV: `public/assets/cv.pdf` (preserves the original public URL).
 - English CV: `public/assets/cv-en.pdf`. Do not add duplicate PDFs under `src/assets/`.
-- Homepage hero, education/experience section, and shared footer offer direct, language-labeled links with `hreflang` metadata.
-- When replacing either PDF, update the `v` query value in its homepage and footer links. Current revision: `20261027`.
+- About offers direct, language-labeled links with `hreflang` metadata; shared footer links to `/about.html#cv`.
+- When replacing either PDF, update the `v` query value in its About links. Current revision: `20261027`.
 - Both CV responses require cache revalidation via `public/_headers`.
 - Verify each deployed PDF against its matching owner-provided source. A successful Git push does not confirm a successful Pages deployment.
 

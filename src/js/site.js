@@ -36,11 +36,16 @@ if (menuButton && navigation) {
 
   const normalizePath = (path) =>
     path.replace(/\.html$/, "").replace(/\/$/, "") || "/index";
+  const currentPath = normalizePath(location.pathname);
+  const navigationPath = ["/research", "/publications", "/tools"].includes(
+    currentPath,
+  )
+    ? "/work"
+    : currentPath.startsWith("/knowledge/")
+      ? "/knowledge"
+      : currentPath;
   navigation.querySelectorAll("a").forEach((link) => {
-    if (
-      normalizePath(new URL(link.href).pathname) ===
-      normalizePath(location.pathname)
-    ) {
+    if (normalizePath(new URL(link.href).pathname) === navigationPath) {
       link.setAttribute("aria-current", "page");
     }
   });

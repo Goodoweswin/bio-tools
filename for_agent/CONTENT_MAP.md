@@ -1,14 +1,17 @@
 # Content Map
 
 ## Main Pages
-- `src/index.html`: **Home**. Jackson Dai / Jie Dai / 代杰, M.D. student identity, color portrait, submitted work, research, tools, selected projects, education/experience timeline, and talks/posters.
+- `src/index.html`: **Home**. Compact introduction, exactly three selected projects, three existing notes, and brief personal About/contact. No CV, timeline, methods inventory, authorship details, or talks list in the main homepage content.
+- `src/work.html`: **Work**. Visual index for research, ElementPrism, and Pilotus; direct launch links for both working tools, and optional research-record/detail links.
+- `src/about.html`: **About**. Concise biography, accurate M.D. student identity and expected graduation, bilingual CV, collapsed background, and WeChat contact.
 - `src/research.html`: **Research**. Two ongoing projects, dates, owner contributions, hypothesis-aware scientific figures, Chinese summaries, and earlier training.
-- `src/publications.html`: **Work & Talks**. Submitted manuscript contribution, ongoing projects, named talks/poster, community projects, training/service, tools, and notes. Existing route and section anchors retained.
+- `src/publications.html`: **Research records**. Existing detail route retaining manuscript/conference anchors and supported claims. Credential-only training/scores/football results are no longer listed here; background links to About/CV. Active primary navigation: Work.
 - `src/tools.html`: **Tools**. Direct launch links for the two existing tools; pathway enrichment is planned.
 - `src/knowledge.html`: **Research notes**. Immediate keyword search, topic filters, and 12 original article links.
 
 ## Components (`src/components/`)
 - `header.html`: Global navigation bar.
+- `selected-projects.html`: Shared three-project showcase used by Home and Work.
 - `footer.html`: Global footer.
 - `chat-widget.html`: **AI Assistant**. Floating chat interface connecting to internal API (`/api/chat`).
 
@@ -31,7 +34,8 @@
 - `CONTENT_MAP.md`: **Page, component, and asset index**.
 - `CONTENT_ACCURACY.md`: **Content Register**. Editable-copy decisions, image-label debt, and owner inputs required for public records.
 - `RESUME_CONTENT_UPDATE.md`: **Resume Update**. Source decisions and sequential acceptance checkpoints for the 2026-10-19 content update.
-- `MD_TYPOGRAPHY_UPDATE.md`: **Current Update**. M.D. identity correction, current resume synchronization, typography, verification, and release checkpoints.
+- `MD_TYPOGRAPHY_UPDATE.md`: **Previous Update**. M.D. identity correction, resume source decisions, and typography baseline.
+- `PERSONAL_SHOWCASE_UPDATE.md`: **Current Presentation**. Personal-showcase structure, content exclusions, new pages, legacy navigation grouping, and release checkpoints.
 
 ## Knowledge Base Categories
 Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
@@ -63,6 +67,7 @@ Located in `src/knowledge/` and included in the Vite build via `vite.config.js`:
 - `public/assets/cv.pdf`: Chinese CV, owner-provided revision 2026-10-27; legacy public URL retained.
 - `public/assets/cv-en.pdf`: English CV, owner-provided revision 2026-10-27.
 - `public/assets/fonts/`: Self-hosted Adobe Source Sans 3 / Source Serif 4, licenses, and source provenance.
+- `public/assets/showcase/`: Actual ElementPrism entry-page screenshot and media provenance.
 
 ## Tools
 - `public/tools/stat_analysis/index.html`: ElementPrism entry page.

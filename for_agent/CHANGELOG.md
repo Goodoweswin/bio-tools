@@ -4,6 +4,15 @@ All notable changes to the **bio-tools** personal research website are documente
 
 ## Unreleased
 
+### 2026-10-30: Personal Showcase
+- Reduced Home to a compact introduction, three visual projects, three note links, and a brief personal About/contact section.
+- Moved academic background and bilingual CV access into a dedicated About page; retained detailed research contributions and conference records off the homepage.
+- Added Work with direct tool launches, a real ElementPrism entry-page screenshot, an owner research schematic, and a clearly typographic studio wordmark.
+- Simplified primary navigation to Home, Work, Notes, and About. Preserved existing detail/tool/article URLs, navigation grouping, and the homepage `#projects` anchor.
+- Removed credential-only lists from public research records; full details remain in the owner PDFs.
+- Updated build entries, sitemap, media provenance, and current design/content handoff records.
+- Local verification passed: production build, sitemap XML, whitespace, 119 Firefox checks, 51 local links/assets, and desktop/mobile screenshots. Commit and push authorized; Git history records transport status. Live deployment is not inferred from local QA.
+
 ### 2026-10-29: M.D. Identity and Type Hierarchy
 - Corrected master's labels to M.D. student in clinical medicine (plastic surgery), expected graduation 2027, in visible content and social/search metadata.
 - Self-hosted Source Serif 4 for editorial headings and Source Sans 3 for reading/UI, with official licenses and explicit Chinese fallbacks.

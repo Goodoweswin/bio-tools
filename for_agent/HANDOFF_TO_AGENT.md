@@ -1,27 +1,29 @@
 # Engineering Handoff
 
-Updated: 2026-10-29.
+Updated: 2026-10-30.
 
 ## Current State
 - Repository: `/home/y417954/biotools/bio-tools`
 - Owner / public name: Jackson Dai
 - Live site: https://daiger.top/
 - Deployment: GitHub main to Cloudflare Pages.
-- Current change: M.D. identity correction, current resume content, self-hosted Source typography, and mobile reading hierarchy. See MD_TYPOGRAPHY_UPDATE.md for current checkpoint states. Owner authorized commit and push on 2026-10-29.
-- Owner authorized commit and push for this update on 2026-10-29. Check Git history and the remote for transport status; do not infer deployment from a local build or a successful push.
-- Current local QA passed: production build, 70 Firefox checks, 43 local links/assets, all four font faces loaded, and desktop/mobile screenshot review. Current report: `/tmp/daiger-md-qa/`. Live-domain access failed TLS negotiation during review.
+- Current change: personal-showcase structure replacing the resume-heavy homepage. See PERSONAL_SHOWCASE_UPDATE.md for current gates. Owner authorized implementation, commit, and push on 2026-10-30.
+- Owner authorized commit and push for this update on 2026-10-30. Check Git history and the remote for transport status; do not infer deployment from a local build or a successful push.
+- Current local QA passed: production build, 119 Firefox checks, 51 local links/assets, fonts loaded, seven public pages, sitemap XML, and desktop/mobile/short-screen screenshots. Current report: `/tmp/daiger-showcase-qa/`. Live deployment still requires independent verification.
 
 ## Site Shape
-- Home: Jackson Dai / Jie Dai / 代杰, M.D. student identity (expected 2027), full-bleed illustration, color portrait, submitted work, research, tools, projects, education and experience, and named talks/posters.
+- Home: brief introduction, secondary M.D. student identity, three selected works, three note links, and personal About/contact. Credentials remain off the homepage.
+- Work: new `/work` index; direct launch links for working tools, research details, and studio link.
+- About: new `/about` biography and bilingual CV, with optional collapsed background and contact.
 - Research: two ongoing projects with dates, owner roles and contributions, hypothesis-aware captions, Chinese summaries, optional diagrams, and earlier research training.
 - Tools: direct links to ElementPrism and DEG Analysis; pathway enrichment remains planned.
 - Notes (existing `/knowledge` route): 12 original articles, keyword search, topic filtering, count, and reset state.
-- Work & Talks: submitted scaffold manuscript contribution, ongoing research, named conference presentations/poster, projects, and training/service at the unchanged `/publications` route. No invented bibliographic records.
+- Research records: existing `/publications` route and incoming anchors retain manuscript/conference detail; credential-only public lists have been removed. Primary navigation groups these and Research/Tools under Work.
 - Articles: light reading style; code and wide tables scroll within the page.
 - Assistant: existing `/api/chat` contract; light UI, nonmodal dialog, labeled controls, Escape and focus handling. No backend changes.
 
 ## Files To Know
-- `src/index.html`, `research.html`, `tools.html`, `knowledge.html`, `publications.html`
+- `src/index.html`, `work.html`, `about.html`, `research.html`, `tools.html`, `knowledge.html`, `publications.html`
 - `src/css/style.css`: central visual system, responsive rules, reduced motion.
 - `src/js/site.js`: mobile menu, current route, notes keyword filtering.
 - `src/styles/article.css`: shared reading layer for all 12 notes.
@@ -42,6 +44,7 @@ Updated: 2026-10-29.
 - Never put tokens in chat or project files.
 
 ## Remaining Work
+- Current presentation gates are tracked in PERSONAL_SHOWCASE_UPDATE.md; no historical resume plan should restore the removed homepage lists.
 - The 2026-10-29 update is authorized for commit/push after local QA; track its current gates in MD_TYPOGRAPHY_UPDATE.md. Current PDFs supersede older source facts, including identity and football results.
 - Previous resume and bilingual-CV updates were pushed as `096893f` and `0ae0647`. The current update's transport status belongs in Git history; deployed verification remains open.
 - Local previews are available at http://127.0.0.1:61531/ (development) and http://127.0.0.1:61532/ (production build) while the servers are running.

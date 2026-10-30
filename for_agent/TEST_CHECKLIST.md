@@ -24,13 +24,19 @@ BASE_URL=http://127.0.0.1:4173 node scripts/check-ui.mjs
 - `QA_OUTPUT` overrides the default `/tmp/daiger-ui` screenshot and JSON report folder.
 - Nonzero exit status blocks the local verification checkpoint.
 - Inspect the screenshots too: DOM overflow tests cannot detect artwork behind text.
-- Current suite also checks all four self-hosted font faces, M.D. student identity, submitted-work role/status, and full-width mobile biography. The next-section hint uses the first About content element, including the stacked portrait on mobile.
+- Current suite also checks all four self-hosted font faces, accurate M.D. identity, a concise four-section homepage, exactly three selected works/notes, four-entry navigation and legacy grouping, About's bilingual CV and optional background, and submitted-work details. The next-section hint checks the Selected Work heading.
 - Stop the dedicated Firefox process after verification.
 - The script mocks assistant success and 401 responses. It does not validate the live AI provider or run Python/WASM calculations.
 
-Coverage: five pages at 320, 390, 768, 1440, and 1920px; short-screen homepage checks; mobile menu/Escape; keyword and topic filters; empty reset; all 12 articles; full-aspect-ratio research images; local links/assets; assistant focus and response rendering.
+Coverage: seven pages at 320, 390, 768, 1440, and 1920px; short-screen homepage checks; mobile menu/Escape; keyword and topic filters; empty reset; all 12 articles; full-aspect-ratio research images; local links/assets; assistant focus and response rendering.
 
-## Latest Local Verification: 2026-10-16
+## Latest Local Verification: 2026-10-30
+- Production build, `git diff --check`, and sitemap XML validation passed.
+- 119/119 Firefox checks passed against production preview; 51 local links/assets valid.
+- Reviewed full Home, Work/About desktop and mobile, and short-screen screenshots. Report: `/tmp/daiger-showcase-qa/`.
+- External sites, deployed AI services, and Python/WASM calculation correctness remain outside this content/structure verification.
+
+## Previous Local Verification: 2026-10-16
 - Production build passed, along with `git diff --check` and `xmllint --noout public/sitemap.xml`.
 - `scripts/check-ui.mjs` completed with 66/66 checks passing against `http://127.0.0.1:61532/`.
 - 40 unique local links/assets passed, including image and PDF content-type checks and internal anchors.

@@ -1,6 +1,10 @@
 # Project Roadmap
 
-## Active Plan: 2026-10-29
+## Active Plan: 2026-10-30
+Personal showcase: four-part Home, new Work/About, concise project media and notes, credentials in About/CV, four-entry navigation, preserved detail/tool/article URLs. See PERSONAL_SHOWCASE_UPDATE.md. Implementation, local QA, commit, and push are authorized; gates remain sequential.
+- Checkpoints 1-3 complete: build, sitemap, whitespace, 119 Firefox checks, 51 local links/assets, and desktop/mobile screenshots passed. Release authorized; inspect Git history and remote for transport state. Live deployment verification remains separate.
+
+## Previous Plan: 2026-10-29
 Owner authorized identity/content correction, typography implementation, commit, and push. See MD_TYPOGRAPHY_UPDATE.md. Sequential gates: source review, implementation, local verification, release. Earlier content decisions about master's studies and conference participation are historical and superseded by the current source register.
 - Checkpoints 1-3 passed: build, 70 Firefox checks, 43 local links/assets, font loading and desktop/mobile screenshot review.
 - Release authorized; inspect Git history/remote for transport status. Production deployment verification remains open.
