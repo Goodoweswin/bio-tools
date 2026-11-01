@@ -393,7 +393,7 @@ button:disabled {
   min-width: 0;
 }
 .showcase-item-featured {
-  grid-row: span 2;
+  grid-row: span 3;
 }
 .showcase-item:not(.showcase-item-featured) {
   display: grid;
@@ -429,6 +429,18 @@ button:disabled {
 }
 .showcase-item p {
   font-size: 1rem;
+}
+.titan-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1100/740;
+  background: var(--bg-secondary);
+}
+.titan-media img {
+  width: 55%;
+  max-width: 104px;
+  background: transparent;
 }
 .studio-mark {
   aspect-ratio: 1100/740;

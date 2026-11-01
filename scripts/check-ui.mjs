@@ -159,7 +159,7 @@ try {
         check(
           "Showcase homepage stays concise",
           await evaluate(
-            `document.querySelectorAll('main > section').length===4 && document.querySelectorAll('.showcase-item').length===3 && document.querySelectorAll('.featured-notes > a').length===3 && !document.querySelector('.experience-list') && !document.querySelector('main').textContent.includes('Co-first author') && !document.querySelector('main').textContent.includes('2027')`,
+            `document.querySelectorAll('main > section').length===4 && document.querySelectorAll('.showcase-item').length===4 && document.querySelectorAll('.featured-notes > a').length===3 && !document.querySelector('.experience-list') && !document.querySelector('main').textContent.includes('Co-first author') && !document.querySelector('main').textContent.includes('2027')`,
           ),
         );
         check(
