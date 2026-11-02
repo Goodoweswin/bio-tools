@@ -1,0 +1,27 @@
+<section class="time-field" data-time-field aria-label="时间点阵">
+  <header class="time-field-head">
+    <div class="time-field-brand">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><circle cx="15" cy="15" r="10" stroke="currentColor" stroke-opacity=".35"/><ellipse cx="15" cy="15" rx="5" ry="13" transform="rotate(40 15 15)" stroke="currentColor" stroke-opacity=".75"/><circle cx="15" cy="15" r="2.5" fill="currentColor"/></svg>
+      <h2 class="sr-only">时间的形状</h2>
+    </div>
+    <div class="time-field-corner">
+      <time class="time-field-birthday" data-field-birthday datetime="2000-09-05" title="出生日期">2000.09.05</time>
+    </div>
+  </header>
+  <div class="time-field-stage">
+    <canvas class="time-field-canvas" role="img" aria-label="正在生成时间点阵">请启用 JavaScript 查看时间点阵。</canvas>
+    <div class="time-field-tooltip" data-field-tooltip hidden></div>
+  </div>
+  <footer class="time-field-footer">
+    <div class="time-field-switch" role="group" aria-label="时间尺度">
+      <button type="button" data-field-mode="life" aria-label="人生，以周为单位" title="人生 · 周" aria-pressed="true">周</button>
+      <button type="button" data-field-mode="year" aria-label="今年，以天为单位" title="今年 · 天" aria-pressed="false">天</button>
+    </div>
+    <p class="sr-only" data-field-count aria-live="polite"></p>
+    <div class="time-field-reference">
+      <a data-field-source href="https://data.worldbank.org.cn/indicator/SP.DYN.LE00.MA.IN?locations=CN" target="_blank" rel="noopener noreferrer">中国男性 75.25 岁 · 世行 2024 ↗</a>
+      <span>出生时预期寿命 · 非个人预测</span>
+    </div>
+  </footer>
+  <noscript><p class="time-field-fallback">请启用 JavaScript 查看点阵。每一粒光点，代表人生的一周或今年的一天。</p></noscript>
+</section>

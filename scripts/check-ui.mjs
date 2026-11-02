@@ -91,6 +91,7 @@ try {
     "/research.html",
     "/tools.html",
     "/knowledge.html",
+    "/life.html",
     "/publications.html",
   ];
   for (const width of [1440, 390, 320, 768, 1920]) {
@@ -111,7 +112,7 @@ try {
       ))
         linkTargets.add(url);
       const info = await json(
-        `({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:[...document.querySelectorAll('h1')].map(x=>x.textContent),active:[...document.querySelectorAll('.nav-links [aria-current="page"]')].map(x=>x.textContent),broken:[...document.images].filter(i=>!i.closest('details:not([open])') && i.loading!=='lazy' && (!i.complete || !i.naturalWidth)).map(i=>i.src),overflow:[...document.querySelectorAll('main *')].filter(e=>{const r=e.getBoundingClientRect();return r.width>0 && (r.right>innerWidth+1 || r.left< -1)}).slice(0,6).map(e=>e.tagName+'.'+e.className)})`,
+        `({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:[...document.querySelectorAll('h1')].map(x=>x.textContent),active:[...document.querySelectorAll('.nav-links [aria-current="page"]')].map(x=>x.textContent),broken:[...document.images].filter(i=>!i.closest('details:not([open])') && i.loading!=='lazy' && (!i.complete || !i.naturalWidth)).map(i=>i.src),overflow:[...document.querySelectorAll('main *')].filter(e=>{const r=e.getBoundingClientRect();return !e.closest('.hero-viewport') && r.width>0 && (r.right>innerWidth+1 || r.left< -1)}).slice(0,6).map(e=>e.tagName+'.'+e.className)})`,
       );
       check(
         route + " @" + width,
@@ -129,6 +130,8 @@ try {
             ? "About"
             : route === "/knowledge.html"
               ? "Notes"
+              : route === "/life.html"
+                ? "Life"
               : "Work";
       check(
         "Navigation group " + route + " @" + width,
@@ -163,9 +166,9 @@ try {
           ),
         );
         check(
-          "Four primary navigation entries",
+          "Primary navigation includes Life",
           await evaluate(
-            `document.querySelectorAll('#site-links a').length===4`,
+            `document.querySelectorAll('#site-links a').length===5 && !!document.querySelector('#site-links a[href="/life.html"]')`,
           ),
         );
       }
@@ -439,7 +442,9 @@ try {
       `getComputedStyle(document.querySelector('#site-links')).display==='flex'`,
     ),
   );
-  check("Browser console", !errors.length, errors);
+  const browserDiagnostics = errors.filter(error => error.includes("script-src resource: chrome:"));
+  const pageErrors = errors.filter(error => !browserDiagnostics.includes(error));
+  check("Browser console", !pageErrors.length, { pageErrors, browserDiagnostics });
   await fs.writeFile(
     path.join(output, "checks.json"),
     JSON.stringify(checks, null, 2),

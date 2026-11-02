@@ -48,6 +48,94 @@
   --radius-md: 4px;
   --radius-lg: 4px;
 }
+
+/* Embeddable time field. Its palette is scoped to the component. */
+.time-field {
+  --field-ink: #e1e7ed;
+  --field-muted: #8d98a6;
+  --field-accent: #9bdcff;
+  --field-dot-past: 156, 164, 173;
+  --field-dot-future: 45, 53, 64;
+  --field-highlight: 165, 225, 255;
+  --field-halo: 125, 206, 255;
+  position: relative;
+  isolation: isolate;
+  color-scheme: dark;
+  color: var(--field-ink);
+  background: #161a20;
+  border: 1px solid #2a3039;
+  border-radius: 14px;
+  padding: 28px 34px 20px;
+  font-family: var(--font-main);
+}
+.time-field-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.time-field-brand { display: flex; align-items: center; gap: 13px; }
+.time-field-brand > svg { color: var(--field-accent); flex-shrink: 0; }
+.time-field-corner { display: flex; align-items: center; gap: 20px; }
+.time-field-stage { position: relative; height: 420px; margin-block: 12px 18px; }
+.time-field-canvas { display: block; width: 100%; height: 100%; transition: transform 180ms ease-out; }
+.time-field-tooltip { position: absolute; z-index: 5; max-width: min(280px, calc(100% - 8px)); pointer-events: none; padding: 7px 10px; border: 1px solid #45596b; border-radius: 5px; background: #131c25f5; color: #d6e8f3; font-size: 10px; font-variant-numeric: tabular-nums; }
+.time-field-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-top: 8px; }
+.time-field-switch { display: flex; gap: 4px; }
+.time-field-switch button { min-height: 36px; padding: 6px 12px; color: var(--field-muted); background: transparent; border: 1px solid transparent; border-radius: 5px; font-size: 12px; }
+.time-field-switch button[aria-pressed='true'] { color: #dbeaf4; background: #232d38; border-color: #354453; }
+.time-field-switch button:hover { color: var(--field-accent); }
+.time-field :focus-visible { outline: 2px solid var(--field-accent); outline-offset: 4px; }
+.time-field-fallback { color: #b8c5d2; padding: 20px; font-size: 14px; }
+.life-demo { background: #0f1217; color: #dce2e9; }
+.life-demo .site-header { background: #0f1217; border-bottom-color: #242b34; }
+.life-demo .logo, .life-demo .nav-links a { color: #a9b4c1; }
+.life-demo .logo-mark { color: #121a22; background: #a4d8f5; }
+.life-demo .nav-links a[aria-current], .life-demo .nav-links a:hover { color: #9bdcff; border-bottom-color: #9bdcff; }
+.life-demo .menu-toggle { color: #c5d4e3; border-color: #3c4856; }
+.life-demo .site-header .nav-links.is-open { background: #151b23; }
+.life-demo-main { width: min(100% - 96px, 1260px); margin: 46px auto 24px; }
+.hero-time-field .time-field {
+  --field-ink: var(--text-color);
+  --field-muted: var(--muted-text);
+  --field-accent: var(--accent-color);
+  --field-dot-past: 134, 158, 145;
+  --field-dot-future: 216, 225, 219;
+  --field-highlight: 18, 103, 80;
+  --field-halo: 18, 103, 80;
+  color-scheme: light;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.hero-time-field .time-field-head { justify-content: flex-end; height: 22px; }
+.hero-time-field .time-field-brand { display: none; }
+.hero-time-field .time-field-corner { gap: 10px; }
+.hero-time-field .time-field-stage,
+.hero-time-field .time-field[data-mode='year'] .time-field-stage { height: 210px; margin-block: 6px; }
+.hero-time-field .time-field[data-mode='life'] .time-field-stage { height: 210px; }
+.hero-time-field .time-field-footer { padding-top: 0; }
+.hero-time-field .time-field-switch button { min-height: 28px; padding: 2px 8px; font-size: 10px; border: 0; background: transparent; }
+.hero-time-field .time-field-switch button[aria-pressed='true'] { color: var(--accent-color); background: var(--surface-strong); }
+.hero-time-field .time-field-tooltip { background: var(--bg-color); border-color: var(--border-color); color: var(--text-color); }
+@media (max-width: 900px) {
+  .time-field { padding: 24px; }
+  .time-field-stage { height: 390px; }
+  .life-demo-main { width: calc(100% - 48px); margin-top: 28px; }
+}
+@media (max-width: 640px) {
+  .time-field { padding: 20px 16px 16px; border-radius: 10px; }
+  .time-field-head { gap: 12px; align-items: start; }
+  .time-field-brand { gap: 8px; }
+  .time-field-brand > svg { width: 24px; height: 24px; }
+  .time-field-corner { gap: 7px; }
+  .time-field-stage { height: 460px; margin-block: 16px; }
+  .time-field[data-mode='year'] .time-field-stage { height: 350px; }
+  .time-field-footer { gap: 12px; flex-wrap: wrap; padding-top: 14px; }
+  .time-field-switch button { font-size: 11px; padding-inline: 9px; }
+
+  .life-demo-main { width: calc(100% - 24px); margin-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .time-field-canvas { transition: none; }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1651,4 +1739,58 @@ details p {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* A shared hero frame keeps the illustration and time field on the same canvas. */
+.home-hero.hero-carousel { height: 380px; min-height: 380px; background: #f3f6f5; }
+.hero-viewport { position: absolute; inset: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.hero-viewport::-webkit-scrollbar { display: none; }
+.hero-slide { position: relative; isolation: isolate; flex: 0 0 100%; min-width: 0; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+.hero-carousel .hero-art { z-index: 0; }
+.hero-slide-time { background: transparent; }
+.hero-carousel > .container { position: relative; z-index: 1; pointer-events: none; }
+.hero-carousel .hero-copy { width: 48%; pointer-events: auto; }
+.hero-time-layout { height: 100%; display: flex; align-items: center; justify-content: flex-end; }
+.hero-time-field { width: 48%; min-width: 0; }
+.hero-carousel-controls { position: absolute; z-index: 3; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 2px; padding: 2px 6px; border: 1px solid var(--border-color); border-radius: 24px; background: #fffffff2; }
+.hero-carousel-controls button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; background: transparent; color: var(--text-secondary); border-radius: 50%; }
+.hero-carousel-controls button:hover { color: var(--accent-color); background: var(--bg-secondary); }
+.hero-carousel-dot span { width: 5px; height: 5px; border-radius: 50%; background: #b9c8bf; }
+.hero-carousel-dot[aria-current='true'] span { width: 17px; border-radius: 4px; background: var(--accent-color); }
+@media (max-width: 1000px) {
+  .hero-carousel .hero-lede { font-size: 1.25rem; }
+  .hero-carousel .hero-copy h1 { font-size: 3rem; }
+}
+@media (max-width: 700px) {
+  .home-hero.hero-carousel { height: 390px; min-height: 390px; align-items: flex-start; }
+  .hero-carousel .hero-copy { width: 100%; padding: 24px 0 0; }
+  .hero-carousel .hero-copy h1 { font-size: 2.5rem; margin-bottom: 10px; }
+  .hero-carousel .hero-lede { display: block; font-size: 1.125rem; max-width: 290px; }
+  .hero-carousel .hero-identity { font-size: .8rem; margin: 10px 0 2px; }
+  .hero-carousel .hero-copy .text-link { min-height: 32px; font-size: .8rem; }
+  .hero-time-layout { align-items: flex-end; padding-bottom: 52px; }
+  .hero-time-field { width: 100%; }
+  .hero-time-field .time-field-stage,
+  .hero-time-field .time-field[data-mode='year'] .time-field-stage,
+  .hero-time-field .time-field[data-mode='life'] .time-field-stage { height: 112px; }
+  .hero-time-field .time-field-head { position: absolute; right: 0; top: 0; }
+  .hero-time-field .time-field-footer { margin-top: 0; }
+  .hero-time-field .time-field-switch button { min-width: 28px; }
+  .hero-time-field .time-field-corner { gap: 5px; }
+  .hero-carousel-controls { bottom: 10px; }
+  .hero-slide .art-caption { bottom: 54px; }
+}
+
+
+.time-field-birthday { color: var(--field-muted); font: 10px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; font-variant-numeric: tabular-nums; }
+.time-field-reference { display: flex; flex-direction: column; gap: 1px; align-items: flex-end; text-align: right; }
+.time-field-reference a { font-size: 10px; color: var(--field-muted); text-decoration: none; }
+.time-field-reference a:hover { color: var(--field-accent); text-decoration: underline; }
+.time-field-reference > span { font-size: 9px; color: var(--field-muted); }
+@media (max-width: 700px) {
+  .hero-time-field .time-field-footer { gap: 6px; flex-wrap: nowrap; }
+  .hero-time-field .time-field-reference a { font-size: 9px; }
+  .hero-time-field .time-field-reference > span { font-size: 8px; }
+  .hero-time-field .time-field-birthday { font-size: 9px; }
+  .hero-time-field .time-field-head { position: static; }
 }
