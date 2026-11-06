@@ -102,7 +102,7 @@ class TimeField {
     source.title = `中国男性出生时预期寿命 ${LIFE_PROFILE.expectancyYears} 岁；${LIFE_PROFILE.sourceName}，${LIFE_PROFILE.dataYear} 年，指标 ${LIFE_PROFILE.indicator}。群体时期统计，不能预测个人寿命。`;
     const summary = `${formatNumber.format(this.completed)} / ${formatNumber.format(this.total)} ${isLife ? "周" : "天"}已走过`;
     this.root.querySelector("[data-field-count]").textContent = summary;
-    this.canvas.setAttribute("aria-label", `${LIFE_PROFILE.birthday} 出生。${summary}。中国男性出生时预期寿命参考 ${LIFE_PROFILE.expectancyYears} 岁，数据为 ${LIFE_PROFILE.dataYear} 年；群体统计，非个人寿命预测。${this.current < 0 ? "已越过群体参考尺度，时间仍在继续。" : `${this.embedded ? "绿色" : "冰蓝"}光点代表${isLife ? `人生第 ${this.current + 1} 周` : "今天"}。`}`);
+    this.canvas.setAttribute("aria-label", `${LIFE_PROFILE.birthday} 出生。${summary}。中国男性出生时预期寿命参考 ${LIFE_PROFILE.expectancyYears} 岁，数据为 ${LIFE_PROFILE.dataYear} 年；群体统计，非个人寿命预测。${this.current < 0 ? "已越过群体参考尺度，时间仍在继续。" : `绿色光点代表${isLife ? `人生第 ${this.current + 1} 周` : "今天"}。`}`);
     this.revealStart = performance.now();
     this.pointer = null;
     this.tooltip.hidden = true;

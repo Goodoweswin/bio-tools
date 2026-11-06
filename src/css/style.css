@@ -82,14 +82,33 @@
 .time-field-switch button:hover { color: var(--field-accent); }
 .time-field :focus-visible { outline: 2px solid var(--field-accent); outline-offset: 4px; }
 .time-field-fallback { color: #b8c5d2; padding: 20px; font-size: 14px; }
-.life-demo { background: #0f1217; color: #dce2e9; }
-.life-demo .site-header { background: #0f1217; border-bottom-color: #242b34; }
-.life-demo .logo, .life-demo .nav-links a { color: #a9b4c1; }
-.life-demo .logo-mark { color: #121a22; background: #a4d8f5; }
-.life-demo .nav-links a[aria-current], .life-demo .nav-links a:hover { color: #9bdcff; border-bottom-color: #9bdcff; }
-.life-demo .menu-toggle { color: #c5d4e3; border-color: #3c4856; }
-.life-demo .site-header .nav-links.is-open { background: #151b23; }
-.life-demo-main { width: min(100% - 96px, 1260px); margin: 46px auto 24px; }
+.life-page-main { padding-block: 64px; }
+.life-page .time-field {
+  --field-ink: var(--text-color);
+  --field-muted: var(--muted-text);
+  --field-accent: var(--accent-color);
+  --field-dot-past: 134, 158, 145;
+  --field-dot-future: 216, 225, 219;
+  --field-highlight: 18, 103, 80;
+  --field-halo: 18, 103, 80;
+  color-scheme: light;
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  border-radius: var(--radius-md);
+}
+.life-page .time-field-switch button { border-radius: var(--radius-sm); }
+.life-page .time-field-switch button[aria-pressed='true'] {
+  color: var(--accent-color);
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+}
+.life-page .time-field-tooltip {
+  color: var(--text-color);
+  background: var(--bg-color);
+  border-color: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+.life-page .time-field-fallback { color: var(--text-secondary); }
 .hero-time-field .time-field {
   --field-ink: var(--text-color);
   --field-muted: var(--muted-text);
@@ -117,7 +136,6 @@
 @media (max-width: 900px) {
   .time-field { padding: 24px; }
   .time-field-stage { height: 390px; }
-  .life-demo-main { width: calc(100% - 48px); margin-top: 28px; }
 }
 @media (max-width: 640px) {
   .time-field { padding: 20px 16px 16px; border-radius: 10px; }
@@ -130,7 +148,7 @@
   .time-field-footer { gap: 12px; flex-wrap: wrap; padding-top: 14px; }
   .time-field-switch button { font-size: 11px; padding-inline: 9px; }
 
-  .life-demo-main { width: calc(100% - 24px); margin-top: 18px; }
+  .life-page-main { padding-block: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .time-field-canvas { transition: none; }

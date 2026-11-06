@@ -84,7 +84,7 @@ try {
   const preload = await call("script.addPreloadScript", { functionDeclaration: "()=>{const original=window.matchMedia.bind(window);window.matchMedia=query=>{const result=original(query);if(query.includes('prefers-reduced-motion'))Object.defineProperty(result,'matches',{value:true});return result}}" });
   await go("/life.html");
   await evaluate("new Promise(r=>setTimeout(r,100)).then(()=>true)");
-  await check("Reduced motion renders a static complete field immediately", "(async()=>{const canvas=document.querySelector('canvas');const before=canvas.toDataURL();await new Promise(r=>setTimeout(r,200));return before===canvas.toDataURL() && document.querySelector('canvas').getAttribute('aria-label').includes('冰蓝光点')})()");
+  await check("Reduced motion renders a static complete field immediately", "(async()=>{const canvas=document.querySelector('canvas');const before=canvas.toDataURL();await new Promise(r=>setTimeout(r,200));return before===canvas.toDataURL() && document.querySelector('canvas').getAttribute('aria-label').includes('绿色光点')})()");
   await go("/");
   await check("Reduced motion disables automatic hero rotation", "document.querySelector('[data-carousel-pause]').getAttribute('aria-pressed')==='true'");
   await call("script.removePreloadScript", { script: preload.script });
